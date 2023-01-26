@@ -6,11 +6,12 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:16:59 by gwolf             #+#    #+#             */
-/*   Updated: 2023/01/25 18:01:51 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/01/26 11:00:38 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include "mlx.h"
 
 int key_hook(int keycode, t_vars *vars)
 {
