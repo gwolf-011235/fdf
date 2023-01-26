@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 09:58:18 by gwolf             #+#    #+#             */
-/*   Updated: 2023/01/26 11:30:22 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/01/26 14:03:46 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,18 @@ void draw_triangle(t_data *img, int x, int y, int size)
 	int trgb = create_trgb(0, 0, 255, 255);
 	int size_x = size + x;
 	int size_y = size + y;
-	int cutoff = size + x;
-	int j = y;
+	//int cutoff = size + x;
+	int temp = y;
 
 	while (x < size_x)
 	{
-		y = j;
-		while (y < size_y)
+		temp = y;
+		while (temp < size_y)
 		{
-			if (y < cutoff)
-				my_mlx_pixel_put(img, x, y, trgb);
-			y++;
+			my_mlx_pixel_put(img, x, temp, trgb);
+			temp++;
 		}
-		cutoff--;
+		size_y--;
 		x++;
 	}
 }
