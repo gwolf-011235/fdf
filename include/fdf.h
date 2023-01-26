@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/01/26 18:02:35 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/01/26 19:10:07 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct s_vars {
 void my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void draw_triangle(t_data *img, int x, int y, int size);
 void draw_square(t_data *img, int x, int y, int size, int trgb);
+void draw_line(t_data *img, int x0, int y0, int x1, int y1, int color);
 
 //color.c
 int create_trgb(int t, int r, int g, int b);
