@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:54:09 by gwolf             #+#    #+#             */
-/*   Updated: 2023/01/26 18:30:57 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/01/26 19:10:45 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,4 +129,5 @@ int main(int argc, char *argv[])
 	map_alloc(&map, fd);
 	fill_array(&map);
 	ft_print_map(&map);
+	testwindow();
 }

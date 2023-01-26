@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 09:58:18 by gwolf             #+#    #+#             */
-/*   Updated: 2023/01/26 14:03:46 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/01/26 19:10:15 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,3 +61,33 @@ void draw_square(t_data *img, int x, int y, int size, int trgb)
 			trgb = get_opposite(trgb);
 	}
 }
+
+void draw_line(t_data *img, int x0, int y0, int x1, int y1, int color) 
+{
+    // The Bresenham algorithm uses the concept of "error" to determine which pixels to draw
+    int dx = abs(x1 - x0); // delta x, the difference between x1 and x0
+    int dy = abs(y1 - y0); // delta y, the difference between y1 and y0
+    int sx = x0 < x1 ? 1 : -1; // step in x direction, either 1 or -1
+    int sy = y0 < y1 ? 1 : -1; // step in y direction, either 1 or -1
+    int err = dx - dy; // initial error value
+
+    // Draw pixels using the Bresenham algorithm
+    while (1) {
+        // Draw a pixel at the current position
+        my_mlx_pixel_put(img, x0, y0, color);
+        // If we've reached the end point, exit the loop
+        if (x0 == x1 && y0 == y1) {
+            break;
+        }
+        int e2 = 2 * err;
+        if (e2 > -dy) {
+            err -= dy;
+            x0 += sx;
+        }
+        if (e2 < dx) {
+            err += dx;
+            y0 += sy;
+        }
+    }
+}
+
