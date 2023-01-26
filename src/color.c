@@ -6,12 +6,11 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:29:34 by gwolf             #+#    #+#             */
-/*   Updated: 2023/01/26 11:00:06 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/01/26 11:30:15 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include "mlx.h"
 
 int create_trgb(int t, int r, int g, int b)
 {

@@ -6,13 +6,11 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 09:58:18 by gwolf             #+#    #+#             */
-/*   Updated: 2023/01/26 11:25:34 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/01/26 11:30:22 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include "mlx.h"
-#include "unistd.h"
 
 void my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {

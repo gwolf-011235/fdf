@@ -6,12 +6,11 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:54:09 by gwolf             #+#    #+#             */
-/*   Updated: 2023/01/26 11:26:55 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/01/26 11:30:09 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include "mlx.h"
 
 int main(void)
 {
