@@ -6,17 +6,17 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/01/26 10:49:19 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/01/26 11:29:13 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 #define FDF_H
 
-#include "mlx.h"
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "mlx.h"
 
 typedef struct s_data {
 	void *img;
@@ -34,7 +34,7 @@ typedef struct s_vars {
 //draw.c
 void my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void draw_triangle(t_data *img, int x, int y, int size);
-void draw_square(t_data *img, int x, int y, int size);
+void draw_square(t_data *img, int x, int y, int size, int trgb);
 
 //color.c
 int create_trgb(int t, int r, int g, int b);
