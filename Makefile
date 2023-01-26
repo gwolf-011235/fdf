@@ -17,7 +17,7 @@ NAME := fdf.out
 LIBFT := $(LIB_DIR)/libft/libft.a
 MLX := $(LIB_DIR)/mlx_linux/libmlx_Linux.a
 
-SRC := main.c draw.c color.c hooks.c testwin.c
+SRC := main.c draw.c color.c hooks.c testwin.c error.c
 
 SRCS := $(addprefix $(SRC_DIR)/, $(SRC))
 
@@ -50,3 +50,5 @@ clean:
 
 fclean: clean
 	rm -rf $(NAME)
+
+re: fclean all
