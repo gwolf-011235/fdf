@@ -51,6 +51,7 @@ Module.symvers
 Mkfile.old
 dkms.conf
 
-# vim swap
+# temp files
 *.swp
 *.swo
+.gdb_history
