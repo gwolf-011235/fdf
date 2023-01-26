@@ -6,14 +6,14 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/01/25 18:00:22 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/01/26 10:49:19 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 #define FDF_H
 
-#include "mlx_linux/mlx.h"
+#include "mlx.h"
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
