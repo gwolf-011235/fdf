@@ -6,17 +6,21 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/01/26 11:29:13 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/01/26 14:18:33 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
-#define FDF_H
+# define FDF_H
 
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include "mlx.h"
+# include <unistd.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+
+# include "mlx.h"
 
 typedef struct s_data {
 	void *img;
@@ -50,5 +54,8 @@ int key_hook(int keycode, t_vars *vars);
 int close_window(int keycode, t_vars *vars);
 int mouse_hook(int button, int x, int y, void *param);
 int mouse_move(int x, int y, void *param);
+
+//testwin.c
+void testwindow(void);
 
 #endif
