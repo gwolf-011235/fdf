@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/01/26 19:10:07 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/01/27 13:59:12 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,14 @@
 
 # define ROW_MAX 100
 
+typedef struct s_point {
+	double x;
+	double y;
+	double z;
+}	t_point;
+
 typedef struct s_map {
-	int *array;
+	t_point	*points;
 	int height;
 	int width;
 	char *rows[ROW_MAX];
@@ -77,5 +83,12 @@ void testwindow(void);
 
 //error.c
 void	terminate(char *message);
+
+//parse.c
+int	ft_count_num(char *line);
+void	map_alloc(t_map *map, int fd);
+void	ft_convert_line(t_map *map, char *line, int index);
+void	fetch_points(t_map *map);
+void	parse_map(t_map *map, char *filename);
 
 #endif
