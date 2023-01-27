@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/01/27 13:59:12 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/01/27 18:23:15 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <errno.h>
+# include <math.h>
 
 # include "mlx.h"
 # include "ft_fd.h"
@@ -62,6 +63,7 @@ void my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void draw_triangle(t_data *img, int x, int y, int size);
 void draw_square(t_data *img, int x, int y, int size, int trgb);
 void draw_line(t_data *img, int x0, int y0, int x1, int y1, int color);
+void draw_points(t_data *img, t_map *map);
 
 //color.c
 int create_trgb(int t, int r, int g, int b);
@@ -79,7 +81,7 @@ int mouse_hook(int button, int x, int y, void *param);
 int mouse_move(int x, int y, void *param);
 
 //testwin.c
-void testwindow(void);
+void testwindow(t_map *map);
 
 //error.c
 void	terminate(char *message);
@@ -90,5 +92,14 @@ void	map_alloc(t_map *map, int fd);
 void	ft_convert_line(t_map *map, char *line, int index);
 void	fetch_points(t_map *map);
 void	parse_map(t_map *map, char *filename);
+
+//matrix.c
+void	mat_mult(double first[3][3], double second[3][3], double mul[3][3]);
+t_point	matrix_point(double mat[3][3], t_point point);
+t_point	rotate_x(t_point point, double angle);
+t_point	rotate_y(t_point point, double angle);
+t_point	rotate_z(t_point point, double angle);
+
+
 
 #endif
