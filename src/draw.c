@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 09:58:18 by gwolf             #+#    #+#             */
-/*   Updated: 2023/01/26 19:10:15 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/01/27 16:42:37 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,25 @@ void my_mlx_pixel_put(t_data *data, int x, int y, int color)
 
 	dst = data->addr + (y * data->line_length + x * (data->bit_per_pixel / 8));
 	*(unsigned int *)dst = color;
+}
+
+void draw_points(t_data *img, t_map *map)
+{
+	int i = 0;
+	int max = map->width * map->width;
+	int zoom = 30;
+	int x;
+	int y;
+	int trgb = create_trgb(0, 255, 0, 0);
+
+	while (i < max)
+	{
+		x = map->points[i].x * zoom;
+		y = map->points[i].y * zoom;
+		draw_square(img, x, y, 10, trgb);
+		i++;
+		trgb = get_opposite(trgb);
+	}
 }
 
 void draw_triangle(t_data *img, int x, int y, int size)
@@ -46,7 +65,6 @@ void draw_square(t_data *img, int x, int y, int size, int trgb)
 	int temp;
 	int size_x = size + x;
 	int size_y = size + y;
-	printf("trgb is: %d\n", trgb);
 
 	while (x < size_x)
 	{
