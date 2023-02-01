@@ -6,7 +6,7 @@
 /*   By: gwolf <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 11:44:09 by gwolf             #+#    #+#             */
-/*   Updated: 2023/01/27 14:07:32 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/01/27 18:32:53 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void testwindow(t_map *map)
 	t_data img;
 
 	vars.mlx = mlx_init();
-	vars.win = mlx_new_window(vars.mlx, 600, 500, "Hello World!");
-	img.img = mlx_new_image(vars.mlx, 600, 500);
+	vars.win = mlx_new_window(vars.mlx, 1920, 1080, "Hello World!");
+	img.img = mlx_new_image(vars.mlx, 1920, 1080);
 	img.addr = mlx_get_data_addr(img.img, &img.bit_per_pixel, &img.line_length, &img.endian);
 	mlx_key_hook(vars.win, key_hook, &vars);
 	mlx_mouse_hook(vars.win, mouse_hook, &vars);

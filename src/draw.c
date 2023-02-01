@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 09:58:18 by gwolf             #+#    #+#             */
-/*   Updated: 2023/01/27 16:42:37 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/01/27 18:58:58 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,23 @@ void draw_points(t_data *img, t_map *map)
 {
 	int i = 0;
 	int max = map->width * map->width;
-	int zoom = 30;
+	double zoom = 30;
+	int offset = 0;
 	int x;
 	int y;
 	int trgb = create_trgb(0, 255, 0, 0);
+	double project[3][3] = {
+		{1, 0, 0},
+		{0, 1, 0},
+		{0, 0, 0}
+	};
 
 	while (i < max)
 	{
-		x = map->points[i].x * zoom;
-		y = map->points[i].y * zoom;
+		map->points[i] = rotate_z(map->points[i], 0.52);
+		map->points[i] = matrix_point(project, map->points[i]);
+		x = map->points[i].x * zoom + offset;
+		y = map->points[i].y * zoom + offset;
 		draw_square(img, x, y, 10, trgb);
 		i++;
 		trgb = get_opposite(trgb);
