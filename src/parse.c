@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gwolf <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/27 13:56:15 by gwolf             #+#    #+#             */
-/*   Updated: 2023/01/27 13:58:12 by gwolf            ###   ########.fr       */
+/*   Created: 2023/02/01 15:00:33 by gwolf             #+#    #+#             */
+/*   Updated: 2023/02/01 15:00:36 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ void	ft_convert_line(t_map *map, char *line, int index)
 	i = 0;
 	while (line[i])
 	{
-		map->points[index].x = index % map->width;
-		map->points[index].y = index / map->width;
+		map->points[index].x = (index % map->width) - (map->width / 2);
+		map->points[index].y = (index / map->width) - (map->height / 2);
 		map->points[index].z = ft_atoi(&line[i]);
 		while (line[i] == ' ')
 			i++;
@@ -79,6 +79,8 @@ void	ft_convert_line(t_map *map, char *line, int index)
 		while (ft_isdigit(line[i]))
 			i++;
 		index++;
+		while (line[i] == ' ')
+			i++;
 		if (line[i] == '\n')
 			break ;
 	}

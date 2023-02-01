@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 16:48:55 by gwolf             #+#    #+#             */
-/*   Updated: 2023/01/27 19:04:46 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/01 14:44:44 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,16 @@ t_point	rotate_y(t_point point, double angle)
 
 t_point	rotate_z(t_point point, double angle)
 {
+	double	rad;
 	double	mat_z[3][3];
 
-	mat_z[0][0] = cos(angle);
-	mat_z[0][1] = -sin(angle);
+	rad = angle / 57.29578;
+
+	mat_z[0][0] = cos(rad);
+	mat_z[0][1] = -sin(rad);
 	mat_z[0][2] = 0;
-	mat_z[1][0] = sin(angle);
-	mat_z[1][1] = cos(angle);
+	mat_z[1][0] = sin(rad);
+	mat_z[1][1] = cos(rad);
 	mat_z[1][2] = 0;
 	mat_z[2][0] = 0;
 	mat_z[2][1] = 0;

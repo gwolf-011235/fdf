@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/01/27 18:23:15 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/01 15:09:37 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void draw_triangle(t_data *img, int x, int y, int size);
 void draw_square(t_data *img, int x, int y, int size, int trgb);
 void draw_line(t_data *img, int x0, int y0, int x1, int y1, int color);
 void draw_points(t_data *img, t_map *map);
+void	fill_background(t_data *img);
 
 //color.c
 int create_trgb(int t, int r, int g, int b);

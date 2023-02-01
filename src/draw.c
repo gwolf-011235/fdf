@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 09:58:18 by gwolf             #+#    #+#             */
-/*   Updated: 2023/01/27 18:58:58 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/01 15:12:59 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,32 @@ void my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
+void	fill_background(t_data *img)
+{
+	int i = 0;
+	int j = 0;
+	int max_x = 600;
+	int max_y = 400;
+
+	while (i < max_x)
+	{
+		j = 0;
+		while (j < max_y)
+		{
+			my_mlx_pixel_put(img, i, j, create_trgb(0, 0, 255, 0));
+			j++;
+		}
+		i++;
+	}
+}
+
 void draw_points(t_data *img, t_map *map)
 {
 	int i = 0;
-	int max = map->width * map->width;
-	double zoom = 30;
-	int offset = 0;
+	int max = map->width * map->height;
+	double zoom = 10;
+	double offset_x = 600 / 2;
+	double offset_y = 400 / 2;
 	int x;
 	int y;
 	int trgb = create_trgb(0, 255, 0, 0);
@@ -37,11 +57,12 @@ void draw_points(t_data *img, t_map *map)
 
 	while (i < max)
 	{
-		map->points[i] = rotate_z(map->points[i], 0.52);
+		map->points[i] = rotate_z(map->points[i], 1);
 		map->points[i] = matrix_point(project, map->points[i]);
-		x = map->points[i].x * zoom + offset;
-		y = map->points[i].y * zoom + offset;
-		draw_square(img, x, y, 10, trgb);
+		x = map->points[i].x * zoom + offset_x;
+		y = map->points[i].y * zoom + offset_y;
+		my_mlx_pixel_put(img, x, y, trgb);
+		//draw_square(img, x, y, 1, trgb);
 		i++;
 		trgb = get_opposite(trgb);
 	}
