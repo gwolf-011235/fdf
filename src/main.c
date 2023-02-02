@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:54:09 by gwolf             #+#    #+#             */
-/*   Updated: 2023/01/27 14:07:18 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/02 10:10:14 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 int main(int argc, char *argv[])
 {
-	static t_map map;
+	static t_data data;
 
 	if (argc != 2)
 		terminate(ERR_ARGS);
-	parse_map(&map, argv[1]);
+	parse_map(&data.map, argv[1]);
 
-	testwindow(&map);
+	testwindow(&data);
 }

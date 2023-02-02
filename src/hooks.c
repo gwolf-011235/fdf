@@ -6,25 +6,25 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:16:59 by gwolf             #+#    #+#             */
-/*   Updated: 2023/01/26 11:00:38 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/02 10:13:28 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "mlx.h"
 
-int key_hook(int keycode, t_vars *vars)
+int key_hook(int keycode, t_data *data)
 {
-	(void)vars;
+	(void)data;
 	printf("This is keycode: %d\n", keycode);
 	return (0);
 }
 
-int close_window(int keycode, t_vars *vars)
+int close_window(int keycode, t_data *data)
 {
 	if (keycode == 65307)
 	{
-		mlx_destroy_window(vars->mlx, vars->win);
+		mlx_destroy_window(data->mlx, data->win);
 		exit(0);
 	}
 	return (0);

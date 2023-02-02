@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/02 09:49:03 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/02 10:05:44 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,26 +47,28 @@ typedef struct s_map {
 	char *rows[ROW_MAX];
 }	t_map;
 
-typedef struct s_data {
+typedef struct s_img {
 	void *img;
 	char *addr;
 	int bit_per_pixel;
 	int line_length;
 	int endian;
+}	t_img;
+
+typedef struct s_data {
+	void	*mlx;
+	void	*win;
+	t_img	img;
+	t_map	map;
 }	t_data;
 
-typedef struct s_vars {
-	void *mlx;
-	void *win;
-}	t_vars;
-
 //draw.c
-void my_mlx_pixel_put(t_data *data, int x, int y, int color);
-void draw_triangle(t_data *img, int x, int y, int size);
-void draw_square(t_data *img, int x, int y, int size, int trgb);
-void draw_line(t_data *img, int x0, int y0, int x1, int y1, int color);
-void draw_points(t_data *img, t_map *map);
-void	fill_background(t_data *img);
+void my_mlx_pixel_put(t_img *data, int x, int y, int color);
+void draw_triangle(t_img *img, int x, int y, int size);
+void draw_square(t_img *img, int x, int y, int size, int trgb);
+void draw_line(t_img *img, int x0, int y0, int x1, int y1, int color);
+void draw_points(t_img *img, t_map *map);
+void	fill_background(t_img *img);
 
 //color.c
 int create_trgb(int t, int r, int g, int b);
@@ -78,13 +80,13 @@ int add_shade(double distance, int trgb);
 int get_opposite(int trgb);
 
 //hooks.c
-int key_hook(int keycode, t_vars *vars);
-int close_window(int keycode, t_vars *vars);
+int key_hook(int keycode, t_data *vars);
+int close_window(int keycode, t_data *vars);
 int mouse_hook(int button, int x, int y, void *param);
 int mouse_move(int x, int y, void *param);
 
 //testwin.c
-void testwindow(t_map *map);
+void testwindow(t_data *data);
 
 //error.c
 void	terminate(char *message);

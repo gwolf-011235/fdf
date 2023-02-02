@@ -6,13 +6,13 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 09:58:18 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/02 09:51:10 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/02 10:11:38 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void my_mlx_pixel_put(t_data *data, int x, int y, int color)
+void my_mlx_pixel_put(t_img *data, int x, int y, int color)
 {
 	char *dst;
 
@@ -20,7 +20,7 @@ void my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void	fill_background(t_data *img)
+void	fill_background(t_img *img)
 {
 	int i = 0;
 	int j = 0;
@@ -37,13 +37,13 @@ void	fill_background(t_data *img)
 	}
 }
 
-void draw_points(t_data *img, t_map *map)
+void draw_points(t_img *img, t_map *map)
 {
 	int i = 0;
 	int max = map->width * map->height;
 	double zoom = 10;
-	double offset_x = 600 / 2;
-	double offset_y = 400 / 2;
+	double offset_x = WIN_X / 2;
+	double offset_y = WIN_Y / 2;
 	int x;
 	int y;
 	int trgb = create_trgb(0, 255, 0, 0);
@@ -66,7 +66,7 @@ void draw_points(t_data *img, t_map *map)
 	}
 }
 
-void draw_triangle(t_data *img, int x, int y, int size)
+void draw_triangle(t_img *img, int x, int y, int size)
 {
 	int trgb = create_trgb(0, 0, 255, 255);
 	int size_x = size + x;
@@ -87,7 +87,7 @@ void draw_triangle(t_data *img, int x, int y, int size)
 	}
 }
 
-void draw_square(t_data *img, int x, int y, int size, int trgb)
+void draw_square(t_img *img, int x, int y, int size, int trgb)
 {
 	int temp;
 	int size_x = size + x;
@@ -107,7 +107,7 @@ void draw_square(t_data *img, int x, int y, int size, int trgb)
 	}
 }
 
-void draw_line(t_data *img, int x0, int y0, int x1, int y1, int color) 
+void draw_line(t_img *img, int x0, int y0, int x1, int y1, int color) 
 {
     // The Bresenham algorithm uses the concept of "error" to determine which pixels to draw
     int dx = abs(x1 - x0); // delta x, the difference between x1 and x0
