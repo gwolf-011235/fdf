@@ -1,5 +1,5 @@
 CC := clang
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -DBUFFER_SIZE=4096
 
 SRC_DIR := src
 OBJ_DIR := obj
