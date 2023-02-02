@@ -6,62 +6,37 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 16:48:55 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/01 14:44:44 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/02 11:40:36 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "fdf.h"
 
-t_point	rotate_x(t_point point, double angle)
+t_point	rotate(t_point point, double ang_x, double ang_y, double ang_z)
 {
-	double	mat_x[3][3];
-
-	mat_x[0][0] = 1;
-	mat_x[0][1] = 0;
-	mat_x[0][2] = 0;
-	mat_x[1][0] = 0;
-	mat_x[1][1] = cos(angle);
-	mat_x[1][2] = -sin(angle);
-	mat_x[2][0] = 0;
-	mat_x[2][1] = sin(angle);
-	mat_x[2][2] = cos(angle);
-	return (matrix_point(mat_x, point));
-}
-
-t_point	rotate_y(t_point point, double angle)
-{
-	double	mat_y[3][3];
-
-	mat_y[0][0] = cos(angle);
-	mat_y[0][1] = 0;
-	mat_y[0][2] = sin(angle);
-	mat_y[1][0] = 0;
-	mat_y[1][1] = 1;
-	mat_y[1][2] = 0;
-	mat_y[2][0] = -sin(angle);
-	mat_y[2][1] = 0;
-	mat_y[2][2] = cos(angle);
-	return (matrix_point(mat_y, point));
-}
-
-t_point	rotate_z(t_point point, double angle)
-{
-	double	rad;
-	double	mat_z[3][3];
-
-	rad = angle / 57.29578;
-
-	mat_z[0][0] = cos(rad);
-	mat_z[0][1] = -sin(rad);
-	mat_z[0][2] = 0;
-	mat_z[1][0] = sin(rad);
-	mat_z[1][1] = cos(rad);
-	mat_z[1][2] = 0;
-	mat_z[2][0] = 0;
-	mat_z[2][1] = 0;
-	mat_z[2][2] = 1;
-	return (matrix_point(mat_z, point));
+	if (ang_x)
+	{
+		ang_x = ang_x / 57.29578;
+		point.x = 1 * point.x + 0 * point.y + 0 * point.z;
+		point.y = 0 * point.x + cos(ang_x) * point.y + -sin(ang_x) * point.z;
+		point.z = 0 * point.x + sin(ang_x) * point.y + cos(ang_x) * point.z;
+	}
+	if (ang_y)
+	{
+		ang_y = ang_y / 57.29578;
+		point.x = cos(ang_y) * point.x + 0 * point.y + sin(ang_y) * point.z;
+		point.y = 0 * point.x + 1 * point.y + 0 * point.z;
+		point.z = -sin(ang_y) * point.x + 0 * point.y + cos(ang_y) * point.z;
+	}
+	if (ang_z)
+	{
+		ang_z = ang_z / 57.29578;
+		point.x = cos(ang_z) * point.x + -sin(ang_z) * point.y + 0 * point.z;
+		point.y = sin(ang_z) * point.x + cos(ang_z) * point.y + 0 * point.z;
+		point.z = 0 * point.x + 0 * point.y + 1 * point.z;
+	}
+	return (point);
 }
 
 t_point	matrix_point(double mat[3][3], t_point point)
