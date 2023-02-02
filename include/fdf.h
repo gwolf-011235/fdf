@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/02 11:44:55 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/02 11:51:58 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 
 # define ROW_MAX 100
 # define WIN_X 1920
-# define WIN_Y 1680
+# define WIN_Y 1080
 
 typedef struct s_point {
 	double x;
