@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:00:33 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/02 10:21:09 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/02 11:49:07 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,11 @@ void	map_alloc(t_map *map, int fd)
 	map->width = ft_count_num(map->rows[0]);
 	if (map->width == -1)
 		terminate(ERR_READ);
-	map->points = malloc(map->height * map->width * sizeof(t_point) * 2);
+	map->sum_points = map->height * map->width;
+	map->points = malloc(map->sum_points * sizeof(t_point) * 2);
 	if (!map->points)
 		terminate(ERR_MEM);
-	map->morph = map->points + (map->height * map->width);
+	map->morph = map->points + (map->sum_points);
 }
 
 void	ft_convert_line(t_map *map, char *line, int index)
