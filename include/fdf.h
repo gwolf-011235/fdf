@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/02 17:19:07 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/02 17:50:51 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,10 @@
 # define COLOR_LOW 0x0000FF
 
 typedef struct s_point {
-	double x;
-	double y;
-	double z;
+	double	x;
+	double	y;
+	double	z;
+	int		color;
 }	t_point;
 
 typedef struct s_po_int {
@@ -66,6 +67,8 @@ typedef struct s_map {
 	double	offset_y;
 	double	high;
 	double	low;
+	int		color_top;
+	int		color_low;
 }	t_map;
 
 typedef struct s_img {
@@ -100,6 +103,7 @@ int get_g(int trgb);
 int get_b(int trgb);
 int add_shade(double distance, int trgb);
 int get_opposite(int trgb);
+int	transition(int color_start, int color_end, double top, double low);
 
 //hooks.c
 int key_hook(int keycode, t_data *vars);
@@ -129,7 +133,5 @@ t_point	project_2d(t_point point);
 //reshape.c
 void	ft_copy_map(t_map *map);
 void	ft_shape_map(t_map *map);
-
-
 
 #endif

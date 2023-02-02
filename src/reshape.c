@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 10:22:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/02 17:36:09 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/02 17:50:23 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	ft_shape_map(t_map *map)
 		map->morph[i].y = map->morph[i].y * map->scale;
 		map->morph[i].z = map->morph[i].z * map->scale;
 		ft_find_extremes(map, map->morph[i].z);
+		map->color_top = transition(COLOR_TOP, COLOR_MID, map->high, 0);
 		map->morph[i] = project_2d(map->morph[i]);
 		map->morph[i].x = map->morph[i].x + map->offset_x;
 		map->morph[i].y = map->morph[i].y + map->offset_y;
