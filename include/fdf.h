@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/02 10:05:44 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/02 10:32:52 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # include "ft_print.h"
 # include "ft_char.h"
 # include "ft_num.h"
+# include "ft_mem.h"
 # include "err_message.h"
 
 # define ROW_MAX 100
@@ -42,9 +43,10 @@ typedef struct s_point {
 
 typedef struct s_map {
 	t_point	*points;
-	int height;
-	int width;
-	char *rows[ROW_MAX];
+	t_point	*morph;
+	int		height;
+	int		width;
+	char	*rows[ROW_MAX];
 }	t_map;
 
 typedef struct s_img {
@@ -104,6 +106,9 @@ t_point	matrix_point(double mat[3][3], t_point point);
 t_point	rotate_x(t_point point, double angle);
 t_point	rotate_y(t_point point, double angle);
 t_point	rotate_z(t_point point, double angle);
+
+//reshape.c
+void	ft_copy_map(t_map *map);
 
 
 

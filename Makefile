@@ -17,7 +17,15 @@ NAME := fdf.out
 LIBFT := $(LIB_DIR)/libft/libft.a
 MLX := $(LIB_DIR)/mlx_linux/libmlx_Linux.a
 
-SRC := main.c draw.c color.c hooks.c testwin.c error.c parse.c matrix.c
+SRC := 	main.c \
+		draw.c \
+		color.c \
+		hooks.c \
+		testwin.c \
+		error.c \
+		parse.c \
+		matrix.c \
+		reshape.c
 
 SRCS := $(addprefix $(SRC_DIR)/, $(SRC))
 

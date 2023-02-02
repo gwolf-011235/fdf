@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:00:10 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/02 10:15:37 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/02 10:33:23 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void testwindow(t_data *data)
 	data->img.addr = mlx_get_data_addr(data->img.img, &data->img.bit_per_pixel, &data->img.line_length, &data->img.endian);
 	mlx_key_hook(data->win, key_hook, NULL);
 	mlx_mouse_hook(data->win, mouse_hook, NULL);
+	ft_copy_map(&data->map);
 	for (int i = 0; i < 90; i++)
 	{
 		draw_points(&data->img, &data->map);

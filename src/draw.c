@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 09:58:18 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/02 10:11:38 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/02 10:34:46 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,10 @@ void draw_points(t_img *img, t_map *map)
 
 	while (i < max)
 	{
-		map->points[i] = rotate_z(map->points[i], 1);
-		map->points[i] = matrix_point(project, map->points[i]);
-		x = map->points[i].x * zoom + offset_x;
-		y = map->points[i].y * zoom + offset_y;
+		map->morph[i] = rotate_z(map->morph[i], 1);
+		map->morph[i] = matrix_point(project, map->morph[i]);
+		x = map->morph[i].x * zoom + offset_x;
+		y = map->morph[i].y * zoom + offset_y;
 		my_mlx_pixel_put(img, x, y, trgb);
 		//draw_square(img, x, y, 1, trgb);
 		i++;

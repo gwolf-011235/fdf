@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:00:33 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/01 15:00:36 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/02 10:21:09 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,10 @@ void	map_alloc(t_map *map, int fd)
 	map->width = ft_count_num(map->rows[0]);
 	if (map->width == -1)
 		terminate(ERR_READ);
-	map->points = malloc(map->height * map->width * sizeof(t_point));
+	map->points = malloc(map->height * map->width * sizeof(t_point) * 2);
 	if (!map->points)
 		terminate(ERR_MEM);
+	map->morph = map->points + (map->height * map->width);
 }
 
 void	ft_convert_line(t_map *map, char *line, int index)
@@ -113,4 +114,3 @@ void	parse_map(t_map *map, char *filename)
 		terminate(ERR_CLOSE);
 	fetch_points(map);
 }
-
