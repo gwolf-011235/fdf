@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 09:58:18 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/02 13:56:44 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/02 14:42:55 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,3 +135,17 @@ void draw_line(t_img *img, int x0, int y0, int x1, int y1, int color)
     }
 }
 
+void	lines(t_img *img, t_map *map)
+{
+	int i;
+
+	i = 0;
+	while (i < map->sum_points - 1)
+	{
+		if (i % map->width != map->width - 1)
+			draw_line(img, map->morph[i].x, map->morph[i].y, map->morph[i + 1].x, map->morph[i + 1].y, create_trgb(0, 0, 0, 255));
+		if (i / map->width != map->height - 1)
+			draw_line(img, map->morph[i].x, map->morph[i].y, map->morph[i + map->width].x, map->morph[i + map->width].y, create_trgb(0, 0, 0, 255));
+		i++;
+	}
+}
