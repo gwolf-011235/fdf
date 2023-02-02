@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/01 15:09:37 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/02 09:49:03 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@
 # include "err_message.h"
 
 # define ROW_MAX 100
+# define WIN_X 1920
+# define WIN_Y 1680
 
 typedef struct s_point {
 	double x;

@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 09:58:18 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/01 15:12:59 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/02 09:51:10 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,11 @@ void	fill_background(t_data *img)
 {
 	int i = 0;
 	int j = 0;
-	int max_x = 600;
-	int max_y = 400;
 
-	while (i < max_x)
+	while (i < WIN_X)
 	{
 		j = 0;
-		while (j < max_y)
+		while (j < WIN_Y)
 		{
 			my_mlx_pixel_put(img, i, j, create_trgb(0, 0, 255, 0));
 			j++;
