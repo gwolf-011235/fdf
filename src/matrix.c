@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 16:48:55 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/02 11:40:36 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/02 13:35:38 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,14 @@ t_point	rotate(t_point point, double ang_x, double ang_y, double ang_z)
 		point.y = sin(ang_z) * point.x + cos(ang_z) * point.y + 0 * point.z;
 		point.z = 0 * point.x + 0 * point.y + 1 * point.z;
 	}
+	return (point);
+}
+
+t_point	project_2d(t_point point)
+{
+	point.x = 1 * point.x + 0 * point.y + 0 * point.z;
+	point.y = 0 * point.x + 1 * point.y + 0 * point.z;
+	point.z = 0 * point.x + 0 * point.y + 0 * point.z;
 	return (point);
 }
 

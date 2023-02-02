@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 09:58:18 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/02 10:34:46 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/02 13:56:44 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,30 +37,29 @@ void	fill_background(t_img *img)
 	}
 }
 
+int	ft_is_outside(t_point point)
+{
+	if (point.x < 0 || point.x > WIN_X)
+		return (1);
+	if (point.y < 0 || point.y > WIN_Y)
+		return (1);
+	return (0);
+}
+
 void draw_points(t_img *img, t_map *map)
 {
-	int i = 0;
-	int max = map->width * map->height;
-	double zoom = 10;
-	double offset_x = WIN_X / 2;
-	double offset_y = WIN_Y / 2;
-	int x;
-	int y;
+	int i;
 	int trgb = create_trgb(0, 255, 0, 0);
-	double project[3][3] = {
-		{1, 0, 0},
-		{0, 1, 0},
-		{0, 0, 0}
-	};
 
-	while (i < max)
+	i = 0;
+	while (i < map->sum_points)
 	{
-		map->morph[i] = rotate_z(map->morph[i], 1);
-		map->morph[i] = matrix_point(project, map->morph[i]);
-		x = map->morph[i].x * zoom + offset_x;
-		y = map->morph[i].y * zoom + offset_y;
-		my_mlx_pixel_put(img, x, y, trgb);
-		//draw_square(img, x, y, 1, trgb);
+		if (ft_is_outside(map->morph[i]))
+		{
+			i++;
+			continue ;
+		}
+		my_mlx_pixel_put(img, map->morph[i].x, map->morph[i].y, trgb);
 		i++;
 		trgb = get_opposite(trgb);
 	}

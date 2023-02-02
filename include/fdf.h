@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/02 11:51:58 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/02 13:45:41 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,9 @@ typedef struct s_map {
 	double	ang_x;
 	double	ang_y;
 	double	ang_z;
+	double	scale;
+	double	offset_x;
+	double	offset_y;
 }	t_map;
 
 typedef struct s_img {
@@ -108,9 +111,11 @@ void	parse_map(t_map *map, char *filename);
 void	mat_mult(double first[3][3], double second[3][3], double mul[3][3]);
 t_point	rotate(t_point point, double ang_x, double ang_y, double ang_z);
 t_point	matrix_point(double mat[3][3], t_point point);
+t_point	project_2d(t_point point);
 
 //reshape.c
 void	ft_copy_map(t_map *map);
+void	ft_shape_map(t_map *map);
 
 
 
