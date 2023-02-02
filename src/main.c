@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:54:09 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/02 14:53:40 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/02 17:34:09 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int main(int argc, char *argv[])
 	data.map.scale = 30;
 	data.map.offset_x = (WIN_X / 2);
 	data.map.offset_y = (WIN_Y / 2);
+	data.map.high = 0;
+	data.map.low = 0;
 	ft_shape_map(&data.map);
 
 	testwindow(&data);
