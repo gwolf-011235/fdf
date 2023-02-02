@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/02 14:26:41 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/02 15:28:16 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,11 @@ typedef struct s_point {
 	double y;
 	double z;
 }	t_point;
+
+typedef struct s_po_int {
+	int	x;
+	int y;
+}	t_po_int;
 
 typedef struct s_map {
 	t_point	*points;
@@ -75,7 +80,7 @@ typedef struct s_data {
 void my_mlx_pixel_put(t_img *data, int x, int y, int color);
 void draw_triangle(t_img *img, int x, int y, int size);
 void draw_square(t_img *img, int x, int y, int size, int trgb);
-void draw_line(t_img *img, int x0, int y0, int x1, int y1, int color);
+void draw_line(t_img *img, t_po_int start, t_po_int end, int color) ;
 void draw_points(t_img *img, t_map *map);
 void	fill_background(t_img *img);
 void	lines(t_img *img, t_map *map);

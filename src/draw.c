@@ -6,15 +6,15 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 09:58:18 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/02 14:42:55 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/02 16:02:01 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void my_mlx_pixel_put(t_img *data, int x, int y, int color)
+void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
 {
-	char *dst;
+	char	*dst;
 
 	dst = data->addr + (y * data->line_length + x * (data->bit_per_pixel / 8));
 	*(unsigned int *)dst = color;
@@ -22,9 +22,10 @@ void my_mlx_pixel_put(t_img *data, int x, int y, int color)
 
 void	fill_background(t_img *img)
 {
-	int i = 0;
-	int j = 0;
+	int	i;
+	int	j;
 
+	i = 0;
 	while (i < WIN_X)
 	{
 		j = 0;
@@ -46,11 +47,12 @@ int	ft_is_outside(t_point point)
 	return (0);
 }
 
-void draw_points(t_img *img, t_map *map)
+void	draw_points(t_img *img, t_map *map)
 {
-	int i;
-	int trgb = create_trgb(0, 255, 0, 0);
+	int	i;
+	int	trgb;
 
+	trgb = create_trgb(0, 255, 0, 0);
 	i = 0;
 	while (i < map->sum_points)
 	{
@@ -65,14 +67,16 @@ void draw_points(t_img *img, t_map *map)
 	}
 }
 
-void draw_triangle(t_img *img, int x, int y, int size)
+void	draw_triangle(t_img *img, int x, int y, int size)
 {
-	int trgb = create_trgb(0, 0, 255, 255);
-	int size_x = size + x;
-	int size_y = size + y;
-	//int cutoff = size + x;
-	int temp = y;
+	int	trgb;
+	int	size_x;
+	int	size_y;
+	int	temp;
 
+	trgb = create_trgb(0, 0, 255, 255);
+	size_x = size + x;
+	size_y = size + y;
 	while (x < size_x)
 	{
 		temp = y;
@@ -86,12 +90,14 @@ void draw_triangle(t_img *img, int x, int y, int size)
 	}
 }
 
-void draw_square(t_img *img, int x, int y, int size, int trgb)
+void	draw_square(t_img *img, int x, int y, int size, int trgb)
 {
-	int temp;
-	int size_x = size + x;
-	int size_y = size + y;
+	int	temp;
+	int	size_x;
+	int	size_y;
 
+	size_x = size + x;
+	size_y = size + y;
 	while (x < size_x)
 	{
 		temp = y;
@@ -106,46 +112,81 @@ void draw_square(t_img *img, int x, int y, int size, int trgb)
 	}
 }
 
-void draw_line(t_img *img, int x0, int y0, int x1, int y1, int color) 
+void	init_line(t_po_int start, t_po_int end, t_po_int *delta, t_po_int *step)
 {
-    // The Bresenham algorithm uses the concept of "error" to determine which pixels to draw
-    int dx = abs(x1 - x0); // delta x, the difference between x1 and x0
-    int dy = abs(y1 - y0); // delta y, the difference between y1 and y0
-    int sx = x0 < x1 ? 1 : -1; // step in x direction, either 1 or -1
-    int sy = y0 < y1 ? 1 : -1; // step in y direction, either 1 or -1
-    int err = dx - dy; // initial error value
+	delta->x = abs(end.x - start.x);
+	delta->y = abs(end.y - start.y);
+	if (start.x < end.x)
+		step->x = 1;
+	else
+		step->x = -1;
+	if (start.y < end.y)
+		step->y = 1;
+	else
+		step->y = -1;
+}
+/**
+ * @brief This function implements the Bresenham algorithm.
+ *		  The Bresenham algorithm uses the concept of "error" 
+ *		  to determine which pixels to draw
+ *
+ * @param img: The pointer to the image struct
+ * @param start: The startpoint with converted values to int
+ * @param end: The endpoint with converted values to int
+ * @param color: The color to draw
+ */
 
-    // Draw pixels using the Bresenham algorithm
-    while (1) {
-        // Draw a pixel at the current position
-        my_mlx_pixel_put(img, x0, y0, color);
-        // If we've reached the end point, exit the loop
-        if (x0 == x1 && y0 == y1) {
-            break;
-        }
-        int e2 = 2 * err;
-        if (e2 > -dy) {
-            err -= dy;
-            x0 += sx;
-        }
-        if (e2 < dx) {
-            err += dx;
-            y0 += sy;
-        }
-    }
+void	draw_line(t_img *img, t_po_int start, t_po_int end, int color)
+{
+	t_po_int	delta;
+	t_po_int	step;
+	int			err;
+	int			e2;
+
+	init_line(start, end, &delta, &step);
+	err = delta.x - delta.y;
+	while (1)
+	{
+		my_mlx_pixel_put(img, start.x, start.y, color);
+		if (start.x == end.x && start.y == end.y)
+			break ;
+		e2 = 2 * err;
+		if (e2 > -delta.y)
+		{
+			err -= delta.y;
+			start.x += step.x;
+		}
+		if (e2 < delta.x)
+		{
+			err += delta.x;
+			start.y += step.y;
+		}
+	}
 }
 
 void	lines(t_img *img, t_map *map)
 {
-	int i;
+	int			i;
+	t_po_int	start;
+	t_po_int	end;
 
 	i = 0;
 	while (i < map->sum_points - 1)
 	{
+		start.x = map->morph[i].x;
+		start.y = map->morph[i].y;
 		if (i % map->width != map->width - 1)
-			draw_line(img, map->morph[i].x, map->morph[i].y, map->morph[i + 1].x, map->morph[i + 1].y, create_trgb(0, 0, 0, 255));
+		{
+			end.x = map->morph[i + 1].x;
+			end.y = map->morph[i + 1].y;
+			draw_line(img, start, end, create_trgb(0, 0, 0, 255));
+		}
 		if (i / map->width != map->height - 1)
-			draw_line(img, map->morph[i].x, map->morph[i].y, map->morph[i + map->width].x, map->morph[i + map->width].y, create_trgb(0, 0, 0, 255));
+		{
+			end.x = map->morph[i + map->width].x;
+			end.y = map->morph[i + map->width].y;
+			draw_line(img, start, end, create_trgb(0, 0, 0, 255));
+		}
 		i++;
 	}
 }
