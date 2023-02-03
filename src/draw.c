@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 09:58:18 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/03 11:18:14 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/03 11:55:44 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,19 +173,19 @@ void	lines(t_img *img, t_map *map)
 	i = 0;
 	while (i < map->sum_points)
 	{
-		start.x = map->morph[i].x;
-		start.y = map->morph[i].y;
+		start.x = abs((int)map->morph[i].x);
+		start.y = abs((int)map->morph[i].y);
 		if (i % map->width != map->width - 1)
 		{
-			end.x = map->morph[i + 1].x;
-			end.y = map->morph[i + 1].y;
+			end.x = abs((int)map->morph[i + 1].x);
+			end.y = abs((int)map->morph[i + 1].y);
 			if (!ft_is_outside(map->morph[i]) || !ft_is_outside(map->morph[i + 1]))
 				draw_line(img, start, end, map->morph[i].color);
 		}
 		if (i / map->width != map->height - 1)
 		{
-			end.x = map->morph[i + map->width].x;
-			end.y = map->morph[i + map->width].y;
+			end.x = abs((int)map->morph[i + map->width].x);
+			end.y = abs((int)map->morph[i + map->width].y);
 			if (!ft_is_outside(map->morph[i]) || !ft_is_outside(map->morph[i + map->width]))
 				draw_line(img, start, end, map->morph[i].color);
 		}

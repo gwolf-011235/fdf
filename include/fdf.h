@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/03 11:32:12 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/03 11:40:30 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # include "ft_mem.h"
 # include "err_message.h"
 
-# define ROW_MAX 100
+# define ROW_MAX 1000
 
 # define WIN_X 1920
 # define WIN_Y 1080
