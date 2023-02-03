@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 09:27:53 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/03 10:52:13 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/03 17:18:03 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,14 @@
 
 void	ft_map_init(t_map *map)
 {
-	map->ang_x = 30;
-	map->ang_y = 330;
-	map->ang_z = 30;
+	map->ang_x = 0;
+	map->ang_y = 0;
+	map->ang_z = 0;
 	map->scale = 10;
 	map->offset_x = (WIN_X / 2);
 	map->offset_y = (WIN_Y / 2);
+	map->trans_x = 0;
+	map->trans_y = 0;
 	map->top = 0;
 	map->low = 0;
 	map->color_top = COLOR_TOP;
