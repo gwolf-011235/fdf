@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:29:34 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/02 17:14:49 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/03 09:16:15 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,32 +54,16 @@ int get_opposite(int trgb)
 	return (trgb ^ 0x00FFFFFF);
 }
 
-int	transition(int color_start, int color_end, double top, double low)
+int	gradient(int color_start, int color_end, double len, double pos)
 {
-	int middle[3];
-
-	if (top)
-	{
-		middle[0] = (get_r(color_end) - get_r(color_start)) / top;
-		middle[1] = (get_g(color_end) - get_g(color_start)) / top;
-		middle[2] = (get_b(color_end) - get_b(color_start)) / top;
-	}
-	else
-	{
-		middle[0] = (get_r(color_end) - get_r(color_start)) / low;
-		middle[1] = (get_g(color_end) - get_g(color_start)) / low;
-		middle[2] = (get_b(color_end) - get_b(color_start)) / low;
-	}
-	return (create_trgb(0, middle[0], middle[1], middle[2]));
-}
-
-int get_transition(double z, int transition_color)
-{
+	int factor[3];
 	int new_col[3];
 
-	new_col[0] = get_r(transition_color) * z + get_r(COLOR_MID);
-	new_col[1] = get_g(transition_color) * z + get_g(COLOR_MID);
-	new_col[2] = get_b(transition_color) * z + get_b(COLOR_MID);
-
+	factor[0] = (get_r(color_end) - get_r(color_start)) / len;
+	factor[1] = (get_g(color_end) - get_g(color_start)) / len;
+	factor[2] = (get_b(color_end) - get_b(color_start)) / len;
+	new_col[0] = factor[0] * pos + get_r(color_start);
+	new_col[1] = factor[1] * pos + get_g(color_start);
+	new_col[2] = factor[2] * pos + get_b(color_start);
 	return (create_trgb(0, new_col[0], new_col[1], new_col[2]));
 }
