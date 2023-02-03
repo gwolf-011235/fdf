@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 16:48:55 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/03 10:39:45 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/03 17:19:47 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,13 @@ void	rotate(t_point *point, double ang_x, double ang_y, double ang_z)
 	}
 }
 
-t_point	project_2d(t_point point)
+void	project_2d(t_point *point)
 {
-	point.x = 1 * point.x + 0 * point.y + 0 * point.z;
-	point.y = 0 * point.x + 1 * point.y + 0 * point.z;
-	point.z = 0 * point.x + 0 * point.y + 0 * point.z;
-	return (point);
+	if (point->z != 0)
+	{
+		point->x = point->x / point->z;
+		point->y = point->y / point->z;
+	}
 }
 
 t_point	matrix_point(double mat[3][3], t_point point)
