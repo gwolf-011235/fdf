@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:16:59 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/03 14:04:50 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/03 14:39:43 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,36 +15,31 @@
 
 int key_hook(int keycode, t_data *data)
 {
-	if (keycode == KEY_ARROW_LEFT)
-	{
+	if (keycode == KEY_A)
 		data->map.ang_x -= 3;
-		ft_redraw(data);
-	}
-	if (keycode == KEY_ARROW_RIGHT)
-	{
+	if (keycode == KEY_S)
 		data->map.ang_x += 3;
-		ft_redraw(data);
-	}
-	if (keycode == KEY_ARROW_UP)
-	{
-		data->map.ang_y += 3;
-		ft_redraw(data);
-	}
-	if (keycode == KEY_ARROW_DOWN)
-	{
+	if (keycode == KEY_D)
 		data->map.ang_y -= 3;
-		ft_redraw(data);
-	}
+	if (keycode == KEY_F)
+		data->map.ang_y += 3;
+	if (keycode == KEY_G)
+		data->map.ang_z -= 3;
+	if (keycode == KEY_H)
+		data->map.ang_z += 3;
 	if (keycode == KEY_Q)
-	{
 		data->map.scale += 1;
-		ft_redraw(data);
-	}
 	if (keycode == KEY_W)
-	{
 		data->map.scale -= 1;
-		ft_redraw(data);
-	}
+	if (keycode == KEY_ARROW_LEFT)
+		data->map.trans_x--;
+	if (keycode == KEY_ARROW_RIGHT)
+		data->map.trans_x++;
+	if (keycode == KEY_ARROW_UP)
+		data->map.trans_y -= 3;
+	if (keycode == KEY_ARROW_DOWN)
+		data->map.trans_y += 3;
+	ft_redraw(data);
 	printf("This is keycode: %d\n", keycode);
 	return (0);
 }
