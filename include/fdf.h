@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/03 09:21:07 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/03 09:29:15 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ typedef struct s_map {
 	double	top;
 	double	low;
 	int		color_top;
+	int		color_mid;
 	int		color_low;
 }	t_map;
 
@@ -133,5 +134,8 @@ t_point	project_2d(t_point point);
 //reshape.c
 void	ft_copy_map(t_map *map);
 void	ft_shape_map(t_map *map);
+
+//map_utils.c
+void	ft_map_init(t_map *map);
 
 #endif
