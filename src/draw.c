@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 09:58:18 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/03 11:55:44 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/03 14:09:43 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,10 +112,10 @@ void	draw_square(t_img *img, int x, int y, int size, int trgb)
 	}
 }
 
-void	init_line(t_po_int start, t_po_int end, t_po_int *delta, t_po_int *step)
+void	init_line(t_point start, t_point end, t_po_int *delta, t_po_int *step)
 {
-	delta->x = abs(end.x - start.x);
-	delta->y = abs(end.y - start.y);
+	delta->x = abs((int)end.x - (int)start.x);
+	delta->y = abs((int)end.y - (int)start.y);
 	if (start.x < end.x)
 		step->x = 1;
 	else
@@ -136,31 +136,43 @@ void	init_line(t_po_int start, t_po_int end, t_po_int *delta, t_po_int *step)
  * @param color: The color to draw
  */
 
-void	draw_line(t_img *img, t_po_int start, t_po_int end, int color)
+void	draw_line(t_img *img, t_point start, t_point end)
 {
 	t_po_int	delta;
 	t_po_int	step;
 	int			err;
 	int			e2;
+	int			len;
+	int			left;
+	int			color;
+	int			test[4];
 
 	init_line(start, end, &delta, &step);
 	err = delta.x - delta.y;
-	while (1)
+	len = sqrt(pow(delta.x, 2) + pow(delta.y, 2));
+	left = len;
+	test[0] = start.x;
+	test[1] = start.y;
+	test[2] = end.x;
+	test[3] = end.y;
+	while (left)
 	{
-		my_mlx_pixel_put(img, start.x, start.y, color);
-		if (start.x == end.x && start.y == end.y)
+		color = gradient(start.color, end.color, len, len - left);
+		my_mlx_pixel_put(img, test[0], test[1], color);
+		if (test[0] == test[2] && test[1] == test[3])
 			break ;
 		e2 = 2 * err;
 		if (e2 > -delta.y)
 		{
 			err -= delta.y;
-			start.x += step.x;
+			test[0] += step.x;
 		}
 		if (e2 < delta.x)
 		{
 			err += delta.x;
-			start.y += step.y;
+			test[1] += step.y;
 		}
+		left--;
 	}
 }
 
@@ -179,15 +191,15 @@ void	lines(t_img *img, t_map *map)
 		{
 			end.x = abs((int)map->morph[i + 1].x);
 			end.y = abs((int)map->morph[i + 1].y);
-			if (!ft_is_outside(map->morph[i]) || !ft_is_outside(map->morph[i + 1]))
-				draw_line(img, start, end, map->morph[i].color);
+			if (!ft_is_outside(map->morph[i]) && !ft_is_outside(map->morph[i + 1]))
+				draw_line(img, map->morph[i], map->morph[i + 1]);
 		}
 		if (i / map->width != map->height - 1)
 		{
 			end.x = abs((int)map->morph[i + map->width].x);
 			end.y = abs((int)map->morph[i + map->width].y);
-			if (!ft_is_outside(map->morph[i]) || !ft_is_outside(map->morph[i + map->width]))
-				draw_line(img, start, end, map->morph[i].color);
+			if (!ft_is_outside(map->morph[i]) && !ft_is_outside(map->morph[i + map->width]))
+				draw_line(img, map->morph[i], map->morph[i + map->width]);
 		}
 		i++;
 	}

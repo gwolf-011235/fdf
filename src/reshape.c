@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 10:22:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/03 11:32:19 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/03 14:21:38 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,12 @@ void	ft_shape_map(t_map *map)
 	i = 0;
 	while (i < map->sum_points)
 	{
-		map->morph[i].color = gradient(map->color_mid, map->color_top, map->top, map->morph[i].z);
+		if (map->morph[i].z == 0)
+			map->morph[i].color = map->color_mid;
+		else if (map->morph[i].z > 0)
+			map->morph[i].color = gradient(map->color_mid, map->color_top, map->top, map->morph[i].z);
+		else
+			map->morph[i].color = gradient(map->color_mid, map->color_low, map->low, map->morph[i].z);
 		rotate(&map->morph[i], map->ang_x, map->ang_y, map->ang_z);
 		map->morph[i].x = map->morph[i].x * map->scale;
 		map->morph[i].y = map->morph[i].y * map->scale;
