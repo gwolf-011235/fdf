@@ -6,36 +6,23 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 09:58:18 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/03 14:09:43 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/03 17:08:55 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 {
 	char	*dst;
 
-	dst = data->addr + (y * data->line_length + x * (data->bit_per_pixel / 8));
+	dst = img->addr + (y * img->line_length + x * (img->bit_per_pixel / 8));
 	*(unsigned int *)dst = color;
 }
 
 void	fill_background(t_img *img)
 {
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < WIN_X)
-	{
-		j = 0;
-		while (j < WIN_Y)
-		{
-			my_mlx_pixel_put(img, i, j, create_trgb(0, 0, 0, 0));
-			j++;
-		}
-		i++;
-	}
+	ft_bzero(img->addr, WIN_X * WIN_Y * 4);
 }
 
 int	ft_is_outside(t_point point)
@@ -179,25 +166,17 @@ void	draw_line(t_img *img, t_point start, t_point end)
 void	lines(t_img *img, t_map *map)
 {
 	int			i;
-	t_po_int	start;
-	t_po_int	end;
 
 	i = 0;
 	while (i < map->sum_points)
 	{
-		start.x = abs((int)map->morph[i].x);
-		start.y = abs((int)map->morph[i].y);
 		if (i % map->width != map->width - 1)
 		{
-			end.x = abs((int)map->morph[i + 1].x);
-			end.y = abs((int)map->morph[i + 1].y);
 			if (!ft_is_outside(map->morph[i]) && !ft_is_outside(map->morph[i + 1]))
 				draw_line(img, map->morph[i], map->morph[i + 1]);
 		}
 		if (i / map->width != map->height - 1)
 		{
-			end.x = abs((int)map->morph[i + map->width].x);
-			end.y = abs((int)map->morph[i + map->width].y);
 			if (!ft_is_outside(map->morph[i]) && !ft_is_outside(map->morph[i + map->width]))
 				draw_line(img, map->morph[i], map->morph[i + map->width]);
 		}
