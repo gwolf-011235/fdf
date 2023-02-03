@@ -6,32 +6,11 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 10:22:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/03 09:57:25 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/03 10:39:01 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-void	ft_copy_map(t_map *map)
-{
-	ft_memcpy(map->morph, map->points, (map->width * map->height * sizeof(t_point)));
-}
-
-void	ft_find_extremes(t_map *map, double z)
-{
-		if (z > map->top)
-		{
-			printf("Found new top!\nOld: %f\n", map->top);
-			map->top = z;
-			printf("New: %f\n", map->top);
-		}
-		if (z < map->low)
-		{
-			printf("Found new low!\nOld: %f\n", map->low);
-			map->low = z;
-			printf("New: %f\n", map->low);
-		}
-}
 
 void	ft_shape_map(t_map *map)
 {
@@ -40,17 +19,16 @@ void	ft_shape_map(t_map *map)
 	i = 0;
 	while (i < map->sum_points)
 	{
-		map->morph[i] = rotate(map->points[i], map->ang_x, map->ang_y, map->ang_z);
+		map->morph[i].color = gradient(COLOR_TOP, COLOR_MID, map->top, map->morph[i].z);
+		rotate(&map->points[i], map->ang_x, map->ang_y, map->ang_z);
 		map->morph[i].x = map->morph[i].x * map->scale;
 		map->morph[i].y = map->morph[i].y * map->scale;
 		map->morph[i].z = map->morph[i].z * map->scale;
-		ft_find_extremes(map, map->morph[i].z);
 		i++;
 	}
 	i = 0;
 	while (i < map->sum_points)
 	{
-		map->morph[i].color = gradient(COLOR_TOP, COLOR_MID, map->top, map->morph[i].z);
 		map->morph[i] = project_2d(map->morph[i]);
 		map->morph[i].x = map->morph[i].x + map->offset_x;
 		map->morph[i].y = map->morph[i].y + map->offset_y;

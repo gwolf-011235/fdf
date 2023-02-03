@@ -6,37 +6,36 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 16:48:55 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/02 13:35:38 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/03 10:39:45 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "fdf.h"
 
-t_point	rotate(t_point point, double ang_x, double ang_y, double ang_z)
+void	rotate(t_point *point, double ang_x, double ang_y, double ang_z)
 {
 	if (ang_x)
 	{
 		ang_x = ang_x / 57.29578;
-		point.x = 1 * point.x + 0 * point.y + 0 * point.z;
-		point.y = 0 * point.x + cos(ang_x) * point.y + -sin(ang_x) * point.z;
-		point.z = 0 * point.x + sin(ang_x) * point.y + cos(ang_x) * point.z;
+		point->x = 1 * point->x + 0 * point->y + 0 * point->z;
+		point->y = 0 * point->x + cos(ang_x) * point->y + -sin(ang_x) * point->z;
+		point->z = 0 * point->x + sin(ang_x) * point->y + cos(ang_x) * point->z;
 	}
 	if (ang_y)
 	{
 		ang_y = ang_y / 57.29578;
-		point.x = cos(ang_y) * point.x + 0 * point.y + sin(ang_y) * point.z;
-		point.y = 0 * point.x + 1 * point.y + 0 * point.z;
-		point.z = -sin(ang_y) * point.x + 0 * point.y + cos(ang_y) * point.z;
+		point->x = cos(ang_y) * point->x + 0 * point->y + sin(ang_y) * point->z;
+		point->y = 0 * point->x + 1 * point->y + 0 * point->z;
+		point->z = -sin(ang_y) * point->x + 0 * point->y + cos(ang_y) * point->z;
 	}
 	if (ang_z)
 	{
 		ang_z = ang_z / 57.29578;
-		point.x = cos(ang_z) * point.x + -sin(ang_z) * point.y + 0 * point.z;
-		point.y = sin(ang_z) * point.x + cos(ang_z) * point.y + 0 * point.z;
-		point.z = 0 * point.x + 0 * point.y + 1 * point.z;
+		point->x = cos(ang_z) * point->x + -sin(ang_z) * point->y + 0 * point->z;
+		point->y = sin(ang_z) * point->x + cos(ang_z) * point->y + 0 * point->z;
+		point->z = 0 * point->x + 0 * point->y + 1 * point->z;
 	}
-	return (point);
 }
 
 t_point	project_2d(t_point point)

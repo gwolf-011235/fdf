@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/03 09:59:33 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/03 10:35:48 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ typedef struct s_map {
 	double	scale;
 	double	offset_x;
 	double	offset_y;
-	double	top;
-	double	low;
+	int		top;
+	int		low;
 	int		color_top;
 	int		color_mid;
 	int		color_low;
@@ -128,15 +128,16 @@ void	parse_map(t_map *map, char *filename);
 
 //matrix.c
 void	mat_mult(double first[3][3], double second[3][3], double mul[3][3]);
-t_point	rotate(t_point point, double ang_x, double ang_y, double ang_z);
+void	rotate(t_point *point, double ang_x, double ang_y, double ang_z);
 t_point	matrix_point(double mat[3][3], t_point point);
 t_point	project_2d(t_point point);
 
 //reshape.c
-void	ft_copy_map(t_map *map);
 void	ft_shape_map(t_map *map);
 
 //map_utils.c
 void	ft_map_init(t_map *map);
+void	ft_find_extremes(t_map *map, int z);
+void	ft_copy_map(t_map *map);
 
 #endif
