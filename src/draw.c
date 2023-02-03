@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 09:58:18 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/03 09:47:01 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/03 11:18:14 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	fill_background(t_img *img)
 		j = 0;
 		while (j < WIN_Y)
 		{
-			my_mlx_pixel_put(img, i, j, create_trgb(0, 0, 255, 0));
+			my_mlx_pixel_put(img, i, j, create_trgb(0, 0, 0, 0));
 			j++;
 		}
 		i++;
