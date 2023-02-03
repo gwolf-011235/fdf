@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 09:58:18 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/02 17:50:05 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/03 09:47:01 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,7 +171,7 @@ void	lines(t_img *img, t_map *map)
 	t_po_int	end;
 
 	i = 0;
-	while (i < map->sum_points - 1)
+	while (i < map->sum_points)
 	{
 		start.x = map->morph[i].x;
 		start.y = map->morph[i].y;
@@ -179,13 +179,15 @@ void	lines(t_img *img, t_map *map)
 		{
 			end.x = map->morph[i + 1].x;
 			end.y = map->morph[i + 1].y;
-			draw_line(img, start, end, create_trgb(0, 0, 0, 255));
+			if (!ft_is_outside(map->morph[i]) || !ft_is_outside(map->morph[i + 1]))
+				draw_line(img, start, end, map->morph[i].color);
 		}
 		if (i / map->width != map->height - 1)
 		{
 			end.x = map->morph[i + map->width].x;
 			end.y = map->morph[i + map->width].y;
-			draw_line(img, start, end, create_trgb(0, 0, 0, 255));
+			if (!ft_is_outside(map->morph[i]) || !ft_is_outside(map->morph[i + map->width]))
+				draw_line(img, start, end, map->morph[i].color);
 		}
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/03 09:29:15 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/03 09:59:33 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 # define WIN_Y 1080
 
 # define COLOR_TOP 0xFF0000
-# define COLOR_MID 0x00FF00
+# define COLOR_MID 0xFFFFFF
 # define COLOR_LOW 0x0000FF
 
 typedef struct s_point {
@@ -95,6 +95,7 @@ void draw_line(t_img *img, t_po_int start, t_po_int end, int color) ;
 void draw_points(t_img *img, t_map *map);
 void	fill_background(t_img *img);
 void	lines(t_img *img, t_map *map);
+int	ft_is_outside(t_point point);
 
 //color.c
 int create_trgb(int t, int r, int g, int b);
