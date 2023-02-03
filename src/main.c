@@ -6,11 +6,23 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:54:09 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/02 17:34:09 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/03 09:21:00 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+void	ft_map_init(t_map *map)
+{
+	map->ang_x = 30;
+	map->ang_y = 330;
+	map->ang_z = 30;
+	map->scale = 30;
+	map->offset_x = (WIN_X / 2);
+	map->offset_y = (WIN_Y / 2);
+	map->top = 0;
+	map->low = 0;
+}
 
 int main(int argc, char *argv[])
 {
@@ -22,14 +34,6 @@ int main(int argc, char *argv[])
 	parse_map(&data.map, argv[1]);
 	ft_copy_map(&data.map);
 
-	data.map.ang_x = 30;
-	data.map.ang_y = 330;
-	data.map.ang_z = 30;
-	data.map.scale = 30;
-	data.map.offset_x = (WIN_X / 2);
-	data.map.offset_y = (WIN_Y / 2);
-	data.map.high = 0;
-	data.map.low = 0;
 	ft_shape_map(&data.map);
 
 	testwindow(&data);

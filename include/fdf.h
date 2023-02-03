@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/02 17:50:51 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/03 09:21:07 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ typedef struct s_map {
 	double	scale;
 	double	offset_x;
 	double	offset_y;
-	double	high;
+	double	top;
 	double	low;
 	int		color_top;
 	int		color_low;
@@ -103,7 +103,7 @@ int get_g(int trgb);
 int get_b(int trgb);
 int add_shade(double distance, int trgb);
 int get_opposite(int trgb);
-int	transition(int color_start, int color_end, double top, double low);
+int	gradient(int color_start, int color_end, double len, double pos);
 
 //hooks.c
 int key_hook(int keycode, t_data *vars);

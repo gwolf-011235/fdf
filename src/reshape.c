@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 10:22:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/02 17:50:23 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/03 09:22:14 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,17 @@ void	ft_copy_map(t_map *map)
 
 void	ft_find_extremes(t_map *map, double z)
 {
-		if (z > map->high)
+		if (z > map->top)
 		{
-			printf("Found new high!\nOld: %f\n", map->high);
-			map->high = z;
-			printf("New: %f\n", map->high);
+			printf("Found new top!\nOld: %f\n", map->top);
+			map->top = z;
+			printf("New: %f\n", map->top);
 		}
 		if (z < map->low)
 		{
-			printf("Found new low!\nOld: %f\n", map->high);
+			printf("Found new low!\nOld: %f\n", map->low);
 			map->low = z;
-			printf("New: %f\n", map->high);
+			printf("New: %f\n", map->low);
 		}
 }
 
@@ -45,7 +45,7 @@ void	ft_shape_map(t_map *map)
 		map->morph[i].y = map->morph[i].y * map->scale;
 		map->morph[i].z = map->morph[i].z * map->scale;
 		ft_find_extremes(map, map->morph[i].z);
-		map->color_top = transition(COLOR_TOP, COLOR_MID, map->high, 0);
+		map->color_top = transition(COLOR_TOP, COLOR_MID, map->top, 0);
 		map->morph[i] = project_2d(map->morph[i]);
 		map->morph[i].x = map->morph[i].x + map->offset_x;
 		map->morph[i].y = map->morph[i].y + map->offset_y;
