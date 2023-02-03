@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/03 11:40:30 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/03 12:00:41 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@
 # define KEY_ARROW_UP 65362
 # define KEY_ARROW_RIGHT 65363
 # define KEY_ARROW_DOWN 65364
+# define KEY_Q 113
+# define KEY_W 119
 
 typedef struct s_point {
 	double	x;

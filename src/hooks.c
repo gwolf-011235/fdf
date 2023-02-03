@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:16:59 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/03 11:34:22 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/03 12:01:41 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,16 @@ int key_hook(int keycode, t_data *data)
 	if (keycode == KEY_ARROW_DOWN)
 	{
 		data->map.ang_y -= 3;
+		ft_redraw(data);
+	}
+	if (keycode == KEY_Q)
+	{
+		data->map.scale += 1;
+		ft_redraw(data);
+	}
+	if (keycode == KEY_W)
+	{
+		data->map.scale -= 1;
 		ft_redraw(data);
 	}
 	printf("This is keycode: %d\n", keycode);
