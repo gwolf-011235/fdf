@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/03 13:41:54 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/03 16:56:35 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,20 @@
 # define WIN_X 1920
 # define WIN_Y 1080
 
-# define COLOR_TOP 0xFF0000
-# define COLOR_MID 0xFFFFFF
+# define COLOR_TOP 0xFFFFFF
+# define COLOR_MID 0x00FF00
 # define COLOR_LOW 0x0000FF
 
 # define KEY_ARROW_LEFT 65361
 # define KEY_ARROW_UP 65362
 # define KEY_ARROW_RIGHT 65363
 # define KEY_ARROW_DOWN 65364
+# define KEY_A 97
+# define KEY_S 115
+# define KEY_D 100
+# define KEY_F 102
+# define KEY_G 103
+# define KEY_H 104
 # define KEY_Q 113
 # define KEY_W 119
 
@@ -72,6 +78,8 @@ typedef struct s_map {
 	double	scale;
 	double	offset_x;
 	double	offset_y;
+	double	trans_x;
+	double	trans_y;
 	int		top;
 	int		low;
 	int		color_top;
@@ -137,7 +145,7 @@ void	parse_map(t_map *map, char *filename);
 void	mat_mult(double first[3][3], double second[3][3], double mul[3][3]);
 void	rotate(t_point *point, double ang_x, double ang_y, double ang_z);
 t_point	matrix_point(double mat[3][3], t_point point);
-t_point	project_2d(t_point point);
+void	project_2d(t_point *point);
 
 //reshape.c
 void	ft_shape_map(t_map *map);
