@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/03 10:35:48 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/03 11:32:12 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,11 @@
 # define COLOR_TOP 0xFF0000
 # define COLOR_MID 0xFFFFFF
 # define COLOR_LOW 0x0000FF
+
+# define KEY_ARROW_LEFT 65361
+# define KEY_ARROW_UP 65362
+# define KEY_ARROW_RIGHT 65363
+# define KEY_ARROW_DOWN 65364
 
 typedef struct s_point {
 	double	x;
@@ -134,6 +139,7 @@ t_point	project_2d(t_point point);
 
 //reshape.c
 void	ft_shape_map(t_map *map);
+void	ft_redraw(t_data *data);
 
 //map_utils.c
 void	ft_map_init(t_map *map);
