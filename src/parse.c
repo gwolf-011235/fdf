@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:00:33 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/03 10:14:32 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/03 17:36:27 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,12 @@ void	fetch_points(t_map *map)
 	while (i < map->height)
 	{
 		if (ft_count_num(map->rows[i]) != map->width)
+		{
+			ft_printf("Line %d is bad!\n", i + 1);
+			ft_printf("Expected: %d\ni", map->width);
+			ft_printf("Got: %d\n", ft_count_num(map->rows[i]));
 			terminate(ERR_LINE);
+		}
 		ft_convert_line(map, map->rows[i], i * map->width);
 		i++;
 	}
