@@ -26,7 +26,9 @@ SRC := 	main.c \
 		parse.c \
 		matrix.c \
 		reshape.c \
-		map_utils.c
+		map_utils.c \
+		test.c \
+		vector.c
 
 SRCS := $(addprefix $(SRC_DIR)/, $(SRC))
 
