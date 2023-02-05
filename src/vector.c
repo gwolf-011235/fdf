@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 19:27:31 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/05 20:30:36 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/05 22:14:53 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 void	vec3_normalize(t_point *point)
 {
-	double len = sqrt(point->x * point->x + point->y * point->y + point->z * point->z);
+	float	len;
+
+	len = sqrt(point->x * point->x + point->y * point->y + point->z * point->z);
 	point->x /= len;
 	point->y /= len;
 	point->z /= len;

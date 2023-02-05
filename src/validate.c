@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 21:36:25 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/05 22:05:44 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/05 22:09:00 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	ft_count_num(char *line)
 {
-	int i;
-	int count;
+	int	i;
+	int	count;
 
 	i = 0;
 	count = 0;
@@ -53,7 +53,7 @@ int	ft_jump_over_hex(char *line)
 		big = false;
 	else if (line[i] == 'X')
 		big = true;
-	else 
+	else
 		return (-1);
 	i++;
 	while (big && ft_strchr("0123456789ABCDEF", line[i]))
@@ -68,7 +68,7 @@ int	ft_jump_over_hex(char *line)
 
 void	ft_check_row(t_map *map, char *row)
 {
-	int count;
+	int	count;
 
 	count = ft_count_num(row);
 	if (count != map->width)
@@ -83,7 +83,7 @@ void	ft_check_row(t_map *map, char *row)
 
 void	ft_extract_rows(t_map *map, int fd)
 {
-	char *row;
+	char	*row;
 
 	row = get_next_line(fd);
 	if (!row)
@@ -109,7 +109,7 @@ void	ft_extract_rows(t_map *map, int fd)
 
 void	ft_validate_map(t_map *map, char *filename)
 {
-	int fd;
+	int	fd;
 
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)

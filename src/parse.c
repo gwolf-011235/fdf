@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:00:33 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/05 21:59:35 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/05 22:09:34 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	map_alloc(t_map *map)
 
 void	ft_convert_line(t_map *map, char *line, int index)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (line[i])
@@ -47,7 +47,7 @@ void	ft_convert_line(t_map *map, char *line, int index)
 
 void	fetch_points(t_map *map)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < map->height)
