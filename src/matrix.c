@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 16:48:55 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/03 17:19:47 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/05 19:29:20 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,20 @@ void	rotate(t_point *point, double ang_x, double ang_y, double ang_z)
 
 void	project_2d(t_point *point)
 {
-	if (point->z != 0)
+	if (point->z == 0)
 	{
-		point->x = point->x / point->z;
-		point->y = point->y / point->z;
+		point->x = 0;
+		point->y = 0;
 	}
+	else
+	{
+		point->x = point->x / -point->z;
+		point->y = point->y / -point->z;
+	}
+	point->x = (point->x + WIN_X / 2) / WIN_X;
+	point->y = (point->y + WIN_Y / 2) / WIN_Y;
+	point->x = floor(point->x * WIN_X);
+	point->y = floor((1 - point->y) * WIN_Y);
 }
 
 t_point	matrix_point(double mat[3][3], t_point point)
@@ -83,4 +92,42 @@ void	mat_mult(double first[3][3], double second[3][3], double mul[3][3])
 		}
 		i++;
 	}
+}
+
+void	fill_mat4(t_mat4 matrix, t_point *points)
+{
+	int i;
+
+	i = 0;
+	while (i < 4)
+	{
+		matrix[i][0] = points[i].x;
+		matrix[i][1] = points[i].y;
+		matrix[i][2] = points[i].z;
+		i++;
+	}
+	matrix[3][0] = 0;
+	matrix[3][1] = 0;
+	matrix[3][2] = 0;
+	matrix[3][3] = 1;
+}
+
+void	lookat(t_point from, t_point to, t_point up, t_mat4 cam2world)
+{
+	t_point	forward;
+	t_point	right;
+	t_point	newup;
+	t_point points[4];
+
+	forward = vec3_subtract(from, to);
+	vec3_normalize(&forward);
+	right = vec3_cross(up, forward);
+	vec3_normalize(&right);
+	newup = vec3_cross(forward, right);
+
+	points[0] = right;
+	points[1] = newup;
+	points[2] = forward;
+	points[3] = from;
+	fill_mat4(cam2world, points);
 }
