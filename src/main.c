@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:54:09 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/05 19:26:22 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/05 21:47:18 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int main(int argc, char *argv[])
 		terminate(ERR_ARGS);
 
 	ft_map_init(&data.map);
-	parse_map(&data.map, argv[1]);
+	ft_validate_map(&data.map, argv[1]);
+	parse_map(&data.map);
 	ft_copy_map(&data.map);
 
 	ft_shape_map(&data.map);

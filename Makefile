@@ -28,7 +28,8 @@ SRC := 	main.c \
 		reshape.c \
 		map_utils.c \
 		test.c \
-		vector.c
+		vector.c \
+		validate.c
 
 SRCS := $(addprefix $(SRC_DIR)/, $(SRC))
 

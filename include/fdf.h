@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/05 20:29:44 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/05 22:00:28 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,13 @@ typedef struct s_data {
 	t_map	map;
 }	t_data;
 
+//validate.c
+void	ft_validate_map(t_map *map, char *filename);
+int		ft_count_num(char *line);
+int		ft_jump_over_hex(char *line);
+void	ft_extract_rows(t_map *map, int fd);
+void	ft_check_row(t_map *map, char *row);
+
 //draw.c
 void my_mlx_pixel_put(t_img *data, int x, int y, int color);
 void draw_triangle(t_img *img, int x, int y, int size);
@@ -139,10 +146,10 @@ void	terminate(char *message);
 
 //parse.c
 int		ft_count_num(char *line);
-void	map_alloc(t_map *map, int fd);
+void	map_alloc(t_map *map);
 void	ft_convert_line(t_map *map, char *line, int index);
 void	fetch_points(t_map *map);
-void	parse_map(t_map *map, char *filename);
+void	parse_map(t_map *map);
 void	ft_set_colors(t_map *map);
 
 //matrix.c
