@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:00:10 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/03 11:16:44 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/04 22:13:42 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,12 @@
 
 void testwindow(t_data *data)
 {
+	int width;
+	int height;
+
 	data->mlx = mlx_init();
+	mlx_get_screen_size(data->mlx, &width, &height);
+	printf("Screen size: %dx%d\n", width, height);
 	data->win = mlx_new_window(data->mlx, WIN_X, WIN_Y, "FdF - by gwolf");
 	data->img.img = mlx_new_image(data->mlx, WIN_X, WIN_Y);
 	data->img.addr = mlx_get_data_addr(data->img.img, &data->img.bit_per_pixel, &data->img.line_length, &data->img.endian);
