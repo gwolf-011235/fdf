@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/03 16:56:35 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/05 19:35:20 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@
 
 # define ROW_MAX 1000
 
-# define WIN_X 1920
-# define WIN_Y 1080
+# define WIN_X 1366
+# define WIN_Y 768
 
 # define COLOR_TOP 0xFFFFFF
 # define COLOR_MID 0x00FF00
@@ -53,10 +53,12 @@
 # define KEY_Q 113
 # define KEY_W 119
 
+typedef double t_mat4[4][4]; 
+
 typedef struct s_point {
-	double	x;
-	double	y;
-	double	z;
+	float	x;
+	float	y;
+	float	z;
 	int		color;
 }	t_point;
 
@@ -72,14 +74,14 @@ typedef struct s_map {
 	int		width;
 	int		sum_points;
 	char	*rows[ROW_MAX];
-	double	ang_x;
-	double	ang_y;
-	double	ang_z;
-	double	scale;
-	double	offset_x;
-	double	offset_y;
-	double	trans_x;
-	double	trans_y;
+	float	ang_x;
+	float	ang_y;
+	float	ang_z;
+	float	scale;
+	float	offset_x;
+	float	offset_y;
+	float	trans_x;
+	float	trans_y;
 	int		top;
 	int		low;
 	int		color_top;
@@ -146,6 +148,13 @@ void	mat_mult(double first[3][3], double second[3][3], double mul[3][3]);
 void	rotate(t_point *point, double ang_x, double ang_y, double ang_z);
 t_point	matrix_point(double mat[3][3], t_point point);
 void	project_2d(t_point *point);
+void	fill_mat4(t_mat4 matrix, t_point *points);
+void	lookat(t_point from, t_point to, t_point up, t_mat4 cam2world);
+
+//vector.c
+void	vec3_normalize(t_point *point);
+t_point	vec3_cross(t_point a, t_point b);
+t_point	vec3_subtract(t_point a, t_point b);
 
 //reshape.c
 void	ft_shape_map(t_map *map);
@@ -155,5 +164,8 @@ void	ft_redraw(t_data *data);
 void	ft_map_init(t_map *map);
 void	ft_find_extremes(t_map *map, int z);
 void	ft_copy_map(t_map *map);
+
+//test.c
+void	test(void);
 
 #endif
