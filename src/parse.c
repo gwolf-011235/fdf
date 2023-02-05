@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:00:33 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/03 17:36:27 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/05 20:27:20 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ void	map_alloc(t_map *map, int fd)
 		terminate(ERR_READ);
 	map->sum_points = map->height * map->width;
 	map->points = malloc(map->sum_points * sizeof(t_point) * 2);
-	if (!map->points)
+	map->color_array = malloc(map->sum_points * sizeof(int));
+	if (!map->points || !map->color_array)
 		terminate(ERR_MEM);
 	map->morph = map->points + (map->sum_points);
 }
@@ -109,6 +110,23 @@ void	fetch_points(t_map *map)
 	}
 }
 
+void	ft_set_colors(t_map *map)
+{
+	int	i;
+
+	i = 0;
+	while (i < map->sum_points)
+	{
+		if (map->points[i].z == 0)
+			map->color_array[i] = map->color_mid;
+		else if (map->points[i].z > 0)
+			map->color_array[i] = gradient(map->color_mid, map->color_top, map->top, map->points[i].z);
+		else
+			map->color_array[i] = gradient(map->color_mid, map->color_low, map->low, map->points[i].z);
+		i++;
+	}
+}
+
 void	parse_map(t_map *map, char *filename)
 {
 	int fd;
@@ -120,4 +138,6 @@ void	parse_map(t_map *map, char *filename)
 	if (close(fd) == -1)
 		terminate(ERR_CLOSE);
 	fetch_points(map);
+	ft_bzero(map->color_array, map->sum_points * sizeof(int));
+	ft_set_colors(map);
 }

@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/05 19:35:20 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/05 20:29:44 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 # define WIN_X 1366
 # define WIN_Y 768
 
-# define COLOR_TOP 0xFFFFFF
+# define COLOR_TOP 0xFF0000
 # define COLOR_MID 0x00FF00
 # define COLOR_LOW 0x0000FF
 
@@ -59,7 +59,6 @@ typedef struct s_point {
 	float	x;
 	float	y;
 	float	z;
-	int		color;
 }	t_point;
 
 typedef struct s_po_int {
@@ -70,6 +69,7 @@ typedef struct s_po_int {
 typedef struct s_map {
 	t_point	*points;
 	t_point	*morph;
+	int		*color_array;
 	int		height;
 	int		width;
 	int		sum_points;
@@ -108,11 +108,12 @@ typedef struct s_data {
 void my_mlx_pixel_put(t_img *data, int x, int y, int color);
 void draw_triangle(t_img *img, int x, int y, int size);
 void draw_square(t_img *img, int x, int y, int size, int trgb);
-void	draw_line(t_img *img, t_point start, t_point end);
+void	draw_line(t_img *img, t_po_int start, t_po_int end, int colors[2]);
 void draw_points(t_img *img, t_map *map);
 void	fill_background(t_img *img);
 void	lines(t_img *img, t_map *map);
 int	ft_is_outside(t_point point);
+t_po_int	ft_convert_3to2(t_point point);
 
 //color.c
 int create_trgb(int t, int r, int g, int b);
@@ -137,11 +138,12 @@ void testwindow(t_data *data);
 void	terminate(char *message);
 
 //parse.c
-int	ft_count_num(char *line);
+int		ft_count_num(char *line);
 void	map_alloc(t_map *map, int fd);
 void	ft_convert_line(t_map *map, char *line, int index);
 void	fetch_points(t_map *map);
 void	parse_map(t_map *map, char *filename);
+void	ft_set_colors(t_map *map);
 
 //matrix.c
 void	mat_mult(double first[3][3], double second[3][3], double mul[3][3]);

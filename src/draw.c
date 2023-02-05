@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 09:58:18 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/03 17:08:55 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/05 20:19:10 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,10 +99,10 @@ void	draw_square(t_img *img, int x, int y, int size, int trgb)
 	}
 }
 
-void	init_line(t_point start, t_point end, t_po_int *delta, t_po_int *step)
+void	init_line(t_po_int start, t_po_int end, t_po_int *delta, t_po_int *step)
 {
-	delta->x = abs((int)end.x - (int)start.x);
-	delta->y = abs((int)end.y - (int)start.y);
+	delta->x = abs(end.x - start.x);
+	delta->y = abs(end.y - start.y);
 	if (start.x < end.x)
 		step->x = 1;
 	else
@@ -123,7 +123,7 @@ void	init_line(t_point start, t_point end, t_po_int *delta, t_po_int *step)
  * @param color: The color to draw
  */
 
-void	draw_line(t_img *img, t_point start, t_point end)
+void	draw_line(t_img *img, t_po_int start, t_po_int end, int colors[2])
 {
 	t_po_int	delta;
 	t_po_int	step;
@@ -132,53 +132,66 @@ void	draw_line(t_img *img, t_point start, t_point end)
 	int			len;
 	int			left;
 	int			color;
-	int			test[4];
 
 	init_line(start, end, &delta, &step);
 	err = delta.x - delta.y;
 	len = sqrt(pow(delta.x, 2) + pow(delta.y, 2));
 	left = len;
-	test[0] = start.x;
-	test[1] = start.y;
-	test[2] = end.x;
-	test[3] = end.y;
 	while (left)
 	{
-		color = gradient(start.color, end.color, len, len - left);
-		my_mlx_pixel_put(img, test[0], test[1], color);
-		if (test[0] == test[2] && test[1] == test[3])
+		color = gradient(colors[0], colors[1], len, len - left);
+		my_mlx_pixel_put(img, start.x, start.y, color);
+		if (start.x == end.x && start.y == end.y)
 			break ;
 		e2 = 2 * err;
 		if (e2 > -delta.y)
 		{
 			err -= delta.y;
-			test[0] += step.x;
+			start.x += step.x;
 		}
 		if (e2 < delta.x)
 		{
 			err += delta.x;
-			test[1] += step.y;
+			start.y += step.y;
 		}
 		left--;
 	}
 }
 
+t_po_int	ft_convert_3to2(t_point point)
+{
+	t_po_int ret;
+
+	ret.x = floor(point.x);
+	ret.y = floor(point.y);
+	return (ret);
+}
+
 void	lines(t_img *img, t_map *map)
 {
 	int			i;
+	t_po_int	start;
+	t_po_int	end;
+	int			colors[2];
 
 	i = 0;
 	while (i < map->sum_points)
 	{
+		start = ft_convert_3to2(map->morph[i]);
+		colors[0] = map->color_array[i];
 		if (i % map->width != map->width - 1)
 		{
+			end = ft_convert_3to2(map->morph[i + 1]);
+			colors[1] = map->color_array[i + 1];
 			if (!ft_is_outside(map->morph[i]) && !ft_is_outside(map->morph[i + 1]))
-				draw_line(img, map->morph[i], map->morph[i + 1]);
+				draw_line(img, start, end, colors);
 		}
 		if (i / map->width != map->height - 1)
 		{
+			end = ft_convert_3to2(map->morph[i + map->width]);
+			colors[1] = map->color_array[i + map->width];
 			if (!ft_is_outside(map->morph[i]) && !ft_is_outside(map->morph[i + map->width]))
-				draw_line(img, map->morph[i], map->morph[i + map->width]);
+				draw_line(img, start, end, colors);
 		}
 		i++;
 	}
