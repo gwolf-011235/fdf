@@ -47,11 +47,7 @@ debug: fclean $(NAME)
 	$(CC) $(CFLAGS) $(INC) $(OBJS) $(LIBS) -o $(NAME)
 	echo "$(NAME) created - DEBUG MODE!"
 
-optimize: CFLAGS += -o3
-optimize: fclean $(NAME)
-	$(CC) $(CFLAGS) $(INC) $(OBJS) $(LIBS) -o $(NAME)
-	echo "$(NAME) created - OPTIMIZED!"
-
+$(NAME): CFLAGS += -o3
 $(NAME): $(OBJS) $(LIBFT) $(MLX)
 	$(COMPILE) $(OBJS) $(LIBS) -o $(NAME)
 
