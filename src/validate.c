@@ -6,19 +6,17 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 21:36:25 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/05 22:09:00 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/08 15:16:31 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	ft_count_num(char *line)
+void	ft_count_num_in_row(char *line, int *count)
 {
 	int	i;
-	int	count;
 
 	i = 0;
-	count = 0;
 	while (line[i])
 	{
 		while (line[i] == ' ')
@@ -27,16 +25,14 @@ int	ft_count_num(char *line)
 			i++;
 		while (ft_isdigit(line[i]))
 			i++;
-		count++;
+		(*count)++;
 		if (line[i] == ',')
 			i += ft_jump_over_hex(&line[i]);
 		if (line[i] != ' ' || line[i] == '\n')
 			break ;
 	}
-	if (line[i] == '\0' || line[i + 1] == '\0')
-		return (count);
-	else
-		return (-1);
+	if (line[i] != '\0' && line[i + 1] != '\0')
+		*count = -1;
 }
 
 int	ft_jump_over_hex(char *line)
@@ -60,7 +56,7 @@ int	ft_jump_over_hex(char *line)
 		i++;
 	while (!big && ft_strchr("0123456789abcdef", line[i]))
 		i++;
-	if (line[i] == ' ')
+	if (line[i] == ' ' || line[i] == '\n')
 		return (i);
 	else
 		return (-1);
@@ -70,7 +66,7 @@ void	ft_check_row(t_map *map, char *row)
 {
 	int	count;
 
-	count = ft_count_num(row);
+	ft_count_num_in_row(row, &count);
 	if (count != map->width)
 	{
 		ft_printf("Line %d is bad!\n", map->height);
@@ -88,7 +84,7 @@ void	ft_extract_rows(t_map *map, int fd)
 	row = get_next_line(fd);
 	if (!row)
 		terminate(ERR_EMPTY);
-	map->width = ft_count_num(row);
+	ft_count_num_in_row(row, &map->width);
 	if (map->width == -1)
 	{
 		free(row);
