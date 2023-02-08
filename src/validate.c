@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 21:36:25 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/08 15:38:29 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/08 16:16:12 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,7 @@ void	ft_count_num_in_row(char *line, int *count, bool *hex)
 	i = 0;
 	while (line[i])
 	{
-		while (line[i] == ' ')
-			i++;
-		if (line[i] == '-' && ft_isdigit(line[i + 1]))
-			i++;
-		while (ft_isdigit(line[i]))
-			i++;
+		i += ft_move_atoi(&line[i]);
 		(*count)++;
 		if (line[i] == ',' && *hex == false)
 		{

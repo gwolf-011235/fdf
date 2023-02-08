@@ -29,7 +29,8 @@ SRC := 	main.c \
 		map_utils.c \
 		test.c \
 		vector.c \
-		validate.c
+		validate.c \
+		utils.c
 
 SRCS := $(addprefix $(SRC_DIR)/, $(SRC))
 

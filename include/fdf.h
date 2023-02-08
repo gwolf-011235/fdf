@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/08 15:20:52 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/08 16:44:15 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,12 @@ int		ft_jump_over_hex(char *line);
 void	ft_extract_rows(t_map *map, int fd);
 void	ft_check_row(t_map *map, char *row);
 
+//parse.c
+void	ft_parse_map(t_map *map);
+void	ft_map_alloc(t_map *map);
+void	ft_parse_line(t_map *map, char *line, int index);
+void	ft_set_colors(t_map *map);
+
 //draw.c
 void my_mlx_pixel_put(t_img *data, int x, int y, int color);
 void draw_triangle(t_img *img, int x, int y, int size);
@@ -145,14 +151,6 @@ void testwindow(t_data *data);
 //error.c
 void	terminate(char *message);
 
-//parse.c
-int		ft_count_num(char *line);
-void	map_alloc(t_map *map);
-void	ft_convert_line(t_map *map, char *line, int index);
-void	fetch_points(t_map *map);
-void	parse_map(t_map *map);
-void	ft_set_colors(t_map *map);
-
 //matrix.c
 void	mat_mult(double first[3][3], double second[3][3], double mul[3][3]);
 void	rotate(t_point *point, double ang_x, double ang_y, double ang_z);
@@ -174,6 +172,10 @@ void	ft_redraw(t_data *data);
 void	ft_map_init(t_map *map);
 void	ft_find_extremes(t_map *map, int z);
 void	ft_copy_map(t_map *map);
+
+//utils.c
+int	ft_move_atoi(char *line);
+int	ft_hex_to_decimal(char *line, int len);
 
 //test.c
 void	test(void);

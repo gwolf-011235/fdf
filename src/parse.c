@@ -6,24 +6,26 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:00:33 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/08 15:47:29 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/08 16:52:15 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	map_alloc(t_map *map)
+void	ft_map_alloc(t_map *map)
 {
 	map->points = malloc(map->sum_points * sizeof(t_point) * 2);
 	map->color_array = malloc(map->sum_points * sizeof(int));
 	if (!map->points || !map->color_array)
 		terminate(ERR_MEM);
 	map->morph = map->points + map->sum_points;
+	ft_bzero(map->color_array, map->sum_points * sizeof(int));
 }
 
-void	ft_convert_line(t_map *map, char *line, int index)
+void	ft_parse_line(t_map *map, char *line, int index)
 {
 	int	i;
+	int len_hex;
 
 	i = 0;
 	while (line[i])
@@ -32,31 +34,18 @@ void	ft_convert_line(t_map *map, char *line, int index)
 		map->points[index].y = (index / map->width) - (map->height / 2);
 		map->points[index].z = ft_atoi(&line[i]);
 		ft_find_extremes(map, map->points[index].z);
-		while (line[i] == ' ')
-			i++;
-		if (line[i] == '-' && ft_isdigit(line[i + 1]))
-			i++;
-		while (ft_isdigit(line[i]))
-			i++;
+		i += ft_move_atoi(&line[i]);
 		if (map->hex && line[i] == ',')
-			i += ft_jump_over_hex(&line[i]);
+		{
+			len_hex = ft_jump_over_hex(&line[i]);
+			map->color_array[index] = ft_hex_to_decimal(&line[i + 3], len_hex);
+			i += len_hex;
+		}
 		index++;
 		if (line[i] == '\n')
 			break ;
 	}
 	free(line);
-}
-
-void	fetch_points(t_map *map)
-{
-	int	i;
-
-	i = 0;
-	while (i < map->height)
-	{
-		ft_convert_line(map, map->rows[i], i * map->width);
-		i++;
-	}
 }
 
 void	ft_set_colors(t_map *map)
@@ -66,6 +55,13 @@ void	ft_set_colors(t_map *map)
 	i = 0;
 	while (i < map->sum_points)
 	{
+		if (map->hex)
+		{
+			if (!map->color_array[i])
+				map->color_array[i] = map->color_mid;
+			i++;
+			continue ;
+		}
 		if (map->points[i].z == 0)
 			map->color_array[i] = map->color_mid;
 		else if (map->points[i].z > 0)
@@ -76,10 +72,16 @@ void	ft_set_colors(t_map *map)
 	}
 }
 
-void	parse_map(t_map *map)
+void	ft_parse_map(t_map *map)
 {
-	map_alloc(map);
-	fetch_points(map);
-	ft_bzero(map->color_array, map->sum_points * sizeof(int));
+	int i;
+
+	i = 0;
+	ft_map_alloc(map);
+	while (i < map->height)
+	{
+		ft_parse_line(map, map->rows[i], i * map->width);
+		i++;
+	}
 	ft_set_colors(map);
 }
