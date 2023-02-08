@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:00:33 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/05 22:09:34 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/08 15:47:29 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,15 @@ void	ft_convert_line(t_map *map, char *line, int index)
 		map->points[index].y = (index / map->width) - (map->height / 2);
 		map->points[index].z = ft_atoi(&line[i]);
 		ft_find_extremes(map, map->points[index].z);
+		while (line[i] == ' ')
+			i++;
 		if (line[i] == '-' && ft_isdigit(line[i + 1]))
 			i++;
 		while (ft_isdigit(line[i]))
 			i++;
+		if (map->hex && line[i] == ',')
+			i += ft_jump_over_hex(&line[i]);
 		index++;
-		while (line[i] == ' ')
-			i++;
 		if (line[i] == '\n')
 			break ;
 	}

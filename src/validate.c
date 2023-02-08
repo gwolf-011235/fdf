@@ -6,13 +6,13 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 21:36:25 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/08 15:16:31 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/08 15:38:29 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	ft_count_num_in_row(char *line, int *count)
+void	ft_count_num_in_row(char *line, int *count, bool *hex)
 {
 	int	i;
 
@@ -26,6 +26,11 @@ void	ft_count_num_in_row(char *line, int *count)
 		while (ft_isdigit(line[i]))
 			i++;
 		(*count)++;
+		if (line[i] == ',' && *hex == false)
+		{
+			*hex = true;
+			ft_printf("Hex colors found!\n");
+		}
 		if (line[i] == ',')
 			i += ft_jump_over_hex(&line[i]);
 		if (line[i] != ' ' || line[i] == '\n')
@@ -38,23 +43,16 @@ void	ft_count_num_in_row(char *line, int *count)
 int	ft_jump_over_hex(char *line)
 {
 	int		i;
-	bool	big;
 
 	i = 0;
 	if (line[i] == ',' && line[i + 1] == '0')
 		i += 2;
 	else
 		return (-1);
-	if (line[i] == 'x')
-		big = false;
-	else if (line[i] == 'X')
-		big = true;
-	else
+	if (line[i] != 'x' && line[i] != 'X')
 		return (-1);
 	i++;
-	while (big && ft_strchr("0123456789ABCDEF", line[i]))
-		i++;
-	while (!big && ft_strchr("0123456789abcdef", line[i]))
+	while (ft_strchr("0123456789ABCDEFabcdef", line[i]))
 		i++;
 	if (line[i] == ' ' || line[i] == '\n')
 		return (i);
@@ -66,7 +64,7 @@ void	ft_check_row(t_map *map, char *row)
 {
 	int	count;
 
-	ft_count_num_in_row(row, &count);
+	ft_count_num_in_row(row, &count, &map->hex);
 	if (count != map->width)
 	{
 		ft_printf("Line %d is bad!\n", map->height);
@@ -84,7 +82,7 @@ void	ft_extract_rows(t_map *map, int fd)
 	row = get_next_line(fd);
 	if (!row)
 		terminate(ERR_EMPTY);
-	ft_count_num_in_row(row, &map->width);
+	ft_count_num_in_row(row, &map->width, &map->hex);
 	if (map->width == -1)
 	{
 		free(row);

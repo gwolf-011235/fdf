@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/08 15:13:06 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/08 15:20:52 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ typedef struct s_map {
 	int		width;
 	int		sum_points;
 	char	*rows[ROW_MAX];
+	bool	hex;
 	float	ang_x;
 	float	ang_y;
 	float	ang_z;
@@ -106,7 +107,7 @@ typedef struct s_data {
 
 //validate.c
 void	ft_validate_map(t_map *map, char *filename);
-void	ft_count_num_in_row(char *line, int *count);
+void	ft_count_num_in_row(char *line, int *count, bool *hex);
 int		ft_jump_over_hex(char *line);
 void	ft_extract_rows(t_map *map, int fd);
 void	ft_check_row(t_map *map, char *row);
