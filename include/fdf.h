@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/08 19:04:04 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/09 10:23:34 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,6 @@
 # include "err_message.h"
 
 # define ROW_MAX 1000
-
-# define WIN_X 1366
-# define WIN_Y 768
 
 # define COLOR_TOP 0xFF0000
 # define COLOR_MID 0x00FF00
@@ -79,8 +76,8 @@ typedef struct s_map {
 	float	ang_y;
 	float	ang_z;
 	float	scale;
-	float	offset_x;
-	float	offset_y;
+	int		offset_x;
+	int		offset_y;
 	float	trans_x;
 	float	trans_y;
 	int		top;
@@ -91,17 +88,20 @@ typedef struct s_map {
 }	t_map;
 
 typedef struct s_img {
-	void *img;
-	char *addr;
-	int bit_per_pixel;
-	int line_length;
-	int endian;
+	void	*ptr;
+	char	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
+	int		win_x;
+	int		win_y;
 }	t_img;
 
 typedef struct s_data {
 	void	*mlx;
 	void	*win;
-	t_img	img;
+	t_img	render;
+	t_img	menu;
 	t_map	map;
 }	t_data;
 
@@ -126,7 +126,7 @@ void	draw_line(t_img *img, t_po_int start, t_po_int end, int colors[2]);
 void draw_points(t_img *img, t_map *map);
 void	fill_background(t_img *img);
 void	lines(t_img *img, t_map *map);
-int	ft_is_outside(t_point point);
+int	ft_is_outside(t_point point, int win_x, int win_y);
 t_po_int	ft_convert_3to2(t_point point);
 
 //color.c
@@ -145,8 +145,9 @@ int close_window(int keycode, t_data *vars);
 int mouse_hook(int button, int x, int y, void *param);
 int mouse_move(int x, int y, void *param);
 
-//testwin.c
+//window.c
 void testwindow(t_data *data);
+void	ft_init_window(t_data *data);
 
 //error.c
 void	terminate(char *message);

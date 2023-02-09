@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 16:48:55 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/05 19:29:20 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/09 10:13:22 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,24 +36,6 @@ void	rotate(t_point *point, double ang_x, double ang_y, double ang_z)
 		point->y = sin(ang_z) * point->x + cos(ang_z) * point->y + 0 * point->z;
 		point->z = 0 * point->x + 0 * point->y + 1 * point->z;
 	}
-}
-
-void	project_2d(t_point *point)
-{
-	if (point->z == 0)
-	{
-		point->x = 0;
-		point->y = 0;
-	}
-	else
-	{
-		point->x = point->x / -point->z;
-		point->y = point->y / -point->z;
-	}
-	point->x = (point->x + WIN_X / 2) / WIN_X;
-	point->y = (point->y + WIN_Y / 2) / WIN_Y;
-	point->x = floor(point->x * WIN_X);
-	point->y = floor((1 - point->y) * WIN_Y);
 }
 
 t_point	matrix_point(double mat[3][3], t_point point)

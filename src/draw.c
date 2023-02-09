@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 09:58:18 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/05 20:19:10 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/09 10:12:46 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,20 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 {
 	char	*dst;
 
-	dst = img->addr + (y * img->line_length + x * (img->bit_per_pixel / 8));
+	dst = img->addr + (y * img->line_len + x * (img->bpp / 8));
 	*(unsigned int *)dst = color;
 }
 
 void	fill_background(t_img *img)
 {
-	ft_bzero(img->addr, WIN_X * WIN_Y * 4);
+	ft_bzero(img->addr, img->win_x * img->win_y * 4);
 }
 
-int	ft_is_outside(t_point point)
+int	ft_is_outside(t_point point, int win_x, int win_y)
 {
-	if (point.x < 0 || point.x > WIN_X)
+	if (point.x < 0 || point.x > win_x)
 		return (1);
-	if (point.y < 0 || point.y > WIN_Y)
+	if (point.y < 0 || point.y > win_y)
 		return (1);
 	return (0);
 }
@@ -43,7 +43,7 @@ void	draw_points(t_img *img, t_map *map)
 	i = 0;
 	while (i < map->sum_points)
 	{
-		if (ft_is_outside(map->morph[i]))
+		if (ft_is_outside(map->morph[i], img->win_x, img->win_y))
 		{
 			i++;
 			continue ;
@@ -183,14 +183,16 @@ void	lines(t_img *img, t_map *map)
 		{
 			end = ft_convert_3to2(map->morph[i + 1]);
 			colors[1] = map->color_array[i + 1];
-			if (!ft_is_outside(map->morph[i]) && !ft_is_outside(map->morph[i + 1]))
+			if (!ft_is_outside(map->morph[i], img->win_x, img->win_y) \
+					&& !ft_is_outside(map->morph[i + 1], img->win_x, img->win_y))
 				draw_line(img, start, end, colors);
 		}
 		if (i / map->width != map->height - 1)
 		{
 			end = ft_convert_3to2(map->morph[i + map->width]);
 			colors[1] = map->color_array[i + map->width];
-			if (!ft_is_outside(map->morph[i]) && !ft_is_outside(map->morph[i + map->width]))
+			if (!ft_is_outside(map->morph[i], img->win_x, img->win_y) \
+					&& !ft_is_outside(map->morph[i + map->width], img->win_x, img->win_y))
 				draw_line(img, start, end, colors);
 		}
 		i++;
