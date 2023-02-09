@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 21:36:25 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/08 16:16:12 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/09 15:52:27 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,10 +96,26 @@ void	ft_extract_rows(t_map *map, int fd)
 	map->sum_points = map->height * map->width;
 }
 
+void	ft_validate_filename(t_map *map, char *filename)
+{
+	int		len;
+	char	*start;
+
+	start = ft_strrchr(filename, '/') + 1;
+	if (!start)
+		start = filename;
+	len = ft_strlen(start);
+	if (!ft_strnstr(start, ".fdf", len))
+		terminate(ERR_FILE);
+	ft_strlcpy(map->filename, start, len - 3);
+	map->filename[31] = 0;
+}
+
 void	ft_validate_map(t_map *map, char *filename)
 {
 	int	fd;
 
+	ft_validate_filename(map, filename);
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 		terminate(ERR_OPEN);

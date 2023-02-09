@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:00:10 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/09 10:30:33 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/09 12:50:53 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_init_window(t_data *data)
 	data->render.addr = mlx_get_data_addr(data->render.ptr, &data->render.bpp, &data->render.line_len, &data->render.endian);
 	data->render.win_x = win_x;
 	data->render.win_y = win_y;
-	data->menu.ptr = mlx_new_image(data->mlx, win_x / 5, win_y);
+	data->menu.ptr = mlx_new_image(data->mlx, win_x / 6, win_y);
 	data->menu.addr = mlx_get_data_addr(data->menu.ptr, &data->menu.bpp, &data->menu.line_len, &data->menu.endian);
 	data->menu.win_x = win_x;
 	data->menu.win_y = win_y;

@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/09 10:23:34 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/09 15:52:57 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct s_map {
 	t_point	*points;
 	t_point	*morph;
 	int		*color_array;
+	char	filename[32];
 	int		height;
 	int		width;
 	int		sum_points;
@@ -111,6 +112,7 @@ void	ft_count_num_in_row(char *line, int *count, bool *hex);
 int		ft_jump_over_hex(char *line);
 void	ft_extract_rows(t_map *map, int fd);
 void	ft_check_row(t_map *map, char *row);
+void	ft_validate_filename(t_map *map, char *filename);
 
 //parse.c
 void	ft_parse_map(t_map *map);
@@ -178,7 +180,10 @@ void	ft_copy_map(t_map *map);
 int	ft_move_atoi(char *line);
 int	ft_hex_to_decimal(char *line, int len);
 
+//menu.c
+void	ft_init_menu(t_data *data);
+
 //test.c
-void	test(void);
+void	test(t_data *data);
 
 #endif
