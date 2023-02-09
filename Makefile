@@ -21,7 +21,7 @@ SRC := 	main.c \
 		draw.c \
 		color.c \
 		hooks.c \
-		testwin.c \
+		window.c \
 		error.c \
 		parse.c \
 		matrix.c \
