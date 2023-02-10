@@ -6,13 +6,13 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 19:27:31 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/05 22:14:53 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/10 10:49:50 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	vec3_normalize(t_point *point)
+void	vec3_normalize(t_vec3f *point)
 {
 	float	len;
 
@@ -22,9 +22,9 @@ void	vec3_normalize(t_point *point)
 	point->z /= len;
 }
 
-t_point	vec3_cross(t_point a, t_point b)
+t_vec3f	vec3_cross(t_vec3f a, t_vec3f b)
 {
-	t_point	cross;
+	t_vec3f	cross;
 
 	cross.x = a.y * b.z - a.z * b.y;
 	cross.y = a.z * b.x - a.x * b.z;
@@ -32,10 +32,10 @@ t_point	vec3_cross(t_point a, t_point b)
 	return (cross);
 }
 
-t_point	vec3_subtract(t_point a, t_point b)
+t_vec3f	vec3_subtract(t_vec3f a, t_vec3f b)
 {
-	t_point	result;
+	t_vec3f	result;
 
-	result = (t_point){a.x - b.x, a.y - b.y, a.z - b.z};
+	result = (t_vec3f){a.x - b.x, a.y - b.y, a.z - b.z};
 	return (result);
 }

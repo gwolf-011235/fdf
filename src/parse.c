@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:00:33 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/08 16:52:15 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/10 10:49:08 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_map_alloc(t_map *map)
 {
-	map->points = malloc(map->sum_points * sizeof(t_point) * 2);
+	map->points = malloc(map->sum_points * sizeof(t_vec3f) * 2);
 	map->color_array = malloc(map->sum_points * sizeof(int));
 	if (!map->points || !map->color_array)
 		terminate(ERR_MEM);

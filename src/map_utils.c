@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 09:27:53 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/09 10:20:38 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/10 10:49:23 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,5 @@ void	ft_find_extremes(t_map *map, int z)
 
 void	ft_copy_map(t_map *map)
 {
-	ft_memcpy(map->morph, map->points, (map->sum_points * sizeof(t_point)));
+	ft_memcpy(map->morph, map->points, (map->sum_points * sizeof(t_vec3f)));
 }
