@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 10:22:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/09 10:15:38 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/10 13:38:48 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,22 @@
 
 void	ft_shape_map(t_map *map)
 {
-	int	i;
+	t_mat4	trans;
+	int		i;
 
+	ft_init_mat4(trans);
+	trans[0][0] = map->scale;
+	trans[1][1] = map->scale;
+	trans[2][2] = map->scale;
+	ft_rotate_x(trans, map->roll);
+	ft_rotate_y(trans, map->pitch);
+	ft_rotate_z(trans, map->yaw);
+	trans[0][3] = map->offset_x;
+	trans[1][3] = map->offset_y;
 	i = 0;
 	while (i < map->sum_points)
 	{
-		rotate(&map->morph[i], map->ang_x, map->ang_y, map->ang_z);
-		map->morph[i].x = map->morph[i].x * map->scale;
-		map->morph[i].y = map->morph[i].y * map->scale;
-		map->morph[i].z = map->morph[i].z * map->scale;
-		map->morph[i].x = map->morph[i].x + map->trans_x;
-		map->morph[i].y = map->morph[i].y + map->trans_y;
-		map->morph[i].x = map->morph[i].x + map->offset_x;
-		map->morph[i].y = map->morph[i].y + map->offset_y;
-		//project_2d(&map->morph[i]);
+		map->morph[i] = ft_mult_vec3f_mat4(map->morph[i], trans);
 		i++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:16:59 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/03 14:39:43 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/10 13:30:15 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,17 @@
 int key_hook(int keycode, t_data *data)
 {
 	if (keycode == KEY_A)
-		data->map.ang_x -= 3;
+		data->map.roll -= 3;
 	if (keycode == KEY_S)
-		data->map.ang_x += 3;
+		data->map.roll += 3;
 	if (keycode == KEY_D)
-		data->map.ang_y -= 3;
+		data->map.pitch -= 3;
 	if (keycode == KEY_F)
-		data->map.ang_y += 3;
+		data->map.pitch += 3;
 	if (keycode == KEY_G)
-		data->map.ang_z -= 3;
+		data->map.yaw -= 3;
 	if (keycode == KEY_H)
-		data->map.ang_z += 3;
+		data->map.yaw += 3;
 	if (keycode == KEY_Q)
 		data->map.scale += 1;
 	if (keycode == KEY_W)

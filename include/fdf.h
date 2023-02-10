@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/10 09:58:11 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/10 13:29:01 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # include "err_message.h"
 
 # define ROW_MAX 1000
+# define RAD 0.01745329251
 
 # define COLOR_TOP 0xFF0000
 # define COLOR_MID 0x00FF00
@@ -50,7 +51,7 @@
 # define KEY_Q 113
 # define KEY_W 119
 
-typedef double t_mat4[4][4]; 
+typedef float t_mat4[4][4]; 
 
 typedef struct s_vec3f {
 	float	x;
@@ -73,9 +74,9 @@ typedef struct s_map {
 	int		sum_points;
 	char	*rows[ROW_MAX];
 	bool	hex;
-	float	ang_x;
-	float	ang_y;
-	float	ang_z;
+	float	roll;
+	float	pitch;
+	float	yaw;
 	float	scale;
 	int		offset_x;
 	int		offset_y;
@@ -155,12 +156,20 @@ void	ft_init_window(t_data *data);
 void	terminate(char *message);
 
 //matrix.c
-void	mat_mult(double first[3][3], double second[3][3], double mul[3][3]);
+void	ft_mult_mat4(t_mat4 first, t_mat4 second, t_mat4 result);
+void	ft_init_mat4(t_mat4 matrix);
+void	ft_copy_mat4(t_mat4 orig, t_mat4 copy);
+t_vec3f	ft_mult_vec3f_mat4(t_vec3f vec, t_mat4 mat);
 void	rotate(t_vec3f *point, double ang_x, double ang_y, double ang_z);
 t_vec3f	matrix_point(double mat[3][3], t_vec3f point);
 void	project_2d(t_vec3f *point);
 void	fill_mat4(t_mat4 matrix, t_vec3f *points);
 void	lookat(t_vec3f from, t_vec3f to, t_vec3f up, t_mat4 cam2world);
+
+//rotation.c
+void	ft_rotate_x(t_mat4 trans, float roll);
+void	ft_rotate_y(t_mat4 trans, float pitch);
+void	ft_rotate_z(t_mat4 trans, float yaw);
 
 //vector.c
 void	vec3_normalize(t_vec3f *point);

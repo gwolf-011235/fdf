@@ -31,7 +31,8 @@ SRC := 	main.c \
 		vector.c \
 		validate.c \
 		utils.c \
-		menu.c
+		menu.c \
+		rotation.c
 
 SRCS := $(addprefix $(SRC_DIR)/, $(SRC))
 

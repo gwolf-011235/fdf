@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 16:48:55 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/10 09:59:15 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/10 13:28:33 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,38 +38,75 @@ void	rotate(t_vec3f *point, double ang_x, double ang_y, double ang_z)
 	}
 }
 
-t_vec3f	matrix_point(double mat[3][3], t_vec3f point)
+t_vec3f	ft_mult_vec3f_mat4(t_vec3f vec, t_mat4 mat)
 {
-	t_vec3f	rotate;
+	t_vec3f	result;
 
-	rotate.x = mat[0][0] * point.x + mat[0][1] * point.y + mat[0][2] * point.z;
-	rotate.y = mat[1][0] * point.x + mat[1][1] * point.y + mat[1][2] * point.z;
-	rotate.z = mat[2][0] * point.x + mat[2][1] * point.y + mat[2][2] * point.z;
-	return (rotate);
+	result.x = mat[0][0] * vec.x + mat[0][1] * vec.y + mat[0][2] * vec.z + mat[0][3];
+	result.y = mat[1][0] * vec.x + mat[1][1] * vec.y + mat[1][2] * vec.z + mat[1][3];
+	result.z = mat[2][0] * vec.x + mat[2][1] * vec.y + mat[2][2] * vec.z + mat[2][3];
+	return (result);
 }
 
-void	mat_mult(double first[3][3], double second[3][3], double mul[3][3])
+void	ft_init_mat4(t_mat4 matrix)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (i < 4)
+	{
+		j = 0;
+		while (j < 4)
+		{
+			matrix[i][j] = 0;
+			j++;
+		}
+		i++;
+	}
+	matrix[0][0] = 1;
+	matrix[1][1] = 1;
+	matrix[2][2] = 1;
+	matrix[3][3] = 1;
+}
+
+void	ft_copy_mat4(t_mat4 orig, t_mat4 copy)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (i < 4)
+	{
+		j = 0;
+		while (j < 4)
+		{
+			copy[i][j] = orig[i][j];
+			j++;
+		}
+		i++;
+	}
+
+}
+
+void	ft_mult_mat4(t_mat4 first, t_mat4 second, t_mat4 result)
 {
 	int		i;
 	int		j;
 	int		k;
-	double	total;
 
 	i = 0;
-	total = 0;
-	while (i < 3)
+	while (i < 4)
 	{
 		j = 0;
-		while (j < 3)
+		while (j < 4)
 		{
 			k = 0;
-			while (k < 3)
+			while (k < 4)
 			{
-				total += first[i][k] * second[k][j];
+				result[i][j] += first[i][k] * second[k][j];
 				k++;
 			}
-			mul[i][j] = total;
-			total = 0;
 			j++;
 		}
 		i++;
