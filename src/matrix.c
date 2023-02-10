@@ -6,37 +6,12 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 16:48:55 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/10 13:28:33 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/10 17:19:06 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "fdf.h"
-
-void	rotate(t_vec3f *point, double ang_x, double ang_y, double ang_z)
-{
-	if (ang_x)
-	{
-		ang_x = ang_x / 57.29578;
-		point->x = 1 * point->x + 0 * point->y + 0 * point->z;
-		point->y = 0 * point->x + cos(ang_x) * point->y + -sin(ang_x) * point->z;
-		point->z = 0 * point->x + sin(ang_x) * point->y + cos(ang_x) * point->z;
-	}
-	if (ang_y)
-	{
-		ang_y = ang_y / 57.29578;
-		point->x = cos(ang_y) * point->x + 0 * point->y + sin(ang_y) * point->z;
-		point->y = 0 * point->x + 1 * point->y + 0 * point->z;
-		point->z = -sin(ang_y) * point->x + 0 * point->y + cos(ang_y) * point->z;
-	}
-	if (ang_z)
-	{
-		ang_z = ang_z / 57.29578;
-		point->x = cos(ang_z) * point->x + -sin(ang_z) * point->y + 0 * point->z;
-		point->y = sin(ang_z) * point->x + cos(ang_z) * point->y + 0 * point->z;
-		point->z = 0 * point->x + 0 * point->y + 1 * point->z;
-	}
-}
 
 t_vec3f	ft_mult_vec3f_mat4(t_vec3f vec, t_mat4 mat)
 {
@@ -64,13 +39,9 @@ void	ft_init_mat4(t_mat4 matrix)
 		}
 		i++;
 	}
-	matrix[0][0] = 1;
-	matrix[1][1] = 1;
-	matrix[2][2] = 1;
-	matrix[3][3] = 1;
 }
 
-void	ft_copy_mat4(t_mat4 orig, t_mat4 copy)
+void	ft_copy_mat4(const t_mat4 src, t_mat4 dest)
 {
 	int i;
 	int j;
@@ -81,7 +52,7 @@ void	ft_copy_mat4(t_mat4 orig, t_mat4 copy)
 		j = 0;
 		while (j < 4)
 		{
-			copy[i][j] = orig[i][j];
+			dest[i][j] = src[i][j];
 			j++;
 		}
 		i++;
@@ -89,7 +60,109 @@ void	ft_copy_mat4(t_mat4 orig, t_mat4 copy)
 
 }
 
-void	ft_mult_mat4(t_mat4 first, t_mat4 second, t_mat4 result)
+void	ft_augment_mat4(t_mat4 mat, float augment[4][8])
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (i < 4)
+	{
+		j = 0;
+		while (j < 4)
+		{
+			augment[i][j] = mat[i][j];
+			j++;
+		}
+		i++;
+	}
+	i = 0;
+	while (i < 4)
+	{
+		j = 0;
+		while (j < 4)
+		{
+			if (i == j)
+				augment[i][j + 4] = 1;
+			else
+				augment[i][j + 4] = 0;
+			j++;
+		}
+		i++;
+	}
+}
+
+void	ft_inverse_mat4(t_mat4 mat)
+{
+	int	i;
+	int	j;
+	int	k;
+	float	ratio;
+	float	temp[4][8];
+
+	ft_augment_mat4(mat, temp);
+	i = 0;
+	while (i < 4)
+	{
+		j = 0;
+		while (j < 4)
+		{
+			if (i != j)
+			{
+				ratio = temp[j][i] / temp[i][i];
+				k = 0;
+				while (k < 2 * 4)
+				{
+					temp[j][k] = temp[j][k] - ratio * temp[i][k];
+					k++;
+				}
+			}
+			j++;
+		}
+		i++;
+	}
+	i = 0;
+	while (i < 4)
+	{
+		j = 4;
+		while (j < 2 * 4)
+		{
+			temp[i][j] = temp[i][j] / temp[i][i];
+			j++;
+		}
+		i++;
+	}
+	ft_print_inverse(temp);
+}
+
+void	ft_print_mat4(t_mat4 matrix)
+{
+	printf("\nMatrix is:\n");
+	for(int i = 0; i < 4; i++)
+		 {
+			  for(int j= 0; j < 4; j++)
+			  {
+			   	printf("%0.3f\t", matrix[i][j]);
+			  }
+			  printf("\n");
+		 }
+
+}
+
+void	ft_print_inverse(float inverse[4][8])
+{
+	printf("\nInverse Matrix is:\n");
+	for(int i = 0; i < 4; i++)
+		 {
+			  for(int j= 4; j< 2*4; j++)
+			  {
+			   	printf("%0.3f\t", inverse[i][j]);
+			  }
+			  printf("\n");
+		 }
+}
+
+void	ft_mult_mat4(const t_mat4 first, const t_mat4 second, t_mat4 result)
 {
 	int		i;
 	int		j;

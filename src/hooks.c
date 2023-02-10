@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:16:59 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/10 13:30:15 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/10 17:17:58 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,35 @@ int close_window(int keycode, t_data *data)
 	return (0);
 }
 
-int mouse_hook(int button, int x, int y, void *param)
+int mouse_hook(int button, int x, int y, t_data *data)
 {
-	(void)param;
-	printf("Mouse clicked!\nbutton: %d, x: %d, y: %d\n", button, x, y);
+	int i;
+	static t_mat4	temp;
+	static bool flag;
+
+	if (!flag)
+	{
+		printf("\nFIRST");
+		ft_copy_mat4(data->map.trans, temp);
+		ft_print_mat4(temp);
+		flag = true;
+	}
+	ft_static_rotate(data->map.trans, 0);
+	ft_rotate_x(temp, 1);
+	i = 0;
+	while (i < data->map.sum_points)
+	{
+		data->map.morph[i] = ft_mult_vec3f_mat4(data->map.morph[i], data->map.trans);
+		i++;
+	}
+	fill_background(&data->render);
+	lines(&data->render, &data->map);
+	mlx_put_image_to_window(data->mlx, data->win, data->render.ptr, 0, 0);
+	//printf("Mouse clicked!\nbutton: %d, x: %d, y: %d\n", button, x, y);
+	(void)x;
+	(void)y;
+	(void)button;
+	ft_print_mat4(temp);
 	return (0);
 }
 

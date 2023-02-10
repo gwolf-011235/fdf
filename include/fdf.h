@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/10 13:29:01 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/10 17:14:29 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ typedef struct s_map {
 	int		color_top;
 	int		color_mid;
 	int		color_low;
+	t_mat4	trans;
 }	t_map;
 
 typedef struct s_img {
@@ -143,9 +144,9 @@ int get_opposite(int trgb);
 int	gradient(int color_start, int color_end, double len, double pos);
 
 //hooks.c
+int mouse_hook(int button, int x, int y, t_data *data);
 int key_hook(int keycode, t_data *vars);
 int close_window(int keycode, t_data *vars);
-int mouse_hook(int button, int x, int y, void *param);
 int mouse_move(int x, int y, void *param);
 
 //window.c
@@ -156,9 +157,13 @@ void	ft_init_window(t_data *data);
 void	terminate(char *message);
 
 //matrix.c
-void	ft_mult_mat4(t_mat4 first, t_mat4 second, t_mat4 result);
+void	ft_print_mat4(t_mat4 matrix);
+void	ft_print_inverse(float inverse[4][8]);
+void	ft_copy_mat4(const t_mat4 src, t_mat4 dest);
+
+void	ft_mult_mat4(const t_mat4 first, const t_mat4 second, t_mat4 result);
+void	ft_inverse_mat4(t_mat4 mat);
 void	ft_init_mat4(t_mat4 matrix);
-void	ft_copy_mat4(t_mat4 orig, t_mat4 copy);
 t_vec3f	ft_mult_vec3f_mat4(t_vec3f vec, t_mat4 mat);
 void	rotate(t_vec3f *point, double ang_x, double ang_y, double ang_z);
 t_vec3f	matrix_point(double mat[3][3], t_vec3f point);
@@ -170,6 +175,7 @@ void	lookat(t_vec3f from, t_vec3f to, t_vec3f up, t_mat4 cam2world);
 void	ft_rotate_x(t_mat4 trans, float roll);
 void	ft_rotate_y(t_mat4 trans, float pitch);
 void	ft_rotate_z(t_mat4 trans, float yaw);
+void	ft_static_rotate(t_mat4 trans, int rotate);
 
 //vector.c
 void	vec3_normalize(t_vec3f *point);
