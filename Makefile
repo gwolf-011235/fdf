@@ -1,5 +1,5 @@
 CC := clang
-CFLAGS = -Wall -Werror -Wextra -DBUFFER_SIZE=4096
+CFLAGS = -DBUFFER_SIZE=4096
 
 SRC_DIR := src
 OBJ_DIR := obj
@@ -45,14 +45,14 @@ OBJS := $(addprefix $(OBJ_DIR)/, $(OBJ))
 all: $(NAME)
 	echo "$(NAME) created!"
 
+$(NAME): CFLAGS += -o3 -Wall -Werror -Wextra 
+$(NAME): $(OBJS) $(LIBFT) $(MLX)
+	$(COMPILE) $(OBJS) $(LIBS) -o $(NAME)
+
 debug: CFLAGS += -g
 debug: fclean $(NAME)
 	$(CC) $(CFLAGS) $(INC) $(OBJS) $(LIBS) -o $(NAME)
 	echo "$(NAME) created - DEBUG MODE!"
-
-$(NAME): CFLAGS += -o3
-$(NAME): $(OBJS) $(LIBFT) $(MLX)
-	$(COMPILE) $(OBJS) $(LIBS) -o $(NAME)
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
