@@ -6,14 +6,14 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 16:48:55 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/09 10:13:22 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/10 09:59:15 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "fdf.h"
 
-void	rotate(t_point *point, double ang_x, double ang_y, double ang_z)
+void	rotate(t_vec3f *point, double ang_x, double ang_y, double ang_z)
 {
 	if (ang_x)
 	{
@@ -38,9 +38,9 @@ void	rotate(t_point *point, double ang_x, double ang_y, double ang_z)
 	}
 }
 
-t_point	matrix_point(double mat[3][3], t_point point)
+t_vec3f	matrix_point(double mat[3][3], t_vec3f point)
 {
-	t_point	rotate;
+	t_vec3f	rotate;
 
 	rotate.x = mat[0][0] * point.x + mat[0][1] * point.y + mat[0][2] * point.z;
 	rotate.y = mat[1][0] * point.x + mat[1][1] * point.y + mat[1][2] * point.z;
@@ -76,7 +76,7 @@ void	mat_mult(double first[3][3], double second[3][3], double mul[3][3])
 	}
 }
 
-void	fill_mat4(t_mat4 matrix, t_point *points)
+void	fill_mat4(t_mat4 matrix, t_vec3f *points)
 {
 	int i;
 
@@ -94,12 +94,12 @@ void	fill_mat4(t_mat4 matrix, t_point *points)
 	matrix[3][3] = 1;
 }
 
-void	lookat(t_point from, t_point to, t_point up, t_mat4 cam2world)
+void	lookat(t_vec3f from, t_vec3f to, t_vec3f up, t_mat4 cam2world)
 {
-	t_point	forward;
-	t_point	right;
-	t_point	newup;
-	t_point points[4];
+	t_vec3f	forward;
+	t_vec3f	right;
+	t_vec3f	newup;
+	t_vec3f points[4];
 
 	forward = vec3_subtract(from, to);
 	vec3_normalize(&forward);

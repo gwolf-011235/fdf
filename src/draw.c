@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 09:58:18 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/09 10:12:46 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/10 09:59:18 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	fill_background(t_img *img)
 	ft_bzero(img->addr, img->win_x * img->win_y * 4);
 }
 
-int	ft_is_outside(t_point point, int win_x, int win_y)
+int	ft_is_outside(t_vec3f point, int win_x, int win_y)
 {
 	if (point.x < 0 || point.x > win_x)
 		return (1);
@@ -99,7 +99,7 @@ void	draw_square(t_img *img, int x, int y, int size, int trgb)
 	}
 }
 
-void	init_line(t_po_int start, t_po_int end, t_po_int *delta, t_po_int *step)
+void	init_line(t_vec2i start, t_vec2i end, t_vec2i *delta, t_vec2i *step)
 {
 	delta->x = abs(end.x - start.x);
 	delta->y = abs(end.y - start.y);
@@ -123,10 +123,10 @@ void	init_line(t_po_int start, t_po_int end, t_po_int *delta, t_po_int *step)
  * @param color: The color to draw
  */
 
-void	draw_line(t_img *img, t_po_int start, t_po_int end, int colors[2])
+void	draw_line(t_img *img, t_vec2i start, t_vec2i end, int colors[2])
 {
-	t_po_int	delta;
-	t_po_int	step;
+	t_vec2i	delta;
+	t_vec2i	step;
 	int			err;
 	int			e2;
 	int			len;
@@ -158,9 +158,9 @@ void	draw_line(t_img *img, t_po_int start, t_po_int end, int colors[2])
 	}
 }
 
-t_po_int	ft_convert_3to2(t_point point)
+t_vec2i	ft_convert_3to2(t_vec3f point)
 {
-	t_po_int ret;
+	t_vec2i ret;
 
 	ret.x = floor(point.x);
 	ret.y = floor(point.y);
@@ -170,8 +170,8 @@ t_po_int	ft_convert_3to2(t_point point)
 void	lines(t_img *img, t_map *map)
 {
 	int			i;
-	t_po_int	start;
-	t_po_int	end;
+	t_vec2i	start;
+	t_vec2i	end;
 	int			colors[2];
 
 	i = 0;

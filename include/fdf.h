@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/09 15:52:57 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/10 09:58:11 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,20 +52,20 @@
 
 typedef double t_mat4[4][4]; 
 
-typedef struct s_point {
+typedef struct s_vec3f {
 	float	x;
 	float	y;
 	float	z;
-}	t_point;
+}	t_vec3f;
 
-typedef struct s_po_int {
+typedef struct s_vec2i {
 	int	x;
 	int y;
-}	t_po_int;
+}	t_vec2i;
 
 typedef struct s_map {
-	t_point	*points;
-	t_point	*morph;
+	t_vec3f	*points;
+	t_vec3f	*morph;
 	int		*color_array;
 	char	filename[32];
 	int		height;
@@ -124,12 +124,12 @@ void	ft_set_colors(t_map *map);
 void my_mlx_pixel_put(t_img *data, int x, int y, int color);
 void draw_triangle(t_img *img, int x, int y, int size);
 void draw_square(t_img *img, int x, int y, int size, int trgb);
-void	draw_line(t_img *img, t_po_int start, t_po_int end, int colors[2]);
+void	draw_line(t_img *img, t_vec2i start, t_vec2i end, int colors[2]);
 void draw_points(t_img *img, t_map *map);
 void	fill_background(t_img *img);
 void	lines(t_img *img, t_map *map);
-int	ft_is_outside(t_point point, int win_x, int win_y);
-t_po_int	ft_convert_3to2(t_point point);
+int	ft_is_outside(t_vec3f point, int win_x, int win_y);
+t_vec2i	ft_convert_3to2(t_vec3f point);
 
 //color.c
 int create_trgb(int t, int r, int g, int b);
@@ -156,16 +156,16 @@ void	terminate(char *message);
 
 //matrix.c
 void	mat_mult(double first[3][3], double second[3][3], double mul[3][3]);
-void	rotate(t_point *point, double ang_x, double ang_y, double ang_z);
-t_point	matrix_point(double mat[3][3], t_point point);
-void	project_2d(t_point *point);
-void	fill_mat4(t_mat4 matrix, t_point *points);
-void	lookat(t_point from, t_point to, t_point up, t_mat4 cam2world);
+void	rotate(t_vec3f *point, double ang_x, double ang_y, double ang_z);
+t_vec3f	matrix_point(double mat[3][3], t_vec3f point);
+void	project_2d(t_vec3f *point);
+void	fill_mat4(t_mat4 matrix, t_vec3f *points);
+void	lookat(t_vec3f from, t_vec3f to, t_vec3f up, t_mat4 cam2world);
 
 //vector.c
-void	vec3_normalize(t_point *point);
-t_point	vec3_cross(t_point a, t_point b);
-t_point	vec3_subtract(t_point a, t_point b);
+void	vec3_normalize(t_vec3f *point);
+t_vec3f	vec3_cross(t_vec3f a, t_vec3f b);
+t_vec3f	vec3_subtract(t_vec3f a, t_vec3f b);
 
 //reshape.c
 void	ft_shape_map(t_map *map);
