@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/10 17:14:29 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/11 08:38:02 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,7 +157,6 @@ void	ft_init_window(t_data *data);
 void	terminate(char *message);
 
 //matrix.c
-void	ft_print_mat4(t_mat4 matrix);
 void	ft_print_inverse(float inverse[4][8]);
 void	ft_copy_mat4(const t_mat4 src, t_mat4 dest);
 
@@ -197,6 +196,11 @@ int	ft_hex_to_decimal(char *line, int len);
 
 //menu.c
 void	ft_init_menu(t_data *data);
+
+//print_utils.c
+void	ft_print_mat4(t_mat4 matrix);
+void	ft_print_point(t_vec3f point);
+void	ft_print_inverse(float inverse[4][8]);
 
 //test.c
 void	test(t_data *data);
