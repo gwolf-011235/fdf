@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/11 20:00:28 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/11 21:55:47 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@
 
 # define ROW_MAX 1000
 # define RAD 0.01745329251
+# define X 0
+# define Y 1
+# define Z 2
 
 # define COLOR_TOP 0xFF0000
 # define COLOR_MID 0x00FF00
@@ -82,6 +85,9 @@ typedef struct s_map {
 	int		offset_y;
 	float	trans_x;
 	float	trans_y;
+	t_vec3f	*edges;
+	int		min[3];
+	int		max[3];	
 	int		top;
 	int		low;
 	int		color_top;
@@ -201,6 +207,10 @@ void	ft_init_menu(t_data *data);
 void	ft_print_mat4(t_mat4 matrix);
 void	ft_print_point(t_vec3f point);
 void	ft_print_inverse(float inverse[4][8]);
+
+//box.c
+void	ft_calc_edges(t_map *map);
+void	ft_draw_box(t_data *data);
 
 //test.c
 void	test(t_data *data);

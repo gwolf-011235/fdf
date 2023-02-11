@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 09:27:53 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/10 13:34:06 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/11 23:37:14 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 void	ft_map_init(t_map *map)
 {
 	map->scale = 30;
+	map->roll = 35.236;
+	map->pitch = 45;
+	map->yaw = 0;
 	map->trans_x = 0;
 	map->trans_y = 0;
 	map->top = 0;

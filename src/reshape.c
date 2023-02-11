@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 10:22:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/11 16:03:03 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/11 20:28:06 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	ft_shape_map(t_map *map) //init trans or smth
 
 void	ft_redraw(t_data *data)
 {
-	//ft_copy_map(&data->map);
 	ft_shape_map(&data->map);
 	fill_background(&data->render);
 	lines(&data->render, &data->map);

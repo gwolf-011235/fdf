@@ -33,7 +33,8 @@ SRC := 	main.c \
 		utils.c \
 		menu.c \
 		rotation.c \
-		print_utils.c
+		print_utils.c \
+		box.c
 
 SRCS := $(addprefix $(SRC_DIR)/, $(SRC))
 
