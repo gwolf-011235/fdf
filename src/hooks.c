@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:16:59 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/10 17:17:58 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/11 07:36:54 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 int key_hook(int keycode, t_data *data)
 {
 	if (keycode == KEY_A)
-		data->map.roll -= 3;
+		data->map.roll -= 1;
 	if (keycode == KEY_S)
-		data->map.roll += 3;
+		data->map.roll += 1;
 	if (keycode == KEY_D)
 		data->map.pitch -= 3;
 	if (keycode == KEY_F)
@@ -57,22 +57,28 @@ int close_window(int keycode, t_data *data)
 int mouse_hook(int button, int x, int y, t_data *data)
 {
 	int i;
-	static t_mat4	temp;
-	static bool flag;
+	t_mat4	rot;
+	t_mat4	temp;
+	bool print;
 
-	if (!flag)
-	{
-		printf("\nFIRST");
-		ft_copy_mat4(data->map.trans, temp);
-		ft_print_mat4(temp);
-		flag = true;
-	}
-	ft_static_rotate(data->map.trans, 0);
-	ft_rotate_x(temp, 1);
+	print = false;
+	ft_init_mat4(temp);
+	ft_static_rotate(rot, 0);
+	ft_printf("\n****BEFORE:");
+	ft_print_mat4(data->map.trans);
+	ft_mult_mat4(rot, data->map.trans, temp);
+	ft_copy_mat4(temp, data->map.trans);
+	ft_printf("\n****AFTER:");
+	ft_print_mat4(data->map.trans);
 	i = 0;
 	while (i < data->map.sum_points)
 	{
-		data->map.morph[i] = ft_mult_vec3f_mat4(data->map.morph[i], data->map.trans);
+		data->map.morph[i] = ft_mult_vec3f_mat4(data->map.morph[i], rot);
+		if (!print)
+		{
+			ft_print_point(data->map.morph[i]);
+			print = true;
+		}
 		i++;
 	}
 	fill_background(&data->render);
@@ -82,7 +88,6 @@ int mouse_hook(int button, int x, int y, t_data *data)
 	(void)x;
 	(void)y;
 	(void)button;
-	ft_print_mat4(temp);
 	return (0);
 }
 
