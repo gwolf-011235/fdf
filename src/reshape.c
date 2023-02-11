@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 10:22:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/11 08:34:03 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/11 08:43:36 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,14 @@ void	ft_shape_map(t_map *map) //init trans or smth
 	i = 0;
 	while (i < map->sum_points)
 	{
-		map->morph[i] = ft_mult_vec3f_mat4(map->morph[i], map->trans);
+		map->morph[i] = ft_mult_vec3f_mat4(map->points[i], map->trans);
 		i++;
 	}
 }
 
 void	ft_redraw(t_data *data)
 {
-	ft_copy_map(&data->map);
+	//ft_copy_map(&data->map);
 	ft_shape_map(&data->map);
 	fill_background(&data->render);
 	lines(&data->render, &data->map);
