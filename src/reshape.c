@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 10:22:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/10 16:17:04 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/11 08:34:03 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,9 @@ void	ft_shape_map(t_map *map) //init trans or smth
 	ft_rotate_x(map->trans, map->roll);
 	ft_rotate_y(map->trans, map->pitch);
 	ft_rotate_z(map->trans, map->yaw);
-	map->trans[0][3] = map->trans_x + map->offset_x;
-	map->trans[1][3] = map->trans_y + map->offset_y;
+	map->trans[3][0] = map->trans_x + map->offset_x;
+	map->trans[3][1] = map->trans_y + map->offset_y;
+
 	i = 0;
 	while (i < map->sum_points)
 	{
