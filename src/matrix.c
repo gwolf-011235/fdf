@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 16:48:55 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/10 17:19:06 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/11 08:38:13 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ t_vec3f	ft_mult_vec3f_mat4(t_vec3f vec, t_mat4 mat)
 {
 	t_vec3f	result;
 
-	result.x = mat[0][0] * vec.x + mat[0][1] * vec.y + mat[0][2] * vec.z + mat[0][3];
-	result.y = mat[1][0] * vec.x + mat[1][1] * vec.y + mat[1][2] * vec.z + mat[1][3];
-	result.z = mat[2][0] * vec.x + mat[2][1] * vec.y + mat[2][2] * vec.z + mat[2][3];
+	result.x = vec.x * mat[0][0] + vec.y * mat[1][0] + vec.z * mat[2][0] + mat[3][0];
+	result.y = vec.x * mat[0][1] + vec.y * mat[1][1] + vec.z * mat[2][1] + mat[3][1];
+	result.z = vec.x * mat[0][2] + vec.y * mat[1][2] + vec.z * mat[2][2] + mat[3][2];
 	return (result);
 }
 
@@ -135,32 +135,6 @@ void	ft_inverse_mat4(t_mat4 mat)
 	ft_print_inverse(temp);
 }
 
-void	ft_print_mat4(t_mat4 matrix)
-{
-	printf("\nMatrix is:\n");
-	for(int i = 0; i < 4; i++)
-		 {
-			  for(int j= 0; j < 4; j++)
-			  {
-			   	printf("%0.3f\t", matrix[i][j]);
-			  }
-			  printf("\n");
-		 }
-
-}
-
-void	ft_print_inverse(float inverse[4][8])
-{
-	printf("\nInverse Matrix is:\n");
-	for(int i = 0; i < 4; i++)
-		 {
-			  for(int j= 4; j< 2*4; j++)
-			  {
-			   	printf("%0.3f\t", inverse[i][j]);
-			  }
-			  printf("\n");
-		 }
-}
 
 void	ft_mult_mat4(const t_mat4 first, const t_mat4 second, t_mat4 result)
 {
