@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:00:33 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/10 10:49:08 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/11 16:16:50 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 void	ft_map_alloc(t_map *map)
 {
-	map->points = malloc(map->sum_points * sizeof(t_vec3f) * 2);
-	map->color_array = malloc(map->sum_points * sizeof(int));
+	map->points = malloc(sizeof(t_vec3f) * map->sum_points * 2);
+	map->color_array = malloc(sizeof(int) * map->sum_points);
 	if (!map->points || !map->color_array)
 		terminate(ERR_MEM);
-	map->morph = map->points + map->sum_points;
-	ft_bzero(map->color_array, map->sum_points * sizeof(int));
+	map->morph = &map->points[1];
+	ft_bzero(map->color_array, sizeof(int) * map->sum_points);
 }
 
 void	ft_parse_line(t_map *map, char *line, int index)
@@ -30,10 +30,10 @@ void	ft_parse_line(t_map *map, char *line, int index)
 	i = 0;
 	while (line[i])
 	{
-		map->points[index].x = (index % map->width) - (map->width / 2);
-		map->points[index].y = (index / map->width) - (map->height / 2);
-		map->points[index].z = ft_atoi(&line[i]);
-		ft_find_extremes(map, map->points[index].z);
+		map->points[index + index].x = (index % map->width) - (map->width / 2);
+		map->points[index + index].y = (index / map->width) - (map->height / 2);
+		map->points[index + index].z = ft_atoi(&line[i]);
+		ft_find_extremes(map, map->points[index + index].z);
 		i += ft_move_atoi(&line[i]);
 		if (map->hex && line[i] == ',')
 		{
@@ -62,12 +62,12 @@ void	ft_set_colors(t_map *map)
 			i++;
 			continue ;
 		}
-		if (map->points[i].z == 0)
+		if (map->points[i + i].z == 0)
 			map->color_array[i] = map->color_mid;
-		else if (map->points[i].z > 0)
-			map->color_array[i] = gradient(map->color_mid, map->color_top, map->top, map->points[i].z);
+		else if (map->points[i + i].z > 0)
+			map->color_array[i] = gradient(map->color_mid, map->color_top, map->top, map->points[i + i].z);
 		else
-			map->color_array[i] = gradient(map->color_mid, map->color_low, map->low, map->points[i].z);
+			map->color_array[i] = gradient(map->color_mid, map->color_low, map->low, map->points[i + i].z);
 		i++;
 	}
 }
