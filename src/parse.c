@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:00:33 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/11 21:55:59 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/12 10:28:22 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,35 +14,36 @@
 
 void	ft_map_alloc(t_map *map)
 {
-	map->points = malloc(sizeof(t_vec3f) * map->sum_points * 2);
+	map->points = malloc(sizeof(t_vec3f) * (map->sum_points * 2 + 16));
 	map->color_array = malloc(sizeof(int) * map->sum_points);
 	if (!map->points || !map->color_array)
 		terminate(ERR_MEM);
 	map->morph = &map->points[1];
+	map->edges = &map->points[map->sum_points * 2];
 	ft_bzero(map->color_array, sizeof(int) * map->sum_points);
 }
 
-void	ft_parse_line(t_map *map, char *line, int index)
+void	ft_parse_line(t_map *map, char *line, int i)
 {
-	int	i;
+	int	j;
 	int len_hex;
 
-	i = 0;
-	while (line[i])
+	j = 0;
+	while (line[j])
 	{
-		map->points[index + index].x = (index % map->width) + map->min[X];
-		map->points[index + index].y = (index / map->width) + map->min[Y];
-		map->points[index + index].z = ft_atoi(&line[i]);
-		ft_find_extremes(map, map->points[index + index].z);
-		i += ft_move_atoi(&line[i]);
-		if (map->hex && line[i] == ',')
+		map->points[i D].x = (i % map->width) + map->min[X];
+		map->points[i D].y = (i / map->width) + map->min[Y];
+		map->points[i D].z = ft_atoi(&line[j]);
+		ft_find_extremes(map, map->points[i D].z);
+		j += ft_move_atoi(&line[j]);
+		if (map->hex && line[j] == ',')
 		{
-			len_hex = ft_jump_over_hex(&line[i]);
-			map->color_array[index] = ft_hex_to_decimal(&line[i + 3], len_hex);
-			i += len_hex;
+			len_hex = ft_jump_over_hex(&line[j]);
+			map->color_array[i] = ft_hex_to_decimal(&line[j + 3], len_hex);
+			j += len_hex;
 		}
-		index++;
-		if (line[i] == '\n')
+		i++;
+		if (line[j] == '\n')
 			break ;
 	}
 	free(line);
@@ -81,9 +82,9 @@ void	ft_parse_map(t_map *map)
 	map->min[Y] = -(map->height / 2);
 	map->max[X] = map->min[X] * -1;
 	map->max[Y] = map->min[Y] * -1;
-	if (!map->width % 2)
+	if (!(map->width % 2))
 		map->max[X]--;
-	if (!map->height % 2)
+	if (!(map->height % 2))
 		map->max[Y]--;
 	i = 0;
 	while (i < map->height)

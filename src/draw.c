@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 09:58:18 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/11 15:51:10 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/12 10:33:51 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,22 +177,22 @@ void	lines(t_img *img, t_map *map)
 	i = 0;
 	while (i < map->sum_points)
 	{
-		start = ft_convert_3to2(map->morph[i+i]);
+		start = ft_convert_3to2(map->points[i D M]);
 		colors[0] = map->color_array[i];
 		if (i % map->width != map->width - 1)
 		{
-			end = ft_convert_3to2(map->morph[i+i + 2]);
+			end = ft_convert_3to2(map->points[i D M + 2]);
 			colors[1] = map->color_array[i + 1];
-			if (!ft_is_outside(map->morph[i+i], img->win_x, img->win_y) \
-					&& !ft_is_outside(map->morph[i+i + 2], img->win_x, img->win_y))
+			if (!ft_is_outside(map->points[i D M], img->win_x, img->win_y) \
+					&& !ft_is_outside(map->points[i D M + 2], img->win_x, img->win_y))
 				draw_line(img, start, end, colors);
 		}
 		if (i / map->width != map->height - 1)
 		{
-			end = ft_convert_3to2(map->morph[i+i + (map->width * 2)]);
+			end = ft_convert_3to2(map->points[i D M + (map->width * 2)]);
 			colors[1] = map->color_array[i + map->width];
-			if (!ft_is_outside(map->morph[i+i], img->win_x, img->win_y) \
-					&& !ft_is_outside(map->morph[i+i + (map->width* 2)], img->win_x, img->win_y))
+			if (!ft_is_outside(map->points[i D M], img->win_x, img->win_y) \
+					&& !ft_is_outside(map->points[i D M + (map->width* 2)], img->win_x, img->win_y))
 				draw_line(img, start, end, colors);
 		}
 		i++;

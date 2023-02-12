@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 09:27:53 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/11 23:37:14 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/12 10:51:35 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,16 @@
 void	ft_map_init(t_map *map)
 {
 	map->scale = 30;
-	map->roll = 35.236;
+	map->roll = 30;
 	map->pitch = 45;
 	map->yaw = 0;
 	map->trans_x = 0;
 	map->trans_y = 0;
 	map->top = 0;
 	map->low = 0;
-	map->color_top = COLOR_TOP;
-	map->color_mid = COLOR_MID;
-	map->color_low = COLOR_LOW;
+	map->color_top = RED;
+	map->color_mid = GREEN;
+	map->color_low = BLUE;
 }
 
 void	ft_find_extremes(t_map *map, int z)
@@ -37,9 +37,4 @@ void	ft_find_extremes(t_map *map, int z)
 	{
 		map->low = z;
 	}
-}
-
-void	ft_copy_map(t_map *map)
-{
-	ft_memcpy(map->morph, map->points, (map->sum_points * sizeof(t_vec3f)));
 }

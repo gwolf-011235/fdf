@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/11 21:55:47 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/12 10:59:35 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,13 @@
 # define Y 1
 # define Z 2
 
-# define COLOR_TOP 0xFF0000
-# define COLOR_MID 0x00FF00
-# define COLOR_LOW 0x0000FF
+# define D * 2
+# define M + 1
+# define P + 8
+
+# define RED 0xFF0000
+# define GREEN 0x00FF00
+# define BLUE 0x0000FF
 
 # define KEY_ARROW_LEFT 65361
 # define KEY_ARROW_UP 65362
@@ -54,7 +58,7 @@
 # define KEY_Q 113
 # define KEY_W 119
 
-typedef float t_mat4[4][4]; 
+typedef float	t_mat4[4][4];
 
 typedef struct s_vec3f {
 	float	x;
@@ -70,6 +74,7 @@ typedef struct s_vec2i {
 typedef struct s_map {
 	t_vec3f	*points;
 	t_vec3f	*morph;
+	t_vec3f	*edges;
 	int		*color_array;
 	int		sum_points;
 	char	filename[32];
@@ -85,7 +90,6 @@ typedef struct s_map {
 	int		offset_y;
 	float	trans_x;
 	float	trans_y;
-	t_vec3f	*edges;
 	int		min[3];
 	int		max[3];	
 	int		top;
@@ -194,7 +198,6 @@ void	ft_redraw(t_data *data);
 //map_utils.c
 void	ft_map_init(t_map *map);
 void	ft_find_extremes(t_map *map, int z);
-void	ft_copy_map(t_map *map);
 
 //utils.c
 int	ft_move_atoi(char *line);
