@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:00:10 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/12 10:39:43 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/14 00:08:12 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	ft_init_window(t_data *data)
 
 void testwindow(t_data *data)
 {
+	//ft_init_menu(data);
 	lines(&data->render, &data->map);
 	ft_draw_box(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->render.ptr, 0, 0);
