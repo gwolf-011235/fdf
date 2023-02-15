@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:00:10 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/14 00:08:12 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/15 14:10:00 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ void	ft_init_window(t_data *data)
 	ft_printf("Screen size: %d x %d\n", win_x, win_y);
 	data->render.ptr = mlx_new_image(data->mlx, win_x, win_y);
 	data->render.addr = mlx_get_data_addr(data->render.ptr, &data->render.bpp, &data->render.line_len, &data->render.endian);
-	data->render.win_x = win_x;
-	data->render.win_y = win_y;
+	data->render.size[X] = win_x;
+	data->render.size[Y] = win_y;
 	data->menu.ptr = mlx_new_image(data->mlx, win_x / 6, win_y);
 	data->menu.addr = mlx_get_data_addr(data->menu.ptr, &data->menu.bpp, &data->menu.line_len, &data->menu.endian);
-	data->menu.win_x = win_x;
-	data->menu.win_y = win_y;
-	data->map.offset_x = win_x / 2;
-	data->map.offset_y = win_y / 2;
+	data->menu.size[X] = win_x / 6;
+	data->menu.size[Y] = win_y;
+	data->map.offset[X] = win_x / 2;
+	data->map.offset[Y] = win_y / 2;
 	data->win = mlx_new_window(data->mlx, win_x, win_y, "FdF - by gwolf");
 }
 
