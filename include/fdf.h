@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/15 14:14:37 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/15 16:42:21 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # include "ft_mem.h"
 # include "err_message.h"
 
-# define ROW_MAX 1000
+# define ROW_MAX 10
 # define RAD 0.01745329251
 # define X 0
 # define Y 1
@@ -118,7 +118,7 @@ typedef struct s_data {
 
 //validate.c
 void	ft_validate_map(t_map *map, char *filename);
-void	ft_count_num_in_row(char *line, int *count, bool *hex);
+int		ft_count_num_in_row(char *line, bool *hex);
 int		ft_jump_over_hex(char *line);
 void	ft_extract_rows(t_map *map, int fd);
 void	ft_check_row(t_map *map, char *row);
@@ -161,8 +161,9 @@ int mouse_move(int x, int y, void *param);
 void testwindow(t_data *data);
 void	ft_init_window(t_data *data);
 
-//error.c
-void	terminate(char *message);
+//terminate.c
+void	ft_terminate(char *message);
+void	ft_free_rows(char *row, char *rows[ROW_MAX], int fd);
 
 //matrix.c
 void	ft_print_inverse(float inverse[4][8]);

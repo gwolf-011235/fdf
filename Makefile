@@ -22,7 +22,7 @@ SRC := 	main.c \
 		color.c \
 		hooks.c \
 		window.c \
-		error.c \
+		terminate.c \
 		parse.c \
 		matrix.c \
 		reshape.c \
