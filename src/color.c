@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:29:34 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/03 09:16:15 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/15 18:50:32 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,28 @@ int get_opposite(int trgb)
 {
 	return (trgb ^ 0x00FFFFFF);
 }
+
+int ft_alpha_blend(int new_color, int old_color)
+{
+	int start[4];
+	int invert[4];
+	int blend[3];
+
+
+    start[0] = (new_color & 0xFF000000) >> 24;
+    start[1] = ((new_color & 0x00FF0000) >> 16) * start[0] / 255;
+    start[2] = ((new_color & 0x0000FF00) >> 8) * start[0] / 255;
+    start[3] = (new_color & 0x000000FF) * start[0] / 255;
+    invert[0] = 255 - start[0];
+    invert[1] = ((old_color & 0x00FF0000) >> 16) * invert[0] / 255;
+    invert[2] = ((old_color & 0x0000FF00) >> 8) * invert[0] / 255;
+    invert[3] = (old_color & 0x000000FF) * invert[0] / 255;
+    blend[0] = start[1] + invert[1];
+    blend[1] = start[2] + invert[2];
+    blend[2] = start[3] + invert[3];
+    return (start[0] << 24) | (blend[0] << 16) | (blend[1] << 8) | blend[2];
+}
+
 
 int	gradient(int color_start, int color_end, double len, double pos)
 {
