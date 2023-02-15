@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 20:28:13 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/15 14:42:50 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/15 18:26:29 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ float	ft_fit_box(t_vec3f *init, int size[2], int offset[2])
 void	ft_draw_box(t_data *data)
 {
 	t_vec3f	*edges;
-	t_vec2i	start;
-	t_vec2i	end;
+	t_pixel	start;
+	t_pixel	end;
 	int	i;
 	int colors[2];
 

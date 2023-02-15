@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 09:58:18 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/15 14:13:01 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/15 23:41:49 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,20 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 	dst = img->addr + (y * img->line_len + x * (img->bpp / 8));
 	*(unsigned int *)dst = color;
 }
+
+/*
+void	ft_pixel_to_image(t_img *img, int x, int y, int color)
+{
+	char	*pixel;
+	int		blend;
+
+	if (x >= 0 && x < img->size[X] && y >= 0 && y < img->size[Y])
+	{
+		pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
+		blend = ft_alpha_blend(*(unsigned int *)pixel);
+	}
+}
+*/
 
 void	fill_background(t_img *img)
 {
@@ -99,7 +113,7 @@ void	draw_square(t_img *img, int x, int y, int size, int trgb)
 	}
 }
 
-void	init_line(t_vec2i start, t_vec2i end, t_vec2i *delta, t_vec2i *step)
+void	init_line(t_pixel start, t_pixel end, t_pixel *delta, t_pixel *step)
 {
 	delta->x = abs(end.x - start.x);
 	delta->y = abs(end.y - start.y);
@@ -123,10 +137,10 @@ void	init_line(t_vec2i start, t_vec2i end, t_vec2i *delta, t_vec2i *step)
  * @param color: The color to draw
  */
 
-void	draw_line(t_img *img, t_vec2i start, t_vec2i end, int colors[2])
+void	draw_line(t_img *img, t_pixel start, t_pixel end, int colors[2])
 {
-	t_vec2i	delta;
-	t_vec2i	step;
+	t_pixel	delta;
+	t_pixel	step;
 	int			err;
 	int			e2;
 	int			len;
@@ -158,9 +172,9 @@ void	draw_line(t_img *img, t_vec2i start, t_vec2i end, int colors[2])
 	}
 }
 
-t_vec2i	ft_convert_3to2(t_vec3f point)
+t_pixel	ft_convert_3to2(t_vec3f point)
 {
-	t_vec2i ret;
+	t_pixel ret;
 
 	ret.x = floor(point.x);
 	ret.y = floor(point.y);
@@ -170,8 +184,8 @@ t_vec2i	ft_convert_3to2(t_vec3f point)
 void	lines(t_img *img, t_map *map)
 {
 	int			i;
-	t_vec2i	start;
-	t_vec2i	end;
+	t_pixel	start;
+	t_pixel	end;
 	int			colors[2];
 
 	i = 0;
