@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/12 10:59:35 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/15 14:14:37 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,7 @@ typedef struct s_map {
 	float	pitch;
 	float	yaw;
 	float	scale;
-	int		offset_x;
-	int		offset_y;
+	int		offset[2];
 	float	trans_x;
 	float	trans_y;
 	int		min[3];
@@ -106,8 +105,7 @@ typedef struct s_img {
 	int		bpp;
 	int		line_len;
 	int		endian;
-	int		win_x;
-	int		win_y;
+	int		size[2];
 }	t_img;
 
 typedef struct s_data {
@@ -214,6 +212,7 @@ void	ft_print_inverse(float inverse[4][8]);
 //box.c
 void	ft_calc_edges(t_map *map);
 void	ft_draw_box(t_data *data);
+float	ft_fit_box(t_vec3f *init, int size[2], int offset[2]);
 
 //test.c
 void	test(t_data *data);
