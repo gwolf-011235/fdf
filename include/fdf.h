@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/15 23:35:20 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/16 14:53:13 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # include "ft_mem.h"
 # include "err_message.h"
 
-# define ROW_MAX 10
+# define ROW_MAX 1000
 # define RAD 0.01745329251
 # define X 0
 # define Y 1
@@ -173,6 +173,7 @@ void	ft_init_window(t_data *data);
 //terminate.c
 void	ft_terminate(char *message);
 void	ft_free_rows(char *row, char *rows[ROW_MAX], int fd);
+void	ft_free_mlx(t_data *data, char *string, bool error);
 
 //matrix.c
 void	ft_print_inverse(float inverse[4][8]);

@@ -6,7 +6,7 @@
 /*   By: gwolf <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 17:03:42 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/09 15:37:38 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/16 14:33:08 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,9 @@
 #define ERR_LINE "❌ Lines don't have the same number of values"
 #define ERR_EMPTY "❌ The map is empty"
 #define ERR_FILE "❌ Filetype not recognised. Use .fdf files"
+#define ERR_MLX "❌ Failed to initialize MLX"
+#define ERR_WIN "❌ Failed to initialize window"
+#define ERR_IMG "❌ Failed to initialize image"
+#define CYA "👋 Goodbye and have a nice day"
 
 #endif

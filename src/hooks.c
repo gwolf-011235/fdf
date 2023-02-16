@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:16:59 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/15 16:00:30 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/16 14:38:20 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int close_window(int keycode, t_data *data)
 {
 	if (keycode == 65307)
 	{
-		mlx_destroy_window(data->mlx, data->win);
+		ft_free_mlx(data, CYA, false);
 		exit(0);
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 14:46:48 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/15 16:38:37 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/16 15:04:18 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,22 +37,23 @@ void	ft_free_rows(char *row, char *rows[ROW_MAX], int fd)
 	ft_terminate(ERR_BIG);
 }
 
-void	ft_mlx_free(t_data *data, t_map *map)
+void	ft_free_mlx(t_data *data, char *string, bool error)
 {
-	if (data)
+	free(data->map.points);
+	free(data->map.color_array);
+	if (data->render.ptr)
+		mlx_destroy_image(data->mlx, data->render.ptr);
+	if (data->menu.ptr)
+		mlx_destroy_image(data->mlx, data->menu.ptr);
+	if (data->win)
+		mlx_destroy_window(data->mlx, data->win);
+	if (data->mlx)
 	{
-		if (data->render.ptr)
-			mlx_destroy_image(data->mlx, data->render.ptr);
-		if (data->menu.ptr)
-			mlx_destroy_image(data->mlx, data->menu.ptr);
-		if (data->win)
-			mlx_destroy_window(data->mlx, data->win);
 		mlx_destroy_display(data->mlx);
+		free(data->mlx);
 	}
-	if (map)
-	{
-		free(map->points);
-		free(map->color_array);
-	}
-
+	if (error)
+		ft_terminate(string);
+	else
+		ft_putendl_fd(string, 1);
 }
