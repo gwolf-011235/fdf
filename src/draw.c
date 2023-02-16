@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 09:58:18 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/16 17:46:56 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/16 21:52:45 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	fill_background(t_img *img)
 	ft_bzero(img->addr, img->size[X] * img->size[Y] * 4);
 }
 
-int	ft_is_outside(t_vec3f point, int win_x, int win_y)
+int	ft_is_inside(t_point point, int win_x, int win_y)
 {
 	if (point.x < 0 || point.x > win_x)
 		return (1);
@@ -50,21 +50,16 @@ int	ft_is_outside(t_vec3f point, int win_x, int win_y)
 
 void	draw_points(t_img *img, t_map *map)
 {
-	int	i;
-	int	trgb;
+	int		i;
+	t_point	pixel;
 
-	trgb = create_trgb(0, 255, 0, 0);
 	i = 0;
 	while (i < map->sum_points)
 	{
-		if (ft_is_outside(map->morph[i], img->size[X], img->size[Y]))
-		{
-			i++;
-			continue ;
-		}
-		my_mlx_pixel_put(img, map->morph[i].x, map->morph[i].y, trgb);
+		pixel = ft_convert_vec2point(map->points[i D M], map->colors[i]);
+		if (ft_is_inside(pixel, img->size[X], img->size[Y]))
+			my_mlx_pixel_put(img, pixel.x, pixel.y, pixel.color);
 		i++;
-		trgb = get_opposite(trgb);
 	}
 }
 
@@ -172,12 +167,13 @@ void	draw_line(t_img *img, t_point start, t_point end, int colors[2])
 	}
 }
 
-t_point	ft_convert_3to2(t_vec3f point)
+t_point	ft_convert_vec2point(t_vec3f point, int color)
 {
 	t_point ret;
 
 	ret.x = floor(point.x);
 	ret.y = floor(point.y);
+	ret.color = color;
 	return (ret);
 }
 

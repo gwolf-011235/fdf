@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/16 21:22:48 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/16 21:49:37 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,8 +141,8 @@ void	draw_line(t_img *img, t_point start, t_point end, int colors[2]);
 void	draw_points(t_img *img, t_map *map);
 void	fill_background(t_img *img);
 void	lines(t_img *img, t_map *map);
-int		ft_is_outside(t_vec3f point, int win_x, int win_y);
-t_point	ft_convert_3to2(t_vec3f point);
+int		ft_is_inside(t_point point, int win_x, int win_y);
+t_point	ft_convert_vec2point(t_vec3f point, int color);
 
 //color.c
 int		create_trgb(int t, int r, int g, int b);
