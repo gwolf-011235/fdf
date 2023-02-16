@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/16 14:53:13 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/16 15:54:20 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ typedef struct s_pixel {
 	int	x;
 	int	y;
 	int	color;
-}	t_pixel;
+}	t_point;
 
 typedef struct s_map {
 	t_vec3f	*points;
@@ -139,35 +139,35 @@ void	ft_parse_line(t_map *map, char *line, int index);
 void	ft_set_colors(t_map *map);
 
 //draw.c
-void my_mlx_pixel_put(t_img *data, int x, int y, int color);
-void draw_triangle(t_img *img, int x, int y, int size);
-void draw_square(t_img *img, int x, int y, int size, int trgb);
-void	draw_line(t_img *img, t_pixel start, t_pixel end, int colors[2]);
-void draw_points(t_img *img, t_map *map);
+void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
+void	draw_triangle(t_img *img, int x, int y, int size);
+void	draw_square(t_img *img, int x, int y, int size, int trgb);
+void	draw_line(t_img *img, t_point start, t_point end, int colors[2]);
+void	draw_points(t_img *img, t_map *map);
 void	fill_background(t_img *img);
 void	lines(t_img *img, t_map *map);
-int	ft_is_outside(t_vec3f point, int win_x, int win_y);
-t_pixel	ft_convert_3to2(t_vec3f point);
+int		ft_is_outside(t_vec3f point, int win_x, int win_y);
+t_point	ft_convert_3to2(t_vec3f point);
 
 //color.c
-int create_trgb(int t, int r, int g, int b);
-int get_t(int trgb);
-int get_r(int trgb);
-int get_g(int trgb);
-int get_b(int trgb);
-int add_shade(double distance, int trgb);
-int get_opposite(int trgb);
-int	gradient(int color_start, int color_end, double len, double pos);
-int ft_alpha_blend(int new_color, int old_color);
+int		create_trgb(int t, int r, int g, int b);
+int		get_t(int trgb);
+int		get_r(int trgb);
+int		get_g(int trgb);
+int		get_b(int trgb);
+int		add_shade(double distance, int trgb);
+int		get_opposite(int trgb);
+int		gradient(int color_start, int color_end, double len, double pos);
+int		ft_alpha_blend(int new_color, int old_color);
 
 //hooks.c
-int mouse_hook(int button, int x, int y, t_data *data);
-int key_hook(int keycode, t_data *vars);
-int close_window(int keycode, t_data *vars);
-int mouse_move(int x, int y, void *param);
+int		mouse_hook(int button, int x, int y, t_data *data);
+int		key_hook(int keycode, t_data *vars);
+int		close_window(int keycode, t_data *vars);
+int		mouse_move(int x, int y, void *param);
 
 //window.c
-void testwindow(t_data *data);
+void	testwindow(t_data *data);
 void	ft_init_window(t_data *data);
 
 //terminate.c
@@ -209,8 +209,8 @@ void	ft_map_init(t_map *map);
 void	ft_find_extremes(t_map *map, int z);
 
 //utils.c
-int	ft_move_atoi(char *line);
-int	ft_hex_to_decimal(char *line, int len);
+int		ft_move_atoi(char *line);
+int		ft_hex_to_decimal(char *line, int len);
 
 //menu.c
 void	ft_init_menu(t_data *data);
