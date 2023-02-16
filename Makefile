@@ -4,18 +4,20 @@ CFLAGS = -DBUFFER_SIZE=4096
 SRC_DIR := src
 OBJ_DIR := obj
 LIB_DIR := lib
+LIB_DIR_FT := $(LIB_DIR)/libft
+LIB_DIR_MLX := $(LIB_DIR)/mlx_linux
 
 INC := -I include
-LIB_MLX := -L $(LIB_DIR)/mlx_linux -l mlx_Linux 
-LIB_FT := -L $(LIB_DIR)/libft -l ft 
+LIB_MLX := -L $(LIB_DIR_MLX) -l mlx_Linux 
+LIB_FT := -L $(LIB_DIR_FT) -l ft 
 LIB_X := -L /usr/lib -l Xext -l X11 -l m -l z
 LIBS := $(LIB_MLX) $(LIB_FT) $(LIB_X)
 
 COMPILE = $(CC) $(CFLAGS) $(INC)
 
-NAME := fdf.out
-LIBFT := $(LIB_DIR)/libft/libft.a
-MLX := $(LIB_DIR)/mlx_linux/libmlx_Linux.a
+NAME := fdf
+LIBFT := $(LIB_DIR_FT)/libft.a
+MLX := $(LIB_DIR_MLX)/libmlx_Linux.a
 
 SRC := 	main.c \
 		draw.c \
@@ -73,5 +75,7 @@ clean:
 
 fclean: clean
 	rm -rf $(NAME)
+	$(MAKE) -C $(LIB_DIR_FT) fclean
+	$(MAKE) -C $(LIB_DIR_MLX) clean
 
 re: fclean all
