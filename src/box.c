@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 20:28:13 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/16 15:55:07 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/16 21:24:52 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ void	ft_calc_edges(t_map *map)
 		else
 			map->edges[i].y = map->min[Y];
 		if (i < 4)
-			map->edges[i].z = map->low;
+			map->edges[i].z = map->min[Z];
 		else
-			map->edges[i].z = map->top;
+			map->edges[i].z = map->max[Z];
 		i++;
 	}
 }

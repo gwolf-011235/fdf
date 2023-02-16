@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/16 17:49:16 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/16 21:22:48 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,11 +99,7 @@ typedef struct s_map {
 	float	trans_y;
 	int		min[3];
 	int		max[3];	
-	int		top;
-	int		low;
-	int		color_top;
-	int		color_mid;
-	int		color_low;
+	int		pattern[3];
 	t_mat4	trans;
 }	t_map;
 
@@ -135,7 +131,7 @@ void	ft_check_filename(t_map *map, char *filename);
 void	ft_parse_map(t_map *map);
 void	ft_map_alloc(t_map *map);
 void	ft_parse_line(t_map *map, char *line, int index);
-void	ft_set_colors(t_map *map, t_vec3f *points, int *color);
+void	ft_set_colors(t_map *map, t_vec3f *points, int *colors);
 
 //draw.c
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color);

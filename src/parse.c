@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:00:33 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/16 17:50:17 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/16 21:23:28 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_map_alloc(t_map *map)
 	map->points = malloc(sizeof(t_vec3f) * (map->sum_points * 2 + 16));
 	if (!map->points)
 		ft_terminate(ERR_MEM);
-	map->colors = malloc(sizeof(int) * map->sum_points);
+	map->colors = malloc(sizeof(int) * map->sum_points + 3);
 	if (!map->colors)
 	{
 		free(map->points);
@@ -57,23 +57,27 @@ void	ft_parse_line(t_map *map, char *line, int i)
 void	ft_set_colors(t_map *map, t_vec3f *points, int *colors)
 {
 	int	i;
+	int	*pattern;
 
+	pattern = map->pattern;
 	i = 0;
 	while (i < map->sum_points)
 	{
 		if (map->hex)
 		{
 			if (!colors[i])
-				colors[i] = map->color_mid;
+				colors[i] = pattern[1];
 			i++;
 			continue ;
 		}
-		if (map->points[i + i].z == 0)
-			map->colors[i] = map->color_mid;
-		else if (map->points[i + i].z > 0)
-			map->colors[i] = gradient(map->color_mid, map->color_top, map->top, map->points[i + i].z);
+		if (points[i + i].z == 0)
+			colors[i] = pattern[1];
+		else if (points[i + i].z > 0)
+			colors[i] = gradient(pattern[1], pattern[2], \
+					map->max[Z], points[i + i].z);
 		else
-			map->colors[i] = gradient(map->color_mid, map->color_low, map->low, map->points[i + i].z);
+			colors[i] = gradient(pattern[1], pattern[0], \
+					map->min[Z], points[i + i].z);
 		i++;
 	}
 }
