@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 09:58:18 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/15 23:41:49 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/16 15:54:46 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 }
 
 /*
-void	ft_pixel_to_image(t_img *img, int x, int y, int color)
+void	ft_point_to_image(t_img *img, int x, int y, int color)
 {
 	char	*pixel;
 	int		blend;
@@ -113,7 +113,7 @@ void	draw_square(t_img *img, int x, int y, int size, int trgb)
 	}
 }
 
-void	init_line(t_pixel start, t_pixel end, t_pixel *delta, t_pixel *step)
+void	init_line(t_point start, t_point end, t_point *delta, t_point *step)
 {
 	delta->x = abs(end.x - start.x);
 	delta->y = abs(end.y - start.y);
@@ -137,10 +137,10 @@ void	init_line(t_pixel start, t_pixel end, t_pixel *delta, t_pixel *step)
  * @param color: The color to draw
  */
 
-void	draw_line(t_img *img, t_pixel start, t_pixel end, int colors[2])
+void	draw_line(t_img *img, t_point start, t_point end, int colors[2])
 {
-	t_pixel	delta;
-	t_pixel	step;
+	t_point	delta;
+	t_point	step;
 	int			err;
 	int			e2;
 	int			len;
@@ -172,9 +172,9 @@ void	draw_line(t_img *img, t_pixel start, t_pixel end, int colors[2])
 	}
 }
 
-t_pixel	ft_convert_3to2(t_vec3f point)
+t_point	ft_convert_3to2(t_vec3f point)
 {
-	t_pixel ret;
+	t_point ret;
 
 	ret.x = floor(point.x);
 	ret.y = floor(point.y);
@@ -184,8 +184,8 @@ t_pixel	ft_convert_3to2(t_vec3f point)
 void	lines(t_img *img, t_map *map)
 {
 	int			i;
-	t_pixel	start;
-	t_pixel	end;
+	t_point	start;
+	t_point	end;
 	int			colors[2];
 
 	i = 0;
