@@ -31,7 +31,7 @@ SRC := 	main.c \
 		map_utils.c \
 		test.c \
 		vector.c \
-		validate.c \
+		check.c \
 		utils.c \
 		menu.c \
 		rotation.c \

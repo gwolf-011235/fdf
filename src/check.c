@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   validate.c                                         :+:      :+:    :+:   */
+/*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 21:36:25 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/15 16:44:03 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/16 17:37:13 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	ft_extract_rows(t_map *map, int fd)
 	map->sum_points = map->height * map->width;
 }
 
-void	ft_validate_filename(t_map *map, char *filename)
+void	ft_check_filename(t_map *map, char *filename)
 {
 	int		len;
 	char	*start;
@@ -114,11 +114,11 @@ void	ft_validate_filename(t_map *map, char *filename)
 	map->filename[31] = 0;
 }
 
-void	ft_validate_map(t_map *map, char *filename)
+void	ft_check_map(t_map *map, char *filename)
 {
 	int	fd;
 
-	ft_validate_filename(map, filename);
+	ft_check_filename(map, filename);
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 		ft_terminate(ERR_OPEN);

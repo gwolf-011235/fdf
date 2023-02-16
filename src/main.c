@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:54:09 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/15 15:59:31 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/16 17:37:37 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(int argc, char *argv[])
 	if (argc != 2)
 		ft_terminate(ERR_ARGS);
 	ft_map_init(&data.map);
-	ft_validate_map(&data.map, argv[1]);
+	ft_check_map(&data.map, argv[1]);
 	ft_parse_map(&data.map);
 	ft_init_window(&data);
 	map->scale = ft_fit_box(&map->points[map->sum_points * 2], data.render.size, map->offset);
