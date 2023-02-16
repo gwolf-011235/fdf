@@ -5,7 +5,7 @@ SRC_DIR := src
 OBJ_DIR := obj
 LIB_DIR := lib
 
-INC := -I /usr/include -I include
+INC := -I include
 LIB_MLX := -L $(LIB_DIR)/mlx_linux -l mlx_Linux 
 LIB_FT := -L $(LIB_DIR)/libft -l ft 
 LIB_X := -L /usr/lib -l Xext -l X11 -l m -l z
