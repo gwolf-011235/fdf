@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:00:33 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/15 16:03:54 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/16 17:50:17 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,21 @@ void	ft_map_alloc(t_map *map)
 	map->points = malloc(sizeof(t_vec3f) * (map->sum_points * 2 + 16));
 	if (!map->points)
 		ft_terminate(ERR_MEM);
-	map->color_array = malloc(sizeof(int) * map->sum_points);
-	if (!map->color_array)
+	map->colors = malloc(sizeof(int) * map->sum_points);
+	if (!map->colors)
 	{
 		free(map->points);
 		ft_terminate(ERR_MEM);
 	}
 	map->morph = &map->points[1];
 	map->edges = &map->points[map->sum_points * 2];
-	ft_bzero(map->color_array, sizeof(int) * map->sum_points);
+	ft_bzero(map->colors, sizeof(int) * map->sum_points);
 }
 
 void	ft_parse_line(t_map *map, char *line, int i)
 {
 	int	j;
-	int len_hex;
+	int	len_hex;
 
 	j = 0;
 	while (line[j])
@@ -44,7 +44,7 @@ void	ft_parse_line(t_map *map, char *line, int i)
 		if (map->hex && line[j] == ',')
 		{
 			len_hex = ft_jump_over_hex(&line[j]);
-			map->color_array[i] = ft_hex_to_decimal(&line[j + 3], len_hex);
+			map->colors[i] = ft_hex_to_decimal(&line[j + 3], len_hex);
 			j += len_hex;
 		}
 		i++;
@@ -54,7 +54,7 @@ void	ft_parse_line(t_map *map, char *line, int i)
 	free(line);
 }
 
-void	ft_set_colors(t_map *map)
+void	ft_set_colors(t_map *map, t_vec3f *points, int *colors)
 {
 	int	i;
 
@@ -63,24 +63,24 @@ void	ft_set_colors(t_map *map)
 	{
 		if (map->hex)
 		{
-			if (!map->color_array[i])
-				map->color_array[i] = map->color_mid;
+			if (!colors[i])
+				colors[i] = map->color_mid;
 			i++;
 			continue ;
 		}
 		if (map->points[i + i].z == 0)
-			map->color_array[i] = map->color_mid;
+			map->colors[i] = map->color_mid;
 		else if (map->points[i + i].z > 0)
-			map->color_array[i] = gradient(map->color_mid, map->color_top, map->top, map->points[i + i].z);
+			map->colors[i] = gradient(map->color_mid, map->color_top, map->top, map->points[i + i].z);
 		else
-			map->color_array[i] = gradient(map->color_mid, map->color_low, map->low, map->points[i + i].z);
+			map->colors[i] = gradient(map->color_mid, map->color_low, map->low, map->points[i + i].z);
 		i++;
 	}
 }
 
 void	ft_parse_map(t_map *map)
 {
-	int i;
+	int	i;
 
 	ft_map_alloc(map);
 	map->min[X] = -(map->width / 2);
@@ -97,6 +97,6 @@ void	ft_parse_map(t_map *map)
 		ft_parse_line(map, map->rows[i], i * map->width);
 		i++;
 	}
-	ft_set_colors(map);
+	ft_set_colors(map, map->points, map->colors);
 	ft_calc_edges(map);
 }

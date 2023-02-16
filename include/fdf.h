@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/16 17:36:30 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/16 17:49:16 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ typedef struct s_map {
 	t_vec3f	*points;
 	t_vec3f	*morph;
 	t_vec3f	*edges;
-	int		*color_array;
+	int		*colors;
 	int		sum_points;
 	char	filename[32];
 	int		height;
@@ -124,10 +124,9 @@ typedef struct s_data {
 	t_map	map;
 }	t_data;
 
-//validate.c
+//check.c
 void	ft_check_map(t_map *map, char *filename);
 int		ft_count_num_in_row(char *line, bool *hex);
-int		ft_jump_over_hex(char *line);
 void	ft_extract_rows(t_map *map, int fd);
 void	ft_check_row(t_map *map, char *row);
 void	ft_check_filename(t_map *map, char *filename);
@@ -136,7 +135,7 @@ void	ft_check_filename(t_map *map, char *filename);
 void	ft_parse_map(t_map *map);
 void	ft_map_alloc(t_map *map);
 void	ft_parse_line(t_map *map, char *line, int index);
-void	ft_set_colors(t_map *map);
+void	ft_set_colors(t_map *map, t_vec3f *points, int *color);
 
 //draw.c
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
@@ -211,6 +210,7 @@ void	ft_find_extremes(t_map *map, int z);
 //utils.c
 int		ft_move_atoi(char *line);
 int		ft_hex_to_decimal(char *line, int len);
+int		ft_jump_over_hex(char *line);
 
 //menu.c
 void	ft_init_menu(t_data *data);

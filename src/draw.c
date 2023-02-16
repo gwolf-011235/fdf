@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 09:58:18 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/16 15:54:46 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/16 17:46:56 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,11 +192,11 @@ void	lines(t_img *img, t_map *map)
 	while (i < map->sum_points)
 	{
 		start = ft_convert_3to2(map->points[i D M]);
-		colors[0] = map->color_array[i];
+		colors[0] = map->colors[i];
 		if (i % map->width != map->width - 1)
 		{
 			end = ft_convert_3to2(map->points[i D M + 2]);
-			colors[1] = map->color_array[i + 1];
+			colors[1] = map->colors[i + 1];
 			if (!ft_is_outside(map->points[i D M], img->size[X], img->size[Y]) \
 					&& !ft_is_outside(map->points[i D M + 2], img->size[X], img->size[Y]))
 				draw_line(img, start, end, colors);
@@ -204,7 +204,7 @@ void	lines(t_img *img, t_map *map)
 		if (i / map->width != map->height - 1)
 		{
 			end = ft_convert_3to2(map->points[i D M + (map->width * 2)]);
-			colors[1] = map->color_array[i + map->width];
+			colors[1] = map->colors[i + map->width];
 			if (!ft_is_outside(map->points[i D M], img->size[X], img->size[Y]) \
 					&& !ft_is_outside(map->points[i D M + (map->width* 2)], img->size[X], img->size[Y]))
 				draw_line(img, start, end, colors);

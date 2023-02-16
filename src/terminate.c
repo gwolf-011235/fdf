@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 14:46:48 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/16 15:44:59 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/16 17:47:23 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	ft_free_rows(char *row, char *rows[ROW_MAX], int fd)
 void	ft_free_mlx(t_data *data, char *string, bool error)
 {
 	free(data->map.points);
-	free(data->map.color_array);
+	free(data->map.colors);
 	if (data->render.ptr)
 		mlx_destroy_image(data->mlx, data->render.ptr);
 	if (data->menu.ptr)

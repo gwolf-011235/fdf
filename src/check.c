@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 21:36:25 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/16 17:37:13 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/16 17:39:45 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,26 +36,6 @@ int	ft_count_num_in_row(char *line, bool *hex)
 	if (line[i] != '\0' && line[i + 1] != '\0')
 		count = -1;
 	return (count);
-}
-
-int	ft_jump_over_hex(char *line)
-{
-	int		i;
-
-	i = 0;
-	if (line[i] == ',' && line[i + 1] == '0')
-		i += 2;
-	else
-		return (-1);
-	if (line[i] != 'x' && line[i] != 'X')
-		return (-1);
-	i++;
-	while (ft_strchr("0123456789ABCDEFabcdef", line[i]))
-		i++;
-	if (line[i] == ' ' || line[i] == '\n')
-		return (i);
-	else
-		return (-1);
 }
 
 void	ft_check_row(t_map *map, char *row)
