@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:00:33 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/16 21:23:28 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/17 08:53:09 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,11 @@
 void	ft_map_alloc(t_map *map)
 {
 	map->points = malloc(sizeof(t_vec3f) * (map->sum_points * 2 + 16));
-	if (!map->points)
-		ft_terminate(ERR_MEM);
-	map->colors = malloc(sizeof(int) * map->sum_points + 3);
-	if (!map->colors)
+	map->colors = malloc(sizeof(int) * map->sum_points);
+	map->pixel = malloc(sizeof(t_point) * (map->sum_points + 8));
+	if (!map->points || !map->colors || !map->pixel)
 	{
-		free(map->points);
-		ft_terminate(ERR_MEM);
+		ft_free_map_ptr(map, ERR_MEM);
 	}
 	map->morph = &map->points[1];
 	map->edges = &map->points[map->sum_points * 2];
