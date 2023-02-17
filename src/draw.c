@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 09:58:18 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/16 21:52:45 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/17 10:03:28 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ void	fill_background(t_img *img)
 int	ft_is_inside(t_point point, int win_x, int win_y)
 {
 	if (point.x < 0 || point.x > win_x)
-		return (1);
+		return (0);
 	if (point.y < 0 || point.y > win_y)
-		return (1);
-	return (0);
+		return (0);
+	return (1);
 }
 
 void	draw_points(t_img *img, t_map *map)
@@ -132,15 +132,15 @@ void	init_line(t_point start, t_point end, t_point *delta, t_point *step)
  * @param color: The color to draw
  */
 
-void	draw_line(t_img *img, t_point start, t_point end, int colors[2])
+void	draw_line(t_img *img, t_point start, t_point end)
 {
 	t_point	delta;
 	t_point	step;
-	int			err;
-	int			e2;
-	int			len;
-	int			left;
-	int			color;
+	int		err;
+	int		e2;
+	int		len;
+	int		left;
+	int		color;
 
 	init_line(start, end, &delta, &step);
 	err = delta.x - delta.y;
@@ -148,7 +148,7 @@ void	draw_line(t_img *img, t_point start, t_point end, int colors[2])
 	left = len;
 	while (left)
 	{
-		color = gradient(colors[0], colors[1], len, len - left);
+		color = gradient(start.color, end.color, len, len - left);
 		my_mlx_pixel_put(img, start.x, start.y, color);
 		if (start.x == end.x && start.y == end.y)
 			break ;
@@ -179,31 +179,27 @@ t_point	ft_convert_vec2point(t_vec3f point, int color)
 
 void	lines(t_img *img, t_map *map)
 {
-	int			i;
+	int		i;
 	t_point	start;
 	t_point	end;
-	int			colors[2];
 
 	i = 0;
 	while (i < map->sum_points)
 	{
-		start = ft_convert_3to2(map->points[i D M]);
-		colors[0] = map->colors[i];
+		start = map->pixel[i];
 		if (i % map->width != map->width - 1)
 		{
-			end = ft_convert_3to2(map->points[i D M + 2]);
-			colors[1] = map->colors[i + 1];
-			if (!ft_is_outside(map->points[i D M], img->size[X], img->size[Y]) \
-					&& !ft_is_outside(map->points[i D M + 2], img->size[X], img->size[Y]))
-				draw_line(img, start, end, colors);
+			end = map->pixel[i + 1];
+			if (ft_is_inside(start, img->size[X], img->size[Y]) \
+					&& ft_is_inside(end, img->size[X], img->size[Y]))
+				draw_line(img, start, end);
 		}
 		if (i / map->width != map->height - 1)
 		{
-			end = ft_convert_3to2(map->points[i D M + (map->width * 2)]);
-			colors[1] = map->colors[i + map->width];
-			if (!ft_is_outside(map->points[i D M], img->size[X], img->size[Y]) \
-					&& !ft_is_outside(map->points[i D M + (map->width* 2)], img->size[X], img->size[Y]))
-				draw_line(img, start, end, colors);
+			end = map->pixel[i + map->width];
+			if (ft_is_inside(start, img->size[X], img->size[Y]) \
+					&& ft_is_inside(end, img->size[X], img->size[Y]))
+				draw_line(img, start, end);
 		}
 		i++;
 	}
