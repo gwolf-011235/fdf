@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   angles.h                                           :+:      :+:    :+:   */
+/*   precalc_matrix.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/16 21:29:34 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/17 08:14:57 by gwolf            ###   ########.fr       */
+/*   Created: 2023/02/17 07:58:40 by gwolf             #+#    #+#             */
+/*   Updated: 2023/02/17 08:29:46 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ANGLES_H
-# define ANGLES_H
+#include "fdf.h"
 
-# define SIN_1 0.0174524
-# define SIN_3 0.0523359
-# define SIN_5 0.0871557
-# define SIN_27 0.4539905
-# define SIN_45 0.7071068
+void	ft_const_iso(t_mat4 transmat)
+{
+	const t_mat4 iso = {
+		{0.8910065, 0.3210376, -0.3210376, 0},
+		{0, 0.7071068, 0.7071068, 0},
+		{0.4540158, -0.6300368, -0.6300368, 0},
+		{0, 0, 0, 1} 
+	};
+	ft_copy_mat4(iso, transmat);
 
-# define COS_1 0.9998477
-# define COS_3 0.9986295
-# define COS_5 0.9961947
-# define COS_27 0.8910065
-# define COS_45 0.7071068
-
-#endif
+}
