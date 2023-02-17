@@ -36,7 +36,8 @@ SRC := 	main.c \
 		menu.c \
 		rotation.c \
 		print_utils.c \
-		box.c
+		box.c \
+		precalc_matrix.c
 
 SRCS := $(addprefix $(SRC_DIR)/, $(SRC))
 
@@ -54,7 +55,7 @@ $(NAME): $(OBJS) $(LIBFT) $(MLX)
 	$(COMPILE) $(OBJS) $(LIBS) -o $(NAME)
 
 debug: CFLAGS += -g
-debug: fclean $(NAME)
+debug: clean $(NAME)
 	$(CC) $(CFLAGS) $(INC) $(OBJS) $(LIBS) -o $(NAME)
 	echo "$(NAME) created - DEBUG MODE!"
 
