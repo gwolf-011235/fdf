@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/16 21:49:37 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/17 09:20:10 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ typedef struct s_map {
 	t_vec3f	*morph;
 	t_vec3f	*edges;
 	int		*colors;
+	t_point	*pixel;
 	int		sum_points;
 	char	filename[32];
 	int		height;
@@ -137,7 +138,7 @@ void	ft_set_colors(t_map *map, t_vec3f *points, int *colors);
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
 void	draw_triangle(t_img *img, int x, int y, int size);
 void	draw_square(t_img *img, int x, int y, int size, int trgb);
-void	draw_line(t_img *img, t_point start, t_point end, int colors[2]);
+void	draw_line(t_img *img, t_point start, t_point end);
 void	draw_points(t_img *img, t_map *map);
 void	fill_background(t_img *img);
 void	lines(t_img *img, t_map *map);
@@ -168,6 +169,7 @@ void	ft_init_window(t_data *data);
 //terminate.c
 void	ft_terminate(char *message);
 void	ft_free_rows(char *row, char *rows[ROW_MAX], int fd);
+void	ft_free_map_ptr(t_map *map, char *string);
 void	ft_free_mlx(t_data *data, char *string, bool error);
 
 //matrix.c
@@ -196,8 +198,11 @@ t_vec3f	vec3_cross(t_vec3f a, t_vec3f b);
 t_vec3f	vec3_subtract(t_vec3f a, t_vec3f b);
 
 //reshape.c
+void	ft_init_project(t_map *map);
 void	ft_shape_map(t_map *map);
 void	ft_redraw(t_data *data);
+void	ft_init_pixel(t_vec3f *morph, int *colors, t_point *pixel, int sum);
+void	ft_calc_points(t_vec3f *points, t_mat4 trans, int sum);
 
 //map_utils.c
 void	ft_map_init(t_map *map);
@@ -220,6 +225,9 @@ void	ft_print_inverse(float inverse[4][8]);
 void	ft_calc_edges(t_map *map);
 void	ft_draw_box(t_data *data);
 float	ft_fit_box(t_vec3f *init, int size[2], int offset[2]);
+
+//precalc_matrix.c
+void	ft_const_iso(t_mat4 transmat);
 
 //test.c
 void	test(t_data *data);
