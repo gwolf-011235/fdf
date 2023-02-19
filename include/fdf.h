@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/17 09:20:10 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/18 23:39:53 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@
 # define X 0
 # define Y 1
 # define Z 2
+# define OFFSET_X 2
+# define OFFSET_Y 3
 
 # define D * 2
 # define M + 1
@@ -73,11 +75,18 @@ typedef struct s_color {
 	uint8_t	a;
 }	t_rgba;
 
-typedef struct s_pixel {
+typedef struct s_point {
 	int	x;
 	int	y;
 	int	color;
 }	t_point;
+
+typedef struct s_matinfo {
+	float	scale;
+	float	angle[3];
+	float	translate[3];
+	int		canvas[4];
+}	t_props;
 
 typedef struct s_map {
 	t_vec3f	*points;
@@ -101,7 +110,8 @@ typedef struct s_map {
 	int		min[3];
 	int		max[3];	
 	int		pattern[3];
-	t_mat4	trans;
+	t_mat4	mat;
+	t_props	props;
 }	t_map;
 
 typedef struct s_img {
@@ -143,6 +153,7 @@ void	draw_points(t_img *img, t_map *map);
 void	fill_background(t_img *img);
 void	lines(t_img *img, t_map *map);
 int		ft_is_inside(t_point point, int win_x, int win_y);
+int		ft_is_outside(t_vec3f point, int canvas[2], float padding);
 t_point	ft_convert_vec2point(t_vec3f point, int color);
 
 //color.c
@@ -175,7 +186,7 @@ void	ft_free_mlx(t_data *data, char *string, bool error);
 //matrix.c
 void	ft_print_inverse(float inverse[4][8]);
 void	ft_copy_mat4(const t_mat4 src, t_mat4 dest);
-
+void	ft_build_transmat(t_mat4 mat, t_props props);
 void	ft_mult_mat4(const t_mat4 first, const t_mat4 second, t_mat4 result);
 void	ft_inverse_mat4(t_mat4 mat);
 void	ft_init_mat4(t_mat4 matrix);
@@ -223,8 +234,9 @@ void	ft_print_inverse(float inverse[4][8]);
 
 //box.c
 void	ft_calc_edges(t_map *map);
+void	ft_morph_edges(t_vec3f *edges, t_mat4 trans);
 void	ft_draw_box(t_data *data);
-float	ft_fit_box(t_vec3f *init, int size[2], int offset[2]);
+float	ft_fit_box(t_vec3f *edges, t_mat4 mat, t_props props);
 
 //precalc_matrix.c
 void	ft_const_iso(t_mat4 transmat);
