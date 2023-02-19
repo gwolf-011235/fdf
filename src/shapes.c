@@ -6,15 +6,15 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 08:44:25 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/19 09:33:26 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/19 09:44:03 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-t_point	ft_math_point(t_point one, t_point two, int x, int y)
+t_point	ft_math_pt(t_point one, t_point two, int x, int y)
 {
-	t_point ret;
+	t_point	ret;
 
 	if (x == 0)
 		ret.x = one.x + two.x;
@@ -36,29 +36,27 @@ t_point	ft_math_point(t_point one, t_point two, int x, int y)
 	return (ret);
 }
 
-void	ft_draw_circle(t_img *img, t_point center, int radius)
+void	ft_draw_circle(t_img *img, t_point ctr, int radius)
 {
-	t_point	outer;
+	t_point	out;
 	int		d;
 
-	outer.x = 0;
-	outer.y = radius;
+	out.x = 0;
+	out.y = radius;
 	d = 3 - 2 * radius;
-
-	while (outer.x <= outer.y)
+	while (out.x <= out.y)
 	{
-		draw_line(img, ft_math_point(center, outer, 0, 0), ft_math_point(center, outer, 1, 0));
-		draw_line(img, ft_math_point(center, outer, 0, 1), ft_math_point(center, outer, 1, 1));
-		draw_line(img, ft_math_point(center, outer, 2, 2), ft_math_point(center, outer, 3, 2));
-		draw_line(img, ft_math_point(center, outer, 2, 3), ft_math_point(center, outer, 3, 3));
-
-		outer.x++;
+		draw_line(img, ft_math_pt(ctr, out, 0, 0), ft_math_pt(ctr, out, 1, 0));
+		draw_line(img, ft_math_pt(ctr, out, 0, 1), ft_math_pt(ctr, out, 1, 1));
+		draw_line(img, ft_math_pt(ctr, out, 2, 2), ft_math_pt(ctr, out, 3, 2));
+		draw_line(img, ft_math_pt(ctr, out, 2, 3), ft_math_pt(ctr, out, 3, 3));
+		out.x++;
 		if (d < 0)
-			d += 4 * outer.x + 6;
+			d += 4 * out.x + 6;
 		else
 		{
-			outer.y--;
-			d += 4 * (outer.x - outer.y) + 10;
+			out.y--;
+			d += 4 * (out.x - out.y) + 10;
 		}
 	}
 }
