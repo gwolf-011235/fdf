@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 09:27:53 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/16 21:24:22 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/18 22:29:42 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,11 @@
 
 void	ft_map_init(t_map *map)
 {
-	map->scale = 10;
-	map->roll = 0;
-	map->pitch = 0;
-	map->yaw = 0;
-	map->trans_x = 0;
-	map->trans_y = 0;
 	map->pattern[0] = BLUE;
 	map->pattern[1] = GREEN;
 	map->pattern[2] = RED;
+	map->props.angle[X] = 45;
+	map->props.angle[Z] = 27;
 }
 
 void	ft_find_extremes(t_map *map, int z)
