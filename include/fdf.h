@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/19 07:40:42 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/19 09:21:27 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -246,6 +246,9 @@ t_point	ft_convert_vec2point(t_vec3f point, int color);
 void	ft_init_pixel(t_vec3f *morph, int *colors, t_point *pixel, int sum);
 void	ft_update_pix_point(t_vec3f *morph, t_point *pixel, int sum);
 void	ft_update_pix_color(int *colors, t_point *pixel, int sum);
+
+//shapes.c
+void	ft_draw_circle(t_img *img, t_point center, int radius);
 
 //test.c
 void	test(t_data *data);

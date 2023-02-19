@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 09:58:18 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/19 07:41:03 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/19 09:20:09 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,51 +75,6 @@ void	draw_points(t_img *img, t_map *map)
 		if (ft_is_inside(pixel, img->size[X], img->size[Y]))
 			my_mlx_pixel_put(img, pixel.x, pixel.y, pixel.color);
 		i++;
-	}
-}
-
-void	draw_triangle(t_img *img, int x, int y, int size)
-{
-	int	trgb;
-	int	size_x;
-	int	size_y;
-	int	temp;
-
-	trgb = create_trgb(0, 0, 255, 255);
-	size_x = size + x;
-	size_y = size + y;
-	while (x < size_x)
-	{
-		temp = y;
-		while (temp < size_y)
-		{
-			my_mlx_pixel_put(img, x, temp, trgb);
-			temp++;
-		}
-		size_y--;
-		x++;
-	}
-}
-
-void	draw_square(t_img *img, int x, int y, int size, int trgb)
-{
-	int	temp;
-	int	size_x;
-	int	size_y;
-
-	size_x = size + x;
-	size_y = size + y;
-	while (x < size_x)
-	{
-		temp = y;
-		while (temp < size_y)
-		{
-			my_mlx_pixel_put(img, x, temp, trgb);
-			temp++;
-		}
-		x++;
-		if (x % 10 == 0)
-			trgb = get_opposite(trgb);
 	}
 }
 
