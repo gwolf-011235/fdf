@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/19 09:21:27 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/19 09:47:50 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,15 +146,12 @@ void	ft_set_colors(t_map *map, t_vec3f *points, int *colors);
 
 //draw.c
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
-void	draw_triangle(t_img *img, int x, int y, int size);
-void	draw_square(t_img *img, int x, int y, int size, int trgb);
 void	draw_line(t_img *img, t_point start, t_point end);
 void	draw_points(t_img *img, t_map *map);
 void	fill_background(t_img *img);
 void	lines(t_img *img, t_map *map);
 int		ft_is_inside(t_point point, int win_x, int win_y);
 int		ft_is_outside(t_vec3f point, int canvas[2], float padding);
-t_point	ft_convert_vec2point(t_vec3f point, int color);
 
 //color.c
 int		create_trgb(int t, int r, int g, int b);
@@ -212,7 +209,6 @@ t_vec3f	vec3_subtract(t_vec3f a, t_vec3f b);
 void	ft_init_project(t_map *map);
 void	ft_shape_map(t_map *map);
 void	ft_redraw(t_data *data);
-void	ft_init_pixel(t_vec3f *morph, int *colors, t_point *pixel, int sum);
 void	ft_calc_points(t_vec3f *points, t_mat4 trans, int sum);
 
 //map_utils.c
@@ -234,7 +230,6 @@ void	ft_print_inverse(float inverse[4][8]);
 
 //box.c
 void	ft_set_edges(t_map *map);
-void	ft_morph_edges(t_vec3f *edges, t_mat4 trans);
 void	ft_draw_box(t_data *data);
 float	ft_fit_box(t_vec3f *edges, t_mat4 mat, t_props props);
 
