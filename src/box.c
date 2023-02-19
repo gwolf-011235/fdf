@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 20:28:13 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/17 09:27:07 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/19 07:14:59 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,29 +35,27 @@ void	ft_calc_edges(t_map *map)
 	}
 }
 
-float	ft_fit_box(t_vec3f *init, int size[2], int offset[2])
+float	ft_fit_box(t_vec3f *edges, t_mat4 mat, t_props props)
 {
-	float	scale;
 	int		i;
 	t_vec3f	temp;
 
-	scale = 1;
+	props.scale = 1.0;
 	while (1)
 	{
+		ft_build_transmat(mat, props);
 		i = 0;
 		while (i < 8)
 		{
-			temp.x = (init[i + i].x * scale + offset[X]) * 1.2;
-			temp.y = (init[i + i].y * scale + offset[Y]) * 1.2;
-			if (temp.x > size[X] || temp.y > size[Y])
+			temp = ft_mult_vec3f_mat4(edges[i + i], mat);
+			if (ft_is_outside(temp, props.canvas, 0.1))
 			{
-				scale = floor(scale);
-				printf("Scale is: %f\n", scale);
-				return (scale);
+				printf("Scale is: %f\n", props.scale);
+				return (props.scale);
 			}
 			i++;
 		}
-		scale += 0.1;
+		props.scale += 0.10;
 	}
 }
 
@@ -74,19 +72,19 @@ void	ft_draw_box(t_data *data)
 	{
 		start = edges[i];
 		end = edges[(i + 1) % 4];
+		start.color = GREEN;
+		end.color = GREEN;
+		if (ft_is_inside(start, data->render.size[X], data->render.size[Y]) && ft_is_inside(end, data->render.size[X], data->render.size[Y]))
+			draw_line(&data->render, start, end);
+		end = edges[i + 4];
 		start.color = BLUE;
 		end.color = BLUE;
 		if (ft_is_inside(start, data->render.size[X], data->render.size[Y]) && ft_is_inside(end, data->render.size[X], data->render.size[Y]))
 			draw_line(&data->render, start, end);
-		end = edges[i + 4];
-		start.color = RED;
-		end.color = RED;
-		if (ft_is_inside(start, data->render.size[X], data->render.size[Y]) && ft_is_inside(end, data->render.size[X], data->render.size[Y]))
-			draw_line(&data->render, start, end);
 		start = edges[i + 4];
 		end = edges[((i + 1) % 4) + 4];
-		start.color = GREEN;
-		end.color = GREEN;
+		start.color = RED;
+		end.color = RED;
 		if (ft_is_inside(start, data->render.size[X], data->render.size[Y]) && ft_is_inside(end, data->render.size[X], data->render.size[Y]))
 			draw_line(&data->render, start, end);
 		i++;
