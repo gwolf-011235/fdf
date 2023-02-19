@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:00:10 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/18 22:27:15 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/19 09:39:25 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_init_window(t_data *data)
 	if (!data->mlx)
 		ft_free_mlx(data, ERR_MLX, true);
 	mlx_get_screen_size(data->mlx, &win_x, &win_y);
-	ft_printf("Screen size: %d x %d\n", win_x, win_y);
+	ft_printf("🖥️  Screen size: %d x %d\n", win_x, win_y);
 	data->win = mlx_new_window(data->mlx, win_x, win_y, "FdF - by gwolf");
 	if (!data->win)
 		ft_free_mlx(data, ERR_WIN, true);
