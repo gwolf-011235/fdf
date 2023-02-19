@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 16:48:55 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/11 08:38:13 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/18 23:29:57 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,21 @@ void	ft_init_mat4(t_mat4 matrix)
 	}
 }
 
+void	ft_build_transmat(t_mat4 mat, t_props props)
+{
+	ft_init_mat4(mat);
+	mat[0][0] = props.scale;
+	mat[1][1] = props.scale;
+	mat[2][2] = props.scale;
+	mat[3][3] = 1;
+	ft_rotate_x(mat, props.angle[X]);
+	ft_rotate_y(mat, props.angle[Y]);
+	ft_rotate_z(mat, props.angle[Z]);
+	mat[3][0] = props.translate[X] + props.canvas[OFFSET_X];
+	mat[3][1] = props.translate[Y] + props.canvas[OFFSET_Y];
+	mat[3][2] = props.translate[Z];
+}
+
 void	ft_copy_mat4(const t_mat4 src, t_mat4 dest)
 {
 	int i;
@@ -57,7 +72,6 @@ void	ft_copy_mat4(const t_mat4 src, t_mat4 dest)
 		}
 		i++;
 	}
-
 }
 
 void	ft_augment_mat4(t_mat4 mat, float augment[4][8])
