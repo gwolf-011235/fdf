@@ -6,11 +6,21 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:00:10 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/16 14:38:11 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/18 22:27:15 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+void	ft_init_image(t_data *data, t_img *img, int win_x, int win_y)
+{
+	img->ptr = mlx_new_image(data->mlx, win_x, win_y);
+	if (!img->ptr)
+		ft_free_mlx(data, ERR_IMG, true);
+	img->addr = mlx_get_data_addr(img->ptr, &img->bpp, &img->line_len, &img->endian);
+	img->size[X] = win_x;
+	img->size[Y] = win_y;
+}
 
 void	ft_init_window(t_data *data)
 {
@@ -25,20 +35,12 @@ void	ft_init_window(t_data *data)
 	data->win = mlx_new_window(data->mlx, win_x, win_y, "FdF - by gwolf");
 	if (!data->win)
 		ft_free_mlx(data, ERR_WIN, true);
-	data->render.ptr = mlx_new_image(data->mlx, win_x, win_y);
-	if (!data->render.ptr)
-		ft_free_mlx(data, ERR_IMG, true);
-	data->render.addr = mlx_get_data_addr(data->render.ptr, &data->render.bpp, &data->render.line_len, &data->render.endian);
-	data->render.size[X] = win_x;
-	data->render.size[Y] = win_y;
-	data->menu.ptr = mlx_new_image(data->mlx, win_x / 6, win_y);
-	if (!data->menu.ptr)
-		ft_free_mlx(data, ERR_IMG, true);
-	data->menu.addr = mlx_get_data_addr(data->menu.ptr, &data->menu.bpp, &data->menu.line_len, &data->menu.endian);
-	data->menu.size[X] = win_x / 6;
-	data->menu.size[Y] = win_y;
-	data->map.offset[X] = win_x / 2;
-	data->map.offset[Y] = win_y / 2;
+	ft_init_image(data, &data->render, win_x, win_y);
+	ft_init_image(data, &data->menu, (win_x / 6), win_y);
+	data->map.props.canvas[X] = win_x;
+	data->map.props.canvas[Y] = win_y;
+	data->map.props.canvas[OFFSET_X] = win_x / 2;
+	data->map.props.canvas[OFFSET_Y] = win_y / 2;
 }
 
 void testwindow(t_data *data)
