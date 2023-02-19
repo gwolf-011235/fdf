@@ -6,13 +6,13 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 20:28:13 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/19 07:14:59 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/19 07:21:59 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	ft_calc_edges(t_map *map)
+void	ft_set_edges(t_map *map)
 {
 	int i;
 

@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/18 23:39:53 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/19 07:22:13 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,7 +233,7 @@ void	ft_print_point(t_vec3f point);
 void	ft_print_inverse(float inverse[4][8]);
 
 //box.c
-void	ft_calc_edges(t_map *map);
+void	ft_set_edges(t_map *map);
 void	ft_morph_edges(t_vec3f *edges, t_mat4 trans);
 void	ft_draw_box(t_data *data);
 float	ft_fit_box(t_vec3f *edges, t_mat4 mat, t_props props);

@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:00:33 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/17 08:53:09 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/19 07:22:44 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,5 +100,5 @@ void	ft_parse_map(t_map *map)
 		i++;
 	}
 	ft_set_colors(map, map->points, map->colors);
-	ft_calc_edges(map);
+	ft_set_edges(map);
 }
