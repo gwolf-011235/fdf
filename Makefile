@@ -37,7 +37,8 @@ SRC := 	main.c \
 		rotation.c \
 		print_utils.c \
 		box.c \
-		precalc_matrix.c
+		precalc_matrix.c \
+		pixel.c
 
 SRCS := $(addprefix $(SRC_DIR)/, $(SRC))
 

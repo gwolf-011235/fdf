@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 09:58:18 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/18 23:17:47 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/19 07:41:03 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,16 +180,6 @@ void	draw_line(t_img *img, t_point start, t_point end)
 		}
 		left--;
 	}
-}
-
-t_point	ft_convert_vec2point(t_vec3f point, int color)
-{
-	t_point ret;
-
-	ret.x = floor(point.x);
-	ret.y = floor(point.y);
-	ret.color = color;
-	return (ret);
 }
 
 void	lines(t_img *img, t_map *map)
