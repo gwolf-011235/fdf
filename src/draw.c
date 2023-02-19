@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 09:58:18 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/17 10:03:28 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/18 23:17:47 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,21 @@ void	ft_point_to_image(t_img *img, int x, int y, int color)
 void	fill_background(t_img *img)
 {
 	ft_bzero(img->addr, img->size[X] * img->size[Y] * 4);
+}
+
+int	ft_is_outside(t_vec3f point, int canvas[2], float padding)
+{
+	float	pad_x;
+	float	pad_y;
+
+	pad_x = canvas[X] * padding;
+	pad_y = canvas[Y] * padding;
+
+	if (point.x < (0 + pad_x) || point.x > (canvas[X] - pad_x))
+		return (1);
+	if (point.y < (0 + pad_y) || point.y > (canvas[Y] - pad_y))
+		return (1);
+	return (0);
 }
 
 int	ft_is_inside(t_point point, int win_x, int win_y)
