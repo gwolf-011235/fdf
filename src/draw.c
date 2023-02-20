@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 09:58:18 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/19 09:20:09 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/20 11:35:47 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	draw_points(t_img *img, t_map *map)
 	i = 0;
 	while (i < map->sum_points)
 	{
-		pixel = ft_convert_vec2point(map->points[i D M], map->colors[i]);
+		pixel = map->pixel[i];
 		if (ft_is_inside(pixel, img->size[X], img->size[Y]))
 			my_mlx_pixel_put(img, pixel.x, pixel.y, pixel.color);
 		i++;
