@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 20:28:13 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/19 07:21:59 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/22 11:27:26 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_set_edges(t_map *map)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < 8)
@@ -50,7 +50,7 @@ float	ft_fit_box(t_vec3f *edges, t_mat4 mat, t_props props)
 			temp = ft_mult_vec3f_mat4(edges[i + i], mat);
 			if (ft_is_outside(temp, props.canvas, 0.1))
 			{
-				printf("Scale is: %f\n", props.scale);
+				ft_printf("🔍 Scale is: %d\n", (int)props.scale);
 				return (props.scale);
 			}
 			i++;
@@ -59,14 +59,12 @@ float	ft_fit_box(t_vec3f *edges, t_mat4 mat, t_props props)
 	}
 }
 
-void	ft_draw_box(t_data *data)
+void	ft_draw_box(t_img *img, t_point *edges)
 {
-	t_point	*edges;
 	t_point	start;
 	t_point	end;
-	int	i;
+	int		i;
 
-	edges = data->map.pixel + data->map.sum_points;
 	i = 0;
 	while (i < 4)
 	{
@@ -74,19 +72,19 @@ void	ft_draw_box(t_data *data)
 		end = edges[(i + 1) % 4];
 		start.color = GREEN;
 		end.color = GREEN;
-		if (ft_is_inside(start, data->render.size[X], data->render.size[Y]) && ft_is_inside(end, data->render.size[X], data->render.size[Y]))
-			draw_line(&data->render, start, end);
+		if (ft_is_inside(start, img->size[X], img->size[Y]) && ft_is_inside(end, img->size[X], img->size[Y]))
+			draw_line(img, start, end);
 		end = edges[i + 4];
 		start.color = BLUE;
 		end.color = BLUE;
-		if (ft_is_inside(start, data->render.size[X], data->render.size[Y]) && ft_is_inside(end, data->render.size[X], data->render.size[Y]))
-			draw_line(&data->render, start, end);
+		if (ft_is_inside(start, img->size[X], img->size[Y]) && ft_is_inside(end, img->size[X], img->size[Y]))
+			draw_line(img, start, end);
 		start = edges[i + 4];
 		end = edges[((i + 1) % 4) + 4];
 		start.color = RED;
 		end.color = RED;
-		if (ft_is_inside(start, data->render.size[X], data->render.size[Y]) && ft_is_inside(end, data->render.size[X], data->render.size[Y]))
-			draw_line(&data->render, start, end);
+		if (ft_is_inside(start, img->size[X], img->size[Y]) && ft_is_inside(end, img->size[X], img->size[Y]))
+			draw_line(img, start, end);
 		i++;
 	}
 }

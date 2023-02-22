@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/19 09:47:50 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/22 10:59:11 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,7 +230,7 @@ void	ft_print_inverse(float inverse[4][8]);
 
 //box.c
 void	ft_set_edges(t_map *map);
-void	ft_draw_box(t_data *data);
+void	ft_draw_box(t_img *img, t_point *edges);
 float	ft_fit_box(t_vec3f *edges, t_mat4 mat, t_props props);
 
 //precalc_matrix.c
