@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 07:10:44 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/11 08:37:39 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/22 10:53:26 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,15 @@ void	ft_print_mat4(t_mat4 matrix)
 
 void	ft_print_inverse(float inverse[4][8])
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	ft_printf("\nInverse Matrix is:\n");
 	i = 0;
 	while (i < 4)
 	{
 		j = 4;
-		while (j < 2*4)
+		while (j < (2 * 4))
 		{
 			printf("%0.3f\t", inverse[i][j]);
 			fflush(stdout);
