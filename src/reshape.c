@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 10:22:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/19 07:41:05 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/22 11:43:59 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,20 +36,6 @@ void	ft_init_project(t_map *map)
 	map->props.scale = ft_fit_box(map->edges, map->mat, map->props);
 	ft_calc_points(map->points, map->mat, map->sum_points);
 	ft_init_pixel(map->points + 1, map->colors, map->pixel, map->sum_points);
-}
-
-void	ft_shape_map(t_map *map) //init trans or smth
-{
-	ft_init_mat4(map->mat);
-	map->mat[0][0] = map->scale;
-	map->mat[1][1] = map->scale;
-	map->mat[2][2] = map->scale;
-	map->mat[3][3] = 1;
-	ft_rotate_x(map->mat, map->roll);
-	ft_rotate_y(map->mat, map->pitch);
-	ft_rotate_z(map->mat, map->yaw);
-	map->mat[3][0] = map->trans_x + map->offset[X];
-	map->mat[3][1] = map->trans_y + map->offset[Y];
 }
 
 void	ft_redraw(t_data *data)
