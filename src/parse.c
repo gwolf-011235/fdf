@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:00:33 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/19 07:22:44 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/22 11:05:30 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	ft_map_alloc(t_map *map)
 	{
 		ft_free_map_ptr(map, ERR_MEM);
 	}
-	map->morph = &map->points[1];
-	map->edges = &map->points[map->sum_points * 2];
+	map->morph = map->points + 1;
+	map->edges = map->points + (map->sum_points * 2);
 	ft_bzero(map->colors, sizeof(int) * map->sum_points);
 }
 
