@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 21:36:25 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/16 17:39:45 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/22 11:24:41 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_count_num_in_row(char *line, bool *hex)
 		if (line[i] == ',' && *hex == false)
 		{
 			*hex = true;
-			ft_printf("Hex colors found!\n");
+			ft_printf("🎨 Hex colors found!\n");
 		}
 		if (line[i] == ',')
 			i += ft_jump_over_hex(&line[i]);
@@ -77,6 +77,8 @@ void	ft_extract_rows(t_map *map, int fd)
 		ft_check_row(map, row);
 	}
 	map->sum_points = map->height * map->width;
+	ft_printf("🗺️  Map Dimensions\n   x: %d - y: %d\n", map->width, map->height);
+	ft_printf("📊 Datapoints: %d\n", map->sum_points);
 }
 
 void	ft_check_filename(t_map *map, char *filename)
