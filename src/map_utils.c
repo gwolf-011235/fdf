@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 09:27:53 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/18 22:29:42 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/23 15:44:26 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 
 void	ft_map_init(t_map *map)
 {
-	map->pattern[0] = BLUE;
-	map->pattern[1] = GREEN;
-	map->pattern[2] = RED;
+	ft_set_pattern(map->pattern, 0);
 	map->props.angle[X] = 45;
 	map->props.angle[Z] = 27;
 }

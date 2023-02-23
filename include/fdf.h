@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/22 13:02:30 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/23 15:38:54 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,14 +153,9 @@ int		ft_is_outside(t_vec3f point, int canvas[2], float padding);
 
 //color.c
 int		create_trgb(int t, int r, int g, int b);
-int		get_t(int trgb);
-int		get_r(int trgb);
-int		get_g(int trgb);
-int		get_b(int trgb);
-int		add_shade(double distance, int trgb);
-int		get_opposite(int trgb);
 int		gradient(int color_start, int color_end, double len, double pos);
 int		ft_alpha_blend(int new_color, int old_color);
+void	ft_set_pattern(int pattern[3], int choice);
 
 //hooks.c
 int		mouse_hook(int button, int x, int y, t_data *data);

@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:29:34 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/22 10:50:30 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/23 15:38:24 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,17 @@ int	gradient(int color_start, int color_end, double len, double pos)
 	new_col[1] = factor[1] * pos + (color_start >> 8 & 0xFF);
 	new_col[2] = factor[2] * pos + (color_start & 0xFF);
 	return (create_trgb(0, new_col[0], new_col[1], new_col[2]));
+}
+
+void	ft_set_pattern(int pattern[3], int choice)
+{
+	const int colorschemes[3][3] = {
+		{RED, YELLOW, BLUE},
+		{PURPLE, GREEN, ORANGE},
+		{LIGHTBLUE, PINK, LIME}
+	};
+
+	pattern[0] = colorschemes[choice][0];
+	pattern[1] = colorschemes[choice][1];
+	pattern[2] = colorschemes[choice][2];
 }
