@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 09:58:18 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/20 11:35:47 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/22 13:10:49 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ void	init_line(t_point start, t_point end, t_point *delta, t_point *step)
 	else
 		step->y = -1;
 }
+
 /**
  * @brief This function implements the Bresenham algorithm.
  *		  The Bresenham algorithm uses the concept of "error" 
@@ -119,7 +120,8 @@ void	draw_line(t_img *img, t_point start, t_point end)
 	while (left)
 	{
 		color = gradient(start.color, end.color, len, len - left);
-		my_mlx_pixel_put(img, start.x, start.y, color);
+		if (ft_is_inside(start, img->size[X], img->size[Y]))
+			my_mlx_pixel_put(img, start.x, start.y, color);
 		if (start.x == end.x && start.y == end.y)
 			break ;
 		e2 = 2 * err;
@@ -150,15 +152,13 @@ void	lines(t_img *img, t_map *map)
 		if (i % map->width != map->width - 1)
 		{
 			end = map->pixel[i + 1];
-			if (ft_is_inside(start, img->size[X], img->size[Y]) \
-					&& ft_is_inside(end, img->size[X], img->size[Y]))
+			//if (ft_is_inside(start, img->size[X], img->size[Y]) && ft_is_inside(end, img->size[X], img->size[Y]))
 				draw_line(img, start, end);
 		}
 		if (i / map->width != map->height - 1)
 		{
 			end = map->pixel[i + map->width];
-			if (ft_is_inside(start, img->size[X], img->size[Y]) \
-					&& ft_is_inside(end, img->size[X], img->size[Y]))
+			//if (ft_is_inside(start, img->size[X], img->size[Y]) && ft_is_inside(end, img->size[X], img->size[Y]))
 				draw_line(img, start, end);
 		}
 		i++;
