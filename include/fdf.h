@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/23 15:38:54 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/24 15:18:23 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ typedef struct s_img {
 	int		bpp;
 	int		line_len;
 	int		endian;
+	int		bytes;
 	int		size[2];
 }	t_img;
 
@@ -146,7 +147,7 @@ void	ft_set_colors(t_map *map, t_vec3f *points, int *colors);
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
 void	draw_line(t_img *img, t_point start, t_point end);
 void	draw_points(t_img *img, t_map *map);
-void	fill_background(t_img *img);
+void	fill_background(t_img *img, int color);
 void	lines(t_img *img, t_map *map);
 int		ft_is_inside(t_point point, int win_x, int win_y);
 int		ft_is_outside(t_vec3f point, int canvas[2], float padding);
