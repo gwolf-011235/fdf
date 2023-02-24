@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/24 17:05:04 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/24 21:28:35 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct s_vec3f {
 	float	x;
 	float	y;
 	float	z;
+	int		color;
 }	t_vec3f;
 
 typedef struct s_color {
@@ -90,7 +91,6 @@ typedef struct s_map {
 	t_vec3f	*points;
 	t_vec3f	*morph;
 	t_vec3f	*edges;
-	int		*colors;
 	t_point	*pixel;
 	int		sum_points;
 	char	filename[32];
@@ -141,7 +141,7 @@ void	ft_check_filename(t_map *map, char *filename);
 void	ft_parse_map(t_map *map);
 void	ft_map_alloc(t_map *map);
 void	ft_parse_line(t_map *map, char *line, int index);
-void	ft_set_colors(t_map *map, t_vec3f *points, int *colors);
+void	ft_set_colors(t_map *map, t_vec3f *points);
 
 //draw.c
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
@@ -211,7 +211,7 @@ void	ft_find_extremes(t_map *map, int z);
 
 //utils.c
 int		ft_move_atoi(char *line);
-int		ft_hex_to_decimal(char *line, int len);
+int		ft_hex_to_dec(char *line, int len);
 int		ft_jump_over_hex(char *line);
 
 //menu.c
@@ -231,8 +231,7 @@ float	ft_fit_box(t_vec3f *edges, t_mat4 mat, t_props props);
 void	ft_const_iso(t_mat4 transmat);
 
 //pixel.c
-t_point	ft_convert_vec2point(t_vec3f point, int color);
-void	ft_init_pixel(t_vec3f *morph, int *colors, t_point *pixel, int sum);
+void	ft_init_pixel(t_vec3f *morph, t_point *pixel, int sum);
 void	ft_update_pix_point(t_vec3f *morph, t_point *pixel, int sum);
 void	ft_update_pix_color(int *colors, t_point *pixel, int sum);
 

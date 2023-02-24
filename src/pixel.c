@@ -6,13 +6,13 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 07:38:00 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/20 11:37:41 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/24 21:28:12 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	ft_init_pixel(t_vec3f *morph, int *colors, t_point *pixel, int sum)
+void	ft_init_pixel(t_vec3f *morph, t_point *pixel, int sum)
 {
 	int	i;
 
@@ -21,7 +21,7 @@ void	ft_init_pixel(t_vec3f *morph, int *colors, t_point *pixel, int sum)
 	{
 		pixel[i].x = floor(morph[i + i].x);
 		pixel[i].y = floor(morph[i + i].y);
-		pixel[i].color = colors[i];
+		pixel[i].color = morph[i + i].color;
 		i++;
 	}
 }

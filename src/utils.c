@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 16:11:11 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/16 17:39:41 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/24 21:13:53 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	ft_jump_over_hex(char *line)
 		return (-1);
 }
 
-int	ft_hex_to_decimal(char *line, int len)
+int	ft_hex_to_dec(char *line, int len)
 {
 	int		i;
 	int		decimal;
