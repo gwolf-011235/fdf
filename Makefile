@@ -4,6 +4,7 @@ CFLAGS = -DBUFFER_SIZE=4096
 SRC_DIR := src
 OBJ_DIR := obj
 LIB_DIR := lib
+LOG_DIR := logs/$(shell date +"%Y-%m-%d")
 LIB_DIR_FT := $(LIB_DIR)/libft
 LIB_DIR_MLX := $(LIB_DIR)/mlx_linux
 
@@ -46,6 +47,8 @@ SRCS := $(addprefix $(SRC_DIR)/, $(SRC))
 OBJ := $(SRC:.c=.o)
 OBJS := $(addprefix $(OBJ_DIR)/, $(OBJ))
 
+LOG_FILE = $(LOG_DIR)/$(shell date +"%H-%M-%S")
+
 .PHONY: all, clean, fclean, re, obj, debug, optimize
 .SILENT:
 
@@ -61,8 +64,18 @@ debug: clean $(NAME)
 	$(CC) $(CFLAGS) $(INC) $(OBJS) $(LIBS) -o $(NAME)
 	echo "$(NAME) created - DEBUG MODE!"
 
+profile: CFLAGS += -pg
+profile: clean $(NAME) | $(LOG_DIR)
+	$(CC) $(CFLAGS) $(INC) $(OBJS) $(LIBS) -o $(NAME)
+	./$(NAME) test_maps/julia.fdf
+	gprof fdf > $(LOG_FILE)
+	ls -dt1 $(LOG_DIR)/* | head -n 1 | xargs less
+
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
+
+$(LOG_DIR):
+	mkdir -p $(LOG_DIR)
 	
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 	$(COMPILE) -c $< -o $@
