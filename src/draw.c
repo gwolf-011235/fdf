@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 09:58:18 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/22 13:10:49 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/24 16:52:47 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 {
 	char	*dst;
 
-	dst = img->addr + (y * img->line_len + x * (img->bpp / 8));
+	dst = img->addr + (y * img->line_len + x * img->bytes);
 	*(unsigned int *)dst = color;
 }
 
@@ -34,9 +34,24 @@ void	ft_point_to_image(t_img *img, int x, int y, int color)
 }
 */
 
-void	fill_background(t_img *img)
+void	fill_background(t_img *img, int color)
 {
-	ft_bzero(img->addr, img->size[X] * img->size[Y] * 4);
+	int i;
+	int j;
+	char *dst;
+
+	i = 0;
+	while (i < img->size[X])
+	{
+		j = 0;
+		while (j < img->size[Y])
+		{
+			dst = img->addr + (j * img->line_len + i * img->bytes);
+			*(unsigned int *)dst = color;
+			j++;
+		}
+		i++;
+	}
 }
 
 int	ft_is_outside(t_vec3f point, int canvas[2], float padding)
@@ -112,14 +127,22 @@ void	draw_line(t_img *img, t_point start, t_point end)
 	int		len;
 	int		left;
 	int		color;
+	int		color_diff;
+	float increment;
+	float factor;
 
 	init_line(start, end, &delta, &step);
 	err = delta.x - delta.y;
 	len = sqrt(delta.x * delta.x + delta.y * delta.y);
+	if (!len)
+		return ;
+	color_diff = end.color - start.color;
+	increment = color_diff / len;
 	left = len;
 	while (left)
 	{
-		color = gradient(start.color, end.color, len, len - left);
+		factor = (len - left) / len;
+		color = start.color + increment * factor;
 		if (ft_is_inside(start, img->size[X], img->size[Y]))
 			my_mlx_pixel_put(img, start.x, start.y, color);
 		if (start.x == end.x && start.y == end.y)
