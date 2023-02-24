@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 10:22:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/22 11:43:59 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/24 15:10:41 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	ft_redraw(t_data *data)
 	ft_build_transmat(data->map.mat, data->map.props);
 	ft_calc_points(data->map.points, data->map.mat, data->map.sum_points);
 	ft_init_pixel(data->map.points + 1, data->map.colors, data->map.pixel, data->map.sum_points);
-	fill_background(&data->render);
+	fill_background(&data->render, 0x00FF000);
 	lines(&data->render, &data->map);
 	mlx_put_image_to_window(data->mlx, data->win, data->render.ptr, 0, 0);
 }

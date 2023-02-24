@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:00:10 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/22 11:02:08 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/24 16:48:54 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	ft_init_image(t_data *data, t_img *img, int win_x, int win_y)
 	img->addr = mlx_get_data_addr(img->ptr, &img->bpp, &img->line_len, &img->endian);
 	img->size[X] = win_x;
 	img->size[Y] = win_y;
+	img->bytes = img->bpp / 8;
 }
 
 void	ft_init_window(t_data *data)
