@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/24 15:18:23 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/24 17:05:04 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ typedef struct s_map {
 	float	trans_y;
 	int		min[3];
 	int		max[3];	
-	int		pattern[3];
+	int		pattern[4];
 	t_mat4	mat;
 	t_props	props;
 }	t_map;

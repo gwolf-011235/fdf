@@ -69,6 +69,7 @@ profile: clean $(NAME) | $(LOG_DIR)
 	$(CC) $(CFLAGS) $(INC) $(OBJS) $(LIBS) -o $(NAME)
 	./$(NAME) test_maps/julia.fdf
 	gprof fdf > $(LOG_FILE)
+	rm gmon.out
 	ls -dt1 $(LOG_DIR)/* | head -n 1 | xargs less
 
 $(OBJ_DIR):
