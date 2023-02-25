@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 09:58:18 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/25 21:32:15 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/25 22:13:08 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,18 +93,32 @@ void	draw_points(t_img *img, t_map *map)
 	}
 }
 
-void	init_line(t_point start, t_point end, t_point *delta, t_point *step)
+int	init_line(t_line *line, t_vec3f start, t_vec3f end)
 {
-	delta->x = abs(end.x - start.x);
-	delta->y = abs(end.y - start.y);
-	if (start.x < end.x)
-		step->x = 1;
+	line->point[0].x = start.x;
+	line->point[0].y = start.y;
+	line->point[0].color = start.color;
+	line->point[1].x = end.x;
+	line->point[1].y = end.y;
+	line->point[1].color = end.color;
+	line->delta[X] = abs(line->point[1].x - line->point[0].x);
+	line->delta[Y] = abs(line->point[1].y - line->point[0].y);
+	if (line->point[0].x < line->point[1].x)
+		line->step[X] = 1;
 	else
-		step->x = -1;
-	if (start.y < end.y)
-		step->y = 1;
+		line->step[X] = -1;
+	if (line->point[0].y < line->point[1].y)
+		line->step[Y] = 1;
 	else
-		step->y = -1;
+		line->step[Y] = -1;
+	line->error[0] = line->delta[X] - line->delta[Y];
+	line->len = sqrt(line->delta[X] * line->delta[X] \
+			+ line->delta[Y] * line->delta[Y]);
+	if (!line->len)
+		return (1);
+	line->remain = line->len;
+	line->increment = (end.color - start.color) / line->len;
+	return (0);
 }
 
 /**
@@ -118,69 +132,97 @@ void	init_line(t_point start, t_point end, t_point *delta, t_point *step)
  * @param color: The color to draw
  */
 
-void	draw_line(t_img *img, t_point start, t_point end)
+void	draw_line(t_img *img, t_vec3f start, t_vec3f end)
 {
-	t_point	delta;
-	t_point	step;
-	int		err;
-	int		e2;
-	int		len;
-	int		left;
-	int		color;
-	float increment;
-	float factor;
+	t_line	line;
 
-	init_line(start, end, &delta, &step);
-	err = delta.x - delta.y;
-	len = sqrt(delta.x * delta.x + delta.y * delta.y);
-	if (!len)
+	if (init_line(&line, start, end))
 		return ;
-	increment = (end.color - start.color) / len;
-	left = len;
-	while (left)
+	while (line.remain)
 	{
-		factor = (len - left) / len;
-		color = start.color + increment * factor;
-		if (ft_is_inside(start, img->size[X], img->size[Y]))
-			my_mlx_pixel_put(img, start.x, start.y, color);
-		if (start.x == end.x && start.y == end.y)
+		line.factor = (line.len - line.remain) / line.len;
+		line.point[0].color = start.color + line.increment * line.factor;
+		my_mlx_pixel_put(img, line.point[0].x, line.point[0].y, line.point[0].color);
+		if (line.point[0].x == line.point[1].x && line.point[0].y == line.point[1].y)
 			break ;
-		e2 = err *2;
-		if (e2 > -delta.y)
+		line.error[1] = line.error[0] * 2;
+		if (line.error[1] > -line.delta[Y])
 		{
-			err -= delta.y;
-			start.x += step.x;
+			line.error[0] -= line.delta[Y];
+			line.point[0].x += line.step[X];
 		}
-		if (e2 < delta.x)
+		if (line.error[1] < line.delta[X])
 		{
-			err += delta.x;
-			start.y += step.y;
+			line.error[0] += line.delta[X];
+			line.point[0].y += line.step[Y];
 		}
-		left--;
+		line.remain--;
 	}
+}
+
+void	ft_clip_line(t_vec3f start, t_vec3f end, int size[2], t_img *img)
+{
+	t_vec3f	temp;
+	float	move;
+
+	if (start.hidden)
+	{
+		temp = end;
+		end = start;
+		start = temp;		
+	}
+	if (end.x < 0 || end.x > size[X])
+	{
+		if (end.x < 0)
+			move = (0 - start.x) / (end.x - start.x);
+		if (end.x > size[X])
+			move = (size[X] - start.x) / (end.x - start.x);
+		end.y = start.y + move * (end.y - start.y);
+		if (end.x > size[X])
+			end.x = size[X];
+		if (end.x < 0)
+			end.x = 0;
+	}
+	if (end.y < 0 || end.y > size[Y])
+	{
+		if (end.y < 0)
+			move = (0 - start.y) / (end.y - start.y);
+		if (end.y > size[Y])
+			move = (size[Y] - start.y) / (end.y - start.y);
+		end.x = start.x + move * (end.x - start.x);
+		if (end.y > size[Y])
+			end.y = size[Y];
+		if (end.y < 0)
+			end.y = 0;
+	}
+	draw_line(img, start, end);
 }
 
 void	lines(t_img *img, t_map *map)
 {
 	int		i;
-	t_point	start;
-	t_point	end;
+	t_vec3f	start;
+	t_vec3f	end;
 
 	i = 0;
 	while (i < map->sum_points)
 	{
-		start = map->pixel[i];
+		start = map->morph[i + i];
 		if (i % map->width != map->width - 1)
 		{
-			end = map->pixel[i + 1];
-			//if (ft_is_inside(start, img->size[X], img->size[Y]) && ft_is_inside(end, img->size[X], img->size[Y]))
+			end = map->morph[i + i + 2];
+			if (!start.hidden && !end.hidden)
 				draw_line(img, start, end);
+			else if ((start.hidden && !end.hidden) || (!start.hidden && end.hidden))
+				ft_clip_line(start, end, img->size, img);
 		}
 		if (i / map->width != map->height - 1)
 		{
-			end = map->pixel[i + map->width];
-			//if (ft_is_inside(start, img->size[X], img->size[Y]) && ft_is_inside(end, img->size[X], img->size[Y]))
+			end = map->morph[i + i + map->width * 2];
+			if (!start.hidden && !end.hidden)
 				draw_line(img, start, end);
+			else if ((start.hidden && !end.hidden) || (!start.hidden && end.hidden))
+				ft_clip_line(start, end, img->size, img);
 		}
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 20:28:13 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/22 11:27:26 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/25 19:36:05 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ float	ft_fit_box(t_vec3f *edges, t_mat4 mat, t_props props)
 			temp = ft_mult_vec3f_mat4(edges[i + i], mat);
 			if (ft_is_outside(temp, props.canvas, 0.1))
 			{
-				ft_printf("🔍 Scale is: %d\n", (int)props.scale);
+				ft_printf("🔍 Scale\n\t%d\n", (int)props.scale);
 				return (props.scale);
 			}
 			i++;
@@ -58,7 +58,7 @@ float	ft_fit_box(t_vec3f *edges, t_mat4 mat, t_props props)
 		props.scale += 0.10;
 	}
 }
-
+/*
 void	ft_draw_box(t_img *img, t_point *edges)
 {
 	t_point	start;
@@ -88,3 +88,4 @@ void	ft_draw_box(t_img *img, t_point *edges)
 		i++;
 	}
 }
+*/
