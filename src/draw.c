@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 09:58:18 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/24 16:52:47 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/25 21:13:47 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,6 @@ void	draw_line(t_img *img, t_point start, t_point end)
 	t_point	delta;
 	t_point	step;
 	int		err;
-	int		e2;
 	int		len;
 	int		left;
 	int		color;
@@ -147,13 +146,12 @@ void	draw_line(t_img *img, t_point start, t_point end)
 			my_mlx_pixel_put(img, start.x, start.y, color);
 		if (start.x == end.x && start.y == end.y)
 			break ;
-		e2 = 2 * err;
-		if (e2 > -delta.y)
+		if ((err * 2) > -delta.y)
 		{
 			err -= delta.y;
 			start.x += step.x;
 		}
-		if (e2 < delta.x)
+		if ((err * 2) < delta.x)
 		{
 			err += delta.x;
 			start.y += step.y;
