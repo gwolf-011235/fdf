@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 20:28:13 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/25 19:36:05 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/25 22:34:19 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ float	ft_fit_box(t_vec3f *edges, t_mat4 mat, t_props props)
 			temp = ft_mult_vec3f_mat4(edges[i + i], mat);
 			if (ft_is_outside(temp, props.canvas, 0.1))
 			{
-				ft_printf("🔍 Scale\n\t%d\n", (int)props.scale);
+				ft_printf("🔍 Scale\n   |%d|\n\n", (int)props.scale);
 				return (props.scale);
 			}
 			i++;
@@ -58,34 +58,33 @@ float	ft_fit_box(t_vec3f *edges, t_mat4 mat, t_props props)
 		props.scale += 0.10;
 	}
 }
-/*
-void	ft_draw_box(t_img *img, t_point *edges)
+
+void	ft_draw_box(t_img *img, t_vec3f *edges)
 {
-	t_point	start;
-	t_point	end;
+	t_vec3f	start;
+	t_vec3f	end;
 	int		i;
 
 	i = 0;
 	while (i < 4)
 	{
-		start = edges[i];
-		end = edges[(i + 1) % 4];
+		start = edges[i + i];
+		end = edges[(i + i + 2) % 8];
 		start.color = GREEN;
 		end.color = GREEN;
-		if (ft_is_inside(start, img->size[X], img->size[Y]) && ft_is_inside(end, img->size[X], img->size[Y]))
+		if (!start.hidden && !end.hidden)
 			draw_line(img, start, end);
-		end = edges[i + 4];
+		end = edges[i + i + 8];
 		start.color = BLUE;
 		end.color = BLUE;
-		if (ft_is_inside(start, img->size[X], img->size[Y]) && ft_is_inside(end, img->size[X], img->size[Y]))
+		if (!start.hidden && !end.hidden)
 			draw_line(img, start, end);
-		start = edges[i + 4];
-		end = edges[((i + 1) % 4) + 4];
+		start = edges[i + i + 8];
+		end = edges[((i + i + 2) % 8) + 8];
 		start.color = RED;
 		end.color = RED;
-		if (ft_is_inside(start, img->size[X], img->size[Y]) && ft_is_inside(end, img->size[X], img->size[Y]))
+		if (!start.hidden && !end.hidden)
 			draw_line(img, start, end);
 		i++;
 	}
 }
-*/
