@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 08:44:25 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/19 09:44:03 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/25 19:37:21 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_point	ft_math_pt(t_point one, t_point two, int x, int y)
 	ret.color = one.color;
 	return (ret);
 }
-
+/*
 void	ft_draw_circle(t_img *img, t_point ctr, int radius)
 {
 	t_point	out;
@@ -46,10 +46,10 @@ void	ft_draw_circle(t_img *img, t_point ctr, int radius)
 	d = 3 - 2 * radius;
 	while (out.x <= out.y)
 	{
-		draw_line(img, ft_math_pt(ctr, out, 0, 0), ft_math_pt(ctr, out, 1, 0));
-		draw_line(img, ft_math_pt(ctr, out, 0, 1), ft_math_pt(ctr, out, 1, 1));
-		draw_line(img, ft_math_pt(ctr, out, 2, 2), ft_math_pt(ctr, out, 3, 2));
-		draw_line(img, ft_math_pt(ctr, out, 2, 3), ft_math_pt(ctr, out, 3, 3));
+		//draw_line(img, ft_math_pt(ctr, out, 0, 0), ft_math_pt(ctr, out, 1, 0));
+		//draw_line(img, ft_math_pt(ctr, out, 0, 1), ft_math_pt(ctr, out, 1, 1));
+		//draw_line(img, ft_math_pt(ctr, out, 2, 2), ft_math_pt(ctr, out, 3, 2));
+		//draw_line(img, ft_math_pt(ctr, out, 2, 3), ft_math_pt(ctr, out, 3, 3));
 		out.x++;
 		if (d < 0)
 			d += 4 * out.x + 6;
@@ -60,3 +60,4 @@ void	ft_draw_circle(t_img *img, t_point ctr, int radius)
 		}
 	}
 }
+*/

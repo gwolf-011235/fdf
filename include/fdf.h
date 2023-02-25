@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/24 21:28:35 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/25 19:23:35 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ typedef struct s_vec3f {
 	float	y;
 	float	z;
 	int		color;
+	int		hidden;
 }	t_vec3f;
 
 typedef struct s_color {
@@ -79,6 +80,17 @@ typedef struct s_point {
 	int	y;
 	int	color;
 }	t_point;
+
+typedef struct s_line {
+	t_point	point[2];
+	int		delta[2];
+	int		step[2];
+	int 	error;
+	int 	len;
+	int		remain;
+	float	increment;
+	float	factor;
+}	t_line;
 
 typedef struct s_matinfo {
 	float	scale;
@@ -145,7 +157,7 @@ void	ft_set_colors(t_map *map, t_vec3f *points);
 
 //draw.c
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
-void	draw_line(t_img *img, t_point start, t_point end);
+void	draw_line(t_img *img, t_vec3f start, t_vec3f end);
 void	draw_points(t_img *img, t_map *map);
 void	fill_background(t_img *img, int color);
 void	lines(t_img *img, t_map *map);
@@ -200,10 +212,10 @@ t_vec3f	vec3_cross(t_vec3f a, t_vec3f b);
 t_vec3f	vec3_subtract(t_vec3f a, t_vec3f b);
 
 //reshape.c
-void	ft_init_project(t_map *map);
+void	ft_init_project(t_map *map, int size[2]);
 void	ft_shape_map(t_map *map);
 void	ft_redraw(t_data *data);
-void	ft_calc_points(t_vec3f *points, t_mat4 trans, int sum);
+void	ft_calc_points(t_vec3f *points, t_mat4 trans, int sum, int size[2]);
 
 //map_utils.c
 void	ft_map_init(t_map *map);
