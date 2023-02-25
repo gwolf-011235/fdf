@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 10:22:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/24 22:22:23 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/25 22:22:53 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	ft_calc_points(t_vec3f *points, t_mat4 mat, int sum, int size[2])
 	while (i < (sum + 8))
 	{
 		morph[i + i] = ft_mult_vec3f_mat4(points[i + i], mat);
+		morph[i + i].hidden = ft_is_outside(morph[i + i], size, 0);
 		i++;
 	}
 }

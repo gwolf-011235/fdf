@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:00:10 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/25 19:37:48 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/25 22:34:37 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_init_window(t_data *data)
 	if (!data->mlx)
 		ft_free_mlx(data, ERR_MLX, true);
 	mlx_get_screen_size(data->mlx, &win_x, &win_y);
-	ft_printf("🖥️  Screen size: %d x %d\n", win_x, win_y);
+	ft_printf("🖥️  Screen size\n   |%d x %d|\n\n", win_x, win_y);
 	data->win = mlx_new_window(data->mlx, win_x, win_y, "FdF - by gwolf");
 	if (!data->win)
 		ft_free_mlx(data, ERR_WIN, true);
@@ -48,7 +48,7 @@ void testwindow(t_data *data)
 {
 	//ft_init_menu(data);
 	lines(&data->render, &data->map);
-	//ft_draw_box(&data->render, data->map.pixel + data->map.sum_points);
+	ft_draw_box(&data->render, data->map.edges + 1);
 	mlx_put_image_to_window(data->mlx, data->win, data->render.ptr, 0, 0);
 	mlx_key_hook(data->win, key_hook, data);
 	mlx_mouse_hook(data->win, mouse_hook, data);
