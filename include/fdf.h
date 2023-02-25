@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/25 19:23:35 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/25 21:38:52 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ typedef struct s_line {
 	t_point	point[2];
 	int		delta[2];
 	int		step[2];
-	int 	error;
+	int 	error[2];
 	int 	len;
 	int		remain;
 	float	increment;
