@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 09:58:18 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/25 21:13:47 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/25 21:15:04 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,6 @@ void	draw_line(t_img *img, t_point start, t_point end)
 	int		len;
 	int		left;
 	int		color;
-	int		color_diff;
 	float increment;
 	float factor;
 
@@ -135,8 +134,7 @@ void	draw_line(t_img *img, t_point start, t_point end)
 	len = sqrt(delta.x * delta.x + delta.y * delta.y);
 	if (!len)
 		return ;
-	color_diff = end.color - start.color;
-	increment = color_diff / len;
+	increment = (end.color - start.color) / len;
 	left = len;
 	while (left)
 	{
