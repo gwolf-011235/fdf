@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/24 21:28:35 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/25 21:36:54 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,17 @@ typedef struct s_point {
 	int	y;
 	int	color;
 }	t_point;
+
+typedef struct s_line {
+	t_point	point[2];
+	int		delta[2];
+	int		step[2];
+	int 	error[2];
+	int 	len;
+	int		remain;
+	float	increment;
+	float	factor;
+}	t_line;
 
 typedef struct s_matinfo {
 	float	scale;
