@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 21:36:25 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/25 22:34:02 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/26 07:15:28 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_count_num_in_row(char *line, bool *hex)
 		if (line[i] == ',' && *hex == false)
 		{
 			*hex = true;
-			ft_printf("🎨 Hex colors\n >> active!\n");
+			ft_printf("🎨 Hex colors found!\n\n");
 		}
 		if (line[i] == ',')
 			i += ft_jump_over_hex(&line[i]);

@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/25 22:17:37 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/26 07:13:36 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,6 @@
 # define Z 2
 # define OFFSET_X 2
 # define OFFSET_Y 3
-
-# define D * 2
-# define M + 1
-# define P + 8
-
 
 # define KEY_ARROW_LEFT 65361
 # define KEY_ARROW_UP 65362
