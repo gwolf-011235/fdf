@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/26 07:13:36 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/26 07:21:17 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ typedef struct s_map {
 	t_vec3f	*points;
 	t_vec3f	*morph;
 	t_vec3f	*edges;
-	t_point	*pixel;
 	int		sum_points;
 	char	filename[32];
 	int		height;

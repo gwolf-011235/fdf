@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 09:58:18 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/25 22:13:08 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/26 07:23:53 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,13 @@ void	draw_points(t_img *img, t_map *map)
 	i = 0;
 	while (i < map->sum_points)
 	{
-		pixel = map->pixel[i];
-		if (ft_is_inside(pixel, img->size[X], img->size[Y]))
+		if (map->morph[i + i].hidden != 1)
+		{
+			pixel.x = map->morph[i + i].x;
+			pixel.y = map->morph[i + i].y;
+			pixel.color = map->morph[i + i].color;
 			my_mlx_pixel_put(img, pixel.x, pixel.y, pixel.color);
+		}
 		i++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:00:33 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/24 21:29:22 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/26 07:24:56 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 void	ft_map_alloc(t_map *map)
 {
 	map->points = malloc(sizeof(t_vec3f) * (map->sum_points * 2 + 16));
-	map->pixel = malloc(sizeof(t_point) * (map->sum_points + 8));
-	if (!map->points || !map->pixel)
+	if (!map->points)
 	{
 		ft_free_map_ptr(map, ERR_MEM);
 	}
