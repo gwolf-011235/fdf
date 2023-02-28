@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:00:33 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/26 07:24:56 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/26 07:33:17 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 
 void	ft_map_alloc(t_map *map)
 {
-	map->points = malloc(sizeof(t_vec3f) * (map->sum_points * 2 + 16));
+	map->points = malloc(sizeof(t_vec3f) * ((map->sum_points + 8) * 4));
 	if (!map->points)
 	{
 		ft_free_map_ptr(map, ERR_MEM);
 	}
 	map->morph = map->points + 1;
 	map->edges = map->points + (map->sum_points * 2);
+	map->polar = map->edges + 16;
 }
 
 void	ft_parse_line(t_map *map, char *line, int i)

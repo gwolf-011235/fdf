@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 10:22:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/26 07:21:07 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/26 22:00:00 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_calc_points(t_vec3f *points, t_mat4 mat, int sum, int size[2])
 	i = 0;
 	while (i < sum)
 	{
-		morph[i + i] = ft_mult_vec3f_mat4(points[i + i], mat);
+ 		morph[i + i] = ft_mult_vec3f_mat4(points[i + i], mat);
 		morph[i + i].color = points[i + i].color;
 		morph[i + i].hidden = ft_is_outside(morph[i + i], size, 0);
 		i++;
@@ -43,7 +43,7 @@ void	ft_init_project(t_map *map, int size[2])
 void	ft_redraw(t_data *data)
 {
 	ft_build_transmat(data->map.mat, data->map.props);
-	ft_calc_points(data->map.points, data->map.mat, data->map.sum_points, data->render.size);
+	ft_calc_points(data->map.polar, data->map.mat, data->map.sum_points, data->render.size);
 	fill_background(&data->render, data->map.pattern[3]);
 	lines(&data->render, &data->map);
 	mlx_put_image_to_window(data->mlx, data->win, data->render.ptr, 0, 0);

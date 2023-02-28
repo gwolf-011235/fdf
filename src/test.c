@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 22:15:46 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/25 19:38:31 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/26 21:57:34 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,21 @@
 
 void	test(t_data *data)
 {
+	ft_convert_spherical(&data->map, data->map.sum_points);
+	ft_convert_sphere2cart(&data->map, data->map.polar);
+	data->map.props.scale = 5;
+	ft_build_transmat(data->map.mat, data->map.props);
+	ft_calc_points(data->map.polar, data->map.mat, data->map.sum_points, data->render.size);
+	data->map.morph = data->map.polar + 1;
+	lines(&data->render, &data->map);
+	mlx_put_image_to_window(data->mlx, data->win, data->render.ptr, 0, 0);
+	mlx_key_hook(data->win, key_hook, data);
+	mlx_mouse_hook(data->win, mouse_hook, data);
+	mlx_hook(data->win, 2, 1L<<0, close_window, data);
+	mlx_hook(data->win, 6, 1L<<6, mouse_move, data);
+	mlx_loop(data->mlx);
+
+	/*
 	t_point	test;
 
 	test.x = 1366 / 2;
@@ -24,7 +39,7 @@ void	test(t_data *data)
 	mlx_hook(data->win, 2, 1L<<0, close_window, data);
 	mlx_mouse_hook(data->win, mouse_hook, data);
 	mlx_loop(data->mlx);
-
+*/
 
 
 

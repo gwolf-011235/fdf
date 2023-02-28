@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/26 07:21:17 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/26 17:22:25 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,13 @@
 # define X 0
 # define Y 1
 # define Z 2
+# define LON 0
+# define LAT 1
 # define OFFSET_X 2
 # define OFFSET_Y 3
+# ifndef M_PI
+	#define M_PI 3.14159265358979323846
+# endif
 
 # define KEY_ARROW_LEFT 65361
 # define KEY_ARROW_UP 65362
@@ -61,6 +66,7 @@ typedef struct s_vec3f {
 	float	z;
 	int		color;
 	int		hidden;
+	float	angle[2];
 }	t_vec3f;
 
 typedef struct s_color {
@@ -98,6 +104,8 @@ typedef struct s_map {
 	t_vec3f	*points;
 	t_vec3f	*morph;
 	t_vec3f	*edges;
+	t_vec3f	*polar;
+	float	radius;
 	int		sum_points;
 	char	filename[32];
 	int		height;
@@ -243,6 +251,10 @@ void	ft_update_pix_color(int *colors, t_point *pixel, int sum);
 
 //shapes.c
 void	ft_draw_circle(t_img *img, t_point center, int radius);
+
+//sphere.c
+void	ft_convert_spherical(t_map *map, int sum);
+void	ft_convert_sphere2cart(t_map *map, t_vec3f *po_morph);
 
 //test.c
 void	test(t_data *data);

@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 19:27:31 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/25 19:34:43 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/02/26 17:29:52 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,6 @@ t_vec3f	vec3_subtract(t_vec3f a, t_vec3f b)
 {
 	t_vec3f	result;
 
-	result = (t_vec3f){a.x - b.x, a.y - b.y, a.z - b.z, 0, 0};
+	result = (t_vec3f){a.x - b.x, a.y - b.y, a.z - b.z, 0, 0, {0}};
 	return (result);
 }

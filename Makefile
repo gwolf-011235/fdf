@@ -39,6 +39,7 @@ SRC := 	main.c \
 		print_utils.c \
 		box.c \
 		precalc_matrix.c \
+		sphere.c \
 		shapes.c
 
 SRCS := $(addprefix $(SRC_DIR)/, $(SRC))
