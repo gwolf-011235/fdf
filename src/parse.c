@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:00:33 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/26 07:33:17 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/01 16:12:26 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 void	ft_map_alloc(t_map *map)
 {
-	map->points = malloc(sizeof(t_vec3f) * ((map->sum_points + 8) * 4));
+	map->points = malloc(sizeof(t_vec3f) * (map->sum_points * 3 + 16));
 	if (!map->points)
 	{
 		ft_free_map_ptr(map, ERR_MEM);
 	}
-	map->morph = map->points + 1;
-	map->edges = map->points + (map->sum_points * 2);
-	map->polar = map->edges + 16;
+	map->morph = map->points + map->sum_points;
+	map->polar = map->morph + map->sum_points;
+	map->edges = map->polar + map->sum_points;
 }
 
 void	ft_parse_line(t_map *map, char *line, int i)
@@ -32,19 +32,19 @@ void	ft_parse_line(t_map *map, char *line, int i)
 	j = 0;
 	while (line[j])
 	{
-		map->points[i + i].x = (i % map->width) + map->min[X];
-		map->points[i + i].y = (i / map->width) + map->min[Y];
-		map->points[i + i].z = ft_atoi(&line[j]);
-		ft_find_extremes(map, map->points[i + i].z);
+		map->points[i].x = (i % map->width) + map->min[X];
+		map->points[i].y = (i / map->width) + map->min[Y];
+		map->points[i].z = ft_atoi(&line[j]);
+		ft_find_extremes(map, map->points[i].z);
 		j += ft_move_atoi(&line[j]);
 		if (map->hex && line[j] == ',')
 		{
 			len_hex = ft_jump_over_hex(&line[j]);
-			map->points[i + i].color = ft_hex_to_dec(&line[j + 3], len_hex);
+			map->points[i].color = ft_hex_to_dec(&line[j + 3], len_hex);
 			j += len_hex;
 		}
 		else
-			map->points[i + i].color = 0x0;
+			map->points[i].color = 0x0;
 		i++;
 		if (line[j] == '\n')
 			break ;
@@ -63,19 +63,19 @@ void	ft_set_colors(t_map *map, t_vec3f *points)
 	{
 		if (map->hex)
 		{
-			if (!points[i + i].color)
-				points[i + i].color = pattern[1];
+			if (!points[i].color)
+				points[i].color = pattern[1];
 			i++;
 			continue ;
 		}
-		if (points[i + i].z == 0)
-			points[i + i].color = pattern[1];
-		else if (points[i + i].z > 0)
-			points[i + i].color = gradient(pattern[1], pattern[2], \
-					map->max[Z], points[i + i].z);
+		if (points[i].z == 0)
+			points[i].color = pattern[1];
+		else if (points[i].z > 0)
+			points[i].color = gradient(pattern[1], pattern[2], \
+					map->max[Z], points[i].z);
 		else
-			points[i + i].color = gradient(pattern[1], pattern[0], \
-					map->min[Z], points[i + i].z);
+			points[i].color = gradient(pattern[1], pattern[0], \
+					map->min[Z], points[i].z);
 		i++;
 	}
 }

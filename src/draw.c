@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 09:58:18 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/26 07:23:53 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/01 16:14:20 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,11 +86,11 @@ void	draw_points(t_img *img, t_map *map)
 	i = 0;
 	while (i < map->sum_points)
 	{
-		if (map->morph[i + i].hidden != 1)
+		if (map->morph[i].hidden != 1)
 		{
-			pixel.x = map->morph[i + i].x;
-			pixel.y = map->morph[i + i].y;
-			pixel.color = map->morph[i + i].color;
+			pixel.x = map->morph[i].x;
+			pixel.y = map->morph[i].y;
+			pixel.color = map->morph[i].color;
 			my_mlx_pixel_put(img, pixel.x, pixel.y, pixel.color);
 		}
 		i++;
@@ -211,10 +211,10 @@ void	lines(t_img *img, t_map *map)
 	i = 0;
 	while (i < map->sum_points)
 	{
-		start = map->morph[i + i];
+		start = map->morph[i];
 		if (i % map->width != map->width - 1)
 		{
-			end = map->morph[i + i + 2];
+			end = map->morph[i + 1];
 			if (!start.hidden && !end.hidden)
 				draw_line(img, start, end);
 			else if ((start.hidden && !end.hidden) || (!start.hidden && end.hidden))
@@ -222,7 +222,7 @@ void	lines(t_img *img, t_map *map)
 		}
 		if (i / map->width != map->height - 1)
 		{
-			end = map->morph[i + i + map->width * 2];
+			end = map->morph[i + map->width];
 			if (!start.hidden && !end.hidden)
 				draw_line(img, start, end);
 			else if ((start.hidden && !end.hidden) || (!start.hidden && end.hidden))

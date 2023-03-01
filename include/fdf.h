@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/01 11:45:10 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/01 17:01:25 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,7 +208,8 @@ t_vec3f	vec3_subtract(t_vec3f a, t_vec3f b);
 void	ft_init_project(t_map *map, int size[2]);
 void	ft_shape_map(t_map *map);
 void	ft_redraw(t_data *data);
-void	ft_calc_points(t_vec3f *points, t_mat4 trans, int sum, int size[2]);
+void	ft_calc_points(t_map *map, t_mat4 mat, int sum, int size[2]);
+void	ft_calc_edges(t_vec3f *edges, t_mat4 mat, int size[2]);
 
 //map_utils.c
 void	ft_map_init(t_map *map);

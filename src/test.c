@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 22:15:46 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/01 13:35:43 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/01 17:04:20 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	test(t_data *data)
 	ft_convert_sphere2cart(&data->map, data->map.polar);
 	data->map.props.scale = 5;
 	ft_build_transmat(data->map.mat, data->map.props);
-	ft_calc_points(data->map.polar, data->map.mat, data->map.sum_points, data->render.size);
+	ft_calc_points(&data->map, data->map.mat, data->map.sum_points, data->render.size);
 	data->map.morph = data->map.polar + 1;
 	lines(&data->render, &data->map);
 	mlx_put_image_to_window(data->mlx, data->win, data->render.ptr, 0, 0);

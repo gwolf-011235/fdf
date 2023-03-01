@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 20:28:13 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/25 22:34:19 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/01 16:16:20 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,17 @@ void	ft_set_edges(t_map *map)
 	while (i < 8)
 	{
 		if (i == 1 || i == 2 || i == 5 || i == 6)
-			map->edges[i + i].x = map->max[X];
+			map->edges[i].x = map->max[X];
 		else
-			map->edges[i + i].x = map->min[X];
+			map->edges[i].x = map->min[X];
 		if (i == 2 || i == 3 || i == 6 || i == 7)
-			map->edges[i + i].y = map->max[Y];
+			map->edges[i].y = map->max[Y];
 		else
-			map->edges[i + i].y = map->min[Y];
+			map->edges[i].y = map->min[Y];
 		if (i < 4)
-			map->edges[i + i].z = map->min[Z];
+			map->edges[i].z = map->min[Z];
 		else
-			map->edges[i + i].z = map->max[Z];
+			map->edges[i].z = map->max[Z];
 		i++;
 	}
 }
@@ -47,7 +47,7 @@ float	ft_fit_box(t_vec3f *edges, t_mat4 mat, t_props props)
 		i = 0;
 		while (i < 8)
 		{
-			temp = ft_mult_vec3f_mat4(edges[i + i], mat);
+			temp = ft_mult_vec3f_mat4(edges[i], mat);
 			if (ft_is_outside(temp, props.canvas, 0.1))
 			{
 				ft_printf("🔍 Scale\n   |%d|\n\n", (int)props.scale);
@@ -68,19 +68,19 @@ void	ft_draw_box(t_img *img, t_vec3f *edges)
 	i = 0;
 	while (i < 4)
 	{
-		start = edges[i + i];
-		end = edges[(i + i + 2) % 8];
+		start = edges[i];
+		end = edges[(i + 1) % 4];
 		start.color = GREEN;
 		end.color = GREEN;
 		if (!start.hidden && !end.hidden)
 			draw_line(img, start, end);
-		end = edges[i + i + 8];
+		end = edges[i + 4];
 		start.color = BLUE;
 		end.color = BLUE;
 		if (!start.hidden && !end.hidden)
 			draw_line(img, start, end);
-		start = edges[i + i + 8];
-		end = edges[((i + i + 2) % 8) + 8];
+		start = edges[i + 4];
+		end = edges[((i + 1) % 4) + 4];
 		start.color = RED;
 		end.color = RED;
 		if (!start.hidden && !end.hidden)
