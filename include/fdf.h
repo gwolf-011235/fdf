@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/01 11:21:25 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/01 11:45:10 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ typedef struct s_map {
 	int		min[3];
 	int		max[3];	
 	int		factor;
+	bool	select;
 	int		pattern[4];
 	t_mat4	mat;
 	t_props	props;
@@ -156,7 +157,7 @@ int		ft_is_outside(t_vec3f point, int canvas[2], float padding);
 int		create_trgb(int t, int r, int g, int b);
 int		gradient(int color_start, int color_end, double len, double pos);
 int		ft_alpha_blend(int new_color, int old_color);
-void	ft_set_pattern(int pattern[3], int choice);
+void	ft_set_pattern(int pattern[4], int choice, int specific);
 
 //hooks.c
 int		key_hook(int keycode, t_data *vars);

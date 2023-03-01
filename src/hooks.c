@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:16:59 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/01 11:21:07 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/01 11:49:45 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,20 @@ void	ft_key_props(int keycode, t_data *data)
 
 void	ft_key_color(int keycode, t_data *data)
 {
+	int specific;
+
+	specific = 5;
+	if (data->map.select)
+		specific = keycode;
 	if (keycode == KEY_ONE)
-		ft_set_pattern(data->map.pattern, 0);
+		ft_set_pattern(data->map.pattern, 0, specific);
 	if (keycode == KEY_TWO)
-		ft_set_pattern(data->map.pattern, 1);
+		ft_set_pattern(data->map.pattern, 1, specific);
 	if (keycode == KEY_THREE)
-		ft_set_pattern(data->map.pattern, 2);
+		ft_set_pattern(data->map.pattern, 2, specific);
 	if (keycode == KEY_FOUR)
-		ft_set_pattern(data->map.pattern, 3);
+		ft_set_pattern(data->map.pattern, 3, specific);
+	if (keycode == KEY_FIVE)
+		data->map.select = !data->map.select;
 	ft_set_colors(&data->map, data->map.points);
 }

@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:29:34 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/24 17:13:40 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/01 12:54:28 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,17 +55,29 @@ int	gradient(int start, int end, double len, double pos)
 	return ((n_col[0] << 24) | (n_col[1] << 16) | (n_col[2] << 8) | n_col[3]);
 }
 
-void	ft_set_pattern(int pattern[4], int choice)
+void	ft_set_pattern(int pattern[4], int choice, int specific)
 {
 	const int colorschemes[4][4] = {
 		{YELLOW, RED, BLUE, BLACK},
-		{PURPLE, GREEN, ORANGE, PALE_YELLOW},
+		{RED, BLACK, GREEN, WHITE},
 		{LIGHTBLUE, PINK, LIME, LIGHT_GRAY},
 		{D_GREEN, D_PURPLE, D_RED, D_GREY}
 	};
 
-	pattern[0] = colorschemes[choice][0];
-	pattern[1] = colorschemes[choice][1];
-	pattern[2] = colorschemes[choice][2];
-	pattern[3] = colorschemes[choice][3];
+	if (specific == 5)
+	{
+		pattern[0] = colorschemes[choice][0];
+		pattern[1] = colorschemes[choice][1];
+		pattern[2] = colorschemes[choice][2];
+		pattern[3] = colorschemes[choice][3];
+		return ;
+	}
+	if (specific == 0)
+		pattern[0] = colorschemes[choice][0];
+	else if (specific == 1)
+		pattern[1] = colorschemes[choice][0];
+	else if (specific == 2)
+		pattern[2] = colorschemes[choice][0];
+	else if (specific == 3)
+		pattern[3] = colorschemes[choice][0];
 }

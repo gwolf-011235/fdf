@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 13:01:30 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/24 17:13:28 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/01 11:36:10 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define COLORS_H
 
 # define BLACK 0x000000
+# define WHITE 0xFFFFFF
 # define RED 0xFF0000
 # define YELLOW 0xFFFF00
 # define BLUE 0x0000FF
