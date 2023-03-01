@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 08:30:19 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/01 10:16:18 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/01 10:37:31 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,21 @@
 
 int	ft_mouse_press(int button, int x, int y, t_data *data)
 {
-	if (button == 1)
+	if (button == M_LEFT)
 	{
 		data->mouse.left = true;
 		data->mouse.last_left[X] = x;
 		data->mouse.last_left[Y] = y;
 	}
-	if (button == 3)
+	if (button == M_RIGHT)
 	{
 		data->mouse.right = true;
 		data->mouse.last_right[X] = x;
 		data->mouse.last_right[Y] = y;
 	}
-	if (button == 4)
+	if (button == M_SCROLL_UP)
 		data->map.props.scale += 1;
-	if (button == 5)
+	if (button == M_SCROLL_DOWN)
 		data->map.props.scale -= 1;
 	ft_redraw(data);
 	return (0);
@@ -38,9 +38,9 @@ int	ft_mouse_release(int button, int x, int y, t_data *data)
 {
 	(void)x;
 	(void)y;
-	if (button == 1)
+	if (button == M_LEFT)
 		data->mouse.left = false;
-	if (button == 3)
+	if (button == M_RIGHT)
 		data->mouse.right = false;
 	return (0);
 }
@@ -67,5 +67,3 @@ int	ft_mouse_move(int x, int y, t_data *data)
 	}
 	return (0);
 }
-
-

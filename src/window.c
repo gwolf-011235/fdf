@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:00:10 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/01 10:06:21 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/01 10:53:19 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ void	ft_init_image(t_data *data, t_img *img, int win_x, int win_y)
 	img->ptr = mlx_new_image(data->mlx, win_x, win_y);
 	if (!img->ptr)
 		ft_free_mlx(data, ERR_IMG, true);
-	img->addr = mlx_get_data_addr(img->ptr, &img->bpp, &img->line_len, &img->endian);
+	img->addr = mlx_get_data_addr(img->ptr, &img->bpp, \
+			&img->line_len, &img->endian);
 	img->size[X] = win_x;
 	img->size[Y] = win_y;
 	img->bytes = img->bpp / 8;
@@ -25,8 +26,8 @@ void	ft_init_image(t_data *data, t_img *img, int win_x, int win_y)
 
 void	ft_init_window(t_data *data)
 {
-	int win_x;
-	int win_y;
+	int	win_x;
+	int	win_y;
 
 	data->mlx = mlx_init();
 	if (!data->mlx)
@@ -44,16 +45,16 @@ void	ft_init_window(t_data *data)
 	data->map.props.canvas[OFFSET_Y] = win_y / 2;
 }
 
-void testwindow(t_data *data)
+void	testwindow(t_data *data)
 {
 	//ft_init_menu(data);
 	lines(&data->render, &data->map);
 	ft_draw_box(&data->render, data->map.edges + 1);
 	mlx_put_image_to_window(data->mlx, data->win, data->render.ptr, 0, 0);
-	mlx_key_hook(data->win, key_hook, data);
-	mlx_hook(data->win, 2, 1L<<0, close_window, data);
-	mlx_hook(data->win, ButtonPress, 1L<<2, ft_mouse_press, data);
-	mlx_hook(data->win, ButtonRelease, 1L<<3, ft_mouse_release, data);
-	mlx_hook(data->win, MotionNotify, 1L<<13, ft_mouse_move, data);
+	mlx_hook(data->win, KeyPress, KeyPressMask, key_hook, data);
+	mlx_hook(data->win, ButtonPress, ButtonPressMask, ft_mouse_press, data);
+	mlx_hook(data->win, ButtonRelease, ButtonReleaseMask, \
+			ft_mouse_release, data);
+	mlx_hook(data->win, MotionNotify, ButtonMotionMask, ft_mouse_move, data);
 	mlx_loop(data->mlx);
 }

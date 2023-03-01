@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 22:15:46 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/01 10:00:29 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/01 10:54:23 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ void	test(t_data *data)
 	data->map.morph = data->map.polar + 1;
 	lines(&data->render, &data->map);
 	mlx_put_image_to_window(data->mlx, data->win, data->render.ptr, 0, 0);
-	mlx_key_hook(data->win, key_hook, data);
-	mlx_hook(data->win, 2, 1L<<0, close_window, data);
 	mlx_loop(data->mlx);
 
 	/*

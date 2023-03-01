@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/01 09:58:56 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/01 11:21:25 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # include "err_message.h"
 # include "colors.h"
 # include "X.h"
+# include "key_macros.h"
 
 # define ROW_MAX 1000
 # define RAD 0.01745329251
@@ -46,18 +47,6 @@
 	#define M_PI 3.14159265358979323846
 # endif
 
-# define KEY_ARROW_LEFT 65361
-# define KEY_ARROW_UP 65362
-# define KEY_ARROW_RIGHT 65363
-# define KEY_ARROW_DOWN 65364
-# define KEY_A 97
-# define KEY_S 115
-# define KEY_D 100
-# define KEY_F 102
-# define KEY_G 103
-# define KEY_H 104
-# define KEY_Q 113
-# define KEY_W 119
 
 typedef float	t_mat4[4][4];
 
@@ -109,6 +98,7 @@ typedef struct s_map {
 	int		offset[2];
 	int		min[3];
 	int		max[3];	
+	int		factor;
 	int		pattern[4];
 	t_mat4	mat;
 	t_props	props;
@@ -170,7 +160,8 @@ void	ft_set_pattern(int pattern[3], int choice);
 
 //hooks.c
 int		key_hook(int keycode, t_data *vars);
-int		close_window(int keycode, t_data *vars);
+void	ft_key_props(int keycode, t_data *data);
+void	ft_key_color(int keycode, t_data *data);
 
 //mouse.c
 int		ft_mouse_press(int button, int x, int y, t_data *data);
