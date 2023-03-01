@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/26 17:22:25 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/01 08:25:33 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,6 @@ typedef struct s_vec3f {
 	int		hidden;
 	float	angle[2];
 }	t_vec3f;
-
-typedef struct s_color {
-	uint8_t	r;
-	uint8_t	g;
-	uint8_t	b;
-	uint8_t	a;
-}	t_rgba;
 
 typedef struct s_point {
 	int	x;
