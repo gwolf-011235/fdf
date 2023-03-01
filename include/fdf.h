@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/01 08:25:33 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/01 08:26:47 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,13 +105,7 @@ typedef struct s_map {
 	int		width;
 	char	*rows[ROW_MAX];
 	bool	hex;
-	float	roll;
-	float	pitch;
-	float	yaw;
-	float	scale;
 	int		offset[2];
-	float	trans_x;
-	float	trans_y;
 	int		min[3];
 	int		max[3];	
 	int		pattern[4];
