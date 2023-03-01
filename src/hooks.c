@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:16:59 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/24 15:12:03 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/01 08:31:42 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,22 +53,3 @@ int close_window(int keycode, t_data *data)
 	}
 	return (0);
 }
-
-int mouse_hook(int button, int x, int y, t_data *data)
-{
-
-	(void)data;
-	printf("Mouse clicked!\nbutton: %d, x: %d, y: %d\n", button, x, y);
-	(void)x;
-	(void)y;
-	(void)button;
-	return (0);
-}
-
-int mouse_move(int x, int y, void *param)
-{
-	(void)param;
-	printf("Mouse moved!\nx: %d y: %d\n", x, y);
-	return (0);
-}
-

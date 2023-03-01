@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:00:10 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/25 22:34:37 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/01 10:06:21 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,9 @@ void testwindow(t_data *data)
 	ft_draw_box(&data->render, data->map.edges + 1);
 	mlx_put_image_to_window(data->mlx, data->win, data->render.ptr, 0, 0);
 	mlx_key_hook(data->win, key_hook, data);
-	mlx_mouse_hook(data->win, mouse_hook, data);
 	mlx_hook(data->win, 2, 1L<<0, close_window, data);
-	mlx_hook(data->win, 6, 1L<<6, mouse_move, data);
+	mlx_hook(data->win, ButtonPress, 1L<<2, ft_mouse_press, data);
+	mlx_hook(data->win, ButtonRelease, 1L<<3, ft_mouse_release, data);
+	mlx_hook(data->win, MotionNotify, 1L<<13, ft_mouse_move, data);
 	mlx_loop(data->mlx);
 }

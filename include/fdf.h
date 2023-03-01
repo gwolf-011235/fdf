@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/01 08:26:47 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/01 09:58:56 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # include "ft_mem.h"
 # include "err_message.h"
 # include "colors.h"
+# include "X.h"
 
 # define ROW_MAX 1000
 # define RAD 0.01745329251
@@ -123,12 +124,20 @@ typedef struct s_img {
 	int		size[2];
 }	t_img;
 
+typedef struct s_mouse {
+	bool 	left;
+	bool	right;
+	int		last_left[2];
+	int		last_right[2];
+}	t_mouse;
+
 typedef struct s_data {
 	void	*mlx;
 	void	*win;
 	t_img	render;
 	t_img	menu;
 	t_map	map;
+	t_mouse	mouse;
 }	t_data;
 
 //check.c
@@ -160,10 +169,13 @@ int		ft_alpha_blend(int new_color, int old_color);
 void	ft_set_pattern(int pattern[3], int choice);
 
 //hooks.c
-int		mouse_hook(int button, int x, int y, t_data *data);
 int		key_hook(int keycode, t_data *vars);
 int		close_window(int keycode, t_data *vars);
-int		mouse_move(int x, int y, void *param);
+
+//mouse.c
+int		ft_mouse_press(int button, int x, int y, t_data *data);
+int		ft_mouse_release(int button, int x, int y, t_data *data);
+int		ft_mouse_move(int x, int y, t_data *data);
 
 //window.c
 void	testwindow(t_data *data);
