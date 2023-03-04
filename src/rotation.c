@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 13:26:37 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/11 08:39:35 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/03 23:47:29 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,17 +75,16 @@ void	ft_rotate_z(t_mat4 trans, float yaw)
 	ft_copy_mat4(temp, trans);
 }
 
-void	ft_static_rotate(t_mat4 trans, int rotate)
+void	ft_rotate_iso(t_mat4 mat)
 {
-	const t_mat4 rot_x = {
-		{1, 0, 0, 0},
-		{0, 0.9998476951563913, 0.01745240643728351, 0},
-		{0, -0.01745240643728351, 0.9998476951563913, 0},
+	t_mat4			temp;
+	const t_mat4 	iso = {
+		{0.707106781, 0.707106781, 0, 0},
+		{-0.577353046, 0.577353046, 0.577344716, 0},
+		{0.408244364, -0.408244364, 0.816500508, 0},
 		{0, 0, 0, 1}
 	};
-
-	if (rotate == 0)
-	{
-		ft_copy_mat4(rot_x, trans);
-	}
+	ft_init_mat4(temp);
+	ft_mult_mat4(iso, mat, temp);
+	ft_copy_mat4(temp, mat);
 }
