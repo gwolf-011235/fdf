@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 14:46:48 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/26 07:24:36 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/04 10:11:37 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,15 @@ void	ft_free_map_ptr(t_map *map, char *string)
 {
 	if (map->points)
 		free(map->points);
+	if (map->z_storage)
+		free(map->z_storage);
 	ft_terminate(string);
 }
 
 void	ft_free_mlx(t_data *data, char *string, bool error)
 {
 	free(data->map.points);
+	free(data->map.z_storage);
 	if (data->render.ptr)
 		mlx_destroy_image(data->mlx, data->render.ptr);
 	if (data->menu.ptr)
