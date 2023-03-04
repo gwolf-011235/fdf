@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/04 20:25:45 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/04 21:44:49 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,12 @@
 # ifndef M_PI
 	#define M_PI 3.14159265358979323846
 # endif
+
+typedef struct s_coord
+{
+	float	lon;
+	float	lat;
+}	t_coord;
 
 typedef struct s_bresvars {
 	int	decision;
@@ -104,6 +110,7 @@ typedef struct s_matinfo {
 	float	translate[3];
 	int		canvas[4];
 	bool	iso;
+	bool	sphere;
 }	t_props;
 
 typedef struct s_map {
@@ -113,6 +120,7 @@ typedef struct s_map {
 	t_vec3f	*edges;
 	t_vec3f	*corner[3];
 	int		*z_storage;
+	t_coord	*ang_coord;
 	float	radius;
 	int		sum_points;
 	char	filename[32];
@@ -234,9 +242,9 @@ t_vec3f	vec3_subtract(t_vec3f a, t_vec3f b);
 
 //reshape.c
 void	ft_init_project(t_data *data);
+void	ft_calc_points(t_map *map, t_vec3f *points, int size[2]);
 void	ft_shape_map(t_map *map);
-int	ft_redraw(t_data *data);
-void	ft_calc_points(t_map *map, t_mat4 mat, int sum, int size[2]);
+int		ft_redraw(t_data *data);
 void	ft_calc_edges(t_vec3f *edges, t_mat4 mat, int size[2]);
 void	ft_scale_z(t_vec3f *points, int *z_storage, int sum, float factor);
 
@@ -274,8 +282,8 @@ void	ft_update_pix_color(int *colors, t_point *pixel, int sum);
 void	ft_draw_circle(t_img *img, t_point center, int radius);
 
 //sphere.c
-void	ft_convert_spherical(t_map *map, int sum);
-void	ft_convert_sphere2cart(t_map *map, t_vec3f *po_morph);
+void	ft_calc_sphere_points(t_map *map, t_coord *ang_coord, t_vec3f *polar);
+void	ft_set_ang_coords(t_map *map, int sum);
 
 //test.c
 void	test(t_data *data);
