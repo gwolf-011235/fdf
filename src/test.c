@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 22:15:46 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/01 17:04:20 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/03 11:26:52 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,10 @@
 
 void	test(t_data *data)
 {
-	ft_convert_spherical(&data->map, data->map.sum_points);
-	ft_convert_sphere2cart(&data->map, data->map.polar);
-	data->map.props.scale = 5;
-	ft_build_transmat(data->map.mat, data->map.props);
-	ft_calc_points(&data->map, data->map.mat, data->map.sum_points, data->render.size);
-	data->map.morph = data->map.polar + 1;
-	lines(&data->render, &data->map);
+	t_pixel start = {300, 300, {0, 0xFF, 0, 0}};
+	t_pixel end = {30, 30, {0, 0, 0xFF, 0}};
+	t_bresvars vars = {0};
+	gradient_line(start, end, vars, &data->render);
 	mlx_put_image_to_window(data->mlx, data->win, data->render.ptr, 0, 0);
 	mlx_hook(data->win, KeyPress, KeyPressMask, key_hook, data);
 	mlx_hook(data->win, ButtonPress, ButtonPressMask, ft_mouse_press, data);
@@ -28,6 +25,17 @@ void	test(t_data *data)
 			ft_mouse_release, data);
 	mlx_hook(data->win, MotionNotify, ButtonMotionMask, ft_mouse_move, data);
 	mlx_loop(data->mlx);
+
+
+	/*
+	ft_convert_spherical(&data->map, data->map.sum_points);
+	ft_convert_sphere2cart(&data->map, data->map.polar);
+	data->map.props.scale = 5;
+	ft_build_transmat(data->map.mat, data->map.props);
+	ft_calc_points(&data->map, data->map.mat, data->map.sum_points, data->render.size);
+	data->map.morph = data->map.polar + 1;
+	lines(&data->render, &data->map);
+	*/
 
 	/*
 	t_point	test;
