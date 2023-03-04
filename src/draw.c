@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 09:58:18 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/01 16:14:20 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/03 18:37:11 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,16 @@ void	ft_point_to_image(t_img *img, int x, int y, int color)
 void	fill_background(t_img *img, int color)
 {
 	int i;
-	int j;
 	char *dst;
+	int pixel;
 
 	i = 0;
-	while (i < img->size[X])
+	pixel = img->size[X] * img->size[Y];
+	dst = img->addr;
+	while (i < pixel)
 	{
-		j = 0;
-		while (j < img->size[Y])
-		{
-			dst = img->addr + (j * img->line_len + i * img->bytes);
-			*(unsigned int *)dst = color;
-			j++;
-		}
+		*(unsigned int *)dst = color;
+		dst += img->bytes;
 		i++;
 	}
 }
@@ -202,6 +199,20 @@ void	ft_clip_line(t_vec3f start, t_vec3f end, int size[2], t_img *img)
 	draw_line(img, start, end);
 }
 
+void	ft_prep_bresenham(t_img *img, t_vec3f start, t_vec3f end)
+{
+	t_pixel p_start;
+	t_pixel	p_end;
+	t_bresvars vars = {0};
+
+	p_start = ft_convert_pixel(start);
+	p_end = ft_convert_pixel(end);
+	ft_init_bresvars(&vars, p_start, p_end);
+	if (vars.delta[X] == 0 && vars.delta[Y] == 0)
+		return ;
+	gradient_line(p_start, p_end, vars, img);
+}
+
 void	lines(t_img *img, t_map *map)
 {
 	int		i;
@@ -216,6 +227,7 @@ void	lines(t_img *img, t_map *map)
 		{
 			end = map->morph[i + 1];
 			if (!start.hidden && !end.hidden)
+				//ft_prep_bresenham(img, start, end);
 				draw_line(img, start, end);
 			else if ((start.hidden && !end.hidden) || (!start.hidden && end.hidden))
 				ft_clip_line(start, end, img->size, img);
@@ -224,6 +236,7 @@ void	lines(t_img *img, t_map *map)
 		{
 			end = map->morph[i + map->width];
 			if (!start.hidden && !end.hidden)
+				//ft_prep_bresenham(img, start, end);
 				draw_line(img, start, end);
 			else if ((start.hidden && !end.hidden) || (!start.hidden && end.hidden))
 				ft_clip_line(start, end, img->size, img);
