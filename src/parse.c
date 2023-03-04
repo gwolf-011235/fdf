@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:00:33 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/04 11:49:44 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/04 21:29:02 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ void	ft_map_alloc(t_map *map)
 {
 	map->points = malloc(sizeof(t_vec3f) * (map->sum_points * 3 + 24));
 	map->z_storage = malloc(sizeof(int) * (map->sum_points + 8));
-	if (!map->points || !map->z_storage)
+	map->ang_coord = malloc(sizeof(t_coord) * map->sum_points);
+	if (!map->points || !map->z_storage || !map->ang_coord)
 	{
 		ft_free_map_ptr(map, ERR_MEM);
 	}
@@ -107,4 +108,5 @@ void	ft_parse_map(t_map *map)
 	ft_set_colors(map, map->points);
 	ft_set_corner(map->corner[0], map->min, map->max, \
 			(map->z_storage + map->sum_points));
+	ft_set_ang_coords(map, map->sum_points);
 }
