@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:00:33 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/01 16:12:26 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/04 11:49:44 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,18 @@
 
 void	ft_map_alloc(t_map *map)
 {
-	map->points = malloc(sizeof(t_vec3f) * (map->sum_points * 3 + 16));
-	if (!map->points)
+	map->points = malloc(sizeof(t_vec3f) * (map->sum_points * 3 + 24));
+	map->z_storage = malloc(sizeof(int) * (map->sum_points + 8));
+	if (!map->points || !map->z_storage)
 	{
 		ft_free_map_ptr(map, ERR_MEM);
 	}
-	map->morph = map->points + map->sum_points;
-	map->polar = map->morph + map->sum_points;
-	map->edges = map->polar + map->sum_points;
+	map->corner[0] = map->points + map->sum_points;
+	map->morph = map->corner[0] + 8;
+	map->corner[1] = map->morph + map->sum_points;
+	map->polar = map->corner[1] + 8;
+	map->corner[2] = map->polar + map->sum_points;
+	map->edges = map->corner[0];
 }
 
 void	ft_parse_line(t_map *map, char *line, int i)
@@ -32,9 +36,10 @@ void	ft_parse_line(t_map *map, char *line, int i)
 	j = 0;
 	while (line[j])
 	{
-		map->points[i].x = (i % map->width) + map->min[X];
-		map->points[i].y = (i / map->width) + map->min[Y];
-		map->points[i].z = ft_atoi(&line[j]);
+		map->points[i].x = ((i % map->width) + map->min[X]);
+		map->points[i].y = ((i / map->width) + map->min[Y]);
+		map->z_storage[i] = ft_atoi(&line[j]);
+		map->points[i].z = map->z_storage[i];
 		ft_find_extremes(map, map->points[i].z);
 		j += ft_move_atoi(&line[j]);
 		if (map->hex && line[j] == ',')
@@ -100,5 +105,6 @@ void	ft_parse_map(t_map *map)
 		i++;
 	}
 	ft_set_colors(map, map->points);
-	ft_set_edges(map);
+	ft_set_corner(map->corner[0], map->min, map->max, \
+			(map->z_storage + map->sum_points));
 }
