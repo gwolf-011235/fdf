@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:16:59 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/04 20:19:55 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/04 21:46:15 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,12 +94,16 @@ void	ft_key_scale(int key, t_map *map)
 		map->props.scale_z -= 0.1 * factor;
 		ft_scale_z(map->points, map->z_storage, map->sum_points, \
 				map->props.scale_z);
+		if (map->props.sphere)
+			ft_calc_sphere_points(map, map->ang_coord, map->polar);
 	}
 	else if (key == KEY_R)
 	{
 		map->props.scale_z += 0.1 * factor;
 		ft_scale_z(map->points, map->z_storage, map->sum_points, \
 				map->props.scale_z);
+		if (map->props.sphere)
+			ft_calc_sphere_points(map, map->ang_coord, map->polar);
 	}
 }
 
