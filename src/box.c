@@ -6,13 +6,13 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 20:28:13 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/01 16:16:20 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/04 11:53:17 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	ft_set_edges(t_map *map)
+void	ft_set_corner(t_vec3f *corner, int min[3], int max[3], int *z_store_c)
 {
 	int	i;
 
@@ -20,34 +20,40 @@ void	ft_set_edges(t_map *map)
 	while (i < 8)
 	{
 		if (i == 1 || i == 2 || i == 5 || i == 6)
-			map->edges[i].x = map->max[X];
+			corner[i].x = max[X];
 		else
-			map->edges[i].x = map->min[X];
+			corner[i].x = min[X];
 		if (i == 2 || i == 3 || i == 6 || i == 7)
-			map->edges[i].y = map->max[Y];
+			corner[i].y = max[Y];
 		else
-			map->edges[i].y = map->min[Y];
+			corner[i].y = min[Y];
 		if (i < 4)
-			map->edges[i].z = map->min[Z];
+		{
+			corner[i].z = min[Z];
+			z_store_c[i] = min[Z];
+		}
 		else
-			map->edges[i].z = map->max[Z];
+		{
+			corner[i].z = max[Z];
+			z_store_c[i] = max[Z];
+		}
 		i++;
 	}
 }
 
-float	ft_fit_box(t_vec3f *edges, t_mat4 mat, t_props props)
+float	ft_fit_box(t_vec3f *corner, t_mat4 mat, t_props props)
 {
 	int		i;
 	t_vec3f	temp;
 
-	props.scale = 1.0;
+	props.scale = 0.01;
 	while (1)
 	{
 		ft_build_transmat(mat, props);
 		i = 0;
 		while (i < 8)
 		{
-			temp = ft_mult_vec3f_mat4(edges[i], mat);
+			temp = ft_mult_vec3f_mat4(corner[i], mat);
 			if (ft_is_outside(temp, props.canvas, 0.1))
 			{
 				ft_printf("🔍 Scale\n   |%d|\n\n", (int)props.scale);
@@ -55,11 +61,11 @@ float	ft_fit_box(t_vec3f *edges, t_mat4 mat, t_props props)
 			}
 			i++;
 		}
-		props.scale += 0.10;
+		props.scale += 0.010;
 	}
 }
 
-void	ft_draw_box(t_img *img, t_vec3f *edges)
+void	ft_draw_box(t_img *img, t_vec3f *corner)
 {
 	t_vec3f	start;
 	t_vec3f	end;
@@ -68,19 +74,19 @@ void	ft_draw_box(t_img *img, t_vec3f *edges)
 	i = 0;
 	while (i < 4)
 	{
-		start = edges[i];
-		end = edges[(i + 1) % 4];
+		start = corner[i];
+		end = corner[(i + 1) % 4];
 		start.color = GREEN;
 		end.color = GREEN;
 		if (!start.hidden && !end.hidden)
 			draw_line(img, start, end);
-		end = edges[i + 4];
+		end = corner[i + 4];
 		start.color = BLUE;
 		end.color = BLUE;
 		if (!start.hidden && !end.hidden)
 			draw_line(img, start, end);
-		start = edges[i + 4];
-		end = edges[((i + 1) % 4) + 4];
+		start = corner[i + 4];
+		end = corner[((i + 1) % 4) + 4];
 		start.color = RED;
 		end.color = RED;
 		if (!start.hidden && !end.hidden)
