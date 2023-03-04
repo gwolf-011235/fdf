@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/01 17:01:25 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/04 20:25:45 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <fcntl.h>
 # include <errno.h>
 # include <math.h>
+# include <time.h>
 
 # include "mlx.h"
 # include "ft_fd.h"
@@ -47,6 +48,26 @@
 	#define M_PI 3.14159265358979323846
 # endif
 
+typedef struct s_bresvars {
+	int	decision;
+	int	delta[2];
+	int	incr[2];
+	char *scr_pos;
+	int line_incr;
+}	t_bresvars;
+
+typedef struct s_argb {
+	int a;
+	int r;
+	int g;
+	int b;
+}	t_argb;
+
+typedef struct s_pixel {
+	int		x;
+	int		y;
+	t_argb	color;
+}	t_pixel;
 
 typedef float	t_mat4[4][4];
 
@@ -78,16 +99,20 @@ typedef struct s_line {
 
 typedef struct s_matinfo {
 	float	scale;
+	float	scale_z;;
 	float	angle[3];
 	float	translate[3];
 	int		canvas[4];
+	bool	iso;
 }	t_props;
 
 typedef struct s_map {
 	t_vec3f	*points;
 	t_vec3f	*morph;
-	t_vec3f	*edges;
 	t_vec3f	*polar;
+	t_vec3f	*edges;
+	t_vec3f	*corner[3];
+	int		*z_storage;
 	float	radius;
 	int		sum_points;
 	char	filename[32];
@@ -160,9 +185,12 @@ int		ft_alpha_blend(int new_color, int old_color);
 void	ft_set_pattern(int pattern[4], int choice, int specific);
 
 //hooks.c
-int		key_hook(int keycode, t_data *vars);
-void	ft_key_props(int keycode, t_data *data);
-void	ft_key_color(int keycode, t_data *data);
+void	ft_key_translate(int key, t_map *map);
+int		key_hook(int key, t_data *vars);
+void	ft_key_props(int key, t_data *data);
+void	ft_key_angle(int key, t_map *map);
+void	ft_key_scale(int key, t_map *map);
+void	ft_key_color(int key, t_map *map);
 
 //mouse.c
 int		ft_mouse_press(int button, int x, int y, t_data *data);
@@ -197,7 +225,7 @@ void	lookat(t_vec3f from, t_vec3f to, t_vec3f up, t_mat4 cam2world);
 void	ft_rotate_x(t_mat4 trans, float roll);
 void	ft_rotate_y(t_mat4 trans, float pitch);
 void	ft_rotate_z(t_mat4 trans, float yaw);
-void	ft_static_rotate(t_mat4 trans, int rotate);
+void	ft_rotate_iso(t_mat4 mat);
 
 //vector.c
 void	vec3_normalize(t_vec3f *point);
@@ -205,11 +233,12 @@ t_vec3f	vec3_cross(t_vec3f a, t_vec3f b);
 t_vec3f	vec3_subtract(t_vec3f a, t_vec3f b);
 
 //reshape.c
-void	ft_init_project(t_map *map, int size[2]);
+void	ft_init_project(t_data *data);
 void	ft_shape_map(t_map *map);
-void	ft_redraw(t_data *data);
+int	ft_redraw(t_data *data);
 void	ft_calc_points(t_map *map, t_mat4 mat, int sum, int size[2]);
 void	ft_calc_edges(t_vec3f *edges, t_mat4 mat, int size[2]);
+void	ft_scale_z(t_vec3f *points, int *z_storage, int sum, float factor);
 
 //map_utils.c
 void	ft_map_init(t_map *map);
@@ -229,9 +258,9 @@ void	ft_print_point(t_vec3f point);
 void	ft_print_inverse(float inverse[4][8]);
 
 //box.c
-void	ft_set_edges(t_map *map);
+void	ft_set_corner(t_vec3f *corner, int min[3], int max[3], int *z_store_c);
 void	ft_draw_box(t_img *img, t_vec3f *edges);
-float	ft_fit_box(t_vec3f *edges, t_mat4 mat, t_props props);
+float	ft_fit_box(t_vec3f *corner, t_mat4 mat, t_props props);
 
 //precalc_matrix.c
 void	ft_const_iso(t_mat4 transmat);
@@ -250,5 +279,12 @@ void	ft_convert_sphere2cart(t_map *map, t_vec3f *po_morph);
 
 //test.c
 void	test(t_data *data);
+
+//bresenham.c
+t_pixel	ft_convert_pixel(t_vec3f point);
+void	ft_swap_pixel(t_pixel *one, t_pixel *two);
+void gradient_line(t_pixel start, t_pixel end, t_bresvars vars, t_img *img);
+void ft_init_bresvars(t_bresvars *vars, t_pixel start, t_pixel end);
+
 
 #endif
