@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 07:34:37 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/04 21:39:37 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/05 07:25:43 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,16 @@ void	ft_set_ang_coords(t_map *map, int sum)
 
 void	ft_calc_sphere_points(t_map *map, t_coord *ang_coord, t_vec3f *polar)
 {
-	int	i;
+	int		i;
+	float	z_offset;
 
 	i = 0;
 	while (i < map->sum_points)
 	{
-		polar[i].x = (map->radius + map->points[i].z) * sin(ang_coord[i].lat) * cos(ang_coord[i].lon);
-		polar[i].y = (map->radius + map->points[i].z) * sin(ang_coord[i].lat) * sin(ang_coord[i].lon);
-		polar[i].z = (map->radius + map->points[i].z) * cos(ang_coord[i].lat);
+		z_offset = map->z_storage[i] * map->props.scale_z;
+		polar[i].x = (map->radius + z_offset) * sin(ang_coord[i].lat) * cos(ang_coord[i].lon);
+		polar[i].y = (map->radius + z_offset) * sin(ang_coord[i].lat) * sin(ang_coord[i].lon);
+		polar[i].z = (map->radius + z_offset) * cos(ang_coord[i].lat);
 		polar[i].color = map->points[i].color;
 		i++;
 	}
