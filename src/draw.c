@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 09:58:18 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/05 16:11:09 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/05 21:41:09 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,6 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 	dst = img->addr + (y * img->line_len + x * img->bytes);
 	*(unsigned int *)dst = color;
 }
-
-/*
-void	ft_point_to_image(t_img *img, int x, int y, int color)
-{
-	char	*pixel;
-	int		blend;
-
-	if (x >= 0 && x < img->size[X] && y >= 0 && y < img->size[Y])
-	{
-		pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
-		blend = ft_alpha_blend(*(unsigned int *)pixel);
-	}
-}
-*/
 
 void	fill_background(t_img *img, int color)
 {
@@ -197,69 +183,6 @@ void	ft_clip_line(t_vec3f start, t_vec3f end, int size[2], t_img *img)
 			end.y = 0;
 	}
 	draw_line(img, start, end);
-}
-
-void	ft_prep_bresenham(t_img *img, t_vec3f start, t_vec3f end)
-{
-	t_pixel p_start;
-	t_pixel	p_end;
-	t_bresvars vars = {0};
-
-	p_start = ft_convert_pixel(start);
-	p_end = ft_convert_pixel(end);
-	ft_init_bresvars(&vars, p_start, p_end);
-	if (vars.delta[X] == 0 && vars.delta[Y] == 0)
-		return ;
-	gradient_line(p_start, p_end, vars, img);
-}
-
-void	ft_connect_points(t_img *img, t_map *map)
-{
-	int		i;
-	int		j;
-	int		index;
-	t_vec3f	start;
-	t_vec3f	end;
-
-	i = 0;
-	while (i < map->height - 1)
-	{
-		index = i * map->width;
-		j = 0;
-		while (j < map->width - 1)
-		{
-			start = map->morph[index + j];
-			end = map->morph[index + j + 1];
-			if (!start.hidden && !end.hidden)
-				draw_line(img, start, end);
-			else if ((!start.hidden && end.hidden) || (start.hidden && !end.hidden))
-				ft_clip_line(start, end, img->size, img);
-			end = map->morph[index + j + map->width];
-			if (!start.hidden && !end.hidden)
-				draw_line(img, start, end);
-			else if ((!start.hidden && end.hidden) || (start.hidden && !end.hidden))
-				ft_clip_line(start, end, img->size, img);
-			j++;
-		}
-		end = map->morph[index + j + map->width];
-		if (!start.hidden && !end.hidden)
-			draw_line(img, start, end);
-		else if ((!start.hidden && end.hidden) || (start.hidden && !end.hidden))
-			ft_clip_line(start, end, img->size, img);
-		i++;
-	}
-	index = i * map->width;
-	j = 0;
-	while (j < map->width - 1)
-	{
-		start = map->morph[index + j];
-		end = map->morph[index + j + 1];
-		if (!start.hidden && !end.hidden)
-			draw_line(img, start, end);
-		else if ((!start.hidden && end.hidden) || (start.hidden && !end.hidden))
-			ft_clip_line(start, end, img->size, img);
-		j++;
-	}
 }
 
 void	lines(t_img *img, t_map *map)
