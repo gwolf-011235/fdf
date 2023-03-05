@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:16:59 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/05 07:28:02 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/05 07:39:37 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int key_hook(int key, t_data *data)
 	else if (key == KEY_ONE || key == KEY_TWO || key == KEY_THREE
 			|| key == KEY_FOUR || key == KEY_FIVE)
 		ft_key_color(key, &data->map);
+	else if (key == KEY_SPACE)
+		ft_key_sphere(key, &data->map);
 	else if (key == KEY_ESC)
 	{
 		ft_free_mlx(data, CYA, false);
@@ -34,6 +36,18 @@ int key_hook(int key, t_data *data)
 	usleep(16667);
 	printf("This is key: %d\n", key);
 	return (0);
+}
+
+void	ft_key_sphere(int key, t_map *map)
+{
+	if (key == KEY_SPACE)
+	{
+		map->props.sphere = !map->props.sphere;
+		if (map->props.sphere)
+			ft_calc_sphere_points(map, map->ang_coord, map->polar);
+		else
+			ft_scale_z(map->points, map->z_storage, map->sum_points, map->props.scale_z);
+	}
 }
 
 int	ft_wrap_angle(float angle, int factor)

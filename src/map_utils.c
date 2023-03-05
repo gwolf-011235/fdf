@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 09:27:53 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/04 21:48:12 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/05 07:43:55 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	ft_map_init(t_map *map)
 	map->props.angle[Z] = 45;
 	map->props.translate[Z] = 1;
 	map->factor = 1;
-	map->props.sphere = true;
 }
 
 void	ft_find_extremes(t_map *map, int z)

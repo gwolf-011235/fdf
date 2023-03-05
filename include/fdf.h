@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/04 21:44:49 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/05 07:39:58 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,6 +199,7 @@ void	ft_key_props(int key, t_data *data);
 void	ft_key_angle(int key, t_map *map);
 void	ft_key_scale(int key, t_map *map);
 void	ft_key_color(int key, t_map *map);
+void	ft_key_sphere(int key, t_map *map);
 
 //mouse.c
 int		ft_mouse_press(int button, int x, int y, t_data *data);
@@ -246,7 +247,7 @@ void	ft_calc_points(t_map *map, t_vec3f *points, int size[2]);
 void	ft_shape_map(t_map *map);
 int		ft_redraw(t_data *data);
 void	ft_calc_edges(t_vec3f *edges, t_mat4 mat, int size[2]);
-void	ft_scale_z(t_vec3f *points, int *z_storage, int sum, float factor);
+void	ft_scale_z(t_vec3f *points, int *z_storage, int sum, float scale_z);
 
 //map_utils.c
 void	ft_map_init(t_map *map);
