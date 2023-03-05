@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:00:10 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/03 23:21:09 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/05 15:23:19 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,5 @@ void	testwindow(t_data *data)
 	mlx_hook(data->win, ButtonRelease, ButtonReleaseMask, \
 			ft_mouse_release, data);
 	mlx_hook(data->win, MotionNotify, ButtonMotionMask, ft_mouse_move, data);
-	mlx_do_sync(data->mlx);
 	mlx_loop(data->mlx);
 }
