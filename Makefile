@@ -31,7 +31,6 @@ SRC := 	main.c \
 		reshape.c \
 		map_utils.c \
 		test.c \
-		vector.c \
 		check.c \
 		utils.c \
 		menu.c \
@@ -42,7 +41,6 @@ SRC := 	main.c \
 		precalc_matrix2.c \
 		mouse.c \
 		sphere.c \
-		bresenham.c \
 		shapes.c
 
 SRCS := $(addprefix $(SRC_DIR)/, $(SRC))
