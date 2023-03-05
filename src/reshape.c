@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 10:22:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/05 22:50:41 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/05 22:55:46 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void	ft_calc_morph(t_vec3f *morph, t_vec3f *points, t_mat4 mat, t_map *map)
 		if (morph[i].x < 0 || morph[i].x > map->props.canvas[X]
 			|| morph[i].y < 0 || morph[i].y > map->props.canvas[Y])
 			morph[i].hidden = true;
+		else
+			morph[i].hidden = false;
 		i++;
 	}
 }
