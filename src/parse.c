@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:00:33 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/04 21:29:02 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/05 08:03:15 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	ft_parse_line(t_map *map, char *line, int i)
 		if (map->hex && line[j] == ',')
 		{
 			len_hex = ft_jump_over_hex(&line[j]);
-			map->points[i].color = ft_hex_to_dec(&line[j + 3], len_hex);
+			map->points[i].color = ft_hex_to_dec(&line[j + 3], len_hex - 3);
 			j += len_hex;
 		}
 		else
