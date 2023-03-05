@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 13:26:37 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/03 23:47:29 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/05 18:27:58 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ void	ft_rotate_y(t_mat4 trans, float pitch)
 	pitch_cos = cos(pitch * RAD);
 	ft_init_mat4(temp);
 	ft_init_mat4(rot_y);
-	rot_y[1][1] = 1;
 	rot_y[0][0] = pitch_cos;
 	rot_y[0][2] = -pitch_sin;
+	rot_y[1][1] = 1;
 	rot_y[2][0] = pitch_sin;
 	rot_y[2][2] = pitch_cos;
 	rot_y[3][3] = 1;
@@ -65,11 +65,11 @@ void	ft_rotate_z(t_mat4 trans, float yaw)
 	yaw_cos = cos(yaw * RAD);
 	ft_init_mat4(temp);
 	ft_init_mat4(rot_z);
-	rot_z[2][2] = 1;
 	rot_z[0][0] = yaw_cos;
 	rot_z[0][1] = yaw_sin;
 	rot_z[1][0] = -yaw_sin;
 	rot_z[1][1] = yaw_cos;
+	rot_z[2][2] = 1;
 	rot_z[3][3] = 1;
 	ft_mult_mat4(rot_z, trans, temp);
 	ft_copy_mat4(temp, trans);
