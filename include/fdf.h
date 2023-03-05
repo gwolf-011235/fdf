@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/05 21:35:59 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/05 22:36:57 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,7 @@ typedef struct s_vec3f {
 	float	y;
 	float	z;
 	int		color;
-	int		hidden;
-	float	angle[2];
+	bool	hidden;
 }	t_vec3f;
 
 typedef struct s_point {
@@ -226,10 +225,9 @@ t_vec3f	vec3_subtract(t_vec3f a, t_vec3f b);
 
 //reshape.c
 void	ft_init_project(t_data *data);
-void	ft_calc_points(t_map *map, t_vec3f *points, int size[2]);
+void	ft_calc_morph(t_vec3f *morph, t_vec3f *points, t_mat4 mat, t_map *map);
 void	ft_shape_map(t_map *map);
 int		ft_redraw(t_data *data);
-void	ft_calc_edges(t_vec3f *edges, t_mat4 mat, int size[2]);
 void	ft_scale_z(t_vec3f *points, int *z_storage, int sum, float scale_z);
 
 //map_utils.c
