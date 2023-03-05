@@ -6,12 +6,47 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 08:30:08 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/03 12:04:00 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/05 21:35:28 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+
+typedef struct s_bresvars {
+	int	decision;
+	int	delta[2];
+	int	incr[2];
+	char *scr_pos;
+	int line_incr;
+}	t_bresvars;
+
+typedef struct s_argb {
+	int a;
+	int r;
+	int g;
+	int b;
+}	t_argb;
+
+typedef struct s_pixel {
+	int		x;
+	int		y;
+	t_argb	color;
+}	t_pixel;
+
+void	ft_prep_bresenham(t_img *img, t_vec3f start, t_vec3f end)
+{
+	t_pixel p_start;
+	t_pixel	p_end;
+	t_bresvars vars = {0};
+
+	p_start = ft_convert_pixel(start);
+	p_end = ft_convert_pixel(end);
+	ft_init_bresvars(&vars, p_start, p_end);
+	if (vars.delta[X] == 0 && vars.delta[Y] == 0)
+		return ;
+	gradient_line(p_start, p_end, vars, img);
+}
 
 t_pixel	ft_convert_pixel(t_vec3f point)
 {
