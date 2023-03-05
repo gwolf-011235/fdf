@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 10:22:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/05 21:31:58 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/05 21:53:36 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_calc_edges(t_vec3f *edges, t_mat4 mat, int size[2])
 void	ft_scale_z(t_vec3f *points, int *z_storage, int sum, float scale_z)
 {
 	int	i;
-	
+
 	i = 0;
 	while (i < sum + 8)
 	{
@@ -46,7 +46,7 @@ void	ft_calc_points(t_map *map, t_vec3f *points, int size[2])
 	i = 0;
 	while (i < map->sum_points + 8)
 	{
- 		map->morph[i] = ft_mult_vec3f_mat4(points[i], map->mat);
+		map->morph[i] = ft_mult_vec3f_mat4(points[i], map->mat);
 		map->morph[i].color = points[i].color;
 		map->morph[i].hidden = ft_is_outside(map->morph[i], size, 0);
 		i++;
@@ -55,11 +55,11 @@ void	ft_calc_points(t_map *map, t_vec3f *points, int size[2])
 
 void	ft_init_project(t_data *data)
 {
-	t_map *map;
+	t_map	*map;
 
 	map = &data->map;
 	ft_scale_z(map->points, map->z_storage, map->sum_points, 0.1);
-	data->map.props.iso = true;	
+	data->map.props.iso = true;
 	map->props.scale = ft_fit_box(map->edges, map->mat, map->props);
 	data->map.props.iso = false;
 	ft_calc_points(map, map->points, data->render.size);
@@ -70,8 +70,8 @@ void	ft_init_project(t_data *data)
 
 int	ft_redraw(t_data *data)
 {
-	clock_t t;
-	double ret;
+	clock_t	t;
+	double	ret;
 
 	t = clock();
 	fill_background(&data->render, data->map.pattern[3]);

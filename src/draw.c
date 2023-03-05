@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 09:58:18 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/05 21:41:09 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/05 21:45:57 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 
 void	fill_background(t_img *img, int color)
 {
-	int i;
-	char *dst;
-	int pixel;
+	int		i;
+	char	*dst;
+	int		pixel;
 
 	i = 0;
 	pixel = img->size[X] * img->size[Y];
@@ -44,7 +44,6 @@ int	ft_is_outside(t_vec3f point, int canvas[2], float padding)
 
 	pad_x = canvas[X] * padding;
 	pad_y = canvas[Y] * padding;
-
 	if (point.x < (0 + pad_x) || point.x > (canvas[X] - pad_x))
 		return (1);
 	if (point.y < (0 + pad_y) || point.y > (canvas[Y] - pad_y))
@@ -129,8 +128,10 @@ void	draw_line(t_img *img, t_vec3f start, t_vec3f end)
 	{
 		line.factor = (line.len - line.remain) / line.len;
 		line.point[0].color = start.color + line.increment * line.factor;
-		my_mlx_pixel_put(img, line.point[0].x, line.point[0].y, line.point[0].color);
-		if (line.point[0].x == line.point[1].x && line.point[0].y == line.point[1].y)
+		my_mlx_pixel_put(img, line.point[0].x, line.point[0].y,
+			line.point[0].color);
+		if (line.point[0].x == line.point[1].x 
+			&& line.point[0].y == line.point[1].y)
 			break ;
 		line.error[1] = line.error[0] * 2;
 		if (line.error[1] > -line.delta[Y])
@@ -156,7 +157,7 @@ void	ft_clip_line(t_vec3f start, t_vec3f end, int size[2], t_img *img)
 	{
 		temp = end;
 		end = start;
-		start = temp;		
+		start = temp;
 	}
 	if (end.x < 0 || end.x > size[X])
 	{

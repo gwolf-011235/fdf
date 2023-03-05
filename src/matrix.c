@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 16:48:55 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/04 21:58:58 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/05 21:51:47 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,19 @@ t_vec3f	ft_mult_vec3f_mat4(t_vec3f vec, t_mat4 mat)
 {
 	t_vec3f	result;
 
-	result.x = vec.x * mat[0][0] + vec.y * mat[1][0] + vec.z * mat[2][0] + mat[3][0];
-	result.y = vec.x * mat[0][1] + vec.y * mat[1][1] + vec.z * mat[2][1] + mat[3][1];
-	result.z = vec.x * mat[0][2] + vec.y * mat[1][2] + vec.z * mat[2][2] + mat[3][2];
+	result.x = vec.x * mat[0][0] + vec.y * mat[1][0] + vec.z * mat[2][0]
+		+ mat[3][0];
+	result.y = vec.x * mat[0][1] + vec.y * mat[1][1] + vec.z * mat[2][1]
+		+ mat[3][1];
+	result.z = vec.x * mat[0][2] + vec.y * mat[1][2] + vec.z * mat[2][2]
+		+ mat[3][2];
 	return (result);
 }
 
 void	ft_init_mat4(t_mat4 matrix)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (i < 4)
@@ -67,8 +70,8 @@ void	ft_build_transmat(t_mat4 mat, t_props props)
 
 void	ft_copy_mat4(const t_mat4 src, t_mat4 dest)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (i < 4)

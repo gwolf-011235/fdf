@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:00:10 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/05 15:23:19 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/05 21:53:56 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void	ft_init_window(t_data *data)
 
 void	testwindow(t_data *data)
 {
-	//ft_init_menu(data);
 	mlx_hook(data->win, KeyPress, KeyPressMask, key_hook, data);
 	mlx_hook(data->win, ButtonPress, ButtonPressMask, ft_mouse_press, data);
 	mlx_hook(data->win, ButtonRelease, ButtonReleaseMask, \

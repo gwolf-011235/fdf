@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:29:34 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/01 12:54:28 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/05 21:55:23 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,11 @@ int	gradient(int start, int end, double len, double pos)
 
 void	ft_set_pattern(int pattern[4], int choice, int specific)
 {
-	const int colorschemes[4][4] = {
-		{YELLOW, RED, BLUE, BLACK},
-		{RED, BLACK, GREEN, WHITE},
-		{LIGHTBLUE, PINK, LIME, LIGHT_GRAY},
-		{D_GREEN, D_PURPLE, D_RED, D_GREY}
+	const int	colorschemes[4][4] = {
+	{YELLOW, RED, BLUE, BLACK},
+	{RED, BLACK, GREEN, WHITE},
+	{LIGHTBLUE, PINK, LIME, LIGHT_GRAY},
+	{D_GREEN, D_PURPLE, D_RED, D_GREY}
 	};
 
 	if (specific == 5)

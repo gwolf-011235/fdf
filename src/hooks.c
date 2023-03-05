@@ -6,27 +6,27 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:16:59 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/05 21:28:28 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/05 21:57:10 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "mlx.h"
 
-int key_hook(int key, t_data *data)
+int	key_hook(int key, t_data *data)
 {
-	if (key == KEY_A || key == KEY_S || key == KEY_D || key == KEY_F 
-			|| key == KEY_G || key == KEY_H)
+	if (key == KEY_A || key == KEY_S || key == KEY_D || key == KEY_F
+		|| key == KEY_G || key == KEY_H)
 		ft_key_angle(key, &data->map);
 	else if (key == KEY_Q || key == KEY_W || key == KEY_E || key == KEY_R)
 		ft_key_scale(key, &data->map);
 	else if (key >= KEY_ARROW_LEFT && key <= KEY_ARROW_DOWN)
 		ft_key_translate(key, &data->map);
 	else if (key == KEY_ONE || key == KEY_TWO || key == KEY_THREE
-			|| key == KEY_FOUR || key == KEY_FIVE)
+		|| key == KEY_FOUR || key == KEY_FIVE)
 		ft_key_color(key, &data->map);
-	else if (key == KEY_SPACE || key == KEY_B || key == KEY_PLUS 
-			|| key == KEY_MINUS)
+	else if (key == KEY_SPACE || key == KEY_B || key == KEY_PLUS
+		|| key == KEY_MINUS)
 		ft_key_sphere(key, &data->map);
 	else if (key == KEY_ESC)
 	{
@@ -80,7 +80,7 @@ int	ft_wrap_angle(float angle, int factor)
 
 void	ft_key_translate(int key, t_map *map)
 {
-	int factor;
+	int	factor;
 
 	factor = map->factor;
 	if (key == KEY_ARROW_LEFT)
@@ -179,7 +179,7 @@ void	ft_key_scale(int key, t_map *map)
 
 void	ft_key_color(int key, t_map *map)
 {
-	int specific;
+	int	specific;
 
 	specific = 5;
 	if (map->select)
