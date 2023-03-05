@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 09:58:18 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/03 18:37:11 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/05 16:11:09 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,6 +211,55 @@ void	ft_prep_bresenham(t_img *img, t_vec3f start, t_vec3f end)
 	if (vars.delta[X] == 0 && vars.delta[Y] == 0)
 		return ;
 	gradient_line(p_start, p_end, vars, img);
+}
+
+void	ft_connect_points(t_img *img, t_map *map)
+{
+	int		i;
+	int		j;
+	int		index;
+	t_vec3f	start;
+	t_vec3f	end;
+
+	i = 0;
+	while (i < map->height - 1)
+	{
+		index = i * map->width;
+		j = 0;
+		while (j < map->width - 1)
+		{
+			start = map->morph[index + j];
+			end = map->morph[index + j + 1];
+			if (!start.hidden && !end.hidden)
+				draw_line(img, start, end);
+			else if ((!start.hidden && end.hidden) || (start.hidden && !end.hidden))
+				ft_clip_line(start, end, img->size, img);
+			end = map->morph[index + j + map->width];
+			if (!start.hidden && !end.hidden)
+				draw_line(img, start, end);
+			else if ((!start.hidden && end.hidden) || (start.hidden && !end.hidden))
+				ft_clip_line(start, end, img->size, img);
+			j++;
+		}
+		end = map->morph[index + j + map->width];
+		if (!start.hidden && !end.hidden)
+			draw_line(img, start, end);
+		else if ((!start.hidden && end.hidden) || (start.hidden && !end.hidden))
+			ft_clip_line(start, end, img->size, img);
+		i++;
+	}
+	index = i * map->width;
+	j = 0;
+	while (j < map->width - 1)
+	{
+		start = map->morph[index + j];
+		end = map->morph[index + j + 1];
+		if (!start.hidden && !end.hidden)
+			draw_line(img, start, end);
+		else if ((!start.hidden && end.hidden) || (start.hidden && !end.hidden))
+			ft_clip_line(start, end, img->size, img);
+		j++;
+	}
 }
 
 void	lines(t_img *img, t_map *map)
