@@ -6,26 +6,11 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 10:22:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/05 21:53:36 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/05 22:50:41 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-void	ft_calc_edges(t_vec3f *edges, t_mat4 mat, int size[2])
-{
-	int		i;
-	t_vec3f	*m_edges;
-
-	m_edges = edges + 8;
-	i = 0;
-	while (i < 8)
-	{
-		m_edges[i] = ft_mult_vec3f_mat4(edges[i], mat);
-		m_edges[i].hidden = ft_is_outside(edges[i], size, 0);
-		i++;
-	}
-}
 
 void	ft_scale_z(t_vec3f *points, int *z_storage, int sum, float scale_z)
 {
@@ -39,16 +24,34 @@ void	ft_scale_z(t_vec3f *points, int *z_storage, int sum, float scale_z)
 	}
 }
 
-void	ft_calc_points(t_map *map, t_vec3f *points, int size[2])
+void	ft_calc_morph(t_vec3f *morph, t_vec3f *points, t_mat4 mat, t_map *map)
 {
 	int		i;
 
 	i = 0;
 	while (i < map->sum_points + 8)
 	{
-		map->morph[i] = ft_mult_vec3f_mat4(points[i], map->mat);
-		map->morph[i].color = points[i].color;
-		map->morph[i].hidden = ft_is_outside(map->morph[i], size, 0);
+		morph[i].x = points[i].x * mat[0][0] + points[i].y * mat[1][0]
+		+ points[i].z * mat[2][0] + mat[3][0];
+		morph[i].y = points[i].x * mat[0][1] + points[i].y * mat[1][1]
+		+ points[i].z * mat[2][1] + mat[3][1];
+		morph[i].z = points[i].x * mat[0][2] + points[i].y * mat[1][2]
+		+ points[i].z * mat[2][2] + mat[3][2];
+		if (morph[i].x < 0 || morph[i].x > map->props.canvas[X]
+			|| morph[i].y < 0 || morph[i].y > map->props.canvas[Y])
+			morph[i].hidden = true;
+		i++;
+	}
+}
+
+void	ft_set_morph_color(t_vec3f *morph, t_vec3f *points, int sum)
+{
+	int	i;
+
+	i = 0;
+	while (i < sum)
+	{
+		morph[i].color = points[i].color;
 		i++;
 	}
 }
@@ -62,7 +65,8 @@ void	ft_init_project(t_data *data)
 	data->map.props.iso = true;
 	map->props.scale = ft_fit_box(map->edges, map->mat, map->props);
 	data->map.props.iso = false;
-	ft_calc_points(map, map->points, data->render.size);
+	ft_calc_morph(map->morph, map->points, map->mat, map);
+	ft_set_morph_color(map->morph, map->points, map->sum_points);
 	lines(&data->render, &data->map);
 	ft_draw_box(&data->render, data->map.corner[1]);
 	mlx_put_image_to_window(data->mlx, data->win, data->render.ptr, 0, 0);
@@ -72,16 +76,18 @@ int	ft_redraw(t_data *data)
 {
 	clock_t	t;
 	double	ret;
+	t_map	*map;
 
+	map = &data->map;
 	t = clock();
 	fill_background(&data->render, data->map.pattern[3]);
-	if (!data->map.props.sphere)
-		ft_calc_points(&data->map, data->map.points, data->render.size);
+	if (!map->props.sphere)
+		ft_calc_morph(map->morph, map->points, map->mat, map);
 	else
-		ft_calc_points(&data->map, data->map.polar, data->render.size);
-	lines(&data->render, &data->map);
-	if (data->map.props.box)
-		ft_draw_box(&data->render, data->map.corner[1]);
+		ft_calc_morph(map->morph, map->polar, map->mat, map);
+	lines(&data->render, map);
+	if (map->props.box)
+		ft_draw_box(&data->render, map->corner[1]);
 	mlx_do_sync(data->mlx);
 	mlx_put_image_to_window(data->mlx, data->win, data->render.ptr, 0, 0);
 	t = clock() - t;
