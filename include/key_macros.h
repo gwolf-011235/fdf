@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 10:32:42 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/05 07:31:34 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/05 16:44:29 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # define KEY_ARROW_DOWN 65364
 # define KEY_SPACE 32
 # define KEY_A 97
+# define KEY_B 98
 # define KEY_D 100
 # define KEY_E 101
 # define KEY_F 102
