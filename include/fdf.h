@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/05 21:17:32 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/05 21:35:59 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,27 +53,6 @@ typedef struct s_coord
 	float	lon;
 	float	lat;
 }	t_coord;
-
-typedef struct s_bresvars {
-	int	decision;
-	int	delta[2];
-	int	incr[2];
-	char *scr_pos;
-	int line_incr;
-}	t_bresvars;
-
-typedef struct s_argb {
-	int a;
-	int r;
-	int g;
-	int b;
-}	t_argb;
-
-typedef struct s_pixel {
-	int		x;
-	int		y;
-	t_argb	color;
-}	t_pixel;
 
 typedef float	t_mat4[4][4];
 
@@ -301,12 +280,6 @@ void	ft_set_ang_coords(t_map *map, int sum);
 
 //test.c
 void	test(t_data *data);
-
-//bresenham.c
-t_pixel	ft_convert_pixel(t_vec3f point);
-void	ft_swap_pixel(t_pixel *one, t_pixel *two);
-void gradient_line(t_pixel start, t_pixel end, t_bresvars vars, t_img *img);
-void ft_init_bresvars(t_bresvars *vars, t_pixel start, t_pixel end);
 
 
 #endif
