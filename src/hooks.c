@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:16:59 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/05 19:07:30 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/05 21:28:28 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ int key_hook(int key, t_data *data)
 	else if (key == KEY_ONE || key == KEY_TWO || key == KEY_THREE
 			|| key == KEY_FOUR || key == KEY_FIVE)
 		ft_key_color(key, &data->map);
-	else if (key == KEY_SPACE || key == KEY_B)
+	else if (key == KEY_SPACE || key == KEY_B || key == KEY_PLUS 
+			|| key == KEY_MINUS)
 		ft_key_sphere(key, &data->map);
 	else if (key == KEY_ESC)
 	{
@@ -33,7 +34,6 @@ int key_hook(int key, t_data *data)
 		exit(0);
 	}
 	ft_redraw(data);
-	usleep(16667);
 	printf("This is key: %d\n", key);
 	return (0);
 }
@@ -51,6 +51,20 @@ void	ft_key_sphere(int key, t_map *map)
 	else if (key == KEY_B)
 	{
 		map->props.box = !map->props.box;
+	}
+	else if (key == KEY_PLUS)
+	{
+		if (map->factor == 1)
+			map->factor = 3;
+		else if (map->factor == 3)
+			map->factor = 5;
+	}
+	else if (key == KEY_MINUS)
+	{
+		if (map->factor == 5)
+			map->factor = 3;
+		else if (map->factor == 3)
+			map->factor = 1;
 	}
 }
 
