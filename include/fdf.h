@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/05 07:39:58 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/05 21:17:32 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,14 +103,15 @@ typedef struct s_line {
 	float	factor;
 }	t_line;
 
-typedef struct s_matinfo {
+typedef struct s_props {
 	float	scale;
-	float	scale_z;;
+	float	scale_z;
 	float	angle[3];
 	float	translate[3];
 	int		canvas[4];
 	bool	iso;
 	bool	sphere;
+	bool	box;
 }	t_props;
 
 typedef struct s_map {
@@ -183,6 +184,7 @@ void	draw_line(t_img *img, t_vec3f start, t_vec3f end);
 void	draw_points(t_img *img, t_map *map);
 void	fill_background(t_img *img, int color);
 void	lines(t_img *img, t_map *map);
+void	ft_connect_points(t_img *img, t_map *map);
 int		ft_is_inside(t_point point, int win_x, int win_y);
 int		ft_is_outside(t_vec3f point, int canvas[2], float padding);
 
@@ -205,6 +207,8 @@ void	ft_key_sphere(int key, t_map *map);
 int		ft_mouse_press(int button, int x, int y, t_data *data);
 int		ft_mouse_release(int button, int x, int y, t_data *data);
 int		ft_mouse_move(int x, int y, t_data *data);
+void	ft_mouse_angle(int x, int y, t_data *data);
+void	ft_mouse_translate(int x, int y, t_data *data);
 
 //window.c
 void	testwindow(t_data *data);
@@ -273,6 +277,15 @@ float	ft_fit_box(t_vec3f *corner, t_mat4 mat, t_props props);
 
 //precalc_matrix.c
 void	ft_const_iso(t_mat4 transmat);
+void	ft_precalc_rot_x(t_mat4 mat, int index);
+void	ft_precalc_rot_x_r(t_mat4 mat, int index);
+void	ft_precalc_rot_y(t_mat4 mat, int index);
+void	ft_precalc_rot_y_r(t_mat4 mat, int index);
+//precalc_matrix2.c
+void	ft_precalc_rot_z(t_mat4 mat, int index);
+void	ft_precalc_rot_z_r(t_mat4 mat, int index);
+void	ft_precalc_zoom_in(t_mat4 mat, int index);
+void	ft_precalc_zoom_out(t_mat4 mat, int index);
 
 //pixel.c
 void	ft_init_pixel(t_vec3f *morph, t_point *pixel, int sum);
