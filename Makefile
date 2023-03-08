@@ -62,13 +62,13 @@ $(NAME): $(OBJS) $(LIBFT) $(MLX)
 	$(COMPILE) $(OBJS) $(LIBS) -o $(NAME)
 
 debug: CFLAGS += -g
-debug: clean $(NAME)
-	$(CC) $(CFLAGS) $(INC) $(OBJS) $(LIBS) -o $(NAME)
+debug: clean $(OBJS) $(LIBFT) $(MLX)
+	$(COMPILE) $(OBJS) $(LIBS) -o $(NAME)
 	echo "$(NAME) created - DEBUG MODE!"
 
 profile: CFLAGS += -pg
-profile: clean $(NAME) | $(LOG_DIR)
-	$(CC) $(CFLAGS) $(INC) $(OBJS) $(LIBS) -o $(NAME)
+profile: clean §(OBJS) $(LIBFT) $(MLX) | $(LOG_DIR)
+	$(COMPILE) $(OBJS) $(LIBS) -o $(NAME)
 	./$(NAME) test_maps/julia.fdf
 	gprof fdf > $(LOG_FILE)
 	rm gmon.out
