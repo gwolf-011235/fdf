@@ -6,13 +6,13 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 20:28:13 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/08 17:45:49 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/08 18:31:56 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	ft_set_corners(t_vec3f *corner, int min[3], int max[3])
+void	ft_set_corners(t_vec3f *corner, float limits[6])
 {
 	int	i;
 
@@ -20,17 +20,17 @@ void	ft_set_corners(t_vec3f *corner, int min[3], int max[3])
 	while (i < 8)
 	{
 		if (i == 1 || i == 2 || i == 5 || i == 6)
-			corner[i].x = max[X];
+			corner[i].x = limits[XMAX];
 		else
-			corner[i].x = min[X];
+			corner[i].x = limits[XMIN];
 		if (i == 2 || i == 3 || i == 6 || i == 7)
-			corner[i].y = max[Y];
+			corner[i].y = limits[YMAX];
 		else
-			corner[i].y = min[Y];
-		if (i < 4)
-			corner[i].z = min[Z];
+			corner[i].y = limits[YMIN];
+		if (i >= 4)
+			corner[i].z = limits[ZMAX];
 		else
-			corner[i].z = max[Z];
+			corner[i].z = limits[ZMIN];
 		i++;
 	}
 }

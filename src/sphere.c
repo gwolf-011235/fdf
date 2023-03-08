@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 07:34:37 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/08 18:09:51 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/08 18:33:29 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	ft_set_ang_coords(t_map *map, int sum)
 	float	step_lat;
 
 	i = 0;
-	step_lon = (2 * M_PI) / map->max[X];
-	step_lat = M_PI / map->max[Y];
+	step_lon = (2 * M_PI) / map->limits[XMAX];
+	step_lat = M_PI / map->limits[YMAX];
 	map->radius = map->width / (2 * M_PI);
 	while (i < sum)
 	{
@@ -34,18 +34,17 @@ void	ft_find_limits_sphere(t_map *map, t_vec3f *polar)
 {
 	int	i;
 
-	ft_memset(map->min, 0, sizeof(map->min));
-	ft_memset(map->max, 0, sizeof(map->max));
+	ft_memset(map->limits_sp, 0, sizeof(map->limits_sp));
 
 	i = 0;
 	while (i < map->sum_points)
 	{
-		map->max[X] = fmax(polar[i].x, map->max[X]);
-		map->min[X] = fmin(polar[i].x, map->min[X]);
-		map->max[Y] = fmax(polar[i].y, map->max[Y]);
-		map->min[Y] = fmin(polar[i].y, map->min[Y]);
-		map->max[Z] = fmax(polar[i].z, map->max[Z]);
-		map->min[Z] = fmin(polar[i].z, map->min[Z]);
+		map->limits_sp[XMAX] = fmax(polar[i].x, map->limits_sp[XMAX]);
+		map->limits_sp[XMIN] = fmin(polar[i].x, map->limits_sp[XMIN]);
+		map->limits_sp[YMAX] = fmax(polar[i].y, map->limits_sp[YMAX]);
+		map->limits_sp[YMIN] = fmin(polar[i].y, map->limits_sp[YMIN]);
+		map->limits_sp[ZMAX] = fmax(polar[i].z, map->limits_sp[ZMAX]);
+		map->limits_sp[ZMIN] = fmin(polar[i].z, map->limits_sp[ZMIN]);
 		i++;
 	}
 }
@@ -68,5 +67,5 @@ void	ft_calc_sphere_points(t_map *map, t_coord *ang_coord, t_vec3f *polar)
 		i++;
 	}
 	ft_find_limits_sphere(map, polar);
-	ft_set_corners(map->corner[2], map->min, map->max);
+	ft_set_corners(map->corner[2], map->limits_sp);
 }

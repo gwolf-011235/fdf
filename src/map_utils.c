@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 09:27:53 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/08 17:33:13 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/08 18:23:30 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,22 +29,22 @@ void	ft_find_limits_z(t_map *map)
 	i = 0;
 	while (i < map->sum_points)
 	{
-		map->max[Z] = fmax(map->points[i].z, map->max[Z]);
-		map->min[Z] = fmin(map->points[i].z, map->min[Z]);
+		map->limits[ZMAX] = fmax(map->points[i].z, map->limits[ZMAX]);
+		map->limits[ZMIN] = fmin(map->points[i].z, map->limits[ZMIN]);
 		i++;
 	}
 }
 
 void	ft_set_limits_xy(t_map *map)
 {
-	map->min[X] = -(map->width / 2);
-	map->min[Y] = -(map->height / 2);
-	map->max[X] = map->min[X] * -1;
-	map->max[Y] = map->min[Y] * -1;
+	map->limits[XMIN] = -(map->width / 2);
+	map->limits[YMIN] = -(map->height / 2);
+	map->limits[XMAX] = map->limits[XMIN] * -1;
+	map->limits[YMAX] = map->limits[YMIN] * -1;
 	if (!(map->width % 2))
-		map->max[X]--;
+		map->limits[XMAX]--;
 	if (!(map->height % 2))
-		map->max[Y]--;
+		map->limits[YMAX]--;
 }
 
 void	ft_fill_z_storage(t_map *map)
@@ -60,8 +60,8 @@ void	ft_fill_z_storage(t_map *map)
 	i = 0;
 	while (i < 4)
 	{
-		map->z_storage[map->sum_points + i] = map->min[Z];
-		map->z_storage[map->sum_points + 4 + i] = map->max[Z];
+		map->z_storage[map->sum_points + i] = map->limits[ZMIN];
+		map->z_storage[map->sum_points + 4 + i] = map->limits[ZMAX];
 		i++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/08 17:45:56 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/08 18:16:11 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,12 @@
 # define LAT 1
 # define OFFSET_X 2
 # define OFFSET_Y 3
+# define XMAX 0
+# define XMIN 1
+# define YMAX 2
+# define YMIN 3
+# define ZMAX 4
+# define ZMIN 5
 
 typedef struct s_coord
 {
@@ -108,9 +114,8 @@ typedef struct s_map {
 	int		width;
 	char	*rows[ROW_MAX];
 	bool	hex;
-	int		offset[2];
-	int		min[3];
-	int		max[3];	
+	float	limits[6];
+	float	limits_sp[6];
 	int		factor;
 	bool	select;
 	int		pattern[4];
@@ -252,7 +257,7 @@ void	ft_print_point(t_vec3f point);
 void	ft_print_inverse(float inverse[4][8]);
 
 //box.c
-void	ft_set_corners(t_vec3f *corner, int min[3], int max[3]);
+void	ft_set_corners(t_vec3f *corner, float limits[6]);
 void	ft_draw_box(t_img *img, t_vec3f *edges);
 float	ft_fit_box(t_vec3f *corner, t_mat4 mat, t_props props);
 
