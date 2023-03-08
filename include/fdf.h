@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/05 22:36:57 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/08 17:45:56 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,10 @@
 # include "X.h"
 # include "key_macros.h"
 
+# ifndef M_PI
+#  define M_PI 3.14159265358979323846
+# endif
+
 # define ROW_MAX 1000
 # define RAD 0.01745329251
 # define X 0
@@ -44,9 +48,6 @@
 # define LAT 1
 # define OFFSET_X 2
 # define OFFSET_Y 3
-# ifndef M_PI
-	#define M_PI 3.14159265358979323846
-# endif
 
 typedef struct s_coord
 {
@@ -74,8 +75,8 @@ typedef struct s_line {
 	t_point	point[2];
 	int		delta[2];
 	int		step[2];
-	int 	error[2];
-	int 	len;
+	int		error[2];
+	int		len;
 	int		remain;
 	float	increment;
 	float	factor;
@@ -125,10 +126,11 @@ typedef struct s_img {
 	int		endian;
 	int		bytes;
 	int		size[2];
+	uint64_t	created_at;
 }	t_img;
 
 typedef struct s_mouse {
-	bool 	left;
+	bool	left;
 	bool	right;
 	int		last_left[2];
 	int		last_right[2];
@@ -232,7 +234,9 @@ void	ft_scale_z(t_vec3f *points, int *z_storage, int sum, float scale_z);
 
 //map_utils.c
 void	ft_map_init(t_map *map);
-void	ft_find_extremes(t_map *map, int z);
+void	ft_set_limits_xy(t_map *map);
+void	ft_find_limits_z(t_map *map);
+void	ft_fill_z_storage(t_map *map);
 
 //utils.c
 int		ft_move_atoi(char *line);
@@ -248,7 +252,7 @@ void	ft_print_point(t_vec3f point);
 void	ft_print_inverse(float inverse[4][8]);
 
 //box.c
-void	ft_set_corner(t_vec3f *corner, int min[3], int max[3], int *z_store_c);
+void	ft_set_corners(t_vec3f *corner, int min[3], int max[3]);
 void	ft_draw_box(t_img *img, t_vec3f *edges);
 float	ft_fit_box(t_vec3f *corner, t_mat4 mat, t_props props);
 
@@ -276,8 +280,11 @@ void	ft_draw_circle(t_img *img, t_point center, int radius);
 void	ft_calc_sphere_points(t_map *map, t_coord *ang_coord, t_vec3f *polar);
 void	ft_set_ang_coords(t_map *map, int sum);
 
+//time.c
+uint64_t	ft_get_timeofday_ms(void);
+uint64_t	ft_timestamp_ms(t_img *img);
+
 //test.c
 void	test(t_data *data);
-
 
 #endif
