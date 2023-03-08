@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 08:30:19 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/06 19:31:08 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/08 19:07:15 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ int	ft_mouse_press(int button, int x, int y, t_data *data)
 	else if (button == M_SCROLL_UP)
 	{
 		data->map.props.scale += data->map.factor * 0.1;
-		ft_precalc_zoom_in(data->map.mat, data->map.factor * 0.5);
+		ft_precalc_zoom(data->map.mat, data->map.factor - 1);
 	}
 	else if (button == M_SCROLL_DOWN)
 	{
 		data->map.props.scale -= data->map.factor * 0.1;
-		ft_precalc_zoom_out(data->map.mat, data->map.factor * 0.5);
+		ft_precalc_zoom(data->map.mat, data->map.factor);
 	}
 	return (0);
 }

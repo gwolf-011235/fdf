@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/08 18:16:11 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/08 19:05:49 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -262,16 +262,11 @@ void	ft_draw_box(t_img *img, t_vec3f *edges);
 float	ft_fit_box(t_vec3f *corner, t_mat4 mat, t_props props);
 
 //precalc_matrix.c
-void	ft_const_iso(t_mat4 transmat);
 void	ft_precalc_rot_x(t_mat4 mat, int index);
-void	ft_precalc_rot_x_r(t_mat4 mat, int index);
 void	ft_precalc_rot_y(t_mat4 mat, int index);
-void	ft_precalc_rot_y_r(t_mat4 mat, int index);
-//precalc_matrix2.c
 void	ft_precalc_rot_z(t_mat4 mat, int index);
-void	ft_precalc_rot_z_r(t_mat4 mat, int index);
-void	ft_precalc_zoom_in(t_mat4 mat, int index);
-void	ft_precalc_zoom_out(t_mat4 mat, int index);
+//precalc_matrix2.c
+void	ft_precalc_zoom(t_mat4 mat, int index);
 
 //pixel.c
 void	ft_init_pixel(t_vec3f *morph, t_point *pixel, int sum);

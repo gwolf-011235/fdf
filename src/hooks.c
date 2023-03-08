@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:16:59 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/08 17:49:21 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/08 19:06:32 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,32 +116,32 @@ void	ft_key_angle(int key, t_map *map)
 	if (key == KEY_A)
 	{
 		map->props.angle[X] -= factor;
-		ft_precalc_rot_x_r(map->mat, factor * 0.5);
+		ft_precalc_rot_x(map->mat, factor);
 	}
 	else if (key == KEY_S)
 	{
 		map->props.angle[X] += factor;
-		ft_precalc_rot_x(map->mat, factor * 0.5);
+		ft_precalc_rot_x(map->mat, factor -1);
 	}
 	else if (key == KEY_D)
 	{
 		map->props.angle[Y] -= factor;
-		ft_precalc_rot_y_r(map->mat, factor * 0.5);
+		ft_precalc_rot_y(map->mat, factor);
 	}
 	else if (key == KEY_F)
 	{
 		map->props.angle[Y] += factor;
-		ft_precalc_rot_y(map->mat, factor * 0.5);
+		ft_precalc_rot_y(map->mat, factor - 1);
 	}
 	else if (key == KEY_G)
 	{
 		map->props.angle[Z] -= factor;
-		ft_precalc_rot_z_r(map->mat, factor * 0.5);
+		ft_precalc_rot_z(map->mat, factor);
 	}
 	else if (key == KEY_H)
 	{
 		map->props.angle[Z] += factor;
-		ft_precalc_rot_z(map->mat, factor * 0.5);
+		ft_precalc_rot_z(map->mat, factor - 1);
 	}
 }
 
@@ -153,12 +153,12 @@ void	ft_key_scale(int key, t_map *map)
 	if (key == KEY_Q)
 	{
 		map->props.scale += 0.1 * factor;
-		ft_precalc_zoom_in(map->mat, factor * 0.5);
+		ft_precalc_zoom(map->mat, factor - 1);
 	}
 	else if (key == KEY_W)
 	{
 		map->props.scale -= 0.1 * factor;
-		ft_precalc_zoom_out(map->mat, factor * 0.5);
+		ft_precalc_zoom(map->mat, factor);
 	}
 	else if (key == KEY_E)
 	{
