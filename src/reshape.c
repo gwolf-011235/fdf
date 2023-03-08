@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 10:22:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/05 22:55:46 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/07 23:08:48 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,12 @@ int	ft_redraw(t_data *data)
 	clock_t	t;
 	double	ret;
 	t_map	*map;
+	static uint64_t last_update;
 
+	if (ft_timestamp_ms(&data->render) - last_update < (uint64_t)(1000 / 30))
+		return (0);
+	last_update = ft_timestamp_ms(&data->render);
+	printf("TIME: %ld\n", last_update);
 	map = &data->map;
 	t = clock();
 	fill_background(&data->render, data->map.pattern[3]);
@@ -90,7 +95,6 @@ int	ft_redraw(t_data *data)
 	lines(&data->render, map);
 	if (map->props.box)
 		ft_draw_box(&data->render, map->corner[1]);
-	mlx_do_sync(data->mlx);
 	mlx_put_image_to_window(data->mlx, data->win, data->render.ptr, 0, 0);
 	t = clock() - t;
 	ret = (double)t / CLOCKS_PER_SEC;
