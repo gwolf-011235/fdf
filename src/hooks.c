@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:16:59 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/05 21:57:10 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/08 17:49:21 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int	key_hook(int key, t_data *data)
 		ft_free_mlx(data, CYA, false);
 		exit(0);
 	}
-	ft_redraw(data);
 	printf("This is key: %d\n", key);
 	return (0);
 }
@@ -46,7 +45,11 @@ void	ft_key_sphere(int key, t_map *map)
 		if (map->props.sphere)
 			ft_calc_sphere_points(map, map->ang_coord, map->polar);
 		else
+		{
 			ft_scale_z(map->points, map->z_storage, map->sum_points, map->props.scale_z);
+			ft_set_limits_xy(map);
+			ft_find_limits_z(map);
+		}
 	}
 	else if (key == KEY_B)
 	{
