@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 08:30:19 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/05 21:18:06 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/06 19:31:08 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int	ft_mouse_press(int button, int x, int y, t_data *data)
 		data->map.props.scale -= data->map.factor * 0.1;
 		ft_precalc_zoom_out(data->map.mat, data->map.factor * 0.5);
 	}
-	ft_redraw(data);
 	return (0);
 }
 
@@ -63,7 +62,6 @@ int	ft_mouse_move(int x, int y, t_data *data)
 	{
 		ft_mouse_translate(x, y, data);
 	}
-	ft_redraw(data);
 	return (0);
 }
 
