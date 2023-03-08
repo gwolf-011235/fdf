@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:00:33 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/05 08:03:15 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/08 17:46:06 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,7 @@ void	ft_parse_line(t_map *map, char *line, int i)
 	{
 		map->points[i].x = ((i % map->width) + map->min[X]);
 		map->points[i].y = ((i / map->width) + map->min[Y]);
-		map->z_storage[i] = ft_atoi(&line[j]);
-		map->points[i].z = map->z_storage[i];
-		ft_find_extremes(map, map->points[i].z);
+		map->points[i].z = ft_atoi(&line[j]);
 		j += ft_move_atoi(&line[j]);
 		if (map->hex && line[j] == ',')
 		{
@@ -91,22 +89,16 @@ void	ft_parse_map(t_map *map)
 	int	i;
 
 	ft_map_alloc(map);
-	map->min[X] = -(map->width / 2);
-	map->min[Y] = -(map->height / 2);
-	map->max[X] = map->min[X] * -1;
-	map->max[Y] = map->min[Y] * -1;
-	if (!(map->width % 2))
-		map->max[X]--;
-	if (!(map->height % 2))
-		map->max[Y]--;
+	ft_set_limits_xy(map);
 	i = 0;
 	while (i < map->height)
 	{
 		ft_parse_line(map, map->rows[i], i * map->width);
 		i++;
 	}
+	ft_find_limits_z(map);
+	ft_fill_z_storage(map);
 	ft_set_colors(map, map->points);
-	ft_set_corner(map->corner[0], map->min, map->max, \
-			(map->z_storage + map->sum_points));
+	ft_set_corners(map->corner[0], map->min, map->max);
 	ft_set_ang_coords(map, map->sum_points);
 }
