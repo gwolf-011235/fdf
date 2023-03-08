@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:16:59 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/08 19:06:32 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/09 00:25:05 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ int	key_hook(int key, t_data *data)
 	else if (key == KEY_SPACE || key == KEY_B || key == KEY_PLUS
 		|| key == KEY_MINUS)
 		ft_key_sphere(key, &data->map);
+	else if (key == KEY_SIX || key == KEY_SEVEN || key == KEY_EIGHT
+		|| key == KEY_NINE)
+		ft_key_view(key, &data->map);
 	else if (key == KEY_ESC)
 	{
 		ft_free_mlx(data, CYA, false);
@@ -35,6 +38,30 @@ int	key_hook(int key, t_data *data)
 	}
 	printf("This is key: %d\n", key);
 	return (0);
+}
+
+void	ft_key_view(int key, t_map *map)
+{
+	if (key == KEY_SIX)
+	{
+		map->props.view = 1;
+		ft_build_transmat(map->mat, map->props);
+	}
+	if (key == KEY_SEVEN)
+	{
+		map->props.view = 2;
+		ft_build_transmat(map->mat, map->props);
+	}
+	if (key == KEY_EIGHT)
+	{
+		map->props.view = 3;
+		ft_build_transmat(map->mat, map->props);
+	}
+	if (key == KEY_NINE)
+	{
+		map->props.view = 4;
+		ft_build_transmat(map->mat, map->props);
+	}
 }
 
 void	ft_key_sphere(int key, t_map *map)

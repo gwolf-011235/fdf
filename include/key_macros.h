@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 10:32:42 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/05 21:25:14 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/09 00:05:25 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,10 @@
 # define KEY_THREE 51
 # define KEY_FOUR 52
 # define KEY_FIVE 53
+# define KEY_SIX 54
+# define KEY_SEVEN 55
+# define KEY_EIGHT 56
+# define KEY_NINE 57
 
 # define M_LEFT 1
 # define M_RIGHT 3

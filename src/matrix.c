@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 16:48:55 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/05 21:51:47 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/09 00:04:24 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,10 @@ void	ft_build_transmat(t_mat4 mat, t_props props)
 	mat[1][1] = props.scale;
 	mat[2][2] = props.scale;
 	mat[3][3] = 1;
-	if (props.iso)
+	if (props.view != 0)
 	{
-		ft_rotate_x(mat, props.angle[X]);
-		ft_rotate_z(mat, props.angle[Z]);
-		ft_print_mat4(mat);
+		ft_precalc_view(mat, props.view);
+		props.view = 0;
 	}
 	else
 	{

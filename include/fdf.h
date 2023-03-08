@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/08 19:05:49 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/09 00:08:15 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,9 @@
 # define YMIN 3
 # define ZMAX 4
 # define ZMIN 5
+# define TOP 1
+# define ISO 2
+# define NICE 3
 
 typedef struct s_coord
 {
@@ -97,6 +100,7 @@ typedef struct s_props {
 	bool	iso;
 	bool	sphere;
 	bool	box;
+	uint8_t	view;
 }	t_props;
 
 typedef struct s_map {
@@ -187,6 +191,7 @@ void	ft_key_angle(int key, t_map *map);
 void	ft_key_scale(int key, t_map *map);
 void	ft_key_color(int key, t_map *map);
 void	ft_key_sphere(int key, t_map *map);
+void	ft_key_view(int key, t_map *map);
 
 //mouse.c
 int		ft_mouse_press(int button, int x, int y, t_data *data);
@@ -267,6 +272,7 @@ void	ft_precalc_rot_y(t_mat4 mat, int index);
 void	ft_precalc_rot_z(t_mat4 mat, int index);
 //precalc_matrix2.c
 void	ft_precalc_zoom(t_mat4 mat, int index);
+void	ft_precalc_view(t_mat4 mat, int index);
 
 //pixel.c
 void	ft_init_pixel(t_vec3f *morph, t_point *pixel, int sum);

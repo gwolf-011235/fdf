@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 10:22:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/07 23:08:48 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/08 22:55:49 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	ft_init_project(t_data *data)
 
 	map = &data->map;
 	ft_scale_z(map->points, map->z_storage, map->sum_points, 0.1);
-	data->map.props.iso = true;
+	//data->map.props.iso = true;
 	map->props.scale = ft_fit_box(map->edges, map->mat, map->props);
 	data->map.props.iso = false;
 	ft_calc_morph(map->morph, map->points, map->mat, map);
