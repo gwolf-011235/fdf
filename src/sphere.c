@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 07:34:37 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/05 21:50:15 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/08 18:09:51 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,26 @@ void	ft_set_ang_coords(t_map *map, int sum)
 	}
 }
 
+void	ft_find_limits_sphere(t_map *map, t_vec3f *polar)
+{
+	int	i;
+
+	ft_memset(map->min, 0, sizeof(map->min));
+	ft_memset(map->max, 0, sizeof(map->max));
+
+	i = 0;
+	while (i < map->sum_points)
+	{
+		map->max[X] = fmax(polar[i].x, map->max[X]);
+		map->min[X] = fmin(polar[i].x, map->min[X]);
+		map->max[Y] = fmax(polar[i].y, map->max[Y]);
+		map->min[Y] = fmin(polar[i].y, map->min[Y]);
+		map->max[Z] = fmax(polar[i].z, map->max[Z]);
+		map->min[Z] = fmin(polar[i].z, map->min[Z]);
+		i++;
+	}
+}
+
 void	ft_calc_sphere_points(t_map *map, t_coord *ang_coord, t_vec3f *polar)
 {
 	int		i;
@@ -47,4 +67,6 @@ void	ft_calc_sphere_points(t_map *map, t_coord *ang_coord, t_vec3f *polar)
 		polar[i].color = map->points[i].color;
 		i++;
 	}
+	ft_find_limits_sphere(map, polar);
+	ft_set_corners(map->corner[2], map->min, map->max);
 }
