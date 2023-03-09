@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:54:09 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/07 23:10:13 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/09 19:13:19 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,5 @@ int	main(int argc, char *argv[])
 	ft_parse_map(&data.map);
 	ft_init_window(&data);
 	ft_init_project(&data);
-	//test(&data);
 	testwindow(&data);
 }

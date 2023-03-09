@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 14:38:32 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/09 16:05:20 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/09 19:21:43 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,6 @@ void	ft_draw_line(t_img *img, t_line *line)
 			line->error[0] += line->delta.x;
 			line->start.y += line->step[Y];
 		}
+		line->remain--;
 	}
 }
