@@ -6,15 +6,15 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 08:44:25 by gwolf             #+#    #+#             */
-/*   Updated: 2023/02/25 19:37:21 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/09 19:24:17 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-t_point	ft_math_pt(t_point one, t_point two, int x, int y)
+t_pixel	ft_math_pt(t_pixel one, t_pixel two, int x, int y)
 {
-	t_point	ret;
+	t_pixel	ret;
 
 	if (x == 0)
 		ret.x = one.x + two.x;
