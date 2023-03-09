@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/09 00:08:15 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/09 10:51:04 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 # include "colors.h"
 # include "X.h"
 # include "key_macros.h"
+# include "angles.h"
 
 # ifndef M_PI
 #  define M_PI 3.14159265358979323846
