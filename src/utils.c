@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 16:11:11 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/05 21:43:24 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/09 16:22:18 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,23 @@ int	ft_hex_to_dec(char *line, int len)
 		i++;
 	}
 	return (decimal);
+}
+
+void	ft_swap_poins(t_vec3f *start, t_vec3f *end)
+{
+	t_vec3f	temp;
+
+	temp = *end;
+	*end = *start;
+	*start = temp;
+}
+
+int	ft_wrap_angle(float angle, int factor)
+{
+	angle += factor;
+	if (angle < 0)
+		angle = 360 - factor;
+	if (angle > 360)
+		angle = 0 + factor;
+	return (angle);
 }

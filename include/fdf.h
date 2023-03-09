@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/09 14:18:16 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/09 17:15:07 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,21 +75,20 @@ typedef struct s_vec3f {
 	bool	hidden;
 }	t_vec3f;
 
-typedef struct s_point {
+typedef struct s_pixel {
 	int	x;
 	int	y;
 	int	color;
-}	t_point;
+}	t_pixel;
 
 typedef struct s_line {
-	t_point	point[2];
-	int		delta[2];
+	t_pixel	start;
+	t_pixel	end;
+	t_pixel delta;
 	int		step[2];
 	int		error[2];
 	int		len;
 	int		remain;
-	float	increment;
-	float	factor;
 }	t_line;
 
 typedef struct s_props {
@@ -174,7 +173,6 @@ void	draw_points(t_img *img, t_map *map);
 void	fill_background(t_img *img, int color);
 void	lines(t_img *img, t_map *map);
 void	ft_connect_points(t_img *img, t_map *map);
-int		ft_is_inside(t_point point, int win_x, int win_y);
 int		ft_is_outside(t_vec3f point, int canvas[2], float padding);
 
 //color.c
@@ -183,15 +181,18 @@ int		gradient(int color_start, int color_end, double len, double pos);
 int		ft_alpha_blend(int new_color, int old_color);
 void	ft_set_pattern(int pattern[4], int choice);
 
-//hooks.c
+//key_hooks.c
+int		ft_key_hook_press(int key, t_data *data);
 void	ft_key_translate(int key, t_map *map);
-int		key_hook(int key, t_data *vars);
-void	ft_key_props(int key, t_data *data);
 void	ft_key_angle(int key, t_map *map);
+void	ft_key_angle2(int key, t_map *map);
+void	ft_key_zoom(int key, t_map *map);
+//key_hooks2.c
 void	ft_key_scale(int key, t_map *map);
 void	ft_key_color(int key, t_map *map);
 void	ft_key_sphere(int key, t_map *map);
 void	ft_key_view(int key, t_map *map);
+void	ft_key_stuff(int key, t_map *map, t_data *data);
 
 //mouse.c
 int		ft_mouse_press(int button, int x, int y, t_data *data);
@@ -253,6 +254,8 @@ void	ft_fill_z_storage(t_map *map);
 int		ft_move_atoi(char *line);
 int		ft_hex_to_dec(char *line, int len);
 int		ft_jump_over_hex(char *line);
+void	ft_swap_poins(t_vec3f *start, t_vec3f *end);
+int		ft_wrap_angle(float angle, int factor);
 
 //menu.c
 void	ft_init_menu(t_data *data);
@@ -275,13 +278,8 @@ void	ft_precalc_rot_z(t_mat4 mat, int index);
 void	ft_precalc_zoom(t_mat4 mat, int index);
 void	ft_precalc_view(t_mat4 mat, int index);
 
-//pixel.c
-void	ft_init_pixel(t_vec3f *morph, t_point *pixel, int sum);
-void	ft_update_pix_point(t_vec3f *morph, t_point *pixel, int sum);
-void	ft_update_pix_color(int *colors, t_point *pixel, int sum);
-
 //shapes.c
-void	ft_draw_circle(t_img *img, t_point center, int radius);
+void	ft_draw_circle(t_img *img, t_pixel center, int radius);
 
 //sphere.c
 void	ft_calc_sphere_points(t_map *map, t_coord *ang_coord, t_vec3f *polar);
@@ -290,6 +288,17 @@ void	ft_set_ang_coords(t_map *map, int sum);
 //time.c
 uint64_t	ft_get_timeofday_ms(void);
 uint64_t	ft_timestamp_ms(t_img *img);
+
+//bresenham.c
+void	ft_draw_line(t_img *img, t_line *line);
+void	ft_prep_bresenham(t_img *img, t_vec3f start, t_vec3f end);
+int		ft_init_line(t_line *line, t_vec3f start, t_vec3f end);
+void	ft_clip_line(t_vec3f start, t_vec3f end, int size[2], t_img *img);
+
+//clipping.c
+void	ft_clip_line(t_vec3f start, t_vec3f end, int size[2], t_img *img);
+void	ft_clip_coord_x(t_vec3f *start, t_vec3f *end, int size[2]);
+void	ft_clip_coord_y(t_vec3f *start, t_vec3f *end, int size[2]);
 
 //test.c
 void	test(t_data *data);

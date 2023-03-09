@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 10:22:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/08 22:55:49 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/09 16:18:48 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ void	ft_calc_morph(t_vec3f *morph, t_vec3f *points, t_mat4 mat, t_map *map)
 	while (i < map->sum_points + 8)
 	{
 		morph[i].x = points[i].x * mat[0][0] + points[i].y * mat[1][0]
-		+ points[i].z * mat[2][0] + mat[3][0];
+			+ points[i].z * mat[2][0] + mat[3][0];
 		morph[i].y = points[i].x * mat[0][1] + points[i].y * mat[1][1]
-		+ points[i].z * mat[2][1] + mat[3][1];
+			+ points[i].z * mat[2][1] + mat[3][1];
 		morph[i].z = points[i].x * mat[0][2] + points[i].y * mat[1][2]
-		+ points[i].z * mat[2][2] + mat[3][2];
+			+ points[i].z * mat[2][2] + mat[3][2];
 		if (morph[i].x < 0 || morph[i].x > map->props.canvas[X]
 			|| morph[i].y < 0 || morph[i].y > map->props.canvas[Y])
 			morph[i].hidden = true;
@@ -64,9 +64,7 @@ void	ft_init_project(t_data *data)
 
 	map = &data->map;
 	ft_scale_z(map->points, map->z_storage, map->sum_points, 0.1);
-	//data->map.props.iso = true;
 	map->props.scale = ft_fit_box(map->edges, map->mat, map->props);
-	data->map.props.iso = false;
 	ft_calc_morph(map->morph, map->points, map->mat, map);
 	ft_set_morph_color(map->morph, map->points, map->sum_points);
 	lines(&data->render, &data->map);
@@ -76,10 +74,10 @@ void	ft_init_project(t_data *data)
 
 int	ft_redraw(t_data *data)
 {
-	clock_t	t;
-	double	ret;
-	t_map	*map;
-	static uint64_t last_update;
+	clock_t			t;
+	double			ret;
+	t_map			*map;
+	static uint64_t	last_update;
 
 	if (ft_timestamp_ms(&data->render) - last_update < (uint64_t)(1000 / 30))
 		return (0);

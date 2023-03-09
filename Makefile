@@ -23,7 +23,8 @@ MLX := $(LIB_DIR_MLX)/libmlx_Linux.a
 SRC := 	main.c \
 		draw.c \
 		color.c \
-		hooks.c \
+		key_hooks.c \
+		key_hooks2.c \
 		window.c \
 		terminate.c \
 		parse.c \
@@ -42,6 +43,8 @@ SRC := 	main.c \
 		mouse.c \
 		sphere.c \
 		time.c \
+		bresenham.c \
+		clipping.c \
 		shapes.c
 
 SRCS := $(addprefix $(SRC_DIR)/, $(SRC))
