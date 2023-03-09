@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:16:59 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/09 00:25:05 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/09 11:01:12 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,12 +179,12 @@ void	ft_key_scale(int key, t_map *map)
 	factor = map->factor;
 	if (key == KEY_Q)
 	{
-		map->props.scale += 0.1 * factor;
+		map->props.scale *= 1 + 0.1 * factor;
 		ft_precalc_zoom(map->mat, factor - 1);
 	}
 	else if (key == KEY_W)
 	{
-		map->props.scale -= 0.1 * factor;
+		map->props.scale *= 1 - 0.1 * factor;
 		ft_precalc_zoom(map->mat, factor);
 	}
 	else if (key == KEY_E)
