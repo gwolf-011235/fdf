@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:16:59 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/09 13:31:08 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/09 14:15:53 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,21 +209,16 @@ void	ft_key_scale(int key, t_map *map)
 
 void	ft_key_color(int key, t_map *map)
 {
-	int	specific;
-
-	specific = 5;
-	if (map->select)
-		specific = key;
 	if (key == KEY_ONE)
-		ft_set_pattern(map->pattern, 0, specific);
+		ft_set_pattern(map->pattern, 0);
 	else if (key == KEY_TWO)
-		ft_set_pattern(map->pattern, 1, specific);
+		ft_set_pattern(map->pattern, 1);
 	else if (key == KEY_THREE)
-		ft_set_pattern(map->pattern, 2, specific);
+		ft_set_pattern(map->pattern, 2);
 	else if (key == KEY_FOUR)
-		ft_set_pattern(map->pattern, 3, specific);
+		ft_set_pattern(map->pattern, 3);
 	else if (key == KEY_FIVE)
-		map->select = !map->select;
+		ft_set_pattern(map->pattern, 4);
 	ft_find_limits_z(map);
 	ft_set_colors(map, map->points);
 	ft_set_morph_color(map->morph, map->points, map->sum_points);

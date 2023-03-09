@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 09:27:53 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/09 13:35:23 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/09 13:50:28 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	ft_find_limits_z(t_map *map)
 {
 	int	i;
 
-	ft_memset(map->limits, 0, sizeof(map->limits_sp));
+	map->limits[ZMAX] = 0;
+	map->limits[ZMIN] = 0;
 	i = 0;
 	while (i < map->sum_points)
 	{

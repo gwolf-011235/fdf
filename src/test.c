@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 22:15:46 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/05 09:37:30 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/09 14:11:08 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,6 @@ void	test(t_data *data)
 	unsigned int color;
 	unsigned int ret;
 	char *dst = data->render.addr + (930 * data->render.line_len + 500 * (data->render.bpp / 8));
-	color = create_trgb(123, 255, 0, 255);
-	ret = mlx_get_color_value(data->mlx, *(unsigned int *)dst);
 	unsigned char *ptr = (unsigned char *)&ret;
 	printf("This is color: %u\n", color);
 	printf("This is ret: %u\n", ret);

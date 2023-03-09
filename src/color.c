@@ -6,36 +6,11 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:29:34 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/09 11:49:03 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/09 14:16:54 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-int	create_trgb(int t, int r, int g, int b)
-{
-	return (t << 24 | r << 16 | g << 8 | b);
-}
-
-int	ft_alpha_blend(int new_color, int old_color)
-{
-	int	start[4];
-	int	invert[4];
-	int	blend[3];
-
-	start[0] = (new_color & 0xFF000000) >> 24;
-	start[1] = ((new_color & 0x00FF0000) >> 16) * start[0] / 255;
-	start[2] = ((new_color & 0x0000FF00) >> 8) * start[0] / 255;
-	start[3] = (new_color & 0x000000FF) * start[0] / 255;
-	invert[0] = 255 - start[0];
-	invert[1] = ((old_color & 0x00FF0000) >> 16) * invert[0] / 255;
-	invert[2] = ((old_color & 0x0000FF00) >> 8) * invert[0] / 255;
-	invert[3] = (old_color & 0x000000FF) * invert[0] / 255;
-	blend[0] = start[1] + invert[1];
-	blend[1] = start[2] + invert[2];
-	blend[2] = start[3] + invert[3];
-	return ((start[0] << 24) | (blend[0] << 16) | (blend[1] << 8) | blend[2]);
-}
 
 int	gradient(int start, int end, double len, double pos)
 {
@@ -55,29 +30,18 @@ int	gradient(int start, int end, double len, double pos)
 	return ((n_col[0] << 24) | (n_col[1] << 16) | (n_col[2] << 8) | n_col[3]);
 }
 
-void	ft_set_pattern(int pattern[4], int choice, int specific)
+void	ft_set_pattern(int pattern[4], int choice)
 {
-	const int	colorschemes[4][4] = {
+	static const int	colorschemes[5][4] = {
 	{YELLOW, RED, BLUE, BLACK},
 	{BLACK, BLACK, BLACK, WHITE},
-	{LIGHTBLUE, PINK, LIME, LIGHT_GRAY},
-	{D_GREEN, D_PURPLE, D_RED, D_GREY}
+	{TYRES, MICHELIN, BLACK, TOKYODRIFT},
+	{BLACK, GREEN, BLACK, BLACK},
+	{PURPLE, ORANGE, PINK, LIGHTBLUE}
 	};
 
-	if (specific == 5)
-	{
-		pattern[0] = colorschemes[choice][0];
-		pattern[1] = colorschemes[choice][1];
-		pattern[2] = colorschemes[choice][2];
-		pattern[3] = colorschemes[choice][3];
-		return ;
-	}
-	if (specific == 0)
-		pattern[0] = colorschemes[choice][0];
-	else if (specific == 1)
-		pattern[1] = colorschemes[choice][0];
-	else if (specific == 2)
-		pattern[2] = colorschemes[choice][0];
-	else if (specific == 3)
-		pattern[3] = colorschemes[choice][0];
+	pattern[0] = colorschemes[choice][0];
+	pattern[1] = colorschemes[choice][1];
+	pattern[2] = colorschemes[choice][2];
+	pattern[3] = colorschemes[choice][3];
 }
