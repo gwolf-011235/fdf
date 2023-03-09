@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 07:34:37 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/08 18:33:29 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/09 13:35:33 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	ft_find_limits_sphere(t_map *map, t_vec3f *polar)
 	int	i;
 
 	ft_memset(map->limits_sp, 0, sizeof(map->limits_sp));
-
 	i = 0;
 	while (i < map->sum_points)
 	{

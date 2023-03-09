@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:00:33 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/08 18:24:58 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/09 13:32:33 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,10 @@ void	ft_set_colors(t_map *map, t_vec3f *points)
 			points[i].color = pattern[1];
 		else if (points[i].z > 0)
 			points[i].color = gradient(pattern[1], pattern[2], \
-					map->limits[XMAX], points[i].z);
+					map->limits[ZMAX], points[i].z);
 		else
 			points[i].color = gradient(pattern[1], pattern[0], \
-					map->limits[XMIN], points[i].z);
+					map->limits[ZMIN], points[i].z);
 		i++;
 	}
 }

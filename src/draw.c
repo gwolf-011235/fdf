@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 09:58:18 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/05 21:45:57 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/09 12:53:41 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ void	draw_line(t_img *img, t_vec3f start, t_vec3f end)
 	while (line.remain)
 	{
 		line.factor = (line.len - line.remain) / line.len;
-		line.point[0].color = start.color + line.increment * line.factor;
+		line.point[0].color = gradient(start.color, end.color, line.len, line.len - line.remain);
 		my_mlx_pixel_put(img, line.point[0].x, line.point[0].y,
 			line.point[0].color);
 		if (line.point[0].x == line.point[1].x 

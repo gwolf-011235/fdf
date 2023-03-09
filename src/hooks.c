@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:16:59 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/09 11:01:12 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/09 13:31:08 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,5 +224,7 @@ void	ft_key_color(int key, t_map *map)
 		ft_set_pattern(map->pattern, 3, specific);
 	else if (key == KEY_FIVE)
 		map->select = !map->select;
+	ft_find_limits_z(map);
 	ft_set_colors(map, map->points);
+	ft_set_morph_color(map->morph, map->points, map->sum_points);
 }

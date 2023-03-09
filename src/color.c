@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:29:34 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/05 21:55:23 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/09 11:49:03 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	ft_set_pattern(int pattern[4], int choice, int specific)
 {
 	const int	colorschemes[4][4] = {
 	{YELLOW, RED, BLUE, BLACK},
-	{RED, BLACK, GREEN, WHITE},
+	{BLACK, BLACK, BLACK, WHITE},
 	{LIGHTBLUE, PINK, LIME, LIGHT_GRAY},
 	{D_GREEN, D_PURPLE, D_RED, D_GREY}
 	};
