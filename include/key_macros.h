@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 10:32:42 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/10 16:40:52 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/10 17:03:48 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # define KEY_H 104
 # define KEY_J 106
 # define KEY_K 107
+# define KEY_L 108
 # define KEY_M 109
 # define KEY_N 110
 # define KEY_Q 113

@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/10 16:19:48 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/10 17:07:38 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,6 +207,7 @@ void	ft_key_view(int key, t_map *map);
 void	ft_key_stuff(int key, t_map *map, t_data *data);
 //key_hooks3.c
 void	ft_key_ftptr(int key, t_data *data);
+void	ft_key_skip(int key, t_map *map);
 
 //mouse.c
 int		ft_mouse_hook_press(int button, int x, int y, t_data *data);

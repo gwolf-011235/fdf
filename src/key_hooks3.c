@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 16:20:01 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/10 16:48:28 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/10 17:07:43 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,21 @@ void	ft_key_ftptr(int key, t_data *data)
 			ft_set_ft_ptr(data, 3);
 		else
 			ft_set_ft_ptr(data, 2);
+	}
+}
+
+void	ft_key_skip(int key, t_map *map)
+{
+	if (key == KEY_K)
+	{
+		map->skip--;
+		if (!map->skip)
+			map->skip = 1;
+	}
+	if (key == KEY_L)
+	{
+		map->skip++;
+		if (map->skip >= 10)
+			map->skip = 10;
 	}
 }
