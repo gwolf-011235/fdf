@@ -6,23 +6,11 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:00:10 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/10 13:03:20 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/10 13:23:05 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-void	ft_init_image(t_data *data, t_img *img, int win_x, int win_y)
-{
-	img->ptr = mlx_new_image(data->mlx, win_x, win_y);
-	if (!img->ptr)
-		ft_free_mlx(data, ERR_IMG, true);
-	img->addr = mlx_get_data_addr(img->ptr, &img->bpp, \
-			&img->line_len, &img->endian);
-	img->size[X] = win_x;
-	img->size[Y] = win_y;
-	img->bytes = img->bpp / 8;
-}
 
 void	ft_init_window(t_data *data)
 {
@@ -45,13 +33,27 @@ void	ft_init_window(t_data *data)
 	data->map.props.canvas[OFFSET_Y] = win_y / 2;
 }
 
-void	testwindow(t_data *data)
+void	ft_init_image(t_data *data, t_img *img, int win_x, int win_y)
+{
+	img->ptr = mlx_new_image(data->mlx, win_x, win_y);
+	if (!img->ptr)
+		ft_free_mlx(data, ERR_IMG, true);
+	img->addr = mlx_get_data_addr(img->ptr, &img->bpp, \
+			&img->line_len, &img->endian);
+	img->size[X] = win_x;
+	img->size[Y] = win_y;
+	img->bytes = img->bpp / 8;
+}
+
+void	ft_start_mlx_loop(t_data *data)
 {
 	mlx_loop_hook(data->mlx, ft_render, data);
 	mlx_hook(data->win, KeyPress, KeyPressMask, ft_key_hook_press, data);
-	mlx_hook(data->win, ButtonPress, ButtonPressMask, ft_mouse_press, data);
+	mlx_hook(data->win, ButtonPress, ButtonPressMask, \
+			ft_mouse_hook_press, data);
 	mlx_hook(data->win, ButtonRelease, ButtonReleaseMask, \
-			ft_mouse_release, data);
-	mlx_hook(data->win, MotionNotify, ButtonMotionMask, ft_mouse_move, data);
+			ft_mouse_hook_release, data);
+	mlx_hook(data->win, MotionNotify, ButtonMotionMask, \
+			ft_mouse_hook_move, data);
 	mlx_loop(data->mlx);
 }

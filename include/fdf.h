@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/10 13:19:43 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/10 13:41:43 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,8 +206,9 @@ void	ft_mouse_angle(int x, int y, t_data *data);
 void	ft_mouse_translate(int x, int y, t_data *data);
 
 //window.c
-void	testwindow(t_data *data);
 void	ft_init_window(t_data *data);
+void	ft_init_image(t_data *data, t_img *img, int win_x, int win_y);
+void	ft_start_mlx_loop(t_data *data);
 
 //terminate.c
 void	ft_terminate(char *message);
@@ -216,37 +217,22 @@ void	ft_free_map_ptr(t_map *map, char *string);
 void	ft_free_mlx(t_data *data, char *string, bool error);
 
 //matrix.c
-void	ft_print_inverse(float inverse[4][8]);
-void	ft_copy_mat4(const t_mat4 src, t_mat4 dest);
-void	ft_build_transmat(t_mat4 mat, t_props props);
-void	ft_mult_mat4(const t_mat4 first, const t_mat4 second, t_mat4 result);
-void	ft_inverse_mat4(t_mat4 mat);
-void	ft_init_mat4(t_mat4 matrix);
 t_vec3f	ft_mult_vec3f_mat4(t_vec3f vec, t_mat4 mat);
-void	rotate(t_vec3f *point, double ang_x, double ang_y, double ang_z);
-t_vec3f	matrix_point(double mat[3][3], t_vec3f point);
-void	project_2d(t_vec3f *point);
-void	fill_mat4(t_mat4 matrix, t_vec3f *points);
-void	lookat(t_vec3f from, t_vec3f to, t_vec3f up, t_mat4 cam2world);
+void	ft_build_transmat(t_mat4 mat, t_props props);
+void	ft_init_mat4(t_mat4 matrix);
+void	ft_copy_mat4(const t_mat4 src, t_mat4 dest);
+void	ft_mult_mat4(const t_mat4 first, const t_mat4 second, t_mat4 result);
 
 //rotation.c
 void	ft_rotate_x(t_mat4 trans, float roll);
 void	ft_rotate_y(t_mat4 trans, float pitch);
 void	ft_rotate_z(t_mat4 trans, float yaw);
-void	ft_rotate_iso(t_mat4 mat);
-
-//vector.c
-void	vec3_normalize(t_vec3f *point);
-t_vec3f	vec3_cross(t_vec3f a, t_vec3f b);
-t_vec3f	vec3_subtract(t_vec3f a, t_vec3f b);
 
 //reshape.c
 void	ft_init_project(t_data *data);
-void	ft_calc_morph(t_vec3f *morph, t_vec3f *points, t_mat4 mat, t_map *map);
-void	ft_shape_map(t_map *map);
-int		ft_render(t_data *data);
 void	ft_scale_z(t_vec3f *points, int *z_storage, int sum, float scale_z);
-void	ft_set_morph_color(t_vec3f *morph, t_vec3f *points, int sum);
+void	ft_calc_morph(t_vec3f *morph, t_vec3f *points, t_mat4 mat, t_map *map);
+int		ft_render(t_data *data);
 
 //map_utils.c
 void	ft_map_init(t_map *map);
@@ -256,9 +242,9 @@ void	ft_fill_z_storage(t_map *map);
 
 //utils.c
 int		ft_move_atoi(char *line);
-int		ft_hex_to_dec(char *line, int len);
 int		ft_jump_over_hex(char *line);
-void	ft_swap_poins(t_vec3f *start, t_vec3f *end);
+int		ft_hex_to_dec(char *line, int len);
+void	ft_swap_points(t_vec3f *start, t_vec3f *end);
 int		ft_wrap_angle(float angle, int factor);
 
 //menu.c
@@ -267,12 +253,12 @@ void	ft_init_menu(t_data *data);
 //print_utils.c
 void	ft_print_mat4(t_mat4 matrix);
 void	ft_print_point(t_vec3f point);
-void	ft_print_inverse(float inverse[4][8]);
 
 //box.c
 void	ft_set_corners(t_vec3f *corner, float limits[6]);
-void	ft_draw_box(t_img *img, t_vec3f *edges);
+int		ft_is_outside(t_vec3f point, int canvas[2], float padding);
 float	ft_fit_box(t_vec3f *corner, t_mat4 mat, t_props props);
+void	ft_draw_box(t_img *img, t_vec3f *edges);
 
 //precalc_matrix.c
 void	ft_precalc_rot_x(t_mat4 mat, int index);
@@ -286,20 +272,21 @@ void	ft_precalc_view(t_mat4 mat, int index);
 void	ft_draw_circle(t_img *img, t_pixel center, int radius);
 
 //sphere.c
-void	ft_calc_sphere_points(t_map *map, t_coord *ang_coord, t_vec3f *polar);
 void	ft_set_ang_coords(t_map *map, int sum);
+void	ft_find_limits_sphere(t_map *map, t_vec3f *polar);
+void	ft_calc_sphere_points(t_map *map, t_coord *ang_coord, t_vec3f *polar);
 
 //time.c
 uint64_t	ft_get_timeofday_ms(void);
 uint64_t	ft_timestamp_ms(t_img *img);
 
 //bresenham.c
-void	ft_draw_line(t_img *img, t_bresvars *vars);
 void	ft_prep_draw_line(t_img *img, t_vec3f start, t_vec3f end);
 int		ft_init_bresvars(t_bresvars *vars, t_vec3f start, t_vec3f end);
+void	ft_draw_line(t_img *img, t_bresvars *vars);
 
 //clipping.c
-void	ft_clip_line(t_vec3f *start, t_vec3f *end, int size[2], t_img *img);
+void	ft_clip_line(t_vec3f *start, t_vec3f *end, int size[2]);
 void	ft_clip_coord_x(t_vec3f *start, t_vec3f *end, int size[2]);
 void	ft_clip_coord_y(t_vec3f *start, t_vec3f *end, int size[2]);
 

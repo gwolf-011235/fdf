@@ -6,11 +6,24 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 10:22:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/10 13:02:45 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/10 13:28:24 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+void	ft_init_project(t_data *data)
+{
+	t_map	*map;
+
+	map = &data->map;
+	ft_scale_z(map->points, map->z_storage, map->sum_points, 0.1);
+	map->props.scale = ft_fit_box(map->edges, map->mat, map->props);
+	ft_calc_morph(map->morph, map->points, map->mat, map);
+	ft_set_morph_color(map->morph, map->points, map->sum_points);
+	ft_wirelines(&data->render, &data->map);
+	mlx_put_image_to_window(data->mlx, data->win, data->render.ptr, 0, 0);
+}
 
 void	ft_scale_z(t_vec3f *points, int *z_storage, int sum, float scale_z)
 {
@@ -44,19 +57,6 @@ void	ft_calc_morph(t_vec3f *morph, t_vec3f *points, t_mat4 mat, t_map *map)
 			morph[i].hidden = false;
 		i++;
 	}
-}
-
-void	ft_init_project(t_data *data)
-{
-	t_map	*map;
-
-	map = &data->map;
-	ft_scale_z(map->points, map->z_storage, map->sum_points, 0.1);
-	map->props.scale = ft_fit_box(map->edges, map->mat, map->props);
-	ft_calc_morph(map->morph, map->points, map->mat, map);
-	ft_set_morph_color(map->morph, map->points, map->sum_points);
-	ft_wirelines(&data->render, &data->map);
-	mlx_put_image_to_window(data->mlx, data->win, data->render.ptr, 0, 0);
 }
 
 int	ft_render(t_data *data)

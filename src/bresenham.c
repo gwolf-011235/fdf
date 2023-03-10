@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 14:38:32 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/10 12:05:30 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/10 13:42:24 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ void	ft_prep_draw_line(t_img *img, t_vec3f start, t_vec3f end)
 	t_bresvars	vars;
 
 	if (!start.hidden && end.hidden)
-		ft_clip_line(&start, &end, img->size, img);
+		ft_clip_line(&start, &end, img->size);
 	else if (start.hidden && !end.hidden)
 	{
-		ft_swap_poins(&start, &end);
-		ft_clip_line(&start, &end, img->size, img);
+		ft_swap_points(&start, &end);
+		ft_clip_line(&start, &end, img->size);
 	}
 	if (ft_init_bresvars(&vars, start, end))
 		return ;
@@ -60,9 +60,9 @@ void	ft_draw_line(t_img *img, t_bresvars *vars)
 {
 	while (1)
 	{
-		vars->start.color = gradient(vars->delta.color, vars->end.color,
+		vars->start.color = ft_gradient(vars->delta.color, vars->end.color,
 				vars->len, vars->len - vars->remain);
-		my_mlx_pixel_put(img, vars->start.x, vars->start.y,
+		ft_put_pix_to_image(img, vars->start.x, vars->start.y,
 			vars->start.color);
 		if (vars->start.x == vars->end.x
 			&& vars->start.y == vars->end.y)

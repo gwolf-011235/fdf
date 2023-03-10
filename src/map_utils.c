@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 09:27:53 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/10 11:48:29 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/10 13:28:52 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,18 @@ void	ft_map_init(t_map *map)
 	map->skip = 1;
 }
 
+void	ft_set_limits_xy(t_map *map)
+{
+	map->limits[XMIN] = -(map->width / 2);
+	map->limits[YMIN] = -(map->height / 2);
+	map->limits[XMAX] = map->limits[XMIN] * -1;
+	map->limits[YMAX] = map->limits[YMIN] * -1;
+	if (!(map->width % 2))
+		map->limits[XMAX]--;
+	if (!(map->height % 2))
+		map->limits[YMAX]--;
+}
+
 void	ft_find_limits_z(t_map *map)
 {
 	int	i;
@@ -36,18 +48,6 @@ void	ft_find_limits_z(t_map *map)
 		map->limits[ZMIN] = fmin(map->points[i].z, map->limits[ZMIN]);
 		i++;
 	}
-}
-
-void	ft_set_limits_xy(t_map *map)
-{
-	map->limits[XMIN] = -(map->width / 2);
-	map->limits[YMIN] = -(map->height / 2);
-	map->limits[XMAX] = map->limits[XMIN] * -1;
-	map->limits[YMAX] = map->limits[YMIN] * -1;
-	if (!(map->width % 2))
-		map->limits[XMAX]--;
-	if (!(map->height % 2))
-		map->limits[YMAX]--;
 }
 
 void	ft_fill_z_storage(t_map *map)
