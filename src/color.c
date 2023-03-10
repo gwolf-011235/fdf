@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:29:34 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/10 13:02:22 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/10 13:07:37 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	gradient(int start, int end, double len, double pos)
 	double	t;
 
 	t = pos / len;
-
 	one.a = (start >> 24 & 0xFF);
 	one.r = (start >> 16 & 0xFF);
 	one.g = (start >> 8 & 0xFF);

@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 20:28:13 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/10 12:06:18 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/10 13:06:08 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,20 @@ void	ft_set_corners(t_vec3f *corner, float limits[6])
 			corner[i].z = limits[ZMIN];
 		i++;
 	}
+}
+
+int	ft_is_outside(t_vec3f point, int canvas[2], float padding)
+{
+	float	pad_x;
+	float	pad_y;
+
+	pad_x = canvas[X] * padding;
+	pad_y = canvas[Y] * padding;
+	if (point.x < (0 + pad_x) || point.x > (canvas[X] - pad_x))
+		return (1);
+	if (point.y < (0 + pad_y) || point.y > (canvas[Y] - pad_y))
+		return (1);
+	return (0);
 }
 
 float	ft_fit_box(t_vec3f *corner, t_mat4 mat, t_props props)

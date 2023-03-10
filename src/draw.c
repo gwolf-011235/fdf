@@ -6,13 +6,13 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 09:58:18 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/10 13:00:47 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/10 13:06:31 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
+void	ft_put_pix_to_image(t_img *img, int x, int y, int color)
 {
 	char	*dst;
 
@@ -37,20 +37,6 @@ void	fill_background(t_img *img, int color)
 	}
 }
 
-int	ft_is_outside(t_vec3f point, int canvas[2], float padding)
-{
-	float	pad_x;
-	float	pad_y;
-
-	pad_x = canvas[X] * padding;
-	pad_y = canvas[Y] * padding;
-	if (point.x < (0 + pad_x) || point.x > (canvas[X] - pad_x))
-		return (1);
-	if (point.y < (0 + pad_y) || point.y > (canvas[Y] - pad_y))
-		return (1);
-	return (0);
-}
-
 void	draw_points(t_img *img, t_map *map)
 {
 	int		i;
@@ -59,7 +45,7 @@ void	draw_points(t_img *img, t_map *map)
 	i = 0;
 	while (i < map->sum_points)
 	{
-		if (map->morph[i].hidden != 1)
+		if (!map->morph[i].hidden)
 		{
 			pixel.x = map->morph[i].x;
 			pixel.y = map->morph[i].y;

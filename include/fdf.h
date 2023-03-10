@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/10 13:03:03 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/10 13:06:52 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,7 +174,7 @@ void	ft_parse_line(t_map *map, char *line, int index);
 void	ft_set_colors(t_map *map, t_vec3f *points);
 
 //draw.c
-void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
+void	ft_put_pix_to_image(t_img *img, int x, int y, int color);
 void	draw_line(t_img *img, t_vec3f start, t_vec3f end);
 void	draw_points(t_img *img, t_map *map);
 void	fill_background(t_img *img, int color);
