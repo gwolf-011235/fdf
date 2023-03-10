@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 10:22:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/10 13:28:24 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/10 15:06:03 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,10 @@ int	ft_render(t_data *data)
 	t = clock();
 	fill_background(&data->render, data->map.pattern[3]);
 	if (!map->props.sphere)
-		ft_calc_morph(map->morph, map->points, map->mat, map);
+		data->calc_ft(map->morph, map->points, map->mat, map);
 	else
-		ft_calc_morph(map->morph, map->polar, map->mat, map);
-	ft_wirelines(&data->render, map);
+		data->calc_ft(map->morph, map->polar, map->mat, map);
+	data->draw_ft(&data->render, map);
 	if (map->props.box)
 		ft_draw_box(&data->render, map->corner[1]);
 	mlx_put_image_to_window(data->mlx, data->win, data->render.ptr, 0, 0);

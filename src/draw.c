@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 09:58:18 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/10 13:15:13 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/10 15:02:51 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	fill_background(t_img *img, int color)
 	}
 }
 
-void	draw_points(t_img *img, t_map *map)
+void	ft_draw_points(t_img *img, t_map *map)
 {
 	int		i;
 	t_pixel	pixel;

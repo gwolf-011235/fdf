@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_hooks.c                                        :+:      :+:    :+:   */
+/*   key_hooks1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:16:59 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/10 13:07:22 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/10 16:21:49 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,11 @@ int	ft_key_hook_press(int key, t_data *data)
 	else if (key == KEY_B || key == KEY_PLUS || key == KEY_MINUS
 		|| key == KEY_ESC)
 		ft_key_stuff(key, &data->map, data);
+	else if (key == KEY_Z || key == KEY_K)
+		ft_key_ftptr(key, data);
 	return (0);
 }
+
 
 void	ft_key_translate(int key, t_map *map)
 {

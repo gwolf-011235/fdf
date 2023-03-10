@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/10 13:41:43 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/10 16:19:48 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,8 @@ typedef struct s_map {
 	t_props	props;
 }	t_map;
 
+typedef void	(*t_calc_ft)(t_vec3f *, t_vec3f *, t_mat4, t_map *);
+
 typedef struct s_img {
 	void	*ptr;
 	char	*addr;
@@ -143,6 +145,8 @@ typedef struct s_img {
 	int		size[2];
 	uint64_t	created_at;
 }	t_img;
+
+typedef void	(*t_draw_ft)(t_img *, t_map *);
 
 typedef struct s_mouse {
 	bool	left;
@@ -158,7 +162,11 @@ typedef struct s_data {
 	t_img	menu;
 	t_map	map;
 	t_mouse	mouse;
+	t_calc_ft	calc_ft;
+	t_draw_ft	draw_ft;
 }	t_data;
+
+void	ft_set_ft_ptr(t_data *data, int choose);
 
 //check.c
 void	ft_check_map(t_map *map, char *filename);
@@ -178,7 +186,7 @@ void	ft_put_pix_to_image(t_img *img, int x, int y, int color);
 void	ft_wirelines(t_img *img, t_map *map);
 void	ft_connect_points(t_img *img, t_vec3f *morph_p, int line, t_map *map);
 void	fill_background(t_img *img, int color);
-void	draw_points(t_img *img, t_map *map);
+void	ft_draw_points(t_img *img, t_map *map);
 
 //color.c
 int		ft_gradient(int color_start, int color_end, double len, double pos);
@@ -197,6 +205,8 @@ void	ft_key_color(int key, t_map *map);
 void	ft_key_sphere(int key, t_map *map);
 void	ft_key_view(int key, t_map *map);
 void	ft_key_stuff(int key, t_map *map, t_data *data);
+//key_hooks3.c
+void	ft_key_ftptr(int key, t_data *data);
 
 //mouse.c
 int		ft_mouse_hook_press(int button, int x, int y, t_data *data);
@@ -289,6 +299,9 @@ void	ft_draw_line(t_img *img, t_bresvars *vars);
 void	ft_clip_line(t_vec3f *start, t_vec3f *end, int size[2]);
 void	ft_clip_coord_x(t_vec3f *start, t_vec3f *end, int size[2]);
 void	ft_clip_coord_y(t_vec3f *start, t_vec3f *end, int size[2]);
+
+//wobble.c
+void	ft_wobble(t_vec3f *morph, t_vec3f *points, t_mat4 mat, t_map *map);
 
 //test.c
 void	test(t_data *data);
