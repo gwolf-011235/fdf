@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 10:22:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/09 16:18:48 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/10 13:02:45 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,18 +46,6 @@ void	ft_calc_morph(t_vec3f *morph, t_vec3f *points, t_mat4 mat, t_map *map)
 	}
 }
 
-void	ft_set_morph_color(t_vec3f *morph, t_vec3f *points, int sum)
-{
-	int	i;
-
-	i = 0;
-	while (i < sum)
-	{
-		morph[i].color = points[i].color;
-		i++;
-	}
-}
-
 void	ft_init_project(t_data *data)
 {
 	t_map	*map;
@@ -67,12 +55,11 @@ void	ft_init_project(t_data *data)
 	map->props.scale = ft_fit_box(map->edges, map->mat, map->props);
 	ft_calc_morph(map->morph, map->points, map->mat, map);
 	ft_set_morph_color(map->morph, map->points, map->sum_points);
-	lines(&data->render, &data->map);
-	ft_draw_box(&data->render, data->map.corner[1]);
+	ft_wirelines(&data->render, &data->map);
 	mlx_put_image_to_window(data->mlx, data->win, data->render.ptr, 0, 0);
 }
 
-int	ft_redraw(t_data *data)
+int	ft_render(t_data *data)
 {
 	clock_t			t;
 	double			ret;
@@ -90,7 +77,7 @@ int	ft_redraw(t_data *data)
 		ft_calc_morph(map->morph, map->points, map->mat, map);
 	else
 		ft_calc_morph(map->morph, map->polar, map->mat, map);
-	lines(&data->render, map);
+	ft_wirelines(&data->render, map);
 	if (map->props.box)
 		ft_draw_box(&data->render, map->corner[1]);
 	mlx_put_image_to_window(data->mlx, data->win, data->render.ptr, 0, 0);

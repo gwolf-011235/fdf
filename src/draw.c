@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 09:58:18 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/10 12:12:07 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/10 13:00:47 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,43 +70,6 @@ void	draw_points(t_img *img, t_map *map)
 	}
 }
 
-void	lines(t_img *img, t_map *map)
-{
-	//int		i;
-	//t_vec3f	start;
-	//t_vec3f	end;
-
-	if (map->skip)
-	{
-		ft_wirelines(img, map);
-		return ;
-	}
-	/*
-	i = 0;
-	while (i < map->sum_points)
-	{
-		start = map->morph[i];
-		if (i % map->width != map->width - 1)
-		{
-			end = map->morph[i + 1];
-			if (!start.hidden && !end.hidden)
-				ft_prep_bresenham(img, start, end);
-			else if ((start.hidden && !end.hidden) || (!start.hidden && end.hidden))
-				ft_clip_line(start, end, img->size, img);
-		}
-		if (i / map->width != map->height - 1)
-		{
-			end = map->morph[i + map->width];
-			if (!start.hidden && !end.hidden)
-				ft_prep_bresenham(img, start, end);
-			else if ((start.hidden && !end.hidden) || (!start.hidden && end.hidden))
-				ft_clip_line(start, end, img->size, img);
-		}
-		i++;
-	}
-	*/
-}
-
 void	ft_connect_points(t_img *img, t_vec3f *morph_p, int line, t_map *map)
 {
 	int	i;
@@ -140,4 +103,3 @@ void	ft_wirelines(t_img *img, t_map *map)
 		i += map->width * map->skip;
 	}
 }
-

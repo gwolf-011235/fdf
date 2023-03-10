@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:00:10 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/09 16:20:41 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/10 13:03:20 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	ft_init_window(t_data *data)
 
 void	testwindow(t_data *data)
 {
-	mlx_loop_hook(data->mlx, ft_redraw, data);
+	mlx_loop_hook(data->mlx, ft_render, data);
 	mlx_hook(data->win, KeyPress, KeyPressMask, ft_key_hook_press, data);
 	mlx_hook(data->win, ButtonPress, ButtonPressMask, ft_mouse_press, data);
 	mlx_hook(data->win, ButtonRelease, ButtonReleaseMask, \

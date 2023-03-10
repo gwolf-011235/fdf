@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/10 12:05:42 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/10 13:03:03 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -248,7 +248,7 @@ t_vec3f	vec3_subtract(t_vec3f a, t_vec3f b);
 void	ft_init_project(t_data *data);
 void	ft_calc_morph(t_vec3f *morph, t_vec3f *points, t_mat4 mat, t_map *map);
 void	ft_shape_map(t_map *map);
-int		ft_redraw(t_data *data);
+int		ft_render(t_data *data);
 void	ft_scale_z(t_vec3f *points, int *z_storage, int sum, float scale_z);
 void	ft_set_morph_color(t_vec3f *morph, t_vec3f *points, int sum);
 
