@@ -6,13 +6,13 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:29:34 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/10 13:07:37 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/10 13:17:02 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	gradient(int start, int end, double len, double pos)
+int	ft_gradient(int start, int end, double len, double pos)
 {
 	t_color	one;
 	t_color	two;

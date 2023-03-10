@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/10 13:15:41 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/10 13:19:43 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,10 +181,9 @@ void	fill_background(t_img *img, int color);
 void	draw_points(t_img *img, t_map *map);
 
 //color.c
-int		create_trgb(int t, int r, int g, int b);
-int		gradient(int color_start, int color_end, double len, double pos);
-int		ft_alpha_blend(int new_color, int old_color);
+int		ft_gradient(int color_start, int color_end, double len, double pos);
 void	ft_set_pattern(int pattern[4], int choice);
+void	ft_set_morph_color(t_vec3f *morph, t_vec3f *points, int sum);
 
 //key_hooks.c
 int		ft_key_hook_press(int key, t_data *data);
@@ -200,9 +199,9 @@ void	ft_key_view(int key, t_map *map);
 void	ft_key_stuff(int key, t_map *map, t_data *data);
 
 //mouse.c
-int		ft_mouse_press(int button, int x, int y, t_data *data);
-int		ft_mouse_release(int button, int x, int y, t_data *data);
-int		ft_mouse_move(int x, int y, t_data *data);
+int		ft_mouse_hook_press(int button, int x, int y, t_data *data);
+int		ft_mouse_hook_release(int button, int x, int y, t_data *data);
+int		ft_mouse_hook_move(int x, int y, t_data *data);
 void	ft_mouse_angle(int x, int y, t_data *data);
 void	ft_mouse_translate(int x, int y, t_data *data);
 

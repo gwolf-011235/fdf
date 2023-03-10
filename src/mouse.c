@@ -6,13 +6,13 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 08:30:19 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/09 11:12:19 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/10 13:19:13 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	ft_mouse_press(int button, int x, int y, t_data *data)
+int	ft_mouse_hook_press(int button, int x, int y, t_data *data)
 {
 	printf("Taste: %d\n", button);
 	if (button == M_LEFT)
@@ -40,7 +40,7 @@ int	ft_mouse_press(int button, int x, int y, t_data *data)
 	return (0);
 }
 
-int	ft_mouse_release(int button, int x, int y, t_data *data)
+int	ft_mouse_hook_release(int button, int x, int y, t_data *data)
 {
 	(void)x;
 	(void)y;
@@ -51,7 +51,7 @@ int	ft_mouse_release(int button, int x, int y, t_data *data)
 	return (0);
 }
 
-int	ft_mouse_move(int x, int y, t_data *data)
+int	ft_mouse_hook_move(int x, int y, t_data *data)
 {
 	if (x > data->render.size[X] || x < 0 || y > data->render.size[Y] || y < 0)
 		return (0);
