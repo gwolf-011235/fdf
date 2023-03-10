@@ -6,71 +6,71 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 14:38:32 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/09 19:21:43 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/10 08:41:58 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	ft_init_line(t_line *line, t_vec3f start, t_vec3f end)
+int	ft_init_bresvars(t_bresvars *vars, t_vec3f start, t_vec3f end)
 {
-	line->start.x = start.x;
-	line->start.y = start.y;
-	line->start.color = start.color;
-	line->end.x = end.x;
-	line->end.y = end.y;
-	line->end.color = end.color;
-	line->delta.x = abs(line->end.x - line->start.x);
-	line->delta.y = abs(line->end.y - line->start.y);
-	line->delta.color = start.color;
-	if (line->start.x < line->end.x)
-		line->step[X] = 1;
+	vars->start.x = start.x;
+	vars->start.y = start.y;
+	vars->start.color = start.color;
+	vars->end.x = end.x;
+	vars->end.y = end.y;
+	vars->end.color = end.color;
+	vars->delta.x = abs(vars->end.x - vars->start.x);
+	vars->delta.y = abs(vars->end.y - vars->start.y);
+	vars->delta.color = start.color;
+	if (vars->start.x < vars->end.x)
+		vars->step[X] = 1;
 	else
-		line->step[X] = -1;
-	if (line->start.y < line->end.y)
-		line->step[Y] = 1;
+		vars->step[X] = -1;
+	if (vars->start.y < vars->end.y)
+		vars->step[Y] = 1;
 	else
-		line->step[Y] = -1;
-	line->error[0] = line->delta.x - line->delta.y;
-	line->len = sqrt(line->delta.x * line->delta.x \
-			+ line->delta.y * line->delta.y);
-	if (!line->len)
+		vars->step[Y] = -1;
+	vars->error[0] = vars->delta.x - vars->delta.y;
+	vars->len = sqrt(vars->delta.x * vars->delta.x \
+			+ vars->delta.y * vars->delta.y);
+	if (!vars->len)
 		return (1);
-	line->remain = line->len;
+	vars->remain = vars->len;
 	return (0);
 }
 
 void	ft_prep_bresenham(t_img *img, t_vec3f start, t_vec3f end)
 {
-	t_line	line;
+	t_bresvars	vars;
 
-	if (ft_init_line(&line, start, end))
+	if (ft_init_bresvars(&vars, start, end))
 		return ;
-	ft_draw_line(img, &line);
+	ft_draw_line(img, &vars);
 }
 
-void	ft_draw_line(t_img *img, t_line *line)
+void	ft_draw_line(t_img *img, t_bresvars *vars)
 {
 	while (1)
 	{
-		line->start.color = gradient(line->delta.color, line->end.color,
-				line->len, line->len - line->remain);
-		my_mlx_pixel_put(img, line->start.x, line->start.y,
-			line->start.color);
-		if (line->start.x == line->end.x
-			&& line->start.y == line->end.y)
+		vars->start.color = gradient(vars->delta.color, vars->end.color,
+				vars->len, vars->len - vars->remain);
+		my_mlx_pixel_put(img, vars->start.x, vars->start.y,
+			vars->start.color);
+		if (vars->start.x == vars->end.x
+			&& vars->start.y == vars->end.y)
 			break ;
-		line->error[1] = line->error[0] * 2;
-		if (line->error[1] > -line->delta.y)
+		vars->error[1] = vars->error[0] * 2;
+		if (vars->error[1] > -vars->delta.y)
 		{
-			line->error[0] -= line->delta.y;
-			line->start.x += line->step[X];
+			vars->error[0] -= vars->delta.y;
+			vars->start.x += vars->step[X];
 		}
-		if (line->error[1] < line->delta.x)
+		if (vars->error[1] < vars->delta.x)
 		{
-			line->error[0] += line->delta.x;
-			line->start.y += line->step[Y];
+			vars->error[0] += vars->delta.x;
+			vars->start.y += vars->step[Y];
 		}
-		line->remain--;
+		vars->remain--;
 	}
 }

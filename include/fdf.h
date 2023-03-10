@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/09 17:15:07 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/10 08:41:43 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ typedef struct s_pixel {
 	int	color;
 }	t_pixel;
 
-typedef struct s_line {
+typedef struct s_bresvars {
 	t_pixel	start;
 	t_pixel	end;
 	t_pixel delta;
@@ -89,7 +89,7 @@ typedef struct s_line {
 	int		error[2];
 	int		len;
 	int		remain;
-}	t_line;
+}	t_bresvars;
 
 typedef struct s_props {
 	float	scale;
@@ -290,9 +290,9 @@ uint64_t	ft_get_timeofday_ms(void);
 uint64_t	ft_timestamp_ms(t_img *img);
 
 //bresenham.c
-void	ft_draw_line(t_img *img, t_line *line);
+void	ft_draw_line(t_img *img, t_bresvars *vars);
 void	ft_prep_bresenham(t_img *img, t_vec3f start, t_vec3f end);
-int		ft_init_line(t_line *line, t_vec3f start, t_vec3f end);
+int		ft_init_bresvars(t_bresvars *vars, t_vec3f start, t_vec3f end);
 void	ft_clip_line(t_vec3f start, t_vec3f end, int size[2], t_img *img);
 
 //clipping.c
