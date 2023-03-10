@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/10 13:12:14 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/10 13:15:41 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,13 +175,10 @@ void	ft_set_colors(t_map *map, t_vec3f *points);
 
 //draw.c
 void	ft_put_pix_to_image(t_img *img, int x, int y, int color);
-void	draw_line(t_img *img, t_vec3f start, t_vec3f end);
-void	draw_points(t_img *img, t_map *map);
-void	fill_background(t_img *img, int color);
-void	lines(t_img *img, t_map *map);
-int		ft_is_outside(t_vec3f point, int canvas[2], float padding);
-void	ft_connect_points(t_img *img, t_vec3f *morph_p, int line, t_map *map);
 void	ft_wirelines(t_img *img, t_map *map);
+void	ft_connect_points(t_img *img, t_vec3f *morph_p, int line, t_map *map);
+void	fill_background(t_img *img, int color);
+void	draw_points(t_img *img, t_map *map);
 
 //color.c
 int		create_trgb(int t, int r, int g, int b);
