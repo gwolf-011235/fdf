@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/10 13:06:52 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/10 13:12:14 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,10 +162,10 @@ typedef struct s_data {
 
 //check.c
 void	ft_check_map(t_map *map, char *filename);
-int		ft_count_num_in_row(char *line, bool *hex);
+void	ft_check_filename(t_map *map, char *filename);
 void	ft_extract_rows(t_map *map, int fd);
 void	ft_check_row(t_map *map, char *row);
-void	ft_check_filename(t_map *map, char *filename);
+int		ft_count_num_in_row(char *line, bool *hex);
 
 //parse.c
 void	ft_parse_map(t_map *map);
