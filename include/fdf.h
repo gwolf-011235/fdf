@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/10 08:41:43 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/10 09:27:40 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,17 @@
 # define ISO 2
 # define NICE 3
 
-typedef struct s_coord
-{
+typedef struct s_coord {
 	float	lon;
 	float	lat;
 }	t_coord;
+
+typedef struct s_color {
+	uint8_t	a;
+	uint8_t	r;
+	uint8_t	g;
+	uint8_t	b;
+}	t_color;
 
 typedef float	t_mat4[4][4];
 

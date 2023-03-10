@@ -6,11 +6,20 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 14:38:32 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/10 08:41:58 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/10 08:47:02 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+void	ft_prep_bresenham(t_img *img, t_vec3f start, t_vec3f end)
+{
+	t_bresvars	vars;
+
+	if (ft_init_bresvars(&vars, start, end))
+		return ;
+	ft_draw_line(img, &vars);
+}
 
 int	ft_init_bresvars(t_bresvars *vars, t_vec3f start, t_vec3f end)
 {
@@ -40,15 +49,6 @@ int	ft_init_bresvars(t_bresvars *vars, t_vec3f start, t_vec3f end)
 	return (0);
 }
 
-void	ft_prep_bresenham(t_img *img, t_vec3f start, t_vec3f end)
-{
-	t_bresvars	vars;
-
-	if (ft_init_bresvars(&vars, start, end))
-		return ;
-	ft_draw_line(img, &vars);
-}
-
 void	ft_draw_line(t_img *img, t_bresvars *vars)
 {
 	while (1)
@@ -71,6 +71,6 @@ void	ft_draw_line(t_img *img, t_bresvars *vars)
 			vars->error[0] += vars->delta.x;
 			vars->start.y += vars->step[Y];
 		}
-		vars->remain--;
+		vars->remain -= 1;
 	}
 }

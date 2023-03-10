@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:29:34 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/09 14:16:54 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/10 09:45:52 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,26 @@
 
 int	gradient(int start, int end, double len, double pos)
 {
-	int		factor[4];
-	int		n_col[4];
-	double	invert_len;
+	t_color	one;
+	t_color	two;
+	t_color	ret;
+	double	t;
 
-	invert_len = 1.0 / len;
-	factor[0] = ((end >> 24 & 0xFF) - (start >> 24 & 0xFF)) * invert_len;
-	factor[1] = ((end >> 16 & 0xFF) - (start >> 16 & 0xFF)) * invert_len;
-	factor[2] = ((end >> 8 & 0xFF) - (start >> 8 & 0xFF)) * invert_len;
-	factor[3] = ((end & 0xFF) - (start & 0xFF)) * invert_len;
-	n_col[0] = factor[0] * pos + (start >> 24 & 0xFF);
-	n_col[1] = factor[1] * pos + (start >> 16 & 0xFF);
-	n_col[2] = factor[2] * pos + (start >> 8 & 0xFF);
-	n_col[3] = factor[3] * pos + (start & 0xFF);
-	return ((n_col[0] << 24) | (n_col[1] << 16) | (n_col[2] << 8) | n_col[3]);
+	t = pos / len;
+
+	one.a = (start >> 24 & 0xFF);
+	one.r = (start >> 16 & 0xFF);
+	one.g = (start >> 8 & 0xFF);
+	one.b = (start & 0xFF);
+	two.a = (end >> 24 & 0xFF);
+	two.r = (end >> 16 & 0xFF);
+	two.g = (end >> 8 & 0xFF);
+	two.b = (end & 0xFF);
+	ret.a = one.a + t * (two.a - one.a);
+	ret.r = one.r + t * (two.r - one.r);
+	ret.g = one.g + t * (two.g - one.g);
+	ret.b = one.b + t * (two.b - one.b);
+	return ((ret.a << 24) | (ret.r << 16) | (ret.g << 8) | ret.b);
 }
 
 void	ft_set_pattern(int pattern[4], int choice)
