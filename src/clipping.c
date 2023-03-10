@@ -6,19 +6,16 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 16:02:31 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/09 16:05:02 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/10 11:57:38 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	ft_clip_line(t_vec3f start, t_vec3f end, int size[2], t_img *img)
+void	ft_clip_line(t_vec3f *start, t_vec3f *end, int size[2], t_img *img)
 {
-	if (start.hidden)
-		ft_swap_poins(&start, &end);
-	ft_clip_coord_x(&start, &end, size);
-	ft_clip_coord_y(&start, &end, size);
-	ft_prep_bresenham(img, start, end);
+	ft_clip_coord_x(start, end, size);
+	ft_clip_coord_y(start, end, size);
 }
 
 void	ft_clip_coord_x(t_vec3f *start, t_vec3f *end, int size[2])

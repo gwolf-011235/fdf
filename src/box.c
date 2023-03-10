@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 20:28:13 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/09 15:31:49 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/10 12:06:18 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,17 +73,17 @@ void	ft_draw_box(t_img *img, t_vec3f *corner)
 		start.color = GREEN;
 		end.color = GREEN;
 		if (!start.hidden && !end.hidden)
-			ft_prep_bresenham(img, start, end);
+			ft_prep_draw_line(img, start, end);
 		end = corner[i + 4];
 		start.color = BLUE;
 		end.color = BLUE;
 		if (!start.hidden && !end.hidden)
-			ft_prep_bresenham(img, start, end);
+			ft_prep_draw_line(img, start, end);
 		start = corner[i + 4];
 		end = corner[((i + 1) % 4) + 4];
 		start.color = RED;
 		end.color = RED;
 		if (!start.hidden && !end.hidden)
-			ft_prep_bresenham(img, start, end);
+			ft_prep_draw_line(img, start, end);
 	}
 }

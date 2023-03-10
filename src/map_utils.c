@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 09:27:53 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/09 14:47:50 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/10 11:48:29 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	ft_map_init(t_map *map)
 	map->props.angle[Z] = 45;
 	map->props.translate[Z] = 1;
 	map->factor = 1;
+	map->skip = 1;
 }
 
 void	ft_find_limits_z(t_map *map)

@@ -6,16 +6,23 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 14:38:32 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/10 08:47:02 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/10 12:05:30 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	ft_prep_bresenham(t_img *img, t_vec3f start, t_vec3f end)
+void	ft_prep_draw_line(t_img *img, t_vec3f start, t_vec3f end)
 {
 	t_bresvars	vars;
 
+	if (!start.hidden && end.hidden)
+		ft_clip_line(&start, &end, img->size, img);
+	else if (start.hidden && !end.hidden)
+	{
+		ft_swap_poins(&start, &end);
+		ft_clip_line(&start, &end, img->size, img);
+	}
 	if (ft_init_bresvars(&vars, start, end))
 		return ;
 	ft_draw_line(img, &vars);

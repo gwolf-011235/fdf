@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/10 09:27:40 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/10 12:05:42 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ typedef struct s_map {
 	float	limits_sp[6];
 	int		factor;
 	int		pattern[4];
+	int		skip;
 	t_mat4	mat;
 	t_props	props;
 }	t_map;
@@ -178,8 +179,9 @@ void	draw_line(t_img *img, t_vec3f start, t_vec3f end);
 void	draw_points(t_img *img, t_map *map);
 void	fill_background(t_img *img, int color);
 void	lines(t_img *img, t_map *map);
-void	ft_connect_points(t_img *img, t_map *map);
 int		ft_is_outside(t_vec3f point, int canvas[2], float padding);
+void	ft_connect_points(t_img *img, t_vec3f *morph_p, int line, t_map *map);
+void	ft_wirelines(t_img *img, t_map *map);
 
 //color.c
 int		create_trgb(int t, int r, int g, int b);
@@ -297,12 +299,11 @@ uint64_t	ft_timestamp_ms(t_img *img);
 
 //bresenham.c
 void	ft_draw_line(t_img *img, t_bresvars *vars);
-void	ft_prep_bresenham(t_img *img, t_vec3f start, t_vec3f end);
+void	ft_prep_draw_line(t_img *img, t_vec3f start, t_vec3f end);
 int		ft_init_bresvars(t_bresvars *vars, t_vec3f start, t_vec3f end);
-void	ft_clip_line(t_vec3f start, t_vec3f end, int size[2], t_img *img);
 
 //clipping.c
-void	ft_clip_line(t_vec3f start, t_vec3f end, int size[2], t_img *img);
+void	ft_clip_line(t_vec3f *start, t_vec3f *end, int size[2], t_img *img);
 void	ft_clip_coord_x(t_vec3f *start, t_vec3f *end, int size[2]);
 void	ft_clip_coord_y(t_vec3f *start, t_vec3f *end, int size[2]);
 

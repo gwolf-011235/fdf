@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 09:58:18 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/09 15:32:10 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/10 12:12:07 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,16 @@ void	draw_points(t_img *img, t_map *map)
 
 void	lines(t_img *img, t_map *map)
 {
-	int		i;
-	t_vec3f	start;
-	t_vec3f	end;
+	//int		i;
+	//t_vec3f	start;
+	//t_vec3f	end;
 
+	if (map->skip)
+	{
+		ft_wirelines(img, map);
+		return ;
+	}
+	/*
 	i = 0;
 	while (i < map->sum_points)
 	{
@@ -98,4 +104,40 @@ void	lines(t_img *img, t_map *map)
 		}
 		i++;
 	}
+	*/
 }
+
+void	ft_connect_points(t_img *img, t_vec3f *morph_p, int line, t_map *map)
+{
+	int	i;
+	int	end[2];
+
+	i = 0;
+	while (i < map->width)
+	{
+		end[X] = i + map->skip;
+		if (end[X] >= map->width)
+			end[X] = map->width - 1;
+		if (!morph_p[i].hidden || !morph_p[end[X]].hidden)
+			ft_prep_draw_line(img, morph_p[i], morph_p[end[X]]);
+		end[Y] = i + map->width * map->skip;
+		if (line + map->skip >= map->height)
+			end[Y] = i + (map->height - 1 - line) * map->width;
+		if (!morph_p[i].hidden || !morph_p[end[Y]].hidden)
+			ft_prep_draw_line(img, morph_p[i], morph_p[end[Y]]);
+		i += map->skip;
+	}
+}
+
+void	ft_wirelines(t_img *img, t_map *map)
+{
+	int	i;
+
+	i = 0;
+	while (i < map->sum_points)
+	{
+		ft_connect_points(img, &map->morph[i], i / map->width, map);
+		i += map->width * map->skip;
+	}
+}
+
