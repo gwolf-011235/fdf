@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 17:01:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/09 17:15:20 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/10 16:44:16 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_key_scale(int key, t_map *map)
 	int	factor;
 
 	factor = map->factor;
-	if (key == KEY_E)
+	if (key == KEY_X)
 	{
 		map->props.scale_z -= 0.1 * factor;
 		if (!map->props.sphere)
@@ -26,7 +26,7 @@ void	ft_key_scale(int key, t_map *map)
 		else
 			ft_calc_sphere_points(map, map->ang_coord, map->polar);
 	}
-	else if (key == KEY_R)
+	else if (key == KEY_C)
 	{
 		map->props.scale_z += 0.1 * factor;
 		if (!map->props.sphere)
@@ -101,14 +101,14 @@ void	ft_key_stuff(int key, t_map *map, t_data *data)
 	{
 		map->props.box = !map->props.box;
 	}
-	else if (key == KEY_PLUS)
+	else if (key == KEY_M)
 	{
 		if (map->factor == 1)
 			map->factor = 3;
 		else if (map->factor == 3)
 			map->factor = 5;
 	}
-	else if (key == KEY_MINUS)
+	else if (key == KEY_N)
 	{
 		if (map->factor == 5)
 			map->factor = 3;

@@ -6,13 +6,14 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 10:32:42 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/10 15:10:57 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/10 16:40:52 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef KEY_MACROS_H
 # define KEY_MACROS_H
 
+# define KEY_ENTER 65293
 # define KEY_ESC 65307 
 # define KEY_ARROW_LEFT 65361
 # define KEY_ARROW_UP 65362
@@ -23,16 +24,21 @@
 # define KEY_MINUS 45
 # define KEY_A 97
 # define KEY_B 98
+# define KEY_C 99
 # define KEY_D 100
 # define KEY_E 101
 # define KEY_F 102
 # define KEY_G 103
 # define KEY_H 104
+# define KEY_J 106
 # define KEY_K 107
+# define KEY_M 109
+# define KEY_N 110
 # define KEY_Q 113
 # define KEY_R 114
 # define KEY_S 115
 # define KEY_W 119
+# define KEY_X 120
 # define KEY_Z 122
 # define KEY_ONE 49
 # define KEY_TWO 50

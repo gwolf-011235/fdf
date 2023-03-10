@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:16:59 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/10 16:21:49 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/10 16:42:33 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ int	ft_key_hook_press(int key, t_data *data)
 {
 	if (key >= KEY_ARROW_LEFT && key <= KEY_ARROW_DOWN)
 		ft_key_translate(key, &data->map);
-	else if (key == KEY_A || key == KEY_S || key == KEY_D || key == KEY_F)
+	else if (key == KEY_W || key == KEY_S || key == KEY_A || key == KEY_D)
 		ft_key_angle(key, &data->map);
-	else if (key == KEY_G || key == KEY_H)
+	else if (key == KEY_Q || key == KEY_E)
 		ft_key_angle2(key, &data->map);
-	else if (key == KEY_Q || key == KEY_W)
+	else if (key == KEY_R || key == KEY_F)
 		ft_key_zoom(key, &data->map);
-	else if (key == KEY_E || key == KEY_R)
+	else if (key == KEY_X || key == KEY_C)
 		ft_key_scale(key, &data->map);
 	else if (key == KEY_ONE || key == KEY_TWO || key == KEY_THREE
 		|| key == KEY_FOUR || key == KEY_FIVE)
@@ -33,11 +33,12 @@ int	ft_key_hook_press(int key, t_data *data)
 	else if (key == KEY_SIX || key == KEY_SEVEN || key == KEY_EIGHT
 		|| key == KEY_NINE)
 		ft_key_view(key, &data->map);
-	else if (key == KEY_B || key == KEY_PLUS || key == KEY_MINUS
+	else if (key == KEY_B || key == KEY_N || key == KEY_M
 		|| key == KEY_ESC)
 		ft_key_stuff(key, &data->map, data);
-	else if (key == KEY_Z || key == KEY_K)
+	else if (key == KEY_J || key == KEY_ENTER)
 		ft_key_ftptr(key, data);
+	printf("Key: %d", key);
 	return (0);
 }
 
@@ -74,22 +75,22 @@ void	ft_key_angle(int key, t_map *map)
 	int	factor;
 
 	factor = map->factor;
-	if (key == KEY_A)
+	if (key == KEY_S)
 	{
 		map->props.angle[X] -= factor;
 		ft_precalc_rot_x(map->mat, factor);
 	}
-	else if (key == KEY_S)
+	else if (key == KEY_W)
 	{
 		map->props.angle[X] += factor;
 		ft_precalc_rot_x(map->mat, factor -1);
 	}
-	else if (key == KEY_D)
+	else if (key == KEY_A)
 	{
 		map->props.angle[Y] -= factor;
 		ft_precalc_rot_y(map->mat, factor);
 	}
-	else if (key == KEY_F)
+	else if (key == KEY_D)
 	{
 		map->props.angle[Y] += factor;
 		ft_precalc_rot_y(map->mat, factor - 1);
@@ -101,12 +102,12 @@ void	ft_key_angle2(int key, t_map *map)
 	int	factor;
 
 	factor = map->factor;
-	if (key == KEY_G)
+	if (key == KEY_Q)
 	{
 		map->props.angle[Z] -= factor;
 		ft_precalc_rot_z(map->mat, factor);
 	}
-	else if (key == KEY_H)
+	else if (key == KEY_E)
 	{
 		map->props.angle[Z] += factor;
 		ft_precalc_rot_z(map->mat, factor - 1);
@@ -118,12 +119,12 @@ void	ft_key_zoom(int key, t_map *map)
 	int	factor;
 
 	factor = map->factor;
-	if (key == KEY_Q)
+	if (key == KEY_R)
 	{
 		map->props.scale *= 1 + 0.1 * factor;
 		ft_precalc_zoom(map->mat, factor - 1);
 	}
-	else if (key == KEY_W)
+	else if (key == KEY_F)
 	{
 		map->props.scale *= 1 - 0.1 * factor;
 		ft_precalc_zoom(map->mat, factor);

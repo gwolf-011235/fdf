@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 16:20:01 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/10 16:20:23 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/10 16:48:28 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,23 @@
 
 void	ft_key_ftptr(int key, t_data *data)
 {
-	static bool	draw;
 	static bool	calc;
+	static bool	draw;
 
-	if (key == KEY_Z)
+	if (key == KEY_ENTER)
 	{
-		draw = !draw;
-		if (draw)
+		calc = !calc;
+		if (calc)
 			ft_set_ft_ptr(data, 1);
 		else
 			ft_set_ft_ptr(data, 0);
 	}
-	if (key == KEY_K)
+	if (key == KEY_J)
 	{
-		calc = !calc;
-		if (calc)
-			ft_set_ft_ptr(data, 2);
-		else
+		draw = !draw;
+		if (draw)
 			ft_set_ft_ptr(data, 3);
+		else
+			ft_set_ft_ptr(data, 2);
 	}
 }
