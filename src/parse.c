@@ -6,11 +6,30 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:00:33 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/09 13:32:33 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/10 13:13:48 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+void	ft_parse_map(t_map *map)
+{
+	int	i;
+
+	ft_map_alloc(map);
+	ft_set_limits_xy(map);
+	i = 0;
+	while (i < map->height)
+	{
+		ft_parse_line(map, map->rows[i], i * map->width);
+		i++;
+	}
+	ft_find_limits_z(map);
+	ft_fill_z_storage(map);
+	ft_set_colors(map, map->points);
+	ft_set_corners(map->corner[0], map->limits);
+	ft_set_ang_coords(map, map->sum_points);
+}
 
 void	ft_map_alloc(t_map *map)
 {
@@ -82,23 +101,4 @@ void	ft_set_colors(t_map *map, t_vec3f *points)
 					map->limits[ZMIN], points[i].z);
 		i++;
 	}
-}
-
-void	ft_parse_map(t_map *map)
-{
-	int	i;
-
-	ft_map_alloc(map);
-	ft_set_limits_xy(map);
-	i = 0;
-	while (i < map->height)
-	{
-		ft_parse_line(map, map->rows[i], i * map->width);
-		i++;
-	}
-	ft_find_limits_z(map);
-	ft_fill_z_storage(map);
-	ft_set_colors(map, map->points);
-	ft_set_corners(map->corner[0], map->limits);
-	ft_set_ang_coords(map, map->sum_points);
 }
