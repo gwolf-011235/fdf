@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:29:34 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/10 13:17:02 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/11 08:17:18 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,38 @@ void	ft_set_morph_color(t_vec3f *morph, t_vec3f *points, int sum)
 		morph[i].color = points[i].color;
 		i++;
 	}
+}
+
+void	ft_set_argb_values(t_color *color, uint8_t r, uint8_t g, uint8_t b)
+{
+	color->a = 0;
+	color->r = r;
+	color->g = g;
+	color->b = b;
+}
+
+uint32_t	ft_raindbow(double ratio)
+{
+	int		normalized;
+	int		region;
+	int		x;
+	t_color	ret;
+
+	normalized = (int)(ratio * 256 * 6);
+	region = normalized / 256;
+	x = normalized % 256;
+
+	if (region == 0)
+		ft_set_argb_values(&ret, 255, 0 + x, 0);
+	else if (region == 1)
+		ft_set_argb_values(&ret, 255 - x, 255, 0);
+	else if (region == 2)
+		ft_set_argb_values(&ret, 0, 255, 0 + x);
+	else if (region == 3)
+		ft_set_argb_values(&ret, 0, 255 - x, 255);
+	else if (region == 4)
+		ft_set_argb_values(&ret, 0 + x, 0, 255);
+	else if (region == 5)
+		ft_set_argb_values(&ret, 255, 0, 255 - x);
+	return ((ret.a << 24) | (ret.r << 16) | (ret.g << 8) | ret.b);
 }
