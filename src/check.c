@@ -78,6 +78,7 @@ void	ft_check_row(t_map *map, char *row)
 		ft_printf("Line %d is bad!\n", map->height);
 		ft_printf("Expected: %d\n", map->width);
 		ft_printf("Got: %d\n", count);
+//free all rows
 		free(row);
 		ft_terminate(ERR_LINE);
 	}
