@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 10:22:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/12 08:29:40 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/12 09:31:37 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ int	ft_render(t_data *data)
 
 	if (ft_timestamp_ms(&data->render) - last_update < (uint64_t)(1000 / 30))
 		return (0);
+	printf("FPS: %ld\n", 1000 / (ft_timestamp_ms(&data->render) - last_update));
 	last_update = ft_timestamp_ms(&data->render);
-	printf("TIME: %ld\n", last_update);
 	map = &data->map;
 	t = clock();
 	fill_background(&data->render, data->map.pattern[3],
@@ -83,10 +83,11 @@ int	ft_render(t_data *data)
 	data->draw_ft(&data->render, map);
 	if (map->props.box)
 		ft_draw_box(&data->render, map->corner[1], data->map.props.canvas);
+	ft_print_mat4(data->map.mat);
 	mlx_put_image_to_window(data->mlx, data->win, data->render.ptr, 0, 0);
 	//mlx_put_image_to_window(data->mlx, data->win, data->menu.ptr, 0, 0);
 	t = clock() - t;
 	ret = (double)t / CLOCKS_PER_SEC;
-	printf("TIME: %f\n", ret * 1000);
+	printf("RENDER: %f\n", ret * 1000);
 	return (0);
 }
