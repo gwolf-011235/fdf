@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:54:09 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/10 21:57:10 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/12 08:18:04 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_set_ft_ptr(t_data *data, int choose)
 {
 	static const t_calc_ft	calc_ptr[2] = {ft_calc_morph, ft_wobble};
-	static const t_draw_ft	draw_ptr[2] = {ft_wirelines, ft_draw_points};
+	static const t_draw_ft	draw_ptr[2] = {ft_draw_wirelines, ft_draw_points};
 
 	if (choose == 0)
 		data->calc_ft = calc_ptr[0];
