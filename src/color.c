@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:29:34 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/11 11:23:35 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/12 07:28:28 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	ft_set_argb_values(t_color *color, uint8_t r, uint8_t g, uint8_t b)
 	color->b = b;
 }
 
-uint32_t	ft_raindbow(double ratio)
+uint32_t	ft_rainbow(double ratio)
 {
 	int		normalized;
 	int		region;
@@ -109,7 +109,7 @@ void	ft_skittles(t_map *map, t_vec3f *morph)
 	{
 		ratio = morph[i].y / map->props.canvas[Y] + offset;
 		ratio = fmod(ratio, 1.0);
-		morph[i].color = ft_raindbow(ratio);
+		morph[i].color = ft_rainbow(ratio);
 		i++;
 	}
 }
