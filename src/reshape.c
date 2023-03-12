@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 10:22:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/12 09:31:37 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/12 18:32:58 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	ft_init_project(t_data *data)
 	map->props.scale = ft_fit_box(map->edges, map->mat, map->props);
 	ft_calc_morph(map->morph, map->points, map->mat, map);
 	ft_set_morph_color(map->morph, map->points, map->sum_points);
-	ft_draw_wirelines(&data->render, &data->map);
-	mlx_put_image_to_window(data->mlx, data->win, data->render.ptr, 0, 0);
+	ft_draw_wirelines(data->render[0], &data->map);
+	mlx_put_image_to_window(data->mlx, data->win, data->render[0]->ptr, 0, 0);
 }
 
 void	ft_scale_z(t_vec3f *points, int *z_storage, int sum, float scale_z)
@@ -62,17 +62,17 @@ void	ft_calc_morph(t_vec3f *morph, t_vec3f *points, t_mat4 mat, t_map *map)
 int	ft_render(t_data *data)
 {
 	clock_t			t;
-	double			ret;
+	//double			ret;
 	t_map			*map;
 	static uint64_t	last_update;
 
-	if (ft_timestamp_ms(&data->render) - last_update < (uint64_t)(1000 / 30))
+	if (ft_timestamp_ms(data->render[0]) - last_update < (uint64_t)(1000 / 30))
 		return (0);
-	printf("FPS: %ld\n", 1000 / (ft_timestamp_ms(&data->render) - last_update));
-	last_update = ft_timestamp_ms(&data->render);
+	//printf("FPS: %ld\n", 1000 / (ft_timestamp_ms(data->render[0]) - last_update));
+	last_update = ft_timestamp_ms(data->render[0]);
 	map = &data->map;
 	t = clock();
-	fill_background(&data->render, data->map.pattern[3],
+	fill_background(data->render[0], data->map.pattern[3],
 		data->map.props.canvas);
 	if (!map->props.sphere)
 		data->calc_ft(map->morph, map->points, map->mat, map);
@@ -80,14 +80,12 @@ int	ft_render(t_data *data)
 		data->calc_ft(map->morph, map->polar, map->mat, map);
 	if (data->map.rainbow)
 		ft_skittles(&data->map, data->map.morph);
-	data->draw_ft(&data->render, map);
+	data->draw_ft(data->render[0], map);
 	if (map->props.box)
-		ft_draw_box(&data->render, map->corner[1], data->map.props.canvas);
-	ft_print_mat4(data->map.mat);
-	mlx_put_image_to_window(data->mlx, data->win, data->render.ptr, 0, 0);
-	//mlx_put_image_to_window(data->mlx, data->win, data->menu.ptr, 0, 0);
+		ft_draw_box(data->render[0], map->corner[1], data->map.props.canvas);
+	mlx_put_image_to_window(data->mlx, data->win, data->render[0]->ptr, data->map.menu_width, 0);
 	t = clock() - t;
-	ret = (double)t / CLOCKS_PER_SEC;
-	printf("RENDER: %f\n", ret * 1000);
+	//ret = (double)t / CLOCKS_PER_SEC;
+	//printf("RENDER: %f\n", ret * 1000);
 	return (0);
 }
