@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:16:59 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/12 07:25:20 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/12 17:34:11 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int	ft_key_hook_press(int key, t_data *data)
 		ft_key_ftptr(key, data);
 	else if (key == KEY_K || key == KEY_L)
 		ft_key_skip(key, &data->map);
+	else if (key == KEY_I)
+		ft_key_menu(data);
 	printf("Key: %d", key);
 	return (0);
 }
