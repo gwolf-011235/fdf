@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 10:22:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/10 15:06:03 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/12 07:30:32 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,13 @@ int	ft_render(t_data *data)
 		data->calc_ft(map->morph, map->points, map->mat, map);
 	else
 		data->calc_ft(map->morph, map->polar, map->mat, map);
+	if (data->map.rainbow)
+		ft_skittles(&data->map, data->map.morph);
 	data->draw_ft(&data->render, map);
 	if (map->props.box)
 		ft_draw_box(&data->render, map->corner[1]);
 	mlx_put_image_to_window(data->mlx, data->win, data->render.ptr, 0, 0);
+	//mlx_put_image_to_window(data->mlx, data->win, data->menu.ptr, 0, 0);
 	t = clock() - t;
 	ret = (double)t / CLOCKS_PER_SEC;
 	printf("TIME: %f\n", ret * 1000);
