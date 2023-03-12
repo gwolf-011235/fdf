@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/11 08:18:07 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/12 07:28:43 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,7 @@ typedef struct s_map {
 	int		skip;
 	t_mat4	mat;
 	t_props	props;
+	bool	rainbow;
 }	t_map;
 
 typedef void	(*t_calc_ft)(t_vec3f *, t_vec3f *, t_mat4, t_map *);
@@ -193,7 +194,8 @@ int		ft_gradient(int color_start, int color_end, double len, double pos);
 void	ft_set_pattern(int pattern[4], int choice);
 void	ft_set_morph_color(t_vec3f *morph, t_vec3f *points, int sum);
 void	ft_set_argb_values(t_color *color, uint8_t r, uint8_t g, uint8_t b);
-uint32_t	ft_raindbow(double ratio);
+uint32_t	ft_rainbow(double ratio);
+void	ft_skittles(t_map *map, t_vec3f *morph);
 
 //key_hooks.c
 int		ft_key_hook_press(int key, t_data *data);
