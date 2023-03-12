@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 10:22:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/12 07:30:32 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/12 08:21:23 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_init_project(t_data *data)
 	map->props.scale = ft_fit_box(map->edges, map->mat, map->props);
 	ft_calc_morph(map->morph, map->points, map->mat, map);
 	ft_set_morph_color(map->morph, map->points, map->sum_points);
-	ft_wirelines(&data->render, &data->map);
+	ft_draw_wirelines(&data->render, &data->map);
 	mlx_put_image_to_window(data->mlx, data->win, data->render.ptr, 0, 0);
 }
 
@@ -81,7 +81,7 @@ int	ft_render(t_data *data)
 		ft_skittles(&data->map, data->map.morph);
 	data->draw_ft(&data->render, map);
 	if (map->props.box)
-		ft_draw_box(&data->render, map->corner[1]);
+		ft_draw_box(&data->render, map->corner[1], data->map.props.canvas);
 	mlx_put_image_to_window(data->mlx, data->win, data->render.ptr, 0, 0);
 	//mlx_put_image_to_window(data->mlx, data->win, data->menu.ptr, 0, 0);
 	t = clock() - t;

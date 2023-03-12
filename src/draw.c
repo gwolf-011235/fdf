@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 09:58:18 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/10 17:13:40 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/12 08:17:44 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_put_pix_to_image(t_img *img, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void	ft_wirelines(t_img *img, t_map *map)
+void	ft_draw_wirelines(t_img *img, t_map *map)
 {
 	int	i;
 
@@ -44,12 +44,14 @@ void	ft_connect_points(t_img *img, t_vec3f *morph_p, int line, t_map *map)
 		if (end[X] >= map->width)
 			end[X] = map->width - 1;
 		if (!morph_p[i].hidden || !morph_p[end[X]].hidden)
-			ft_prep_draw_line(img, morph_p[i], morph_p[end[X]]);
+			ft_prep_draw_line(img, morph_p[i], morph_p[end[X]],
+				map->props.canvas);
 		end[Y] = i + map->width * map->skip;
 		if (line + map->skip >= map->height)
 			end[Y] = i + (map->height - 1 - line) * map->width;
 		if (!morph_p[i].hidden || !morph_p[end[Y]].hidden)
-			ft_prep_draw_line(img, morph_p[i], morph_p[end[Y]]);
+			ft_prep_draw_line(img, morph_p[i], morph_p[end[Y]],
+				map->props.canvas);
 		i += map->skip;
 	}
 }
