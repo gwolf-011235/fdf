@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 20:28:13 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/10 13:06:08 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/12 08:19:53 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ float	ft_fit_box(t_vec3f *corner, t_mat4 mat, t_props props)
 	}
 }
 
-void	ft_draw_box(t_img *img, t_vec3f *corner)
+void	ft_draw_box(t_img *img, t_vec3f *corner, int size[2])
 {
 	t_vec3f	start;
 	t_vec3f	end;
@@ -87,17 +87,17 @@ void	ft_draw_box(t_img *img, t_vec3f *corner)
 		start.color = GREEN;
 		end.color = GREEN;
 		if (!start.hidden && !end.hidden)
-			ft_prep_draw_line(img, start, end);
+			ft_prep_draw_line(img, start, end, size);
 		end = corner[i + 4];
 		start.color = BLUE;
 		end.color = BLUE;
 		if (!start.hidden && !end.hidden)
-			ft_prep_draw_line(img, start, end);
+			ft_prep_draw_line(img, start, end, size);
 		start = corner[i + 4];
 		end = corner[((i + 1) % 4) + 4];
 		start.color = RED;
 		end.color = RED;
 		if (!start.hidden && !end.hidden)
-			ft_prep_draw_line(img, start, end);
+			ft_prep_draw_line(img, start, end, size);
 	}
 }
