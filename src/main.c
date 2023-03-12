@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:54:09 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/10 15:05:48 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/10 21:57:10 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int	main(int argc, char *argv[])
 	ft_set_ft_ptr(&data, 2);
 	srand(time(NULL));
 	ft_init_window(&data);
+	ft_init_menu(&data);
 	ft_init_project(&data);
 	ft_start_mlx_loop(&data);
 }
