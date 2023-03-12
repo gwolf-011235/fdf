@@ -47,6 +47,7 @@ SRC := 	main.c \
 		bresenham.c \
 		clipping.c \
 		wobble.c \
+		swap.c \
 		shapes.c
 
 SRCS := $(addprefix $(SRC_DIR)/, $(SRC))
