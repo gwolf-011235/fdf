@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 14:46:48 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/12 18:08:26 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/12 23:02:13 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ void	ft_free_mlx(t_data *data, char *string, bool error)
 	free(data->map.ang_coord);
 	if (data->render[0]->ptr)
 		mlx_destroy_image(data->mlx, data->render[0]->ptr);
-	if (data->menu.ptr)
-		mlx_destroy_image(data->mlx, data->menu.ptr);
+	if (data->menu[0]->ptr)
+		mlx_destroy_image(data->mlx, data->menu[0]->ptr);
 	if (data->win)
 		mlx_destroy_window(data->mlx, data->win);
 	if (data->mlx)

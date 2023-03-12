@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 09:27:53 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/10 13:28:52 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/12 23:00:44 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,19 @@ void	ft_fill_z_storage(t_map *map)
 		map->z_storage[map->sum_points + i] = map->limits[ZMIN];
 		map->z_storage[map->sum_points + 4 + i] = map->limits[ZMAX];
 		i++;
+	}
+}
+
+void	ft_set_canvas_size(int canvas[4], int x, int y)
+{
+	if (x)
+	{
+		canvas[X] = x;
+		canvas[OFFSET_X] = x / 2;
+	}
+	if (y)
+	{
+		canvas[Y] = y;
+		canvas[OFFSET_Y] = y / 2;
 	}
 }

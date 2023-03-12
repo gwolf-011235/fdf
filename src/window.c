@@ -6,36 +6,44 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:00:10 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/12 18:38:57 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/12 22:55:46 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+void	ft_set_img_ptr(t_img *images, t_img *render[2], t_img *menu[3])
+{
+	render[0] = images;
+	render[1] = images + 1;
+	menu[0] = images + 2;
+	menu[1] = images + 3;
+	menu[2] = images + 4;
+}
+
 void	ft_init_window(t_data *data)
 {
 	int	*screen;
 
-	screen = data->screen;
+	data->images = malloc(sizeof(t_img) * 5);
+	if (!data->images)
+		ft_free_mlx(data, ERR_MEM, true); //needs modification
+	ft_set_img_ptr(data->images, data->render, data->menu);
 	data->mlx = mlx_init();
 	if (!data->mlx)
 		ft_free_mlx(data, ERR_MLX, true);
-	mlx_get_screen_size(data->mlx, &data->screen[X], &data->screen[Y]);
-	ft_printf("🖥️  Screen size\n   |%d x %d|\n\n", data->screen[X], data->screen[Y]);
+	screen = data->screen;
+	mlx_get_screen_size(data->mlx, &screen[X], &screen[Y]);
+	ft_printf("🖥️  Screen size\n   |%d x %d|\n\n", screen[X], screen[Y]);
 	data->win = mlx_new_window(data->mlx, screen[X], screen[Y], "FdF - by gwolf");
 	if (!data->win)
 		ft_free_mlx(data, ERR_WIN, true);
-	data->render[0] = malloc(sizeof(t_img));
-	data->render[1] = malloc(sizeof(t_img));
 	ft_init_image(data, data->render[0], screen[X], screen[Y]);
 	ft_init_image(data, data->render[1], screen[X] - MENU_WIDTH, screen[Y]);
-	printf("0. line_len: %d\n", data->render[0]->line_len);
-	printf("1. line_len: %d\n", data->render[1]->line_len);
-	ft_init_image(data, &data->menu, MENU_WIDTH, screen[Y]);
-	data->map.props.canvas[X] = screen[X];
-	data->map.props.canvas[Y] = screen[Y];
-	data->map.props.canvas[OFFSET_X] = screen[X] / 2;
-	data->map.props.canvas[OFFSET_Y] = screen[Y] / 2;
+	ft_init_image(data, data->menu[0], MENU_WIDTH, MENU_HEIGHT);
+	ft_init_image(data, data->menu[1], MENU_WIDTH, MENU_HEIGHT);
+	ft_init_image(data, data->menu[2], MENU_WIDTH, screen[Y]); //needs mod > smaller
+	ft_set_canvas_size(data->map.props.canvas, screen[X], screen[Y]);
 }
 
 void	ft_init_image(t_data *data, t_img *img, int win_x, int win_y)

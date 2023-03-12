@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/12 18:51:41 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/12 22:55:23 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@
 # define ISO 2
 # define NICE 3
 # define MENU_WIDTH 320
+# define MENU_HEIGHT 1080
 
 typedef struct s_coord {
 	float	lon;
@@ -162,8 +163,9 @@ typedef struct s_data {
 	void	*mlx;
 	void	*win;
 	int		screen[2];
+	t_img	*images;
 	t_img	*render[2];
-	t_img	menu;
+	t_img	*menu[3];
 	t_map	map;
 	t_mouse	mouse;
 	t_calc_ft	calc_ft;
@@ -258,6 +260,7 @@ void	ft_map_init(t_map *map);
 void	ft_set_limits_xy(t_map *map);
 void	ft_find_limits_z(t_map *map);
 void	ft_fill_z_storage(t_map *map);
+void	ft_set_canvas_size(int canvas[4], int x, int y);
 
 //utils.c
 int		ft_move_atoi(char *line);

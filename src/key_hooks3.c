@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 16:20:01 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/12 18:52:11 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/12 22:57:47 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,17 +57,17 @@ void	ft_key_menu(t_data *data)
 	if (data->map.menu)
 	{
 		ft_swap_img_ptr(&data->render[0], &data->render[1]);
-		data->map.menu_width = 320;
-		data->map.props.canvas[X] -= 320;
+		data->map.menu_width = MENU_WIDTH;
+		data->map.props.canvas[X] -= MENU_WIDTH;
 		data->map.props.canvas[OFFSET_X] = data->map.props.canvas[X] / 2;
-		mlx_put_image_to_window(data->mlx, data->win, data->menu.ptr, 0, 0);
+		mlx_put_image_to_window(data->mlx, data->win, data->menu[0]->ptr, 0, 0);
 		ft_write_menu(data);
 	}
 	else
 	{
 		ft_swap_img_ptr(&data->render[0], &data->render[1]);
 		data->map.menu_width = 0;
-		data->map.props.canvas[X] += 320;
+		data->map.props.canvas[X] += MENU_WIDTH;
 		data->map.props.canvas[OFFSET_X] = data->map.props.canvas[X] / 2;
 	}
 }
