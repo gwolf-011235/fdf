@@ -6,22 +6,22 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 14:38:32 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/10 13:42:24 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/12 08:15:11 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	ft_prep_draw_line(t_img *img, t_vec3f start, t_vec3f end)
+void	ft_prep_draw_line(t_img *img, t_vec3f start, t_vec3f end, int size[2])
 {
 	t_bresvars	vars;
 
 	if (!start.hidden && end.hidden)
-		ft_clip_line(&start, &end, img->size);
+		ft_clip_line(&start, &end, size);
 	else if (start.hidden && !end.hidden)
 	{
 		ft_swap_points(&start, &end);
-		ft_clip_line(&start, &end, img->size);
+		ft_clip_line(&start, &end, size);
 	}
 	if (ft_init_bresvars(&vars, start, end))
 		return ;
