@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 08:30:19 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/10 13:19:13 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/12 08:35:31 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ int	ft_mouse_hook_release(int button, int x, int y, t_data *data)
 
 int	ft_mouse_hook_move(int x, int y, t_data *data)
 {
-	if (x > data->render.size[X] || x < 0 || y > data->render.size[Y] || y < 0)
+	if (x > data->map.props.canvas[X] || x < 0
+		|| y > data->map.props.canvas[Y] || y < 0)
 		return (0);
 	if (data->mouse.left)
 	{

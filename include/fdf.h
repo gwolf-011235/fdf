@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/12 08:28:42 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/12 08:33:52 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,6 @@ typedef struct s_img {
 	int		line_len;
 	int		endian;
 	int		bytes;
-	int		size[2];
 	uint64_t	created_at;
 }	t_img;
 
