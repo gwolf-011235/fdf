@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 17:01:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/10 16:44:16 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/12 07:24:57 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,9 +98,9 @@ void	ft_key_view(int key, t_map *map)
 void	ft_key_stuff(int key, t_map *map, t_data *data)
 {
 	if (key == KEY_B)
-	{
 		map->props.box = !map->props.box;
-	}
+	else if (key == KEY_G)
+		map->rainbow = !map->rainbow;
 	else if (key == KEY_M)
 	{
 		if (map->factor == 1)
