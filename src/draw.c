@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 09:58:18 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/12 08:17:44 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/12 08:29:10 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,14 @@ void	ft_connect_points(t_img *img, t_vec3f *morph_p, int line, t_map *map)
 	}
 }
 
-void	fill_background(t_img *img, int color)
+void	fill_background(t_img *img, int color, int size[2])
 {
 	int		i;
 	char	*dst;
 	int		pixel;
 
 	i = 0;
-	pixel = img->size[X] * img->size[Y];
+	pixel = size[X] * size[Y];
 	dst = img->addr;
 	while (i < pixel)
 	{

@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 10:22:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/12 08:21:23 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/12 08:29:40 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ int	ft_render(t_data *data)
 	printf("TIME: %ld\n", last_update);
 	map = &data->map;
 	t = clock();
-	fill_background(&data->render, data->map.pattern[3]);
+	fill_background(&data->render, data->map.pattern[3],
+		data->map.props.canvas);
 	if (!map->props.sphere)
 		data->calc_ft(map->morph, map->points, map->mat, map);
 	else

@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/12 08:20:39 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/12 08:28:42 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,7 +186,7 @@ void	ft_set_colors(t_map *map, t_vec3f *points);
 void	ft_put_pix_to_image(t_img *img, int x, int y, int color);
 void	ft_draw_wirelines(t_img *img, t_map *map);
 void	ft_connect_points(t_img *img, t_vec3f *morph_p, int line, t_map *map);
-void	fill_background(t_img *img, int color);
+void	fill_background(t_img *img, int color, int size[2]);
 void	ft_draw_points(t_img *img, t_map *map);
 
 //color.c
