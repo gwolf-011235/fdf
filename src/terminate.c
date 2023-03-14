@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 14:46:48 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/12 23:02:13 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/13 19:02:58 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ void	ft_terminate(char *message)
 	exit(1);
 }
 
-void	ft_free_rows(char *row, char *rows[ROW_MAX], int fd)
+void	ft_free_rows(char *row, char *rows[ROW_MAX], int fd, int num)
 {
 	int	i;
 
 	close(fd);
 	get_next_line(fd);
 	free(row);
-	i = ROW_MAX;
+	i = num;
 	while (i--)
 	{
 		free(rows[i]);
@@ -49,15 +49,30 @@ void	ft_free_map_ptr(t_map *map, char *string)
 	ft_terminate(string);
 }
 
+void	ft_destroy_images(t_data *data)
+{
+	if (data->render[0]->ptr)
+		mlx_destroy_image(data->mlx, data->render[0]->ptr);
+	if (data->render[1]->ptr)
+		mlx_destroy_image(data->mlx, data->render[1]->ptr);
+	if (data->menu[0]->ptr)
+		mlx_destroy_image(data->mlx, data->menu[0]->ptr);
+	if (data->menu[1]->ptr)
+		mlx_destroy_image(data->mlx, data->menu[1]->ptr);
+	if (data->menu[2]->ptr)
+		mlx_destroy_image(data->mlx, data->menu[2]->ptr);
+}
+
 void	ft_free_mlx(t_data *data, char *string, bool error)
 {
 	free(data->map.points);
 	free(data->map.z_storage);
 	free(data->map.ang_coord);
-	if (data->render[0]->ptr)
-		mlx_destroy_image(data->mlx, data->render[0]->ptr);
-	if (data->menu[0]->ptr)
-		mlx_destroy_image(data->mlx, data->menu[0]->ptr);
+	if (data->images)
+	{
+		ft_destroy_images(data);
+		free(data->images);
+	}
 	if (data->win)
 		mlx_destroy_window(data->mlx, data->win);
 	if (data->mlx)
