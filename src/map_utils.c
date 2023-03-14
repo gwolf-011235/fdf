@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 09:27:53 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/12 23:00:44 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/13 01:45:35 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,18 @@ void	ft_set_canvas_size(int canvas[4], int x, int y)
 {
 	if (x)
 	{
-		canvas[X] = x;
-		canvas[OFFSET_X] = x / 2;
+		if (canvas[X] == 0)
+			canvas[X] = x;
+		else
+			canvas[X] += x;
+		canvas[OFFSET_X] = canvas[X] / 2;
 	}
 	if (y)
 	{
-		canvas[Y] = y;
-		canvas[OFFSET_Y] = y / 2;
+		if (canvas[Y] == 0)
+			canvas[Y] = y;
+		else
+			canvas[Y] += y;
+		canvas[OFFSET_Y] = canvas[Y] / 2;
 	}
 }
