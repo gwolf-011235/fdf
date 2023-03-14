@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/12 22:55:23 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/14 18:14:02 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,9 @@
 # define NICE 3
 # define MENU_WIDTH 320
 # define MENU_HEIGHT 1080
+# define OFF 0
+# define STATS 1
+# define CONTROL 2
 
 typedef struct s_coord {
 	float	lon;
@@ -134,7 +137,7 @@ typedef struct s_map {
 	t_mat4	mat;
 	t_props	props;
 	bool	rainbow;
-	bool	menu;
+	uint8_t	menu;
 	int		menu_width;
 }	t_map;
 
@@ -178,7 +181,7 @@ void	ft_set_ft_ptr(t_data *data, int choose);
 void	ft_check_map(t_map *map, char *filename);
 void	ft_check_filename(t_map *map, char *filename);
 void	ft_extract_rows(t_map *map, int fd);
-void	ft_check_row(t_map *map, char *row);
+bool	ft_check_row(t_map *map, char *row);
 int		ft_count_num_in_row(char *line, bool *hex);
 
 //parse.c
@@ -204,6 +207,7 @@ void	ft_skittles(t_map *map, t_vec3f *morph);
 
 //key_hooks.c
 int		ft_key_hook_press(int key, t_data *data);
+void	ft_key_hook_press2(int key, t_map *map);
 void	ft_key_translate(int key, t_map *map);
 void	ft_key_angle(int key, t_map *map);
 void	ft_key_angle2(int key, t_map *map);
@@ -217,7 +221,8 @@ void	ft_key_stuff(int key, t_map *map, t_data *data);
 //key_hooks3.c
 void	ft_key_ftptr(int key, t_data *data);
 void	ft_key_skip(int key, t_map *map);
-void	ft_key_menu(t_data *data);
+void	ft_key_toggle_menu(t_data *data);
+void	ft_key_toggle_controls(t_data *data);
 
 //mouse.c
 int		ft_mouse_hook_press(int button, int x, int y, t_data *data);
@@ -233,8 +238,9 @@ void	ft_start_mlx_loop(t_data *data);
 
 //terminate.c
 void	ft_terminate(char *message);
-void	ft_free_rows(char *row, char *rows[ROW_MAX], int fd);
+void	ft_free_rows(char *row, char *rows[ROW_MAX], int fd, int num);
 void	ft_free_map_ptr(t_map *map, char *string);
+void	ft_destroy_images(t_data *data);
 void	ft_free_mlx(t_data *data, char *string, bool error);
 
 //matrix.c
@@ -319,6 +325,11 @@ void	ft_clip_coord_y(t_vec3f *start, t_vec3f *end, int size[2]);
 
 //wobble.c
 void	ft_wobble(t_vec3f *morph, t_vec3f *points, t_mat4 mat, t_map *map);
+
+//numconvert.c
+void	ft_ftoa_in_place(float num, char *str, int precision);
+void	ft_itoa_in_place(int num, char *str);
+
 
 //test.c
 void	test(t_data *data);
