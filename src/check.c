@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 21:36:25 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/10 13:12:09 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/13 19:03:57 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,19 +56,20 @@ void	ft_extract_rows(t_map *map, int fd)
 	while (row)
 	{
 		if (map->height == ROW_MAX)
-			ft_free_rows(row, map->rows, fd);
+			ft_free_rows(row, map->rows, fd, ROW_MAX);
 		map->rows[map->height++] = row;
 		row = get_next_line(fd);
 		if (!row)
 			break ;
-		ft_check_row(map, row);
+		if (ft_check_row(map, row) == false)
+			ft_free_rows(row, map->rows, fd, map->height);
 	}
 	map->sum_points = map->height * map->width;
 	ft_printf("🗺️  Map Dimensions\n   |%d x %d|\n\n", map->width, map->height);
 	ft_printf("📊 Datapoints\n   |%d|\n\n", map->sum_points);
 }
 
-void	ft_check_row(t_map *map, char *row)
+bool	ft_check_row(t_map *map, char *row)
 {
 	int	count;
 
@@ -78,10 +79,9 @@ void	ft_check_row(t_map *map, char *row)
 		ft_printf("Line %d is bad!\n", map->height);
 		ft_printf("Expected: %d\n", map->width);
 		ft_printf("Got: %d\n", count);
-//free all rows
-		free(row);
-		ft_terminate(ERR_LINE);
+		return (false);
 	}
+	return (true);
 }
 
 int	ft_count_num_in_row(char *line, bool *hex)
