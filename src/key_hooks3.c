@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 16:20:01 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/12 22:57:47 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/14 18:16:32 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,23 +51,44 @@ void	ft_key_skip(int key, t_map *map)
 	}
 }
 
-void	ft_key_menu(t_data *data)
+void	ft_key_toggle_menu(t_data *data)
 {
-	data->map.menu = !data->map.menu;
+	if (data->map.menu == OFF)
+		data->map.menu = STATS;
+	else if (data->map.menu == CONTROL)
+	{
+		ft_swap_img_ptr(&data->menu[0], &data->menu[1]);
+		data->map.menu = OFF;
+	}
+	else
+		data->map.menu = OFF;
 	if (data->map.menu)
 	{
 		ft_swap_img_ptr(&data->render[0], &data->render[1]);
 		data->map.menu_width = MENU_WIDTH;
-		data->map.props.canvas[X] -= MENU_WIDTH;
-		data->map.props.canvas[OFFSET_X] = data->map.props.canvas[X] / 2;
+		ft_set_canvas_size(data->map.props.canvas, -MENU_WIDTH, 0);
 		mlx_put_image_to_window(data->mlx, data->win, data->menu[0]->ptr, 0, 0);
-		ft_write_menu(data);
+		if (data->map.menu == STATS)
+			ft_write_menu(data);
 	}
 	else
 	{
 		ft_swap_img_ptr(&data->render[0], &data->render[1]);
 		data->map.menu_width = 0;
-		data->map.props.canvas[X] += MENU_WIDTH;
-		data->map.props.canvas[OFFSET_X] = data->map.props.canvas[X] / 2;
+		ft_set_canvas_size(data->map.props.canvas, MENU_WIDTH, 0);
 	}
+}
+
+void	ft_key_toggle_controls(t_data *data)
+{
+	if (data->map.menu == OFF)
+		return ;
+	else if (data->map.menu == STATS)
+		data->map.menu = CONTROL;
+	else
+		data->map.menu = STATS;
+	ft_swap_img_ptr(&data->menu[0], &data->menu[1]);
+	mlx_put_image_to_window(data->mlx, data->win, data->menu[0]->ptr, 0, 0);
+	if (data->map.menu == STATS)
+		ft_write_menu(data);
 }
