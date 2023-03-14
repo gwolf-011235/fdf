@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 16:11:11 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/12 18:52:06 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/14 18:26:09 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	ft_wrap_angle(float angle, int factor)
 {
 	angle += factor;
 	if (angle < 0)
-		angle = 360 - factor;
+		angle = 360 + factor;
 	if (angle > 360)
 		angle = 0 + factor;
 	return (angle);
