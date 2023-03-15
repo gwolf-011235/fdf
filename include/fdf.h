@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/14 18:46:09 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/15 10:26:54 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -282,6 +282,7 @@ void	ft_swap_points(t_vec3f *start, t_vec3f *end);
 //menu.c
 void	ft_init_menu(t_data *data);
 void	ft_write_menu(t_data *data);
+void	ft_update_menu(t_data *data);
 
 //print_utils.c
 void	ft_print_mat4(t_mat4 matrix);
@@ -329,7 +330,9 @@ void	ft_wobble(t_vec3f *morph, t_vec3f *points, t_mat4 mat, t_map *map);
 
 //numconvert.c
 void	ft_ftoa_in_place(float num, char *str, int precision);
-void	ft_itoa_in_place(int num, char *str);
+int		ft_itoa_in_place(int num, char *str);
+int		ft_count_digit(int num);
+void	ft_str_padding(char *str, int pad);
 
 
 //test.c
