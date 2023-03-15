@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 10:38:34 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/15 10:50:41 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/15 17:50:11 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,17 @@ void	ft_write_menu(t_data *data)
 	mlx_string_put(data->mlx, data->win, 120, 665, 0x0, "change:");
 }
 
+void	ft_mlx_put_viewname(t_data *data, uint8_t index)
+{
+	char	str[5];
+	static const char views[5][5] = {
+		"None", "Iso", "Top", "Side", "Nice"};
+
+	ft_memset(str, 0, 5);
+	ft_strlcpy(str, views[index], 5);
+	mlx_string_put(data->mlx, data->win, 260, 400, 0x0, str);
+}
+
 void	ft_update_menu(t_data *data)
 {
 	ft_mlx_put_int(data, 260, 315, data->map.props.angle[X]);
@@ -102,4 +113,6 @@ void	ft_update_menu(t_data *data)
 		mlx_string_put(data->mlx, data->win, 260, 665, 0x0, "mid");
 	else 
 		mlx_string_put(data->mlx, data->win, 260, 665, 0x0, "max");
+	ft_mlx_put_viewname(data, data->map.props.view);
+
 }
