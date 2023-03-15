@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 10:38:34 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/15 17:50:11 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/15 18:35:56 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,11 @@ void	ft_mlx_put_int(t_data *data, int x, int y, int num)
 	char	str[4];
 	int		padding;
 
-	numlen = ft_count_digit(num);
+	if (num < 0)
+		numlen = 1;
+	else
+		numlen = 0;
+	numlen += ft_count_digit(num);
 	if (numlen > 3)
 	{
 		mlx_string_put(data->mlx, data->win, x, y, 0x0, "max");
@@ -103,6 +107,8 @@ void	ft_update_menu(t_data *data)
 	ft_mlx_put_int(data, 260, 315, data->map.props.angle[X]);
 	ft_mlx_put_int(data, 260, 340, data->map.props.angle[Y]);
 	ft_mlx_put_int(data, 260, 365, data->map.props.angle[Z]);
+	ft_mlx_put_int(data, 160, 395, data->map.props.translate[X]);
+	ft_mlx_put_int(data, 180, 395, data->map.props.translate[Y]);
 	ft_mlx_put_float(data, (int[]){235, 415}, data->map.props.scale, 2);
 	ft_mlx_put_float(data, (int[]){235, 495}, data->map.props.scale_z, 2);
 	mlx_string_put(data->mlx, data->win, 255, 580, 0x0, "1:");
