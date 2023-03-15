@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:29:34 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/12 07:28:28 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/16 00:16:26 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,19 @@ int	ft_gradient(int start, int end, double len, double pos)
 
 void	ft_set_pattern(int pattern[4], int choice)
 {
-	static const int	colorschemes[5][4] = {
-	{YELLOW, RED, BLUE, BLACK},
-	{BLACK, BLACK, BLACK, WHITE},
-	{TYRES, MICHELIN, BLACK, TOKYODRIFT},
-	{BLACK, GREEN, BLACK, BLACK},
-	{PURPLE, ORANGE, PINK, LIGHTBLUE}
+	static const int	colorschemes[5][5] = {
+	{YELLOW, RED, BLUE, BLACK, STANDARD},
+	{BLACK, BLACK, BLACK, WHITE, B_AND_W},
+	{TYRES, MICHELIN, BLACK, TOKYODRIFT, RUPPI},
+	{BLACK, GREEN, BLACK, BLACK, MATRIX},
+	{PURPLE, ORANGE, PINK, LIGHTBLUE, ICECREAM}
 	};
 
 	pattern[0] = colorschemes[choice][0];
 	pattern[1] = colorschemes[choice][1];
 	pattern[2] = colorschemes[choice][2];
 	pattern[3] = colorschemes[choice][3];
+	pattern[4] = colorschemes[choice][4];
 }
 
 void	ft_set_morph_color(t_vec3f *morph, t_vec3f *points, int sum)
