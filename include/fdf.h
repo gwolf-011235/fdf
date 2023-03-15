@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/14 18:14:02 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/14 18:46:09 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -273,6 +273,7 @@ int		ft_move_atoi(char *line);
 int		ft_jump_over_hex(char *line);
 int		ft_hex_to_dec(char *line, int len);
 int		ft_wrap_angle(float angle, int factor);
+void	ft_set_view_angle(float angle[3], uint8_t index);
 
 //swap.c
 void	ft_swap_img_ptr(t_img **a, t_img **b);
