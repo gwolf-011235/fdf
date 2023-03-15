@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 17:01:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/12 07:24:57 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/15 17:57:58 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,28 +71,39 @@ void	ft_key_sphere(int key, t_map *map)
 	}
 }
 
+void	ft_set_view_angles(float angle[3], uint8_t index)
+{
+	static const float	view_angle[5][3] =
+	{{0}, {35, 0, 45}, {0, 0, 0}, {0, 90, 0}, {54, 0, 45}};
+
+	angle[X] = view_angle[index][X];
+	angle[Y] = view_angle[index][Y];
+	angle[Z] = view_angle[index][Z];
+}
+
 void	ft_key_view(int key, t_map *map)
 {
 	if (key == KEY_SIX)
 	{
-		map->props.view = 1;
-		ft_build_transmat(map->mat, map->props);
+		map->props.view = ISO;
+		ft_set_view_angles(map->props.angle, ISO);
 	}
-	if (key == KEY_SEVEN)
+	else if (key == KEY_SEVEN)
 	{
-		map->props.view = 2;
-		ft_build_transmat(map->mat, map->props);
+		map->props.view = TOP;
+		ft_set_view_angles(map->props.angle, TOP);
 	}
-	if (key == KEY_EIGHT)
+	else if (key == KEY_EIGHT)
 	{
-		map->props.view = 3;
-		ft_build_transmat(map->mat, map->props);
+		map->props.view = SIDE;
+		ft_set_view_angles(map->props.angle, SIDE);
 	}
-	if (key == KEY_NINE)
+	else if (key == KEY_NINE)
 	{
-		map->props.view = 4;
-		ft_build_transmat(map->mat, map->props);
+		map->props.view = NICE;
+		ft_set_view_angles(map->props.angle, NICE);
 	}
+	ft_build_transmat(map->mat, map->props);
 }
 
 void	ft_key_stuff(int key, t_map *map, t_data *data)
