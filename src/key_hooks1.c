@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:16:59 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/15 16:13:17 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/15 18:47:30 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_key_hook_press(int key, t_data *data)
 		|| key == KEY_C || key == KEY_ONE || key == KEY_TWO || key == KEY_THREE
 		|| key == KEY_FOUR || key == KEY_FIVE || key == KEY_SPACE
 		|| key == KEY_SIX || key == KEY_SEVEN || key == KEY_EIGHT
-		|| key == KEY_NINE)
+		|| key == KEY_NINE || key == KEY_ZERO)
 		ft_key_hook_press2(key, &data->map);
 	else if (key == KEY_B || key == KEY_N || key == KEY_M
 		|| key == KEY_G || key == KEY_ESC)
@@ -45,7 +45,7 @@ void	ft_key_hook_press2(int key, t_map *map)
 		ft_key_angle(key, map);
 	else if (key == KEY_Q || key == KEY_E)
 		ft_key_angle2(key, map);
-	else if (key == KEY_R || key == KEY_F)
+	else if (key == KEY_R || key == KEY_F || key == KEY_ZERO)
 		ft_key_zoom(key, map);
 	else if (key == KEY_X || key == KEY_C)
 		ft_key_scale(key, map);
@@ -149,5 +149,11 @@ void	ft_key_zoom(int key, t_map *map)
 			return ;
 		map->props.scale *= 1 - 0.1 * factor;
 		ft_precalc_zoom(map->mat, factor);
+	}
+	else if (key == KEY_ZERO)
+	{
+		map->props.translate[X] = 0;
+		map->props.translate[Y] = 0;
+		map->props.scale = ft_fit_box(map->edges, map->mat, map->props);
 	}
 }
