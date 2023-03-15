@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 10:38:34 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/15 18:35:56 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/16 00:38:35 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,32 +19,37 @@ void	ft_init_menu(t_data *data)
 
 	data->menu[0]->ptr = mlx_xpm_file_to_image(data->mlx, "image/menu.xpm", &temp_x, &temp_y);
 	data->menu[1]->ptr = mlx_xpm_file_to_image(data->mlx, "image/controls.xpm", &temp_x, &temp_y);
+	data->menu[2]->ptr = mlx_xpm_file_to_image(data->mlx, "image/layer.xpm", &temp_x, &temp_y);
 	mlx_set_font(data->mlx, data->win,
 		"-misc-fixed-medium-r-normal-*-15-*-*-100-*-*-iso8859-1");
 }
 
-void	ft_mlx_put_int(t_data *data, int x, int y, int num)
+void	ft_mlx_put_int(t_data *data, int pos[2], int num, int pad)
 {
 	int		numlen;
-	char	str[4];
-	int		padding;
+	char	str[8];
 
 	if (num < 0)
 		numlen = 1;
 	else
 		numlen = 0;
 	numlen += ft_count_digit(num);
-	if (numlen > 3)
+	if (numlen > 7)
 	{
-		mlx_string_put(data->mlx, data->win, x, y, 0x0, "max");
+		mlx_string_put(data->mlx, data->win, pos[X], pos[Y], 0x0, "max");
 		return ;
 	}
-	ft_memset(str, 0, 4);
-	padding = 3 - numlen;
-	ft_itoa_in_place(num, str + padding);
-	while (padding--)
-		str[padding] = ' ';
-	mlx_string_put(data->mlx, data->win, x, y, 0x0, str);
+	ft_memset(str, 0, 8);
+	pad -= numlen;
+	if (pad > 0)
+	{
+		ft_itoa_in_place(num, str + pad);
+		while (pad--)
+			str[pad] = ' ';
+	}
+	else
+		ft_itoa_in_place(num, str);
+	mlx_string_put(data->mlx, data->win, pos[X], pos[Y], 0x0, str);
 }
 
 void	ft_mlx_put_float(t_data *data, int pos[2], float num, int prec)
@@ -53,7 +58,11 @@ void	ft_mlx_put_float(t_data *data, int pos[2], float num, int prec)
 	char	str[8];
 	int		padding;
 
-	numlen = ft_count_digit(num);
+	if (num < 0)
+		numlen = 1;
+	else
+		numlen = 0;
+	numlen += ft_count_digit(num);
 	if (numlen > 3)
 	{
 		mlx_string_put(data->mlx, data->win, pos[X], pos[Y], 0x0, "max");
@@ -72,26 +81,29 @@ void	ft_write_menu(t_data *data)
 	mlx_string_put(data->mlx, data->win, 30, 85, 0x0, "Name:");
 	mlx_string_put(data->mlx, data->win, 90, 85, 0x0, data->map.filename);
 	mlx_string_put(data->mlx, data->win, 30, 125, 0x0, "Rows (x):");
-	ft_mlx_put_int(data, 130, 125, data->map.width);
+	ft_mlx_put_int(data, (t_pos){130, 125}, data->map.width, 3);
 	mlx_string_put(data->mlx, data->win, 30, 145, 0x0, "Cols (y):");
-	ft_mlx_put_int(data, 130, 145, data->map.height);
+	ft_mlx_put_int(data, (t_pos){130, 145}, data->map.height, 3);
 	mlx_string_put(data->mlx, data->win, 30, 165, 0x0, "> Points:");
-	ft_mlx_put_int(data, 130, 165, data->map.sum_points);
+	ft_mlx_put_int(data, (t_pos){130, 165}, data->map.sum_points, 3);
 	mlx_string_put(data->mlx, data->win, 30, 205, 0x0, "Hex-Colors:");
 	if (data->map.hex)
 		mlx_string_put(data->mlx, data->win, 150, 205, 0x00FF00, "found");
 	else
 		mlx_string_put(data->mlx, data->win, 150, 205, 0x0, "no");
-	mlx_string_put(data->mlx, data->win, 120, 315, 0x0, "yaw   (x):");
-	mlx_string_put(data->mlx, data->win, 120, 340, 0x0, "pitch (y):");
-	mlx_string_put(data->mlx, data->win, 120, 365, 0x0, "roll  (z):");
-	mlx_string_put(data->mlx, data->win, 120, 415, 0x0, "zoom:");
-	mlx_string_put(data->mlx, data->win, 120, 495, 0x0, "z-scale:");
-	mlx_string_put(data->mlx, data->win, 120, 580, 0x0, "sampling:");
-	mlx_string_put(data->mlx, data->win, 120, 665, 0x0, "change:");
+	mlx_string_put(data->mlx, data->win, 110, 315, 0x0, "yaw   (x):");
+	mlx_string_put(data->mlx, data->win, 110, 340, 0x0, "pitch (y):");
+	mlx_string_put(data->mlx, data->win, 110, 365, 0x0, "roll  (z):");
+	mlx_string_put(data->mlx, data->win, 110, 430, 0x0, "zoom:");
+	mlx_string_put(data->mlx, data->win, 110, 510, 0x0, "z-scale:");
+	mlx_string_put(data->mlx, data->win, 110, 590, 0x0, "mod-level:");
+	mlx_string_put(data->mlx, data->win, 110, 655, 0x0, "          x:");
+	mlx_string_put(data->mlx, data->win, 110, 670, 0x0, "translate");
+	mlx_string_put(data->mlx, data->win, 110, 685, 0x0, "          y:");
+	mlx_string_put(data->mlx, data->win, 110, 770, 0x0, "sampling:");
 }
 
-void	ft_mlx_put_viewname(t_data *data, uint8_t index)
+void	ft_mlx_put_viewname(t_data *data, uint8_t index, int pos[2])
 {
 	char	str[5];
 	static const char views[5][5] = {
@@ -99,26 +111,47 @@ void	ft_mlx_put_viewname(t_data *data, uint8_t index)
 
 	ft_memset(str, 0, 5);
 	ft_strlcpy(str, views[index], 5);
-	mlx_string_put(data->mlx, data->win, 260, 400, 0x0, str);
+	mlx_string_put(data->mlx, data->win, pos[X], pos[Y], 0x0, str);
+}
+
+void	ft_mlx_put_colorscheme(t_data *data, uint8_t index, int pos[2])
+{
+	char	str[9];
+	static const char colorscheme[5][9] = {
+		"Standard", "B & W", "Ruppi", "Matrix", "Icecream"};
+
+	ft_memset(str, 0, 9);
+	ft_strlcpy(str, colorscheme[index], 9);
+	mlx_string_put(data->mlx, data->win, pos[X], pos[Y], 0x0, str);
 }
 
 void	ft_update_menu(t_data *data)
 {
-	ft_mlx_put_int(data, 260, 315, data->map.props.angle[X]);
-	ft_mlx_put_int(data, 260, 340, data->map.props.angle[Y]);
-	ft_mlx_put_int(data, 260, 365, data->map.props.angle[Z]);
-	ft_mlx_put_int(data, 160, 395, data->map.props.translate[X]);
-	ft_mlx_put_int(data, 180, 395, data->map.props.translate[Y]);
-	ft_mlx_put_float(data, (int[]){235, 415}, data->map.props.scale, 2);
-	ft_mlx_put_float(data, (int[]){235, 495}, data->map.props.scale_z, 2);
+	mlx_put_image_to_window(data->mlx, data->win, data->menu[2]->ptr, 220, 280);
+	ft_mlx_put_int(data, (t_pos){250, 315}, data->map.props.angle[X], 3);
+	ft_mlx_put_int(data, (t_pos){250, 340}, data->map.props.angle[Y], 3);
+	ft_mlx_put_int(data, (t_pos){250, 365}, data->map.props.angle[Z], 3);
+	if (data->map.props.scale >= 1000)
+		mlx_string_put(data->mlx, data->win, 240, 430, RED, "MAX");
+	else
+		ft_mlx_put_float(data, (t_pos){220, 430}, data->map.props.scale, 2);
+	if (data->map.props.scale_z >= 10.0)
+		mlx_string_put(data->mlx, data->win, 240, 510, RED, "MAX");
+	else if (data->map.props.scale_z <= -10.0)
+		mlx_string_put(data->mlx, data->win, 240, 510, RED, "MIN");
+	else
+		ft_mlx_put_float(data, (t_pos){220, 510}, data->map.props.scale_z, 2);
 	mlx_string_put(data->mlx, data->win, 255, 580, 0x0, "1:");
-	ft_mlx_put_int(data, 258, 580, data->map.skip);
+	ft_mlx_put_int(data, (t_pos){258, 580}, data->map.skip, 3);
 	if (data->map.factor == 1)
-		mlx_string_put(data->mlx, data->win, 260, 665, 0x0, "min");
+		mlx_string_put(data->mlx, data->win, 240, 590, GREEN, "min");
 	else if (data->map.factor == 3)
-		mlx_string_put(data->mlx, data->win, 260, 665, 0x0, "mid");
+		mlx_string_put(data->mlx, data->win, 240, 590, YELLOW, "Mid");
 	else 
-		mlx_string_put(data->mlx, data->win, 260, 665, 0x0, "max");
-	ft_mlx_put_viewname(data, data->map.props.view);
+		mlx_string_put(data->mlx, data->win, 240, 590, RED, "MAX");
+	ft_mlx_put_int(data, (t_pos){210, 655}, data->map.props.translate[X], 7);
+	ft_mlx_put_int(data, (t_pos){210, 685}, data->map.props.translate[Y], 7);
+	ft_mlx_put_viewname(data, data->map.props.view, (t_pos){260, 400});
+	ft_mlx_put_colorscheme(data, data->map.pattern[4], (t_pos){260, 500});
 
 }
