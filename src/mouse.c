@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 08:30:19 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/12 18:39:36 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/16 00:09:26 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	ft_mouse_hook_press(int button, int x, int y, t_data *data)
 {
-	printf("Taste: %d\n", button);
 	if (button == M_LEFT)
 	{
 		data->mouse.left = true;
@@ -58,6 +57,7 @@ int	ft_mouse_hook_move(int x, int y, t_data *data)
 		return (0);
 	if (data->mouse.left)
 	{
+		data->map.props.view = 0;
 		ft_mouse_angle(x, y, data);
 	}
 	if (data->mouse.right)
@@ -78,8 +78,8 @@ void	ft_mouse_angle(int x, int y, t_data *data)
 	distance = sqrt(delta_x * delta_x + delta_y * delta_y);
 	if (distance < 5)
 		return ;
-	data->map.props.angle[X] += delta_x;
-	data->map.props.angle[Y] -= delta_y;
+	data->map.props.angle[X] = ft_wrap_angle(data->map.props.angle[X], delta_x);
+	data->map.props.angle[Y] = ft_wrap_angle(data->map.props.angle[Y], delta_y);
 	data->mouse.last_left[X] = x;
 	data->mouse.last_left[Y] = y;
 	ft_build_transmat(data->map.mat, data->map.props);
@@ -97,7 +97,13 @@ void	ft_mouse_translate(int x, int y, t_data *data)
 	if (distance < 10)
 		return ;
 	data->map.props.translate[X] -= delta_x;
+	if (data->map.props.translate[X] >= 10000
+		|| data->map.props.translate[X] <= -10000)
+		data->map.props.translate[X] += delta_x;
 	data->map.props.translate[Y] -= delta_y;
+	if (data->map.props.translate[Y] >= 10000
+		|| data->map.props.translate[Y] <= -10000)
+		data->map.props.translate[Y] += delta_y;
 	data->mouse.last_right[X] = x;
 	data->mouse.last_right[Y] = y;
 	data->map.mat[3][0] -= delta_x;
