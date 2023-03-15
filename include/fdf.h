@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/15 10:26:54 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/15 16:50:10 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,10 @@
 # define YMIN 3
 # define ZMAX 4
 # define ZMIN 5
-# define TOP 1
-# define ISO 2
-# define NICE 3
+# define ISO 1
+# define TOP 2
+# define SIDE 3
+# define NICE 4
 # define MENU_WIDTH 320
 # define MENU_HEIGHT 1080
 # define OFF 0
