@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 09:27:53 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/13 01:45:35 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/15 18:29:33 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,9 @@
 void	ft_map_init(t_map *map)
 {
 	ft_set_pattern(map->pattern, 0);
-	map->props.angle[X] = atan(sqrt(2)) * 180 / M_PI;
+	map->props.angle[X] = 35;
 	map->props.angle[Y] = 0;
 	map->props.angle[Z] = 45;
-	map->props.translate[Z] = 1;
 	map->factor = 1;
 	map->skip = 1;
 }
