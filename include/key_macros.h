@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 10:32:42 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/13 01:24:17 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/15 18:44:49 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@
 # define KEY_W 119
 # define KEY_X 120
 # define KEY_Z 122
+# define KEY_ZERO 48
 # define KEY_ONE 49
 # define KEY_TWO 50
 # define KEY_THREE 51
