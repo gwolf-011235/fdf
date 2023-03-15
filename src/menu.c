@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 10:38:34 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/14 02:18:17 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/15 10:50:41 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,47 @@ void	ft_init_menu(t_data *data)
 	data->menu[0]->ptr = mlx_xpm_file_to_image(data->mlx, "image/menu.xpm", &temp_x, &temp_y);
 	data->menu[1]->ptr = mlx_xpm_file_to_image(data->mlx, "image/controls.xpm", &temp_x, &temp_y);
 	mlx_set_font(data->mlx, data->win,
-		"-misc-fixed-medium-r-normal-*-20-*-*-100-*-*-iso8859-1");
+		"-misc-fixed-medium-r-normal-*-15-*-*-100-*-*-iso8859-1");
 }
 
 void	ft_mlx_put_int(t_data *data, int x, int y, int num)
 {
-	char	str[20];
+	int		numlen;
+	char	str[4];
+	int		padding;
 
-	ft_memset(str, 0, 20);
-	ft_itoa_in_place(num, str);
+	numlen = ft_count_digit(num);
+	if (numlen > 3)
+	{
+		mlx_string_put(data->mlx, data->win, x, y, 0x0, "max");
+		return ;
+	}
+	ft_memset(str, 0, 4);
+	padding = 3 - numlen;
+	ft_itoa_in_place(num, str + padding);
+	while (padding--)
+		str[padding] = ' ';
 	mlx_string_put(data->mlx, data->win, x, y, 0x0, str);
+}
+
+void	ft_mlx_put_float(t_data *data, int pos[2], float num, int prec)
+{
+	int		numlen;
+	char	str[8];
+	int		padding;
+
+	numlen = ft_count_digit(num);
+	if (numlen > 3)
+	{
+		mlx_string_put(data->mlx, data->win, pos[X], pos[Y], 0x0, "max");
+		return ;
+	}
+	ft_memset(str, 0, 8);
+	padding = 3 - numlen;
+	ft_ftoa_in_place(num, str + padding, prec);
+	while (padding--)
+		str[padding] = ' ';
+	mlx_string_put(data->mlx, data->win, pos[X], pos[Y], 0x0, str);
 }
 
 void	ft_write_menu(t_data *data)
@@ -47,10 +78,28 @@ void	ft_write_menu(t_data *data)
 		mlx_string_put(data->mlx, data->win, 150, 205, 0x00FF00, "found");
 	else
 		mlx_string_put(data->mlx, data->win, 150, 205, 0x0, "no");
-	mlx_string_put(data->mlx, data->win, 130, 315, 0x0, "yaw (x):");
-	ft_mlx_put_int(data, 220, 315, data->map.props.angle[X]);
-	mlx_string_put(data->mlx, data->win, 130, 340, 0x0, "pitch (y): 9");
-	mlx_string_put(data->mlx, data->win, 130, 365, 0x0, "roll (z):  9");
+	mlx_string_put(data->mlx, data->win, 120, 315, 0x0, "yaw   (x):");
+	mlx_string_put(data->mlx, data->win, 120, 340, 0x0, "pitch (y):");
+	mlx_string_put(data->mlx, data->win, 120, 365, 0x0, "roll  (z):");
+	mlx_string_put(data->mlx, data->win, 120, 415, 0x0, "zoom:");
+	mlx_string_put(data->mlx, data->win, 120, 495, 0x0, "z-scale:");
+	mlx_string_put(data->mlx, data->win, 120, 580, 0x0, "sampling:");
+	mlx_string_put(data->mlx, data->win, 120, 665, 0x0, "change:");
+}
 
-
+void	ft_update_menu(t_data *data)
+{
+	ft_mlx_put_int(data, 260, 315, data->map.props.angle[X]);
+	ft_mlx_put_int(data, 260, 340, data->map.props.angle[Y]);
+	ft_mlx_put_int(data, 260, 365, data->map.props.angle[Z]);
+	ft_mlx_put_float(data, (int[]){235, 415}, data->map.props.scale, 2);
+	ft_mlx_put_float(data, (int[]){235, 495}, data->map.props.scale_z, 2);
+	mlx_string_put(data->mlx, data->win, 255, 580, 0x0, "1:");
+	ft_mlx_put_int(data, 258, 580, data->map.skip);
+	if (data->map.factor == 1)
+		mlx_string_put(data->mlx, data->win, 260, 665, 0x0, "min");
+	else if (data->map.factor == 3)
+		mlx_string_put(data->mlx, data->win, 260, 665, 0x0, "mid");
+	else 
+		mlx_string_put(data->mlx, data->win, 260, 665, 0x0, "max");
 }
