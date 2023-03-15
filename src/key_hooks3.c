@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 16:20:01 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/14 18:16:32 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/15 10:43:32 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ void	ft_key_skip(int key, t_map *map)
 	if (key == KEY_L)
 	{
 		map->skip++;
-		if (map->skip >= 10)
-			map->skip = 10;
+		if (map->skip >= 9)
+			map->skip = 9;
 	}
 }
 
