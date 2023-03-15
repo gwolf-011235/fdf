@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/15 16:50:10 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/16 00:16:05 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,13 @@
 # define OFF 0
 # define STATS 1
 # define CONTROL 2
+# define STANDARD 0
+# define B_AND_W 1
+# define RUPPI 2
+# define MATRIX 3
+# define ICECREAM 4
+
+typedef	int	t_pos[2];
 
 typedef struct s_coord {
 	float	lon;
@@ -133,7 +140,7 @@ typedef struct s_map {
 	float	limits[6];
 	float	limits_sp[6];
 	int		factor;
-	int		pattern[4];
+	int		pattern[5];
 	int		skip;
 	t_mat4	mat;
 	t_props	props;
