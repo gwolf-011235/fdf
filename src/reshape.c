@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 10:22:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/12 18:32:58 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/15 08:43:14 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ int	ft_render(t_data *data)
 	if (map->props.box)
 		ft_draw_box(data->render[0], map->corner[1], data->map.props.canvas);
 	mlx_put_image_to_window(data->mlx, data->win, data->render[0]->ptr, data->map.menu_width, 0);
+	ft_update_menu(data);
 	t = clock() - t;
 	//ret = (double)t / CLOCKS_PER_SEC;
 	//printf("RENDER: %f\n", ret * 1000);
