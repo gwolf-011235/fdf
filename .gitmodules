@@ -3,4 +3,4 @@
 	url = https://github.com/42Paris/minilibx-linux
 [submodule "lib/libft"]
 	path = lib/libft
-	url = git@github.com:gwolf-011235/libft.git
+	url = https://github.com/gwolf-011235/libft.git
