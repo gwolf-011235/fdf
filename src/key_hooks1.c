@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:16:59 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/16 01:40:39 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/16 17:20:27 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,6 @@ void	ft_key_zoom(int key, t_map *map)
 	{
 		map->props.translate[X] = 0;
 		map->props.translate[Y] = 0;
-		map->props.scale = ft_fit_box(map->edges, map->mat, map->props);
+		map->props.scale = ft_fit_box(map->corner[0], map->mat, map->props);
 	}
 }
