@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 14:46:48 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/13 19:02:58 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/16 17:33:10 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,12 @@ void	ft_free_rows(char *row, char *rows[ROW_MAX], int fd, int num)
 		free(rows[i]);
 	}
 	errno = 0;
-	ft_printf("Max row is: %d\n", ROW_MAX);
-	ft_terminate(ERR_BIG);
+	if (num == ROW_MAX)
+	{
+		ft_printf("Max row is: %d\n", ROW_MAX);
+		ft_terminate(ERR_BIG);
+	}
+	ft_terminate(ERR_READ);
 }
 
 void	ft_free_map_ptr(t_map *map, char *string)
