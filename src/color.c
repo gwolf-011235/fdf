@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:29:34 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/16 00:16:26 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/16 15:48:48 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	ft_set_pattern(int pattern[4], int choice)
 	{BLACK, BLACK, BLACK, WHITE, B_AND_W},
 	{TYRES, MICHELIN, BLACK, TOKYODRIFT, RUPPI},
 	{BLACK, GREEN, BLACK, BLACK, MATRIX},
-	{PURPLE, ORANGE, PINK, LIGHTBLUE, ICECREAM}
+	{PURPLE, ORANGE, PINK, LIGHTBLUE, POP}
 	};
 
 	pattern[0] = colorschemes[choice][0];
