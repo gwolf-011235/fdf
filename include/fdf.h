@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/16 01:56:35 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/16 15:28:34 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@
 # define B_AND_W 1
 # define RUPPI 2
 # define MATRIX 3
-# define ICECREAM 4
+# define POP 4
 
 typedef	int	t_pos[2];
 
@@ -123,6 +123,12 @@ typedef struct s_props {
 }	t_props;
 
 typedef struct s_map {
+	char	filename[22];
+	int		width;
+	int		height;
+	int		sum_points;
+	char	*rows[ROW_MAX];
+	bool	hex;
 	t_vec3f	*points;
 	t_vec3f	*morph;
 	t_vec3f	*polar;
@@ -131,12 +137,6 @@ typedef struct s_map {
 	int		*z_storage;
 	t_coord	*ang_coord;
 	float	radius;
-	int		sum_points;
-	char	filename[32];
-	int		height;
-	int		width;
-	char	*rows[ROW_MAX];
-	bool	hex;
 	float	limits[6];
 	float	limits_sp[6];
 	int		factor;
@@ -187,10 +187,10 @@ typedef struct s_data {
 void	ft_set_ft_ptr(t_data *data, int choose);
 
 //check.c
-void	ft_check_map(t_map *map, char *filename);
-void	ft_check_filename(t_map *map, char *filename);
+void	ft_check_map(t_map *map, char *input);
+void	ft_check_filename(char filename[22], char *input);
 void	ft_extract_rows(t_map *map, int fd);
-bool	ft_check_row(t_map *map, char *row);
+bool	ft_check_row(char *row, int width, int height, bool *hex);
 int		ft_count_num_in_row(char *line, bool *hex);
 
 //parse.c
