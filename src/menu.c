@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 10:38:34 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/16 01:42:36 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/16 02:01:25 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,12 +126,12 @@ void	ft_mlx_put_viewname(t_data *data, uint8_t index, int pos[2])
 
 void	ft_mlx_put_colorscheme(t_data *data, uint8_t index, int pos[2])
 {
-	char	str[9];
-	static const char colorscheme[5][9] = {
-		"Standard", "B & W", "Ruppi", "Matrix", "Icecream"};
+	char	str[7];
+	static const char colorscheme[5][7] = {
+		"Init", "B & W", "Ruppi", "Matrix", "Pop"};
 
-	ft_memset(str, 0, 9);
-	ft_strlcpy(str, colorscheme[index], 9);
+	ft_memset(str, 0, 7);
+	ft_strlcpy(str, colorscheme[index], 7);
 	mlx_string_put(data->mlx, data->win, pos[X], pos[Y], 0x0, str);
 }
 
@@ -153,8 +153,6 @@ void	ft_update_menu(t_data *data)
 		mlx_string_put(data->mlx, data->win, 240, 510, RED, "MIN");
 	else
 		ft_mlx_put_float(data, (t_pos){220, 510}, data->map.props.scale_z, 2);
-	mlx_string_put(data->mlx, data->win, 255, 580, 0x0, "1:");
-	ft_mlx_put_int(data, (t_pos){258, 580}, data->map.skip, 3);
 	if (data->map.factor == 1)
 		mlx_string_put(data->mlx, data->win, 240, 590, GREEN, "min");
 	else if (data->map.factor == 3)
@@ -163,7 +161,10 @@ void	ft_update_menu(t_data *data)
 		mlx_string_put(data->mlx, data->win, 240, 590, RED, "MAX");
 	ft_mlx_put_int(data, (t_pos){210, 655}, data->map.props.translate[X], 7);
 	ft_mlx_put_int(data, (t_pos){210, 685}, data->map.props.translate[Y], 7);
-	ft_mlx_put_viewname(data, data->map.props.view, (t_pos){260, 400});
-	ft_mlx_put_colorscheme(data, data->map.pattern[4], (t_pos){260, 500});
+	mlx_string_put(data->mlx, data->win, 245, 100, 0x0, "1:");
+	ft_mlx_put_int(data, (t_pos){250, 100}, data->map.skip, 3);
+	ft_mlx_put_viewname(data, data->map.props.view, (t_pos){220, 120});
+	ft_mlx_put_colorscheme(data, data->map.pattern[4], (t_pos){220, 140});
+	ft_mlx_put_int(data, (t_pos){220, 160}, 1000 / data->fps, 3);
 
 }
