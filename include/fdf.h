@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/16 15:28:34 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/16 17:24:47 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@
 
 typedef	int	t_pos[2];
 
+typedef float	t_mat4[4][4];
+
 typedef struct s_coord {
 	float	lon;
 	float	lat;
@@ -83,8 +85,6 @@ typedef struct s_color {
 	uint8_t	g;
 	uint8_t	b;
 }	t_color;
-
-typedef float	t_mat4[4][4];
 
 typedef struct s_vec3f {
 	float	x;
@@ -132,7 +132,6 @@ typedef struct s_map {
 	t_vec3f	*points;
 	t_vec3f	*morph;
 	t_vec3f	*polar;
-	t_vec3f	*edges;
 	t_vec3f	*corner[3];
 	int		*z_storage;
 	t_coord	*ang_coord;
@@ -158,7 +157,6 @@ typedef struct s_img {
 	int		line_len;
 	int		endian;
 	int		bytes;
-	uint64_t	created_at;
 }	t_img;
 
 typedef void	(*t_draw_ft)(t_img *, t_map *);
@@ -181,6 +179,7 @@ typedef struct s_data {
 	t_mouse	mouse;
 	t_calc_ft	calc_ft;
 	t_draw_ft	draw_ft;
+	uint64_t	created_at;
 	uint64_t	fps;
 }	t_data;
 
@@ -321,7 +320,7 @@ void	ft_calc_sphere_points(t_map *map, t_coord *ang_coord, t_vec3f *polar);
 
 //time.c
 uint64_t	ft_get_timeofday_ms(void);
-uint64_t	ft_timestamp_ms(t_img *img);
+uint64_t	ft_timestamp_ms(uint64_t created_at);
 
 //bresenham.c
 void	ft_prep_draw_line(t_img *img, t_vec3f start, t_vec3f end, int size[2]);

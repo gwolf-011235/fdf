@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 19:35:23 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/07 22:51:31 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/16 17:24:53 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,7 @@ uint64_t	ft_get_timeofday_ms(void)
 	return ((tv.tv_sec * (uint64_t)1000) + (tv.tv_usec / 1000));
 }
 
-uint64_t	ft_timestamp_ms(t_img *img)
+uint64_t	ft_timestamp_ms(uint64_t created_at)
 {
-	if (img->created_at == 0)
-		img->created_at = ft_get_timeofday_ms();
-	return (ft_get_timeofday_ms() - img->created_at);
+	return (ft_get_timeofday_ms() - created_at);
 }

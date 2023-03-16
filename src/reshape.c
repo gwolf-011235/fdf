@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 10:22:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/16 01:58:41 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/16 17:25:46 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_init_project(t_data *data)
 
 	map = &data->map;
 	ft_scale_z(map->points, map->z_storage, map->sum_points, 0.1);
-	map->props.scale = ft_fit_box(map->edges, map->mat, map->props);
+	map->props.scale = ft_fit_box(map->corner[0], map->mat, map->props);
 	ft_calc_morph(map->morph, map->points, map->mat, map);
 	ft_set_morph_color(map->morph, map->points, map->sum_points);
 	ft_draw_wirelines(data->render[0], &data->map);
@@ -65,10 +65,10 @@ int	ft_render(t_data *data)
 	t_map			*map;
 	static uint64_t	last_update;
 
-	data->fps = (ft_timestamp_ms(data->render[0]) - last_update);
+	data->fps = (ft_timestamp_ms(data->created_at) - last_update);
 	if (data->fps < (uint64_t)(1000 / 30))
 		return (0);
-	last_update = ft_timestamp_ms(data->render[0]);
+	last_update = ft_timestamp_ms(data->created_at);
 	map = &data->map;
 	t = clock();
 	fill_background(data->render[0], data->map.pattern[3],
