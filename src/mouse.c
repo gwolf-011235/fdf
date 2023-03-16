@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 08:30:19 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/16 00:09:26 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/16 01:41:26 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ int	ft_mouse_hook_press(int button, int x, int y, t_data *data)
 		data->mouse.last_right[X] = x;
 		data->mouse.last_right[Y] = y;
 	}
-	else if (button == M_SCROLL_UP)
+	else if (button == M_SCROLL_UP && data->map.props.scale < 1000)
 	{
 		data->map.props.scale *= 1 + data->map.factor * 0.1;
 		ft_precalc_zoom(data->map.mat, data->map.factor - 1);
 	}
-	else if (button == M_SCROLL_DOWN)
+	else if (button == M_SCROLL_DOWN && data->map.props.scale > 0.1)
 	{
 		data->map.props.scale *= 1 - data->map.factor * 0.1;
 		ft_precalc_zoom(data->map.mat, data->map.factor);
