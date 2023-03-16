@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 10:22:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/16 00:40:32 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/16 01:58:41 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,12 @@ void	ft_calc_morph(t_vec3f *morph, t_vec3f *points, t_mat4 mat, t_map *map)
 int	ft_render(t_data *data)
 {
 	clock_t			t;
-	//double			ret;
 	t_map			*map;
 	static uint64_t	last_update;
 
-	if (ft_timestamp_ms(data->render[0]) - last_update < (uint64_t)(1000 / 30))
+	data->fps = (ft_timestamp_ms(data->render[0]) - last_update);
+	if (data->fps < (uint64_t)(1000 / 30))
 		return (0);
-	//printf("FPS: %ld\n", 1000 / (ft_timestamp_ms(data->render[0]) - last_update));
 	last_update = ft_timestamp_ms(data->render[0]);
 	map = &data->map;
 	t = clock();
@@ -87,7 +86,5 @@ int	ft_render(t_data *data)
 	if (data->map.menu == STATS)
 		ft_update_menu(data);
 	t = clock() - t;
-	//ret = (double)t / CLOCKS_PER_SEC;
-	//printf("RENDER: %f\n", ret * 1000);
 	return (0);
 }

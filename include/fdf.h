@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/16 00:16:05 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/16 01:56:35 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,6 +181,7 @@ typedef struct s_data {
 	t_mouse	mouse;
 	t_calc_ft	calc_ft;
 	t_draw_ft	draw_ft;
+	uint64_t	fps;
 }	t_data;
 
 void	ft_set_ft_ptr(t_data *data, int choose);
