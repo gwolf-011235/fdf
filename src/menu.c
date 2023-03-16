@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 10:38:34 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/16 00:38:35 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/16 01:42:36 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,22 @@
 
 void	ft_init_menu(t_data *data)
 {
+	const static char	files[3][20] = {
+		"assets/menu.xpm",
+		"assets/controls.xpm",
+		"assets/layer.xpm"};
 	int	temp_x;
 	int	temp_y;
 
-	data->menu[0]->ptr = mlx_xpm_file_to_image(data->mlx, "image/menu.xpm", &temp_x, &temp_y);
-	data->menu[1]->ptr = mlx_xpm_file_to_image(data->mlx, "image/controls.xpm", &temp_x, &temp_y);
-	data->menu[2]->ptr = mlx_xpm_file_to_image(data->mlx, "image/layer.xpm", &temp_x, &temp_y);
+	data->menu[0]->ptr = mlx_xpm_file_to_image(data->mlx, (char *)files[0], &temp_x, &temp_y);
+	if (data->menu[0]->ptr == NULL)
+		ft_free_mlx(data, (char *)files[0], true); 
+	data->menu[1]->ptr = mlx_xpm_file_to_image(data->mlx, (char *)files[1], &temp_x, &temp_y);
+	if (data->menu[1]->ptr == NULL)
+		ft_free_mlx(data, (char *)files[1], true); 
+	data->menu[2]->ptr = mlx_xpm_file_to_image(data->mlx, (char *)files[2], &temp_x, &temp_y);
+	if (data->menu[2]->ptr == NULL)
+		ft_free_mlx(data, (char *)files[2], true); 
 	mlx_set_font(data->mlx, data->win,
 		"-misc-fixed-medium-r-normal-*-15-*-*-100-*-*-iso8859-1");
 }
@@ -133,6 +143,8 @@ void	ft_update_menu(t_data *data)
 	ft_mlx_put_int(data, (t_pos){250, 365}, data->map.props.angle[Z], 3);
 	if (data->map.props.scale >= 1000)
 		mlx_string_put(data->mlx, data->win, 240, 430, RED, "MAX");
+	else if (data->map.props.scale < 0.1)
+		mlx_string_put(data->mlx, data->win, 240, 430, RED, "MIN");
 	else
 		ft_mlx_put_float(data, (t_pos){220, 430}, data->map.props.scale, 2);
 	if (data->map.props.scale_z >= 10.0)
