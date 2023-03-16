@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 21:36:25 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/16 15:24:05 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/16 17:47:08 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ bool	ft_check_row(char *row, int width, int height, bool *hex)
 	{
 		ft_printf("Line %d is bad!\n", height);
 		ft_printf("Expected: %d\n", width);
-		ft_printf("Got: %d\n", count);
 		return (false);
 	}
 	return (true);
@@ -102,7 +101,7 @@ int	ft_count_num_in_row(char *line, bool *hex)
 		}
 		if (line[i] == ',')
 			i += ft_jump_over_hex(&line[i]);
-		if (line[i] != ' ' || line[i] == '\n')
+		if ((line[i] == ' ' && line[i + 1] == '\n') || line[i] == '\n')
 			break ;
 	}
 	if (line[i] != '\0' && line[i + 1] != '\0')
