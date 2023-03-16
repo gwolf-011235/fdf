@@ -6,18 +6,18 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 21:36:25 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/13 19:03:57 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/16 15:24:05 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	ft_check_map(t_map *map, char *filename)
+void	ft_check_map(t_map *map, char *input)
 {
 	int	fd;
 
-	ft_check_filename(map, filename);
-	fd = open(filename, O_RDONLY);
+	ft_check_filename(map->filename, input);
+	fd = open(input, O_RDONLY);
 	if (fd == -1)
 		ft_terminate(ERR_OPEN);
 	ft_extract_rows(map, fd);
@@ -25,19 +25,19 @@ void	ft_check_map(t_map *map, char *filename)
 		ft_terminate(ERR_CLOSE);
 }
 
-void	ft_check_filename(t_map *map, char *filename)
+void	ft_check_filename(char filename[22], char *input)
 {
 	int		len;
 	char	*start;
 
-	start = ft_strrchr(filename, '/') + 1;
+	start = ft_strrchr(input, '/') + 1;
 	if (!start)
-		start = filename;
+		start = input;
 	len = ft_strlen(start);
 	if (!ft_strnstr(start, ".fdf", len))
 		ft_terminate(ERR_FILE);
-	ft_strlcpy(map->filename, start, len - 3);
-	map->filename[31] = 0;
+	ft_strlcpy(filename, start, len - 3);
+	filename[21] = 0;
 }
 
 void	ft_extract_rows(t_map *map, int fd)
@@ -61,7 +61,7 @@ void	ft_extract_rows(t_map *map, int fd)
 		row = get_next_line(fd);
 		if (!row)
 			break ;
-		if (ft_check_row(map, row) == false)
+		if (ft_check_row(row, map->width, map->height, &map->hex) == false)
 			ft_free_rows(row, map->rows, fd, map->height);
 	}
 	map->sum_points = map->height * map->width;
@@ -69,15 +69,15 @@ void	ft_extract_rows(t_map *map, int fd)
 	ft_printf("📊 Datapoints\n   |%d|\n\n", map->sum_points);
 }
 
-bool	ft_check_row(t_map *map, char *row)
+bool	ft_check_row(char *row, int width, int height, bool *hex)
 {
 	int	count;
 
-	count = ft_count_num_in_row(row, &map->hex);
-	if (count != map->width)
+	count = ft_count_num_in_row(row, hex);
+	if (count != width)
 	{
-		ft_printf("Line %d is bad!\n", map->height);
-		ft_printf("Expected: %d\n", map->width);
+		ft_printf("Line %d is bad!\n", height);
+		ft_printf("Expected: %d\n", width);
 		ft_printf("Got: %d\n", count);
 		return (false);
 	}
