@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 14:38:32 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/17 15:48:08 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/17 16:15:59 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,36 +26,6 @@ void	ft_prep_draw_line(t_img *img, t_vec3f start, t_vec3f end, int size[2])
 	if (ft_init_bresvars(&vars, start, end))
 		return ;
 	ft_draw_line(img, &vars);
-}
-
-void	ft_clip_line(t_vec3f *start, t_vec3f *end, int size[2])
-{
-	float	move;
-
-	if (end->x < 0 || end->x > size[X])
-	{
-		if (end->x < 0)
-			move = (0 - start->x) / (end->x - start->x);
-		if (end->x > size[X])
-			move = (size[X] - start->x) / (end->x - start->x);
-		end->y = start->y + move * (end->y - start->y);
-		if (end->x > size[X])
-			end->x = size[X];
-		if (end->x < 0)
-			end->x = 0;
-	}
-	if (end->y < 0 || end->y > size[Y])
-	{
-		if (end->y < 0)
-			move = (0 - start->y) / (end->y - start->y);
-		if (end->y > size[Y])
-			move = (size[Y] - start->y) / (end->y - start->y);
-		end->x = start->x + move * (end->x - start->x);
-		if (end->y > size[Y])
-			end->y = size[Y];
-		if (end->y < 0)
-			end->y = 0;
-	}
 }
 
 int	ft_init_bresvars(t_bresvars *vars, t_vec3f start, t_vec3f end)
