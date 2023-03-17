@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 08:30:19 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/16 01:41:26 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/17 14:57:10 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,15 +97,17 @@ void	ft_mouse_translate(int x, int y, t_data *data)
 	if (distance < 10)
 		return ;
 	data->map.props.translate[X] -= delta_x;
-	if (data->map.props.translate[X] >= 10000
-		|| data->map.props.translate[X] <= -10000)
+	if (data->map.props.translate[X] >= 5000
+		|| data->map.props.translate[X] <= -5000)
 		data->map.props.translate[X] += delta_x;
+	else
+		data->map.mat[3][0] -= delta_x;
 	data->map.props.translate[Y] -= delta_y;
-	if (data->map.props.translate[Y] >= 10000
-		|| data->map.props.translate[Y] <= -10000)
+	if (data->map.props.translate[Y] >= 5000
+		|| data->map.props.translate[Y] <= -5000)
 		data->map.props.translate[Y] += delta_y;
+	else
+		data->map.mat[3][1] -= delta_y;
 	data->mouse.last_right[X] = x;
 	data->mouse.last_right[Y] = y;
-	data->map.mat[3][0] -= delta_x;
-	data->map.mat[3][1] -= delta_y;
 }

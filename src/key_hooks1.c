@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:16:59 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/16 17:20:27 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/17 15:01:37 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,28 +67,28 @@ void	ft_key_translate(int key, t_map *map)
 	factor = map->factor;
 	if (key == KEY_ARROW_LEFT)
 	{
-		if (map->props.translate[X] <= -10000)
+		if (map->props.translate[X] <= -5000)
 			return ;
 		map->props.translate[X] -= factor;
 		map->mat[3][0] -= factor;
 	}
 	else if (key == KEY_ARROW_RIGHT)
 	{
-		if (map->props.translate[X] >= 10000)
+		if (map->props.translate[X] >= 5000)
 			return ;
 		map->props.translate[X] += factor;
 		map->mat[3][0] += factor;
 	}
 	else if (key == KEY_ARROW_UP)
 	{
-		if (map->props.translate[Y] <= -10000)
+		if (map->props.translate[Y] <= -5000)
 			return ;
 		map->props.translate[Y] -= factor;
 		map->mat[3][1] -= factor;
 	}
 	else if (key == KEY_ARROW_DOWN)
 	{
-		if (map->props.translate[Y] >= 10000)
+		if (map->props.translate[Y] >= 5000)
 			return ;
 		map->props.translate[Y] += factor;
 		map->mat[3][1] += factor;
