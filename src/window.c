@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:00:10 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/17 15:24:27 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/17 16:47:59 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_init_window(t_data *data)
 
 	data->images = malloc(sizeof(t_img) * 5);
 	if (!data->images)
-		ft_free_mlx(data, ERR_MEM, true); //needs modification
+		ft_free_mlx(data, ERR_MEM, true);
 	ft_set_img_ptr(data->images, data->render, data->menu);
 	data->mlx = mlx_init();
 	if (!data->mlx)
@@ -35,7 +35,7 @@ void	ft_init_window(t_data *data)
 	screen = data->screen;
 	mlx_get_screen_size(data->mlx, &screen[X], &screen[Y]);
 	ft_printf("🖥️  Screen size\n   |%d x %d|\n\n", screen[X], screen[Y]);
-	data->win = mlx_new_window(data->mlx, screen[X], screen[Y], "FdF - by gwolf");
+	data->win = mlx_new_window(data->mlx, screen[X], screen[Y], "gwolFdF");
 	if (!data->win)
 		ft_free_mlx(data, ERR_WIN, true);
 	ft_init_image(data, data->render[0], screen[X], screen[Y]);
