@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 00:46:41 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/15 10:35:49 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/17 16:46:25 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,21 +33,21 @@ int	ft_count_digit(int num)
 void	ft_str_rev(char *str)
 {
 	int		len;
-    int		i;
+	int		i;
 	int		end;
 	char	temp;
 
 	len = ft_strlen(str);
 	i = 0;
 	end = len - 1;
-    while (i < end)
+	while (i < end)
 	{
-        temp = str[i];
-        str[i] = str[end];
-        str[end] = temp;
+		temp = str[i];
+		str[i] = str[end];
+		str[end] = temp;
 		i++;
 		end--;
-    }
+	}
 }
 
 void	ft_ftoa_in_place(float num, char *str, int precision)
@@ -65,7 +65,6 @@ void	ft_ftoa_in_place(float num, char *str, int precision)
 	}
 	else
 		is_negative = 0;
-	
 	if (is_negative)
 	{
 		*str = '-';
@@ -73,30 +72,30 @@ void	ft_ftoa_in_place(float num, char *str, int precision)
 	}
 	integer_part = (int)num;
 	fractional_part = num - integer_part;
-    i = ft_itoa_in_place(integer_part, str);
+	i = ft_itoa_in_place(integer_part, str);
 	str[i] = '.';
 	i++;
 	while (precision-- > 0)
 	{
-        fractional_part *= 10;
-        digit = (int)fractional_part;
-        str[i++] = digit + '0';
-        fractional_part -= digit;
-    }
-    str[i] = '\0';
+		fractional_part *= 10;
+		digit = (int)fractional_part;
+		str[i++] = digit + '0';
+		fractional_part -= digit;
+	}
+	str[i] = '\0';
 }
 
 int	ft_itoa_in_place(int num, char *str)
 {
 	int	i;
-    int	is_negative;
+	int	is_negative;
 
 	i = 0;
 	if (num < 0)
 	{
-        is_negative = 1;
-        num = -num;
-    }
+		is_negative = 1;
+		num = -num;
+	}
 	else
 		is_negative = 0;
 	str[i++] = num % 10 + '0';
@@ -109,6 +108,6 @@ int	ft_itoa_in_place(int num, char *str)
 	if (is_negative)
 		str[i++] = '-';
 	ft_str_rev(str);
-    str[i] = '\0';
+	str[i] = '\0';
 	return (i);
 }
