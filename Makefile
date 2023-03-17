@@ -45,7 +45,6 @@ SRC := 	main.c \
 		sphere.c \
 		time.c \
 		bresenham.c \
-		clipping.c \
 		wobble.c \
 		swap.c \
 		numconvert.c \
