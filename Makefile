@@ -23,6 +23,7 @@ MLX := $(LIB_DIR_MLX)/libmlx_Linux.a
 SRC := 	main.c \
 		draw.c \
 		color.c \
+		key_hooks.c \
 		key_hooks1.c \
 		key_hooks2.c \
 		key_hooks3.c \

@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/17 16:11:08 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/17 16:39:26 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,10 +215,12 @@ void	ft_skittles(t_map *map, t_vec3f *morph);
 
 //key_hooks.c
 int		ft_key_hook_press(int key, t_data *data);
-void	ft_key_hook_press2(int key, t_map *map);
+void	ft_key_press_handler1(int key, t_map *map);
+void	ft_key_press_handler2(int key, t_data *data);
+//key_hooks1.c
 void	ft_key_translate(int key, t_map *map);
-void	ft_key_angle(int key, t_map *map);
-void	ft_key_angle2(int key, t_map *map);
+void	ft_key_rotate_xy(int key, t_map *map);
+void	ft_key_rotate_z(int key, t_map *map);
 void	ft_key_zoom(int key, t_map *map);
 //key_hooks2.c
 void	ft_key_scale(int key, t_map *map);
@@ -282,7 +284,7 @@ int		ft_move_atoi(char *line);
 int		ft_jump_over_hex(char *line);
 int		ft_hex_to_dec(char *line, int len);
 int		ft_wrap_angle(float angle, int factor);
-void	ft_set_view_angle(float angle[3], uint8_t index);
+void	ft_set_view_angles(float angle[3], uint8_t index);
 
 //swap.c
 void	ft_swap_img_ptr(t_img **a, t_img **b);
