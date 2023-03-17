@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 17:01:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/17 15:41:47 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/17 16:21:16 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,16 +72,6 @@ void	ft_key_sphere(int key, t_map *map)
 			ft_find_limits_z(map);
 		}
 	}
-}
-
-void	ft_set_view_angles(float angle[3], uint8_t index)
-{
-	static const float	view_angle[5][3] =
-	{{0}, {35, 0, 45}, {0, 0, 0}, {0, 90, 0}, {54, 0, 45}};
-
-	angle[X] = view_angle[index][X];
-	angle[Y] = view_angle[index][Y];
-	angle[Z] = view_angle[index][Z];
 }
 
 void	ft_key_view(int key, t_map *map)

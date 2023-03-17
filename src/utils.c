@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 16:11:11 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/14 18:47:53 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/17 16:22:13 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,13 +79,12 @@ int	ft_wrap_angle(float angle, int factor)
 	return (angle);
 }
 
-void	ft_set_view_angle(float angle[3], uint8_t index)
+void	ft_set_view_angles(float angle[3], uint8_t index)
 {
-	static const float	preset[4][3] = {
-		{0, 0, 0}, {35, 0, 45}
-	};
+	static const float	view_angle[5][3] = {
+	{0}, {35, 0, 45}, {0, 0, 0}, {0, 90, 0}, {54, 0, 45}};
 
-	angle[X] = preset[index][X];
-	angle[Y] = preset[index][Y];
-	angle[Z] = preset[index][Z];
+	angle[X] = view_angle[index][X];
+	angle[Y] = view_angle[index][Y];
+	angle[Z] = view_angle[index][Z];
 }
