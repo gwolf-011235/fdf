@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 16:39:39 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/17 16:40:31 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/17 16:42:24 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ int	ft_key_hook_press(int key, t_data *data)
 		|| key == KEY_FOUR || key == KEY_FIVE || key == KEY_SPACE
 		|| key == KEY_SIX || key == KEY_SEVEN || key == KEY_EIGHT
 		|| key == KEY_NINE || key == KEY_ZERO)
-	 	ft_key_press_handler1(key, &data->map);
+		ft_key_press_handler1(key, &data->map);
 	if (key == KEY_B || key == KEY_N || key == KEY_M
 		|| key == KEY_G || key == KEY_J || key == KEY_ENTER || key == KEY_K
 		|| key == KEY_L || key == KEY_I || key == KEY_H || key == KEY_ESC)
-	 	ft_key_press_handler2(key, data);
+		ft_key_press_handler2(key, data);
 	return (0);
 }
 
@@ -66,5 +66,4 @@ void	ft_key_press_handler2(int key, t_data *data)
 		ft_key_toggle_controls(data);
 	else if (key == KEY_ESC)
 		ft_close_program(data);
-
 }
