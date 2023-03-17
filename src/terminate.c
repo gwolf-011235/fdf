@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 14:46:48 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/16 17:33:10 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/17 15:21:24 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,12 @@ void	ft_terminate(char *message)
 	else
 		perror(message);
 	exit(1);
+}
+
+int	ft_close_program(t_data *data)
+{
+	ft_free_mlx(data, CYA, false);
+	exit(0);
 }
 
 void	ft_free_rows(char *row, char *rows[ROW_MAX], int fd, int num)
