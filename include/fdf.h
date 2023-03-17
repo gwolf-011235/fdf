@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/17 12:41:38 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/17 15:24:00 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -246,6 +246,7 @@ void	ft_init_image(t_data *data, t_img *img, int win_x, int win_y);
 void	ft_start_mlx_loop(t_data *data);
 
 //terminate.c
+int		ft_close_program(t_data *data);
 void	ft_terminate(char *message);
 void	ft_free_rows(char *row, char *rows[ROW_MAX], int fd, int num);
 void	ft_free_map_ptr(t_map *map, char *string);
