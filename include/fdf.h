@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/17 15:43:11 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/17 15:48:32 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -325,14 +325,9 @@ uint64_t	ft_timestamp_ms(uint64_t created_at);
 
 //bresenham.c
 void	ft_prep_draw_line(t_img *img, t_vec3f start, t_vec3f end, int size[2]);
+void	ft_clip_line(t_vec3f *start, t_vec3f *end, int size[2]);
 int		ft_init_bresvars(t_bresvars *vars, t_vec3f start, t_vec3f end);
 void	ft_draw_line(t_img *img, t_bresvars *vars);
-
-//clipping.c
-//can be included in bresenham
-void	ft_clip_line(t_vec3f *start, t_vec3f *end, int size[2]);
-void	ft_clip_coord_x(t_vec3f *start, t_vec3f *end, int size[2]);
-void	ft_clip_coord_y(t_vec3f *start, t_vec3f *end, int size[2]);
 
 //wobble.c
 void	ft_wobble(t_vec3f *morph, t_vec3f *points, t_mat4 mat, t_map *map);
