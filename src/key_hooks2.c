@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 17:01:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/15 23:30:18 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/17 15:23:17 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,10 +129,5 @@ void	ft_key_stuff(int key, t_map *map, t_data *data)
 			map->factor = 3;
 		else if (map->factor == 3)
 			map->factor = 1;
-	}
-	else if (key == KEY_ESC)
-	{
-		ft_free_mlx(data, CYA, false);
-		exit(0);
 	}
 }

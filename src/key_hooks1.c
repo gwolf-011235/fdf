@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:16:59 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/17 15:01:37 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/17 15:23:00 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_key_hook_press(int key, t_data *data)
 		|| key == KEY_NINE || key == KEY_ZERO)
 		ft_key_hook_press2(key, &data->map);
 	else if (key == KEY_B || key == KEY_N || key == KEY_M
-		|| key == KEY_G || key == KEY_ESC)
+		|| key == KEY_G)
 		ft_key_stuff(key, &data->map, data);
 	else if (key == KEY_J || key == KEY_ENTER)
 		ft_key_ftptr(key, data);
@@ -34,6 +34,8 @@ int	ft_key_hook_press(int key, t_data *data)
 		ft_key_toggle_menu(data);
 	else if (key == KEY_H)
 		ft_key_toggle_controls(data);
+	else if (key == KEY_ESC)
+		ft_close_program(data);
 	return (0);
 }
 
