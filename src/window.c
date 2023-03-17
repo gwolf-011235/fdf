@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:00:10 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/16 14:32:18 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/17 15:24:27 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,6 @@ void	ft_start_mlx_loop(t_data *data)
 			ft_mouse_hook_release, data);
 	mlx_hook(data->win, MotionNotify, ButtonMotionMask, \
 			ft_mouse_hook_move, data);
+	mlx_hook(data->win, 17, 1L << 17, ft_close_program, data);
 	mlx_loop(data->mlx);
 }
