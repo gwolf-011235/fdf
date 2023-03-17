@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/17 15:24:00 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/17 15:43:11 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@
 # define TOP 2
 # define SIDE 3
 # define NICE 4
-# define MENU_WIDTH 320
+# define MENU_WIDTH 300
 # define MENU_HEIGHT 1080
 # define OFF 0
 # define STATS 1
@@ -197,7 +197,6 @@ int		ft_count_num_in_row(char *line, bool *hex);
 void	ft_parse_map(t_map *map);
 void	ft_map_alloc(t_map *map);
 void	ft_parse_line(t_map *map, char *line, int index);
-void	ft_set_colors(t_map *map, t_vec3f *points);
 
 //draw.c
 void	ft_put_pix_to_image(t_img *img, int x, int y, int color);
@@ -207,9 +206,9 @@ void	fill_background(t_img *img, int color, int size[2]);
 void	ft_draw_points(t_img *img, t_map *map);
 
 //color.c
+void	ft_set_morph_color(t_vec3f *points, t_vec3f *morph, t_map *map);
 int		ft_gradient(int color_start, int color_end, double len, double pos);
 void	ft_set_pattern(int pattern[4], int choice);
-void	ft_set_morph_color(t_vec3f *morph, t_vec3f *points, int sum);
 void	ft_set_argb_values(t_color *color, uint8_t r, uint8_t g, uint8_t b);
 uint32_t	ft_rainbow(double ratio);
 void	ft_skittles(t_map *map, t_vec3f *morph);
@@ -226,7 +225,7 @@ void	ft_key_scale(int key, t_map *map);
 void	ft_key_color(int key, t_map *map);
 void	ft_key_sphere(int key, t_map *map);
 void	ft_key_view(int key, t_map *map);
-void	ft_key_stuff(int key, t_map *map, t_data *data);
+void	ft_key_stuff(int key, t_map *map);
 //key_hooks3.c
 void	ft_key_ftptr(int key, t_data *data);
 void	ft_key_skip(int key, t_map *map);
