@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/16 17:24:47 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/17 12:41:38 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@
 # define RUPPI 2
 # define MATRIX 3
 # define POP 4
+# define FPS_TARGET 30
 
 typedef	int	t_pos[2];
 
