@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:29:34 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/16 15:48:48 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/17 15:33:05 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,32 @@ void	ft_set_pattern(int pattern[4], int choice)
 	pattern[4] = colorschemes[choice][4];
 }
 
-void	ft_set_morph_color(t_vec3f *morph, t_vec3f *points, int sum)
+void	ft_set_morph_color(t_vec3f *points, t_vec3f *morph, t_map *map)
 {
 	int	i;
+	int	*pattern;
 
+	pattern = map->pattern;
 	i = 0;
-	while (i < sum)
+	while (i < map->sum_points)
 	{
-		morph[i].color = points[i].color;
+		if (map->hex)
+		{
+			if (!points[i].color)
+				morph[i].color = pattern[1];
+			else
+				morph[i].color = points[i].color;
+			i++;
+			continue ;
+		}
+		if (points[i].z == 0)
+			morph[i].color = pattern[1];
+		else if (points[i].z > 0)
+			morph[i].color = ft_gradient(pattern[1], pattern[2], \
+					map->limits[ZMAX], points[i].z);
+		else
+			morph[i].color = ft_gradient(pattern[1], pattern[0], \
+					map->limits[ZMIN], points[i].z);
 		i++;
 	}
 }

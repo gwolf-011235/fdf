@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 10:22:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/17 13:53:14 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/17 15:35:12 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ void	ft_init_project(t_data *data)
 	t_map	*map;
 
 	map = &data->map;
+	ft_set_morph_color(map->points, map->morph, map);
 	ft_scale_z(map->points, map->z_storage, map->sum_points, 0.1);
 	map->props.scale = ft_fit_box(map->corner[0], map->mat, map->props);
 	ft_calc_morph(map->morph, map->points, map->mat, map);
-	ft_set_morph_color(map->morph, map->points, map->sum_points);
 	ft_draw_wirelines(data->render[0], &data->map);
 	mlx_put_image_to_window(data->mlx, data->win, data->render[0]->ptr, 0, 0);
 }

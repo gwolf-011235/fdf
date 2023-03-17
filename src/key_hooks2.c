@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 17:01:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/17 15:23:17 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/17 15:41:47 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,7 @@ void	ft_key_color(int key, t_map *map)
 	else if (key == KEY_FIVE)
 		ft_set_pattern(map->pattern, 4);
 	ft_find_limits_z(map);
-	ft_set_colors(map, map->points);
-	ft_set_morph_color(map->morph, map->points, map->sum_points);
+	ft_set_morph_color(map->points, map->morph, map);
 }
 
 void	ft_key_sphere(int key, t_map *map)
@@ -110,7 +109,7 @@ void	ft_key_view(int key, t_map *map)
 	ft_build_transmat(map->mat, map->props);
 }
 
-void	ft_key_stuff(int key, t_map *map, t_data *data)
+void	ft_key_stuff(int key, t_map *map)
 {
 	if (key == KEY_B)
 		map->props.box = !map->props.box;

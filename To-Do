@@ -1,8 +1,3 @@
-TEST
-Destroy Notify for click on x
-Menu info on translate
-Set colors to work directly with morph
 Sort out struct
-Clear menu info
 Z scale after sphere is sometimes wrong
 Resize shouldnt work in sphere Mode, because it is using corner1. recheck and adapt. Maybe also draw box broken?
