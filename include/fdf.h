@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/19 20:41:58 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/19 20:57:48 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -244,6 +244,7 @@ void	ft_mouse_translate(int x, int y, t_data *data);
 //window.c
 void	ft_init_window(t_data *data);
 void	ft_init_image(t_data *data, t_img *img, int win_x, int win_y);
+void	ft_init_menu(t_data *data);
 void	ft_start_mlx_loop(t_data *data);
 
 //terminate.c
@@ -291,9 +292,11 @@ void	ft_swap_img_ptr(t_img **a, t_img **b);
 void	ft_swap_points(t_vec3f *start, t_vec3f *end);
 
 //menu.c
-void	ft_init_menu(t_data *data);
 void	ft_write_menu(t_data *data);
+void	ft_write_map_info(t_data *data);
+void	ft_write_projection_info(t_data *data);
 void	ft_update_menu(t_data *data);
+void	ft_update_menu2(t_data *data, t_map *map);
 
 //print_utils.c
 void	ft_print_mat4(t_mat4 matrix);

@@ -6,38 +6,13 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 10:38:34 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/19 20:42:58 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/19 20:57:38 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	ft_init_menu(t_data *data)
-{
-	static const char	files[3][20] = {
-		"assets/menu.xpm",
-		"assets/controls.xpm",
-		"assets/layer.xpm"};
-	int					x;
-	int					y;
-
-	data->menu[0]->ptr = mlx_xpm_file_to_image(data->mlx,
-			(char *)files[0], &x, &y);
-	if (data->menu[0]->ptr == NULL)
-		ft_free_mlx(data, (char *)files[0], true);
-	data->menu[1]->ptr = mlx_xpm_file_to_image(data->mlx,
-			(char *)files[1], &x, &y);
-	if (data->menu[1]->ptr == NULL)
-		ft_free_mlx(data, (char *)files[1], true);
-	data->menu[2]->ptr = mlx_xpm_file_to_image(data->mlx,
-			(char *)files[2], &x, &y);
-	if (data->menu[2]->ptr == NULL)
-		ft_free_mlx(data, (char *)files[2], true);
-	mlx_set_font(data->mlx, data->win,
-		"-misc-fixed-medium-r-normal-*-15-*-*-100-*-*-iso8859-1");
-}
-
-void	ft_write_menu(t_data *data)
+void	ft_write_map_info(t_data *data)
 {
 	mlx_string_put(data->mlx, data->win, 30, 85, 0x0, "Name:");
 	mlx_string_put(data->mlx, data->win, 90, 85, 0x0, data->map.filename);
@@ -45,13 +20,17 @@ void	ft_write_menu(t_data *data)
 	ft_mlx_put_int(data, (t_pos){130, 125}, data->map.width, 3);
 	mlx_string_put(data->mlx, data->win, 30, 145, 0x0, "Cols (y):");
 	ft_mlx_put_int(data, (t_pos){130, 145}, data->map.height, 3);
-	mlx_string_put(data->mlx, data->win, 30, 165, 0x0, "> Points:");
+	mlx_string_put(data->mlx, data->win, 30, 165, 0x0, "= Points:");
 	ft_mlx_put_int(data, (t_pos){130, 165}, data->map.sum_points, 3);
 	mlx_string_put(data->mlx, data->win, 30, 185, 0x0, "Hex-Colors:");
 	if (data->map.hex)
-		mlx_string_put(data->mlx, data->win, 150, 185, 0x00FF00, "found");
+		mlx_string_put(data->mlx, data->win, 150, 185, GREEN, "found");
 	else
 		mlx_string_put(data->mlx, data->win, 150, 185, 0x0, "no");
+}
+
+void	ft_write_projection_info(t_data *data)
+{
 	mlx_string_put(data->mlx, data->win, 100, 285, 0x0, "yaw   (x):");
 	mlx_string_put(data->mlx, data->win, 100, 310, 0x0, "pitch (y):");
 	mlx_string_put(data->mlx, data->win, 100, 335, 0x0, "roll  (z):");
@@ -66,6 +45,12 @@ void	ft_write_menu(t_data *data)
 	mlx_string_put(data->mlx, data->win, 100, 815, 0x0, "view:");
 	mlx_string_put(data->mlx, data->win, 100, 865, 0x0, "FPS:");
 	mlx_string_put(data->mlx, data->win, 100, 890, 0x0, "Target:");
+}
+
+void	ft_write_menu(t_data *data)
+{
+	ft_write_map_info(data);
+	ft_write_projection_info(data);
 }
 
 void	ft_update_menu(t_data *data)
@@ -92,22 +77,27 @@ void	ft_update_menu(t_data *data)
 		mlx_string_put(data->mlx, data->win, 230, 535, YELLOW, "Mid");
 	else
 		mlx_string_put(data->mlx, data->win, 230, 535, RED, "MAX");
-	if (data->map.props.translate[X] >= 5000)
+	ft_update_menu2(data, &data->map);
+}
+
+void	ft_update_menu2(t_data *data, t_map *map)
+{
+	if (map->props.translate[X] >= 5000)
 		mlx_string_put(data->mlx, data->win, 230, 595, RED, "MAX");
-	else if (data->map.props.scale_z <= -5000)
+	else if (map->props.scale_z <= -5000)
 		mlx_string_put(data->mlx, data->win, 230, 595, RED, "MIN");
 	else
-		ft_mlx_put_int(data, (t_pos){195, 595}, data->map.props.translate[X], 7);
-	if (data->map.props.translate[Y] >= 5000)
+		ft_mlx_put_int(data, (t_pos){195, 595}, map->props.translate[X], 7);
+	if (map->props.translate[Y] >= 5000)
 		mlx_string_put(data->mlx, data->win, 230, 620, RED, "MAX");
-	else if (data->map.props.scale_z <= -5000)
+	else if (map->props.scale_z <= -5000)
 		mlx_string_put(data->mlx, data->win, 230, 620, RED, "MIN");
 	else
-		ft_mlx_put_int(data, (t_pos){195, 620}, data->map.props.translate[Y], 7);
+		ft_mlx_put_int(data, (t_pos){195, 620}, map->props.translate[Y], 7);
 	mlx_string_put(data->mlx, data->win, 210, 680, 0x0, "1:");
-	ft_mlx_put_int(data, (t_pos){213, 680}, data->map.skip, 3);
-	ft_mlx_put_colorscheme(data, data->map.pattern[4], (t_pos){210, 750});
-	ft_mlx_put_viewname(data, data->map.props.view, (t_pos){210, 815});
+	ft_mlx_put_int(data, (t_pos){213, 680}, map->skip, 3);
+	ft_mlx_put_colorscheme(data, map->pattern[4], (t_pos){210, 750});
+	ft_mlx_put_viewname(data, map->props.view, (t_pos){210, 815});
 	ft_mlx_put_int(data, (t_pos){210, 865}, 1000 / data->fps, 3);
 	ft_mlx_put_int(data, (t_pos){210, 890}, FPS_TARGET, 3);
 }

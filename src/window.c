@@ -6,11 +6,36 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:00:10 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/19 20:36:10 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/19 20:57:46 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+void	ft_init_menu(t_data *data)
+{
+	static const char	files[3][20] = {
+		"assets/menu.xpm",
+		"assets/controls.xpm",
+		"assets/layer.xpm"};
+	int					x;
+	int					y;
+
+	data->menu[0]->ptr = mlx_xpm_file_to_image(data->mlx,
+			(char *)files[0], &x, &y);
+	if (data->menu[0]->ptr == NULL)
+		ft_free_mlx(data, (char *)files[0], true);
+	data->menu[1]->ptr = mlx_xpm_file_to_image(data->mlx,
+			(char *)files[1], &x, &y);
+	if (data->menu[1]->ptr == NULL)
+		ft_free_mlx(data, (char *)files[1], true);
+	data->menu[2]->ptr = mlx_xpm_file_to_image(data->mlx,
+			(char *)files[2], &x, &y);
+	if (data->menu[2]->ptr == NULL)
+		ft_free_mlx(data, (char *)files[2], true);
+	mlx_set_font(data->mlx, data->win,
+		"-misc-fixed-medium-r-normal-*-15-*-*-100-*-*-iso8859-1");
+}
 
 void	ft_set_img_ptr(t_img *images, t_img *render[2], t_img *menu[3])
 {
