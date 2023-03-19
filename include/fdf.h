@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/17 16:39:26 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/19 20:41:58 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -345,6 +345,11 @@ int		ft_itoa_in_place(int num, char *str);
 int		ft_count_digit(int num);
 void	ft_str_padding(char *str, int pad);
 
+//put_to_screen.c
+void	ft_mlx_put_int(t_data *data, int pos[2], int num, int pad);
+void	ft_mlx_put_float(t_data *data, int pos[2], float num, int prec);
+void	ft_mlx_put_viewname(t_data *data, uint8_t index, int pos[2]);
+void	ft_mlx_put_colorscheme(t_data *data, uint8_t index, int pos[2]);
 
 //test.c
 void	test(t_data *data);

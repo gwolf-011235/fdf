@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:00:10 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/17 16:47:59 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/19 20:36:10 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	ft_init_window(t_data *data)
 		ft_free_mlx(data, ERR_WIN, true);
 	ft_init_image(data, data->render[0], screen[X], screen[Y]);
 	ft_init_image(data, data->render[1], screen[X] - MENU_WIDTH, screen[Y]);
+	ft_init_menu(data);
 	ft_set_canvas_size(data->map.props.canvas, screen[X], screen[Y]);
 }
 

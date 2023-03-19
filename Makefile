@@ -50,6 +50,7 @@ SRC := 	main.c \
 		wobble.c \
 		swap.c \
 		numconvert.c \
+		put_to_screen.c \
 		shapes.c
 
 SRCS := $(addprefix $(SRC_DIR)/, $(SRC))
