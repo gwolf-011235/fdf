@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 10:22:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/17 15:35:12 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/19 21:01:26 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,8 @@ int	ft_render(t_data *data)
 	data->draw_ft(data->render[0], map);
 	if (map->props.box)
 		ft_draw_box(data->render[0], map->corner[1], data->map.props.canvas);
-	mlx_put_image_to_window(data->mlx, data->win, data->render[0]->ptr, data->map.menu_width, 0);
+	mlx_put_image_to_window(data->mlx, data->win,
+		data->render[0]->ptr, data->map.menu_width, 0);
 	if (data->map.menu == STATS)
 		ft_update_menu(data);
 	return (0);
