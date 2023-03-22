@@ -33,7 +33,6 @@ SRC := 	main.c \
 		matrix.c \
 		reshape.c \
 		map_utils.c \
-		test.c \
 		check.c \
 		utils.c \
 		menu.c \

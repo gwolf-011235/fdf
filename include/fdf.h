@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/19 20:57:48 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/22 10:08:28 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -353,8 +353,5 @@ void	ft_mlx_put_int(t_data *data, int pos[2], int num, int pad);
 void	ft_mlx_put_float(t_data *data, int pos[2], float num, int prec);
 void	ft_mlx_put_viewname(t_data *data, uint8_t index, int pos[2]);
 void	ft_mlx_put_colorscheme(t_data *data, uint8_t index, int pos[2]);
-
-//test.c
-void	test(t_data *data);
 
 #endif
