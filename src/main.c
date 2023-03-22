@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:54:09 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/16 17:25:03 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/22 10:07:37 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,12 @@ void	ft_set_ft_ptr(t_data *data, int choose)
 		data->draw_ft = draw_ptr[0];
 	else if (choose == 3)
 		data->draw_ft = draw_ptr[1];
+}
+
+int	ft_close_program(t_data *data)
+{
+	ft_free_mlx(data, CYA, false);
+	exit(0);
 }
 
 int	main(int argc, char *argv[])
