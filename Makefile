@@ -1,6 +1,9 @@
-CC := clang
-CFLAGS = -DBUFFER_SIZE=4096
+# colors
+RESET := \033[0m
+GREEN := \033[32m
+RED := \033[31m
 
+# directories
 SRC_DIR := src
 OBJ_DIR := obj
 LIB_DIR := lib
@@ -8,14 +11,19 @@ LOG_DIR := logs/$(shell date +"%Y-%m-%d")
 LIB_DIR_FT := $(LIB_DIR)/libft
 LIB_DIR_MLX := $(LIB_DIR)/mlx_linux
 
+# libraries
 INC := -I include
 LIB_MLX := -L $(LIB_DIR_MLX) -l mlx_Linux 
 LIB_FT := -L $(LIB_DIR_FT) -l ft 
 LIB_X := -L /usr/lib -l Xext -l X11 -l m -l z
 LIBS := $(LIB_MLX) $(LIB_FT) $(LIB_X)
 
+# compiling
+CC := clang
+CFLAGS = -DBUFFER_SIZE=4096
 COMPILE = $(CC) $(CFLAGS) $(INC)
 
+# targets
 NAME := fdf
 LIBFT := $(LIB_DIR_FT)/libft.a
 MLX := $(LIB_DIR_MLX)/libmlx_Linux.a
@@ -75,7 +83,7 @@ debug: clean $(OBJS) $(LIBFT) $(MLX)
 	echo "$(NAME) created - DEBUG MODE!"
 
 profile: CFLAGS += -pg
-profile: clean §(OBJS) $(LIBFT) $(MLX) | $(LOG_DIR)
+profile: clean $(OBJS) $(LIBFT) $(MLX) | $(LOG_DIR)
 	$(COMPILE) $(OBJS) $(LIBS) -o $(NAME)
 	./$(NAME) test_maps/julia.fdf
 	gprof fdf > $(LOG_FILE)
