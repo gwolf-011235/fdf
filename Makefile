@@ -33,21 +33,20 @@ SRC := 	main.c \
 		matrix.c \
 		reshape.c \
 		map_utils.c \
-		test.c \
 		check.c \
 		utils.c \
 		menu.c \
 		rotation.c \
 		print_utils.c \
 		box.c \
-		precalc_matrix.c \
+		precalc_matrix1.c \
 		precalc_matrix2.c \
 		mouse.c \
 		sphere.c \
 		time.c \
 		bresenham.c \
 		clipping.c \
-		wobble.c \
+		easter.c \
 		swap.c \
 		numconvert.c \
 		put_to_screen.c \
