@@ -39,7 +39,7 @@ SRC := 	main.c \
 		rotation.c \
 		print_utils.c \
 		box.c \
-		precalc_matrix.c \
+		precalc_matrix1.c \
 		precalc_matrix2.c \
 		mouse.c \
 		sphere.c \
