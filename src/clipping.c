@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 16:02:31 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/17 16:09:21 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/22 09:32:02 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ft_clip_coord_x(t_vec3f *start, t_vec3f *end, int size[2])
 	else
 	{
 		move = (size[X] - start->x) / (end->x - start->x);
-		end->x = size[X];
+		end->x = size[X] - 1;
 	}
 	end->y = start->y + move * (end->y - start->y);
 }
@@ -53,7 +53,7 @@ void	ft_clip_coord_y(t_vec3f *start, t_vec3f *end, int size[2])
 	else
 	{
 		move = (size[Y] - start->y) / (end->y - start->y);
-		end->y = size[Y];
+		end->y = size[Y] - 1;
 	}
 	end->x = start->x + move * (end->x - start->x);
 }
