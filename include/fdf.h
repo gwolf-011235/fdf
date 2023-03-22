@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/22 10:08:28 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/22 10:14:11 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,8 +210,6 @@ void	ft_set_morph_color(t_vec3f *points, t_vec3f *morph, t_map *map);
 int		ft_gradient(int color_start, int color_end, double len, double pos);
 void	ft_set_pattern(int pattern[4], int choice);
 void	ft_set_argb_values(t_color *color, uint8_t r, uint8_t g, uint8_t b);
-uint32_t	ft_rainbow(double ratio);
-void	ft_skittles(t_map *map, t_vec3f *morph);
 
 //key_hooks.c
 int		ft_key_hook_press(int key, t_data *data);
@@ -339,8 +337,10 @@ void	ft_clip_line(t_vec3f *start, t_vec3f *end, int size[2]);
 void	ft_clip_coord_x(t_vec3f *start, t_vec3f *end, int size[2]);
 void	ft_clip_coord_y(t_vec3f *start, t_vec3f *end, int size[2]);
 
-//wobble.c
+//easter.c
 void	ft_wobble(t_vec3f *morph, t_vec3f *points, t_mat4 mat, t_map *map);
+uint32_t	ft_rainbow(double ratio);
+void	ft_skittles(t_map *map, t_vec3f *morph);
 
 //numconvert.c
 void	ft_ftoa_in_place(float num, char *str, int precision);
