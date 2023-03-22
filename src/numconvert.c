@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 00:46:41 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/17 16:46:25 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/22 09:09:46 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,32 +55,26 @@ void	ft_ftoa_in_place(float num, char *str, int precision)
 	int		integer_part;
 	float	fractional_part;
 	int		i;
-	int		digit;
-	int		is_negative;
 
-	if (num < 0)
-	{
-		is_negative = 1;
-		num = -num;
-	}
-	else
-		is_negative = 0;
-	if (is_negative)
-	{
-		*str = '-';
-		str++;
-	}
 	integer_part = (int)num;
 	fractional_part = num - integer_part;
-	i = ft_itoa_in_place(integer_part, str);
-	str[i] = '.';
-	i++;
+	if (fractional_part < 0 && integer_part == 0)
+	{
+		str[0] = '-';
+		str[1] = '0';
+		i = 2;
+	}
+	else
+		i = ft_itoa_in_place(integer_part, str);
+	if (fractional_part < 0)
+		fractional_part = -fractional_part;
+	str[i++] = '.';
 	while (precision-- > 0)
 	{
 		fractional_part *= 10;
-		digit = (int)fractional_part;
-		str[i++] = digit + '0';
-		fractional_part -= digit;
+		integer_part = (int)fractional_part;
+		str[i++] = integer_part + '0';
+		fractional_part -= integer_part;
 	}
 	str[i] = '\0';
 }
