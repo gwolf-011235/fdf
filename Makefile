@@ -82,7 +82,8 @@ OBJS := $(addprefix $(OBJ_DIR)/, $(OBJ))
 LOG_FILE = $(LOG_DIR)/$(shell date +"%H-%M-%S")
 
 .PHONY: all, clean, fclean, re, obj, debug, optimize
-.SILENT:
+
+#.SILENT:
 
 all: $(NAME)
 

@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/23 14:00:03 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/23 14:09:00 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,14 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <errno.h>
+# include <stdbool.h>
 # include <math.h>
 # include <time.h>
+
+# include "mlx.h"
+# include "ft_print.h"
+# include "ft_fd.h"
+# include "X.h"
 
 # include "macro_general.h"
 # include "macro_colors.h"
