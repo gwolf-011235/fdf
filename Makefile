@@ -39,39 +39,39 @@ HIT_TOTAL = $(words $(SRCS))
 HIT_COUNT = $(eval HIT_N != expr ${HIT_N} + 1)${HIT_N}
 ECHO = printf "\033[2K\r[`expr ${HIT_COUNT} '*' 100 / ${HIT_TOTAL}`%%] %s"
 
-SRC := 	main.c \
-		check.c \
-		parse.c \
-		window.c \
-		reshape.c \
-		draw.c \
-		color.c \
-		bresenham.c \
-		matrix.c \
-		terminate.c \
-		utils_calc.c \
-		utils_limits.c \
-		utils_prog.c \
-		utils_set.c \
-		utils_string.c \
-		utils_swap.c \
-		menu.c \
-		rotation.c \
-		box.c \
-		precalc_matrix1.c \
-		precalc_matrix2.c \
-		mouse.c \
-		key_hooks.c \
-		key_hooks1.c \
-		key_hooks2.c \
-		key_hooks3.c \
-		sphere.c \
-		time.c \
-		clipping.c \
-		easter.c \
-		numconvert.c \
-		put_to_screen.c \
-		shapes.c
+SRC := 	main_bonus.c \
+		check_bonus.c \
+		parse_bonus.c \
+		window_bonus.c \
+		reshape_bonus.c \
+		draw_bonus.c \
+		color_bonus.c \
+		bresenham_bonus.c \
+		matrix_bonus.c \
+		terminate_bonus.c \
+		utils_calc_bonus.c \
+		utils_limits_bonus.c \
+		utils_prog_bonus.c \
+		utils_set_bonus.c \
+		utils_string_bonus.c \
+		utils_swap_bonus.c \
+		menu_bonus.c \
+		rotation_bonus.c \
+		box_bonus.c \
+		precalc_matrix1_bonus.c \
+		precalc_matrix2_bonus.c \
+		mouse_bonus.c \
+		key_hooks_bonus.c \
+		key_hooks1_bonus.c \
+		key_hooks2_bonus.c \
+		key_hooks3_bonus.c \
+		sphere_bonus.c \
+		time_bonus.c \
+		clipping_bonus.c \
+		easter_bonus.c \
+		numconvert_bonus.c \
+		put_to_screen_bonus.c \
+		shapes_bonus.c
 
 SRCS := $(addprefix $(SRC_DIR)/, $(SRC))
 
