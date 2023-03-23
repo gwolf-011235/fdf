@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/23 16:01:40 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/23 17:01:13 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@
 # define ROW_MAX 1000
 # define KEY_ESC 65307 
 
-
 typedef int		t_pos[2];
 
 typedef float	t_mat4[4][4];
@@ -51,7 +50,7 @@ typedef struct s_color {
 	uint8_t	r;
 	uint8_t	g;
 	uint8_t	b;
-	}	t_color;
+}	t_color;
 
 typedef struct s_vec3f {
 	float	x;
@@ -122,7 +121,6 @@ typedef struct s_data {
 	t_calc_ft	calc_ft;
 	t_draw_ft	draw_ft;
 }	t_data;
-
 
 //main.c
 
@@ -202,6 +200,6 @@ int		ft_init_bresvars(t_bresvars *vars, t_vec3f start, t_vec3f end);
 void	ft_draw_line(t_img *img, t_bresvars *vars);
 
 //key_hooks.c
-int	ft_key_hook_press(int key, t_data *data);
+int		ft_key_hook_press(int key, t_data *data);
 
 #endif

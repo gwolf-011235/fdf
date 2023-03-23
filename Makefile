@@ -110,7 +110,7 @@ OBJS_B := $(addprefix $(OBJ_DIR_B)/, $(OBJ_B))
 
 LOG_FILE = $(LOG_DIR)/$(shell date +"%H-%M-%S")
 
-.PHONY: all, clean, fclean, re, obj, debug, optimize, bonus
+.PHONY: all, clean, fclean, re, obj, debug, optimize, bonus, re_bonus
 
 .SILENT:
 
@@ -184,3 +184,5 @@ fclean: clean
 	$(MAKE) -C $(LIB_DIR_MLX) clean
 
 re: fclean all
+	
+re_bonus: fclean bonus

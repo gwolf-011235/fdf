@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   parse_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:00:33 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/23 15:02:56 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/23 17:36:11 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_parse_map(t_map *map)
 
 void	ft_map_alloc(t_map *map)
 {
-	map->points = malloc(sizeof(t_vec3f) * (map->sum_points * 3 + 24));
+	map->points = malloc(sizeof(t_vec3f) * (map->sum_points + 8) * 3);
 	map->z_storage = malloc(sizeof(int) * (map->sum_points + 8));
 	map->lonlat = malloc(sizeof(t_lonlat) * map->sum_points);
 	if (!map->points || !map->z_storage || !map->lonlat)

@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 16:39:39 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/23 16:01:41 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/23 16:48:41 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 int	ft_key_hook_press(int key, t_data *data)
 {
-	(void)key;
-	if (KEY_ESC)
+	if (key == KEY_ESC)
 		ft_close_program(data);
 	return (0);
 }

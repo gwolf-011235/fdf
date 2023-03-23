@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   colors.h                                           :+:      :+:    :+:   */
+/*   macro_colors.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 13:01:30 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/23 13:47:55 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/23 16:50:25 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COLORS_H
-# define COLORS_H
+#ifndef MACRO_COLORS_H
+# define MACRO_COLORS_H
 
 # define BLACK 0x000000
 # define WHITE 0xFFFFFF

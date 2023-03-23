@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_macros.h                                       :+:      :+:    :+:   */
+/*   macro_keys.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 10:32:42 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/23 13:54:28 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/23 16:51:08 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef KEY_MACROS_H
-# define KEY_MACROS_H
+#ifndef MACRO_KEYS_H
+# define MACRO_KEYS_H
 
 // keyboard
 # define KEY_ENTER 65293
