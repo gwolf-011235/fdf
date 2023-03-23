@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 13:01:30 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/09 14:17:48 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/23 13:47:55 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,5 @@
 # define TYRES 0xE2E2E2
 # define MICHELIN 0x5B5B5B
 # define PINK 0xFF30C1
+
 #endif

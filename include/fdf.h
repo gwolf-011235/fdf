@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/23 13:21:38 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/23 14:00:03 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <stdint.h>
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
@@ -23,53 +24,20 @@
 # include <math.h>
 # include <time.h>
 
-# include "mlx.h"
-# include "ft_fd.h"
-# include "ft_str.h"
-# include "ft_print.h"
-# include "ft_char.h"
-# include "ft_num.h"
-# include "ft_mem.h"
+# include "macro_general.h"
+# include "macro_colors.h"
+# include "macro_keys.h"
+# include "macro_angles.h"
 # include "err_message.h"
-# include "colors.h"
-# include "X.h"
-# include "key_macros.h"
-# include "angles.h"
 
 # ifndef M_PI
 #  define M_PI 3.14159265358979323846
 # endif
+# define RAD 0.01745329251
 
 # define ROW_MAX 1000
-# define RAD 0.01745329251
-# define X 0
-# define Y 1
-# define Z 2
-# define LON 0
-# define LAT 1
-# define OFFSET_X 2
-# define OFFSET_Y 3
-# define XMAX 0
-# define XMIN 1
-# define YMAX 2
-# define YMIN 3
-# define ZMAX 4
-# define ZMIN 5
-# define ISO 1
-# define TOP 2
-# define SIDE 3
-# define NICE 4
-# define MENU_WIDTH 300
-# define MENU_HEIGHT 1080
-# define OFF 0
-# define STATS 1
-# define CONTROL 2
-# define STANDARD 0
-# define B_AND_W 1
-# define RUPPI 2
-# define MATRIX 3
-# define POP 4
 # define FPS_TARGET 30
+# define MENU_WIDTH 300
 
 typedef int		t_pos[2];
 

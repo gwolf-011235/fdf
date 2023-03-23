@@ -6,13 +6,14 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 10:32:42 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/15 18:44:49 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/23 13:54:28 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef KEY_MACROS_H
 # define KEY_MACROS_H
 
+// keyboard
 # define KEY_ENTER 65293
 # define KEY_ESC 65307 
 # define KEY_ARROW_LEFT 65361
@@ -54,6 +55,7 @@
 # define KEY_EIGHT 56
 # define KEY_NINE 57
 
+// mouse
 # define M_LEFT 1
 # define M_RIGHT 3
 # define M_SCROLL_UP 4

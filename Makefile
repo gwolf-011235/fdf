@@ -18,7 +18,7 @@ LIB_DIR_FT := $(LIB_DIR)/libft
 LIB_DIR_MLX := $(LIB_DIR)/mlx_linux
 
 # libraries
-INC := -I include
+INC := -I include -I /usr/include/X11 -I lib/libft/include -I lib/mlx_linux/
 LIB_MLX := -L $(LIB_DIR_MLX) -l mlx_Linux 
 LIB_FT := -L $(LIB_DIR_FT) -l ft 
 LIB_X := -L /usr/lib -l Xext -l X11 -l m -l z
@@ -40,21 +40,21 @@ HIT_COUNT = $(eval HIT_N != expr ${HIT_N} + 1)${HIT_N}
 ECHO = printf "\033[2K\r[`expr ${HIT_COUNT} '*' 100 / ${HIT_TOTAL}`%%] %s"
 
 SRC := 	main.c \
+		check.c \
+		parse.c \
+		window.c \
+		reshape.c \
 		draw.c \
 		color.c \
-		key_hooks.c \
-		key_hooks1.c \
-		key_hooks2.c \
-		key_hooks3.c \
-		window.c \
-		terminate.c \
-		parse.c \
+		bresenham.c \
 		matrix.c \
-		reshape.c \
+		terminate.c \
+		utils_calc.c \
 		utils_limits.c \
-		check.c \
-		utils.c \
+		utils_prog.c \
 		utils_set.c \
+		utils_string.c \
+		utils_swap.c \
 		menu.c \
 		rotation.c \
 		print_utils.c \
@@ -62,12 +62,14 @@ SRC := 	main.c \
 		precalc_matrix1.c \
 		precalc_matrix2.c \
 		mouse.c \
+		key_hooks.c \
+		key_hooks1.c \
+		key_hooks2.c \
+		key_hooks3.c \
 		sphere.c \
 		time.c \
-		bresenham.c \
 		clipping.c \
 		easter.c \
-		swap.c \
 		numconvert.c \
 		put_to_screen.c \
 		shapes.c
