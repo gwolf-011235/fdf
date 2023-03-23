@@ -1,7 +1,13 @@
-# colors
+# text effects
 RESET := \033[0m
+BOLD := \033[1m
+BLACK := \033[30m
 GREEN := \033[32m
+YELLOW := \033[33m
 RED := \033[31m
+BLUE := \033[34m
+CYAN := \033[36m
+CYAN_B := \033[46m
 
 # directories
 SRC_DIR := src
@@ -19,7 +25,7 @@ LIB_X := -L /usr/lib -l Xext -l X11 -l m -l z
 LIBS := $(LIB_MLX) $(LIB_FT) $(LIB_X)
 
 # compiling
-CC := clang
+CC := cc
 CFLAGS = -DBUFFER_SIZE=4096
 COMPILE = $(CC) $(CFLAGS) $(INC)
 
@@ -27,6 +33,11 @@ COMPILE = $(CC) $(CFLAGS) $(INC)
 NAME := fdf
 LIBFT := $(LIB_DIR_FT)/libft.a
 MLX := $(LIB_DIR_MLX)/libmlx_Linux.a
+
+# progress bar
+HIT_TOTAL = $(words $(SRCS))
+HIT_COUNT = $(eval HIT_N != expr ${HIT_N} + 1)${HIT_N}
+ECHO = printf "\033[2K\r[`expr ${HIT_COUNT} '*' 100 / ${HIT_TOTAL}`%%] %s"
 
 SRC := 	main.c \
 		draw.c \
@@ -71,11 +82,12 @@ LOG_FILE = $(LOG_DIR)/$(shell date +"%H-%M-%S")
 .SILENT:
 
 all: $(NAME)
-	echo "$(NAME) created!"
 
 $(NAME): CFLAGS += -o3 -Wall -Werror -Wextra 
-$(NAME): $(OBJS) $(LIBFT) $(MLX)
+$(NAME): $(LIBFT) $(MLX) $(OBJS)
+	printf "\033[2K\r$(GREEN)%-50s$(RESET)\n" "compilation done"
 	$(COMPILE) $(OBJS) $(LIBS) -o $(NAME)
+	echo "\n$(GREEN)$(NAME) created!$(RESET)"
 
 debug: CFLAGS += -g
 debug: clean $(OBJS) $(LIBFT) $(MLX)
@@ -96,21 +108,33 @@ $(OBJ_DIR):
 $(LOG_DIR):
 	mkdir -p $(LOG_DIR)
 	
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR) message
+	$(ECHO) "$(CC) $@"
 	$(COMPILE) -c $< -o $@
 
 $(LIBFT):
+	printf "$(YELLOW)$(BOLD)compilation$(RESET) [$(BLUE)libft$(RESET)]\n"
 	$(MAKE) -C $(LIB_DIR)/libft
 
 $(MLX):
+	printf "$(YELLOW)$(BOLD)compilation$(RESET) [$(BLUE)mlx$(RESET)]\n"
 	$(MAKE) -C $(LIB_DIR)/mlx_linux
 
+message:
+	printf "$(YELLOW)$(BOLD)compilation$(RESET) [$(BLUE)mlx$(RESET)]\n"
+
 clean: 
+	printf "$(YELLOW)$(BOLD)clean$(RESET) [$(BLUE)fdf$(RESET)]\n"
 	rm -rf $(OBJ_DIR)
+	printf "$(RED)subdir $(OBJ_DIR) cleaned$(RESET)\n"
+	rm -rf gmon.out
 
 fclean: clean
 	rm -rf $(NAME)
+	printf "$(RED)$(NAME) cleaned$(RESET)\n"
+	printf "$(YELLOW)$(BOLD)clean$(RESET) [$(BLUE)libft$(RESET)]\n"
 	$(MAKE) -C $(LIB_DIR_FT) fclean
+	printf "$(YELLOW)$(BOLD)clean$(RESET) [$(BLUE)mlx$(RESET)]\n"
 	$(MAKE) -C $(LIB_DIR_MLX) clean
 
 re: fclean all
