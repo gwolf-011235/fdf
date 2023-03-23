@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/22 11:19:33 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/23 13:21:38 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,8 +185,6 @@ typedef struct s_data {
 }	t_data;
 
 //main.c
-int		ft_close_program(t_data *data);
-void	ft_init_data(t_data *data);
 
 //check.c
 void	ft_check_map(t_map *map, char *input);
@@ -199,6 +197,7 @@ int		ft_count_num_in_row(char *line, bool *hex);
 void	ft_parse_map(t_map *map);
 void	ft_map_alloc(t_map *map);
 void	ft_parse_line(t_map *map, char *line, int index);
+void	ft_fill_z_storage(t_map *map);
 
 //draw.c
 void	ft_put_pix_to_image(t_img *img, int x, int y, int color);
@@ -267,28 +266,33 @@ void	ft_rotate_y(t_mat4 trans, float pitch);
 void	ft_rotate_z(t_mat4 trans, float yaw);
 
 //reshape.c
-void	ft_init_project(t_data *data);
+void	ft_init_projection(t_data *data);
 void	ft_scale_z(t_vec3f *points, int *z_storage, int sum, float scale_z);
 void	ft_calc_morph(t_vec3f *morph, t_vec3f *points, t_mat4 mat, t_map *map);
 int		ft_render(t_data *data);
 
-//map_utils.c
+//utils_limits.c
 void	ft_set_limits_xy(t_map *map);
 void	ft_find_limits_z(t_map *map);
-void	ft_fill_z_storage(t_map *map);
+
+//utils_set.c
 void	ft_set_canvas_size(int canvas[4], int x, int y);
-void	ft_set_ft_ptr(t_data *data, int choose);
+void	ft_set_ft_ptr(t_data *data, uint8_t index);
+void	ft_set_view_angles(float angle[3], uint8_t index);
 
 //utils.c
 int		ft_move_atoi(char *line);
 int		ft_jump_over_hex(char *line);
 int		ft_hex_to_dec(char *line, int len);
 int		ft_wrap_angle(float angle, int factor);
-void	ft_set_view_angles(float angle[3], uint8_t index);
 
-//swap.c
+//utils_swap.c
 void	ft_swap_img_ptr(t_img **a, t_img **b);
 void	ft_swap_points(t_vec3f *start, t_vec3f *end);
+
+//utils_prog.c
+int		ft_close_program(t_data *data);
+void	ft_init_data(t_data *data);
 
 //menu.c
 void	ft_write_menu(t_data *data);
@@ -329,7 +333,6 @@ uint64_t	ft_timestamp_ms(uint64_t created_at);
 
 //bresenham.c
 void	ft_prep_draw_line(t_img *img, t_vec3f start, t_vec3f end, int size[2]);
-void	ft_clip_line(t_vec3f *start, t_vec3f *end, int size[2]);
 int		ft_init_bresvars(t_bresvars *vars, t_vec3f start, t_vec3f end);
 void	ft_draw_line(t_img *img, t_bresvars *vars);
 
