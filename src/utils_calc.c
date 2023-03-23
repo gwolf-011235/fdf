@@ -1,50 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils_calc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/08 16:11:11 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/17 16:22:13 by gwolf            ###   ########.fr       */
+/*   Created: 2023/03/23 13:22:48 by gwolf             #+#    #+#             */
+/*   Updated: 2023/03/23 13:23:20 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-int	ft_move_atoi(char *line)
-{
-	int	i;
-
-	i = 0;
-	while (line[i] == ' ')
-		i++;
-	if (line[i] == '-')
-		i++;
-	while (ft_isdigit(line[i]))
-		i++;
-	return (i);
-}
-
-int	ft_jump_over_hex(char *line)
-{
-	int		i;
-
-	i = 0;
-	if (line[i] == ',' && line[i + 1] == '0')
-		i += 2;
-	else
-		return (-1);
-	if (line[i] != 'x' && line[i] != 'X')
-		return (-1);
-	i++;
-	while (ft_strchr("0123456789ABCDEFabcdef", line[i]))
-		i++;
-	if (line[i] == ' ' || line[i] == '\n')
-		return (i);
-	else
-		return (-1);
-}
 
 int	ft_hex_to_dec(char *line, int len)
 {
@@ -77,14 +43,4 @@ int	ft_wrap_angle(float angle, int factor)
 	if (angle > 360)
 		angle = 0 + factor;
 	return (angle);
-}
-
-void	ft_set_view_angles(float angle[3], uint8_t index)
-{
-	static const float	view_angle[5][3] = {
-	{0}, {35, 0, 45}, {0, 0, 0}, {0, 90, 0}, {54, 0, 45}};
-
-	angle[X] = view_angle[index][X];
-	angle[Y] = view_angle[index][Y];
-	angle[Z] = view_angle[index][Z];
 }
