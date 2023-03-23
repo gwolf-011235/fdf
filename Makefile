@@ -121,7 +121,7 @@ $(MLX):
 	$(MAKE) -C $(LIB_DIR)/mlx_linux
 
 message:
-	printf "$(YELLOW)$(BOLD)compilation$(RESET) [$(BLUE)mlx$(RESET)]\n"
+	printf "$(YELLOW)$(BOLD)compilation$(RESET) [$(BLUE)fdf$(RESET)]\n"
 
 clean: 
 	printf "$(YELLOW)$(BOLD)clean$(RESET) [$(BLUE)fdf$(RESET)]\n"
