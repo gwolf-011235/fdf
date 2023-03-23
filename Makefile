@@ -55,7 +55,7 @@ SRC :=  box.c \
         main.c \
         matrix.c \
         parse.c \
-        precalc_matrix2.c \
+        precalc_matrix.c \
         reshape.c \
         terminate.c \
         utils_calc.c \
