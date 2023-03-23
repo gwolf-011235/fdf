@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 09:58:18 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/23 14:58:06 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/23 15:12:41 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,19 @@
 
 void	ft_put_pix_to_image(t_img *img, int x, int y, int color)
 {
-	char	*dst;
+	int		i;
+	char	*pixel;
 
-	dst = img->addr + (y * img->line_len + x * img->bytes);
-	*(unsigned int *)dst = color;
+	i = img->bpp - 8;
+	pixel = img->addr + (y * img->line_len + x * img->bytes);
+	while (i >= 0)
+	{
+		if (img->endian != 0)
+			*pixel++ = (color >> i) & 0xFF;
+		else
+			*pixel++ = (color >> (img->bpp - 8 - i)) & 0xFF;
+		i -= 8;
+	}
 }
 
 void	ft_draw_wirelines(t_img *img, t_map *map)
