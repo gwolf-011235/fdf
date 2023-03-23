@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:00:10 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/19 20:57:46 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/23 13:38:15 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,10 @@ void	ft_init_window(t_data *data)
 	if (!data->win)
 		ft_free_mlx(data, ERR_WIN, true);
 	ft_init_image(data, data->render[0], screen[X], screen[Y]);
+	if (data->render[0]->endian)
+		ft_printf("🥚 Endian\n   |big|\n\n");
+	else
+		ft_printf("🥚 Endian\n   |little|\n\n");
 	ft_init_image(data, data->render[1], screen[X] - MENU_WIDTH, screen[Y]);
 	ft_init_menu(data);
 	ft_set_canvas_size(data->map.props.canvas, screen[X], screen[Y]);
