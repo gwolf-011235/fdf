@@ -6,13 +6,13 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 10:22:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/22 22:41:41 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/23 11:53:56 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	ft_init_project(t_data *data)
+void	ft_init_projection(t_data *data)
 {
 	t_map	*map;
 
