@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 07:34:37 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/23 14:24:04 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/23 15:02:58 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_set_lonlat(t_map *map, int sum)
 	}
 }
 
-void	ft_find_limits_sphere(t_map *map, t_vec3f *polar)
+void	ft_find_limits_sphere(t_map *map, t_vec3f *sphere)
 {
 	int	i;
 
@@ -38,17 +38,17 @@ void	ft_find_limits_sphere(t_map *map, t_vec3f *polar)
 	i = 0;
 	while (i < map->sum_points)
 	{
-		map->limits_sp[XMAX] = fmax(polar[i].x, map->limits_sp[XMAX]);
-		map->limits_sp[XMIN] = fmin(polar[i].x, map->limits_sp[XMIN]);
-		map->limits_sp[YMAX] = fmax(polar[i].y, map->limits_sp[YMAX]);
-		map->limits_sp[YMIN] = fmin(polar[i].y, map->limits_sp[YMIN]);
-		map->limits_sp[ZMAX] = fmax(polar[i].z, map->limits_sp[ZMAX]);
-		map->limits_sp[ZMIN] = fmin(polar[i].z, map->limits_sp[ZMIN]);
+		map->limits_sp[XMAX] = fmax(sphere[i].x, map->limits_sp[XMAX]);
+		map->limits_sp[XMIN] = fmin(sphere[i].x, map->limits_sp[XMIN]);
+		map->limits_sp[YMAX] = fmax(sphere[i].y, map->limits_sp[YMAX]);
+		map->limits_sp[YMIN] = fmin(sphere[i].y, map->limits_sp[YMIN]);
+		map->limits_sp[ZMAX] = fmax(sphere[i].z, map->limits_sp[ZMAX]);
+		map->limits_sp[ZMIN] = fmin(sphere[i].z, map->limits_sp[ZMIN]);
 		i++;
 	}
 }
 
-void	ft_calc_sphere_points(t_map *map, t_lonlat *lonlat, t_vec3f *polar)
+void	ft_calc_sphere_points(t_map *map, t_lonlat *lonlat, t_vec3f *sphere)
 {
 	int		i;
 	float	z_offset;
@@ -57,14 +57,14 @@ void	ft_calc_sphere_points(t_map *map, t_lonlat *lonlat, t_vec3f *polar)
 	while (i < map->sum_points)
 	{
 		z_offset = map->z_storage[i] * map->props.scale_z;
-		polar[i].x = (map->radius + z_offset) * sin(lonlat[i].lat)
+		sphere[i].x = (map->radius + z_offset) * sin(lonlat[i].lat)
 			* cos(lonlat[i].lon);
-		polar[i].y = (map->radius + z_offset) * sin(lonlat[i].lat)
+		sphere[i].y = (map->radius + z_offset) * sin(lonlat[i].lat)
 			* sin(lonlat[i].lon);
-		polar[i].z = (map->radius + z_offset) * cos(lonlat[i].lat);
-		polar[i].color = map->points[i].color;
+		sphere[i].z = (map->radius + z_offset) * cos(lonlat[i].lat);
+		sphere[i].color = map->points[i].color;
 		i++;
 	}
-	ft_find_limits_sphere(map, polar);
+	ft_find_limits_sphere(map, sphere);
 	ft_set_corners(map->corner[2], map->limits_sp);
 }

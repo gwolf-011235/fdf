@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:00:33 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/23 14:22:46 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/23 15:02:56 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void	ft_map_alloc(t_map *map)
 	map->corner[0] = map->points + map->sum_points;
 	map->morph = map->corner[0] + 8;
 	map->corner[1] = map->morph + map->sum_points;
-	map->polar = map->corner[1] + 8;
-	map->corner[2] = map->polar + map->sum_points;
+	map->sphere = map->corner[1] + 8;
+	map->corner[2] = map->sphere + map->sum_points;
 }
 
 void	ft_parse_line(t_map *map, char *line, int i)

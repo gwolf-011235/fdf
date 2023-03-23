@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/23 14:57:25 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/23 15:02:54 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ typedef struct s_map {
 	bool		hex;
 	t_vec3f		*points;
 	t_vec3f		*morph;
-	t_vec3f		*polar;
+	t_vec3f		*sphere;
 	t_vec3f		*corner[3];
 	int			*z_storage;
 	t_lonlat	*lonlat;
@@ -295,8 +295,8 @@ void	ft_draw_circle(t_img *img, t_pixel center, int radius);
 
 //sphere.c
 void	ft_set_lonlat(t_map *map, int sum);
-void	ft_find_limits_sphere(t_map *map, t_vec3f *polar);
-void	ft_calc_sphere_points(t_map *map, t_lonlat *ang_lonlat, t_vec3f *polar);
+void	ft_find_limits_sphere(t_map *map, t_vec3f *sphere);
+void	ft_calc_sphere_points(t_map *map, t_lonlat *ang_lonlat, t_vec3f *sphere);
 
 //time.c
 uint64_t	ft_get_timeofday_ms(void);

@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 10:22:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/23 11:53:56 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/23 15:02:57 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	ft_render(t_data *data)
 	if (!map->props.sphere)
 		data->calc_ft(map->morph, map->points, map->mat, map);
 	else
-		data->calc_ft(map->morph, map->polar, map->mat, map);
+		data->calc_ft(map->morph, map->sphere, map->mat, map);
 	if (data->map.rainbow)
 		ft_skittles(&data->map, data->map.morph);
 	data->draw_ft(data->render[0], map);

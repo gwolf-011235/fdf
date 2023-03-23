@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 17:01:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/23 14:22:08 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/23 15:02:55 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_key_scale(int key, t_map *map)
 			ft_scale_z(map->points, map->z_storage, map->sum_points, \
 				map->props.scale_z);
 		else
-			ft_calc_sphere_points(map, map->lonlat, map->polar);
+			ft_calc_sphere_points(map, map->lonlat, map->sphere);
 	}
 	else if (key == KEY_C)
 	{
@@ -37,7 +37,7 @@ void	ft_key_scale(int key, t_map *map)
 			ft_scale_z(map->points, map->z_storage, map->sum_points, \
 				map->props.scale_z);
 		else
-			ft_calc_sphere_points(map, map->lonlat, map->polar);
+			ft_calc_sphere_points(map, map->lonlat, map->sphere);
 	}
 }
 
@@ -63,7 +63,7 @@ void	ft_key_sphere(int key, t_map *map)
 	{
 		map->props.sphere = !map->props.sphere;
 		if (map->props.sphere)
-			ft_calc_sphere_points(map, map->lonlat, map->polar);
+			ft_calc_sphere_points(map, map->lonlat, map->sphere);
 		else
 		{
 			ft_scale_z(map->points, map->z_storage,
