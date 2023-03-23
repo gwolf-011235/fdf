@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 10:38:34 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/19 20:57:38 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/23 14:59:05 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	ft_update_menu2(t_data *data, t_map *map)
 	else
 		ft_mlx_put_int(data, (t_pos){195, 620}, map->props.translate[Y], 7);
 	mlx_string_put(data->mlx, data->win, 210, 680, 0x0, "1:");
-	ft_mlx_put_int(data, (t_pos){213, 680}, map->skip, 3);
+	ft_mlx_put_int(data, (t_pos){213, 680}, map->sampling, 3);
 	ft_mlx_put_colorscheme(data, map->pattern[4], (t_pos){210, 750});
 	ft_mlx_put_viewname(data, map->props.view, (t_pos){210, 815});
 	ft_mlx_put_int(data, (t_pos){210, 865}, 1000 / data->fps, 3);

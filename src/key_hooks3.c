@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 16:20:01 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/15 10:43:32 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/23 14:58:23 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,19 +35,19 @@ void	ft_key_ftptr(int key, t_data *data)
 	}
 }
 
-void	ft_key_skip(int key, t_map *map)
+void	ft_key_sampling(int key, t_map *map)
 {
 	if (key == KEY_K)
 	{
-		map->skip--;
-		if (!map->skip)
-			map->skip = 1;
+		map->sampling--;
+		if (!map->sampling)
+			map->sampling = 1;
 	}
 	if (key == KEY_L)
 	{
-		map->skip++;
-		if (map->skip >= 9)
-			map->skip = 9;
+		map->sampling++;
+		if (map->sampling >= 9)
+			map->sampling = 9;
 	}
 }
 

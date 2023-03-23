@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/23 14:51:04 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/23 14:57:25 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ typedef struct s_map {
 	float		limits_sp[6];
 	int			factor;
 	int			pattern[5];
-	int			skip;
+	int			sampling;
 	t_mat4		mat;
 	t_props		props;
 	bool		rainbow;
@@ -204,7 +204,7 @@ void	ft_key_view(int key, t_map *map);
 void	ft_key_stuff(int key, t_map *map);
 //key_hooks3.c
 void	ft_key_ftptr(int key, t_data *data);
-void	ft_key_skip(int key, t_map *map);
+void	ft_key_sampling(int key, t_map *map);
 void	ft_key_toggle_menu(t_data *data);
 void	ft_key_toggle_controls(t_data *data);
 

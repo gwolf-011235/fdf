@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 16:39:39 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/17 16:42:24 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/23 14:59:41 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	ft_key_press_handler2(int key, t_data *data)
 	else if (key == KEY_J || key == KEY_ENTER)
 		ft_key_ftptr(key, data);
 	else if (key == KEY_K || key == KEY_L)
-		ft_key_skip(key, &data->map);
+		ft_key_sampling(key, &data->map);
 	else if (key == KEY_I)
 		ft_key_toggle_menu(data);
 	else if (key == KEY_H)
