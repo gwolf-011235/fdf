@@ -11,7 +11,9 @@ CYAN_B := \033[46m
 
 # directories
 SRC_DIR := src
+SRC_DIR_B := src/bonus
 OBJ_DIR := obj
+OBJ_DIR_B := obj/bonus
 LIB_DIR := lib
 LOG_DIR := logs/$(shell date +"%Y-%m-%d")
 LIB_DIR_FT := $(LIB_DIR)/libft
@@ -31,6 +33,7 @@ COMPILE = $(CC) $(CFLAGS) $(INC)
 
 # targets
 NAME := fdf
+NAME_B := fdf_bonus
 LIBFT := $(LIB_DIR_FT)/libft.a
 MLX := $(LIB_DIR_MLX)/libmlx_Linux.a
 
@@ -38,49 +41,76 @@ MLX := $(LIB_DIR_MLX)/libmlx_Linux.a
 HIT_TOTAL = $(words $(SRCS))
 HIT_COUNT = $(eval HIT_N != expr ${HIT_N} + 1)${HIT_N}
 ECHO = printf "\033[2K\r[`expr ${HIT_COUNT} '*' 100 / ${HIT_TOTAL}`%%] %s"
+HIT_TOTAL_B = $(words $(SRCS_B))
+ECHO_B = printf "\033[2K\r[`expr ${HIT_COUNT} '*' 100 / ${HIT_TOTAL_B}`%%] %s"
 
-SRC := 	main_bonus.c \
-		check_bonus.c \
-		parse_bonus.c \
-		window_bonus.c \
-		reshape_bonus.c \
-		draw_bonus.c \
-		color_bonus.c \
-		bresenham_bonus.c \
-		matrix_bonus.c \
-		terminate_bonus.c \
-		utils_calc_bonus.c \
-		utils_limits_bonus.c \
-		utils_prog_bonus.c \
-		utils_set_bonus.c \
-		utils_string_bonus.c \
-		utils_swap_bonus.c \
-		menu_bonus.c \
-		rotation_bonus.c \
-		box_bonus.c \
-		precalc_matrix1_bonus.c \
-		precalc_matrix2_bonus.c \
-		mouse_bonus.c \
-		key_hooks_bonus.c \
-		key_hooks1_bonus.c \
-		key_hooks2_bonus.c \
-		key_hooks3_bonus.c \
-		sphere_bonus.c \
-		time_bonus.c \
-		clipping_bonus.c \
-		easter_bonus.c \
-		numconvert_bonus.c \
-		put_to_screen_bonus.c \
-		shapes_bonus.c
+# source files
+
+SRC :=  box.c \
+        bresenham.c \
+        check.c \
+        color.c \
+        draw.c \
+        precalc_matrix2.c \
+        key_hooks.c \
+        main.c \
+        matrix.c \
+        parse.c \
+        reshape.c \
+        terminate.c \
+        utils_calc.c \
+        utils_limits.c \
+        utils_prog.c \
+        utils_set.c \
+        utils_string.c \
+        window.c \
+
+SRC_B := 	main_bonus.c \
+			check_bonus.c \
+			parse_bonus.c \
+			window_bonus.c \
+			reshape_bonus.c \
+			draw_bonus.c \
+			color_bonus.c \
+			bresenham_bonus.c \
+			matrix_bonus.c \
+			terminate_bonus.c \
+			utils_calc_bonus.c \
+			utils_limits_bonus.c \
+			utils_prog_bonus.c \
+			utils_set_bonus.c \
+			utils_string_bonus.c \
+			utils_swap_bonus.c \
+			menu_bonus.c \
+			rotation_bonus.c \
+			box_bonus.c \
+			precalc_matrix1_bonus.c \
+			precalc_matrix2_bonus.c \
+			mouse_bonus.c \
+			key_hooks_bonus.c \
+			key_hooks1_bonus.c \
+			key_hooks2_bonus.c \
+			key_hooks3_bonus.c \
+			sphere_bonus.c \
+			time_bonus.c \
+			clipping_bonus.c \
+			easter_bonus.c \
+			numconvert_bonus.c \
+			put_to_screen_bonus.c \
+			shapes_bonus.c
 
 SRCS := $(addprefix $(SRC_DIR)/, $(SRC))
+SRCS_B := $(addprefix $(SRC_DIR_B)/, $(SRC_B))
 
 OBJ := $(SRC:.c=.o)
+OBJ_B := $(SRC_B:.c=.o)
+
 OBJS := $(addprefix $(OBJ_DIR)/, $(OBJ))
+OBJS_B := $(addprefix $(OBJ_DIR_B)/, $(OBJ_B))
 
 LOG_FILE = $(LOG_DIR)/$(shell date +"%H-%M-%S")
 
-.PHONY: all, clean, fclean, re, obj, debug, optimize
+.PHONY: all, clean, fclean, re, obj, debug, optimize, bonus
 
 .SILENT:
 
@@ -91,6 +121,11 @@ $(NAME): $(LIBFT) $(MLX) $(OBJS)
 	printf "\033[2K\r$(GREEN)%-50s$(RESET)\n" "compilation done"
 	$(COMPILE) $(OBJS) $(LIBS) -o $(NAME)
 	echo "\n$(GREEN)$(NAME) created!$(RESET)"
+
+bonus: $(LIBFT) $(MLX) $(OBJS_B)
+	printf "\033[2K\r$(GREEN)%-50s$(RESET)\n" "compilation done"
+	$(COMPILE) $(OBJS_B) $(LIBS) -o $(NAME_B)
+	echo "\n$(GREEN)$(NAME) created - BONUS!$(RESET)"
 
 debug: CFLAGS += -g
 debug: clean $(OBJS) $(LIBFT) $(MLX)
@@ -108,10 +143,17 @@ profile: clean $(OBJS) $(LIBFT) $(MLX) | $(LOG_DIR)
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 
+$(OBJ_DIR_B):
+	mkdir -p $(OBJ_DIR_B)
+
 $(LOG_DIR):
 	mkdir -p $(LOG_DIR)
 	
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR) message
+	$(ECHO) "$(CC) $@"
+	$(COMPILE) -c $< -o $@
+
+$(OBJ_DIR_B)/%.o: $(SRC_DIR_B)/%.c | $(OBJ_DIR_B) message
 	$(ECHO) "$(CC) $@"
 	$(COMPILE) -c $< -o $@
 
@@ -134,6 +176,7 @@ clean:
 
 fclean: clean
 	rm -rf $(NAME)
+	rm -rf $(NAME_B)
 	printf "$(RED)$(NAME) cleaned$(RESET)\n"
 	printf "$(YELLOW)$(BOLD)clean$(RESET) [$(BLUE)libft$(RESET)]\n"
 	$(MAKE) -C $(LIB_DIR_FT) fclean
