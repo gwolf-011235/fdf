@@ -51,11 +51,11 @@ SRC :=  box.c \
         check.c \
         color.c \
         draw.c \
-        precalc_matrix2.c \
         key_hooks.c \
         main.c \
         matrix.c \
         parse.c \
+        precalc_matrix2.c \
         reshape.c \
         terminate.c \
         utils_calc.c \
@@ -65,39 +65,38 @@ SRC :=  box.c \
         utils_string.c \
         window.c \
 
-SRC_B := 	main_bonus.c \
-			check_bonus.c \
-			parse_bonus.c \
-			window_bonus.c \
-			reshape_bonus.c \
-			draw_bonus.c \
-			color_bonus.c \
+SRC_B := 	box_bonus.c \
 			bresenham_bonus.c \
+			check_bonus.c \
+			clipping_bonus.c \
+			color_bonus.c \
+			draw_bonus.c \
+			easter_bonus.c \
+			key_hooks_bonus.c \
+			key_hooks1_bonus.c \
+			key_hooks2_bonus.c \
+			key_hooks3_bonus.c \
+			main_bonus.c \
 			matrix_bonus.c \
+			menu_bonus.c \
+			mouse_bonus.c \
+			numconvert_bonus.c \
+			parse_bonus.c \
+			precalc_matrix1_bonus.c \
+			precalc_matrix2_bonus.c \
+			put_to_screen_bonus.c \
+			reshape_bonus.c \
+			rotation_bonus.c \
+			sphere_bonus.c \
 			terminate_bonus.c \
+			time_bonus.c \
 			utils_calc_bonus.c \
 			utils_limits_bonus.c \
 			utils_prog_bonus.c \
 			utils_set_bonus.c \
 			utils_string_bonus.c \
 			utils_swap_bonus.c \
-			menu_bonus.c \
-			rotation_bonus.c \
-			box_bonus.c \
-			precalc_matrix1_bonus.c \
-			precalc_matrix2_bonus.c \
-			mouse_bonus.c \
-			key_hooks_bonus.c \
-			key_hooks1_bonus.c \
-			key_hooks2_bonus.c \
-			key_hooks3_bonus.c \
-			sphere_bonus.c \
-			time_bonus.c \
-			clipping_bonus.c \
-			easter_bonus.c \
-			numconvert_bonus.c \
-			put_to_screen_bonus.c \
-			shapes_bonus.c
+			window_bonus.c
 
 SRCS := $(addprefix $(SRC_DIR)/, $(SRC))
 SRCS_B := $(addprefix $(SRC_DIR_B)/, $(SRC_B))
