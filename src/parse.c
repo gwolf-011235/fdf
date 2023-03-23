@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:00:33 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/17 15:33:26 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/23 12:01:32 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,23 @@ void	ft_parse_line(t_map *map, char *line, int i)
 			break ;
 	}
 	free(line);
+}
+
+void	ft_fill_z_storage(t_map *map)
+{
+	int	i;
+
+	i = 0;
+	while (i < map->sum_points)
+	{
+		map->z_storage[i] = map->points[i].z;
+		i++;
+	}
+	i = 0;
+	while (i < 4)
+	{
+		map->z_storage[map->sum_points + i] = map->limits[ZMIN];
+		map->z_storage[map->sum_points + 4 + i] = map->limits[ZMAX];
+		i++;
+	}
 }
