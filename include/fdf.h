@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/23 15:02:54 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/23 15:06:12 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ typedef struct s_props {
 	bool	sphere;
 	bool	box;
 	uint8_t	view;
+	bool	rainbow;
 }	t_props;
 
 typedef struct s_map {
@@ -118,7 +119,6 @@ typedef struct s_map {
 	int			sampling;
 	t_mat4		mat;
 	t_props		props;
-	bool		rainbow;
 	uint8_t		menu;
 	int			menu_width;
 }	t_map;
