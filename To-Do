@@ -1,3 +1,0 @@
-Sort out struct
-Z scale after sphere is sometimes wrong
-Resize shouldnt work in sphere Mode, because it is using corner1. recheck and adapt. Maybe also draw box broken?
