@@ -57,7 +57,6 @@ SRC := 	main.c \
 		utils_swap.c \
 		menu.c \
 		rotation.c \
-		print_utils.c \
 		box.c \
 		precalc_matrix1.c \
 		precalc_matrix2.c \
@@ -83,7 +82,7 @@ LOG_FILE = $(LOG_DIR)/$(shell date +"%H-%M-%S")
 
 .PHONY: all, clean, fclean, re, obj, debug, optimize
 
-#.SILENT:
+.SILENT:
 
 all: $(NAME)
 

@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/23 14:09:00 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/23 14:51:04 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,10 @@ typedef int		t_pos[2];
 
 typedef float	t_mat4[4][4];
 
-typedef struct s_coord {
+typedef struct s_lonlat {
 	float	lon;
 	float	lat;
-}	t_coord;
+}	t_lonlat;
 
 typedef struct s_color {
 	uint8_t	a;
@@ -98,29 +98,29 @@ typedef struct s_props {
 }	t_props;
 
 typedef struct s_map {
-	char	filename[22];
-	int		width;
-	int		height;
-	int		sum_points;
-	char	*rows[ROW_MAX];
-	bool	hex;
-	t_vec3f	*points;
-	t_vec3f	*morph;
-	t_vec3f	*polar;
-	t_vec3f	*corner[3];
-	int		*z_storage;
-	t_coord	*ang_coord;
-	float	radius;
-	float	limits[6];
-	float	limits_sp[6];
-	int		factor;
-	int		pattern[5];
-	int		skip;
-	t_mat4	mat;
-	t_props	props;
-	bool	rainbow;
-	uint8_t	menu;
-	int		menu_width;
+	char		filename[22];
+	int			width;
+	int			height;
+	int			sum_points;
+	char		*rows[ROW_MAX];
+	bool		hex;
+	t_vec3f		*points;
+	t_vec3f		*morph;
+	t_vec3f		*polar;
+	t_vec3f		*corner[3];
+	int			*z_storage;
+	t_lonlat	*lonlat;
+	float		radius;
+	float		limits[6];
+	float		limits_sp[6];
+	int			factor;
+	int			pattern[5];
+	int			skip;
+	t_mat4		mat;
+	t_props		props;
+	bool		rainbow;
+	uint8_t		menu;
+	int			menu_width;
 }	t_map;
 
 typedef void	(*t_calc_ft)(t_vec3f *, t_vec3f *, t_mat4, t_map *);
@@ -157,6 +157,7 @@ typedef struct s_data {
 	uint64_t	created_at;
 	uint64_t	fps;
 }	t_data;
+
 
 //main.c
 
@@ -275,10 +276,6 @@ void	ft_write_projection_info(t_data *data);
 void	ft_update_menu(t_data *data);
 void	ft_update_menu2(t_data *data, t_map *map);
 
-//print_utils.c
-void	ft_print_mat4(t_mat4 matrix);
-void	ft_print_point(t_vec3f point);
-
 //box.c
 void	ft_set_corners(t_vec3f *corner, float limits[6]);
 int		ft_is_outside(t_vec3f point, int canvas[2], float padding);
@@ -297,9 +294,9 @@ void	ft_precalc_view(t_mat4 mat, int index);
 void	ft_draw_circle(t_img *img, t_pixel center, int radius);
 
 //sphere.c
-void	ft_set_ang_coords(t_map *map, int sum);
+void	ft_set_lonlat(t_map *map, int sum);
 void	ft_find_limits_sphere(t_map *map, t_vec3f *polar);
-void	ft_calc_sphere_points(t_map *map, t_coord *ang_coord, t_vec3f *polar);
+void	ft_calc_sphere_points(t_map *map, t_lonlat *ang_lonlat, t_vec3f *polar);
 
 //time.c
 uint64_t	ft_get_timeofday_ms(void);
