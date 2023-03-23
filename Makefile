@@ -51,9 +51,10 @@ SRC := 	main.c \
 		parse.c \
 		matrix.c \
 		reshape.c \
-		map_utils.c \
+		utils_limits.c \
 		check.c \
 		utils.c \
+		utils_set.c \
 		menu.c \
 		rotation.c \
 		print_utils.c \
