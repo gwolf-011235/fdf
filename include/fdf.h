@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/22 10:27:44 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/22 11:19:33 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,7 +184,9 @@ typedef struct s_data {
 	uint64_t	fps;
 }	t_data;
 
-void	ft_set_ft_ptr(t_data *data, int choose);
+//main.c
+int		ft_close_program(t_data *data);
+void	ft_init_data(t_data *data);
 
 //check.c
 void	ft_check_map(t_map *map, char *input);
@@ -246,7 +248,6 @@ void	ft_init_menu(t_data *data);
 void	ft_start_mlx_loop(t_data *data);
 
 //terminate.c
-int		ft_close_program(t_data *data);
 void	ft_terminate(char *message);
 void	ft_free_rows(char *row, char *rows[ROW_MAX], int fd, int num);
 void	ft_free_map_ptr(t_map *map, char *string);
@@ -272,11 +273,11 @@ void	ft_calc_morph(t_vec3f *morph, t_vec3f *points, t_mat4 mat, t_map *map);
 int		ft_render(t_data *data);
 
 //map_utils.c
-void	ft_map_init(t_map *map);
 void	ft_set_limits_xy(t_map *map);
 void	ft_find_limits_z(t_map *map);
 void	ft_fill_z_storage(t_map *map);
 void	ft_set_canvas_size(int canvas[4], int x, int y);
+void	ft_set_ft_ptr(t_data *data, int choose);
 
 //utils.c
 int		ft_move_atoi(char *line);

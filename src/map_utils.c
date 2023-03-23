@@ -6,22 +6,11 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 09:27:53 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/15 22:11:59 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/22 11:15:59 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-void	ft_map_init(t_map *map)
-{
-	ft_set_pattern(map->pattern, 0);
-	map->props.angle[X] = 35;
-	map->props.angle[Y] = 0;
-	map->props.angle[Z] = 45;
-	map->factor = 1;
-	map->skip = 1;
-	map->props.scale_z = 0.1;
-}
 
 void	ft_set_limits_xy(t_map *map)
 {
@@ -87,4 +76,19 @@ void	ft_set_canvas_size(int canvas[4], int x, int y)
 			canvas[Y] += y;
 		canvas[OFFSET_Y] = canvas[Y] / 2;
 	}
+}
+
+void	ft_set_ft_ptr(t_data *data, int choose)
+{
+	static const t_calc_ft	calc_ptr[2] = {ft_calc_morph, ft_wobble};
+	static const t_draw_ft	draw_ptr[2] = {ft_draw_wirelines, ft_draw_points};
+
+	if (choose == 0)
+		data->calc_ft = calc_ptr[0];
+	else if (choose == 1)
+		data->calc_ft = calc_ptr[1];
+	else if (choose == 2)
+		data->draw_ft = draw_ptr[0];
+	else if (choose == 3)
+		data->draw_ft = draw_ptr[1];
 }
