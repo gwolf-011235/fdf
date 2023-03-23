@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:00:33 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/23 12:01:32 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/23 14:22:46 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,15 @@ void	ft_parse_map(t_map *map)
 	ft_find_limits_z(map);
 	ft_fill_z_storage(map);
 	ft_set_corners(map->corner[0], map->limits);
-	ft_set_ang_coords(map, map->sum_points);
+	ft_set_lonlat(map, map->sum_points);
 }
 
 void	ft_map_alloc(t_map *map)
 {
 	map->points = malloc(sizeof(t_vec3f) * (map->sum_points * 3 + 24));
 	map->z_storage = malloc(sizeof(int) * (map->sum_points + 8));
-	map->ang_coord = malloc(sizeof(t_coord) * map->sum_points);
-	if (!map->points || !map->z_storage || !map->ang_coord)
+	map->lonlat = malloc(sizeof(t_lonlat) * map->sum_points);
+	if (!map->points || !map->z_storage || !map->lonlat)
 	{
 		ft_free_map_ptr(map, ERR_MEM);
 	}

@@ -6,13 +6,13 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 07:34:37 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/09 13:35:33 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/23 14:24:04 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	ft_set_ang_coords(t_map *map, int sum)
+void	ft_set_lonlat(t_map *map, int sum)
 {
 	int		i;
 	float	step_lon;
@@ -24,8 +24,8 @@ void	ft_set_ang_coords(t_map *map, int sum)
 	map->radius = map->width / (2 * M_PI);
 	while (i < sum)
 	{
-		map->ang_coord[i].lon = map->points[i].x * step_lon;
-		map->ang_coord[i].lat = map->points[i].y * step_lat;
+		map->lonlat[i].lon = map->points[i].x * step_lon;
+		map->lonlat[i].lat = map->points[i].y * step_lat;
 		i++;
 	}
 }
@@ -48,7 +48,7 @@ void	ft_find_limits_sphere(t_map *map, t_vec3f *polar)
 	}
 }
 
-void	ft_calc_sphere_points(t_map *map, t_coord *ang_coord, t_vec3f *polar)
+void	ft_calc_sphere_points(t_map *map, t_lonlat *lonlat, t_vec3f *polar)
 {
 	int		i;
 	float	z_offset;
@@ -57,11 +57,11 @@ void	ft_calc_sphere_points(t_map *map, t_coord *ang_coord, t_vec3f *polar)
 	while (i < map->sum_points)
 	{
 		z_offset = map->z_storage[i] * map->props.scale_z;
-		polar[i].x = (map->radius + z_offset) * sin(ang_coord[i].lat)
-			* cos(ang_coord[i].lon);
-		polar[i].y = (map->radius + z_offset) * sin(ang_coord[i].lat)
-			* sin(ang_coord[i].lon);
-		polar[i].z = (map->radius + z_offset) * cos(ang_coord[i].lat);
+		polar[i].x = (map->radius + z_offset) * sin(lonlat[i].lat)
+			* cos(lonlat[i].lon);
+		polar[i].y = (map->radius + z_offset) * sin(lonlat[i].lat)
+			* sin(lonlat[i].lon);
+		polar[i].z = (map->radius + z_offset) * cos(lonlat[i].lat);
 		polar[i].color = map->points[i].color;
 		i++;
 	}
