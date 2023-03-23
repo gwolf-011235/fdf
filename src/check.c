@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 21:36:25 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/17 09:05:04 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/23 13:12:44 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ bool	ft_check_row(char *row, int width, int height, bool *hex)
 	count = ft_count_num_in_row(row, hex);
 	if (count != width)
 	{
-		ft_printf("Line %d is bad!\n", height);
+		ft_printf("Line %d is bad!\n", height + 1);
 		ft_printf("Expected: %d\n", width);
 		return (false);
 	}
@@ -93,7 +93,8 @@ int	ft_count_num_in_row(char *line, bool *hex)
 	while (line[i])
 	{
 		i += ft_move_atoi(&line[i]);
-		count++;
+		if (ft_isdigit(line[i - 1]))
+			count++;
 		if (line[i] == ',' && *hex == false)
 		{
 			*hex = true;
