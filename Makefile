@@ -19,8 +19,10 @@ LOG_DIR := logs/$(shell date +"%Y-%m-%d")
 LIB_DIR_FT := $(LIB_DIR)/libft
 LIB_DIR_MLX := $(LIB_DIR)/mlx_linux
 
-# libraries
+# include
 INC := -I include -I /usr/include/X11 -I lib/libft/include -I lib/mlx_linux/
+
+# libraries
 LIB_MLX := -L $(LIB_DIR_MLX) -l mlx_Linux 
 LIB_FT := -L $(LIB_DIR_FT) -l ft 
 LIB_X := -L /usr/lib -l Xext -l X11 -l m -l z
@@ -42,7 +44,9 @@ HIT_TOTAL = $(words $(SRCS))
 HIT_COUNT = $(eval HIT_N != expr ${HIT_N} + 1)${HIT_N}
 ECHO = printf "\033[2K\r[`expr ${HIT_COUNT} '*' 100 / ${HIT_TOTAL}`%%] %s"
 HIT_TOTAL_B = $(words $(SRCS_B))
-ECHO_B = printf "\033[2K\r[`expr ${HIT_COUNT} '*' 100 / ${HIT_TOTAL_B}`%%] %s"
+HIT_NB := 0
+HIT_COUNT_B = $(eval HIT_NB := $(shell expr ${HIT_NB} + 1))${HIT_NB}
+ECHO_B = printf "\033[2K\r[`expr ${HIT_COUNT_B} '*' 100 / ${HIT_TOTAL_B}`%%] %s"
 
 # source files
 
@@ -55,7 +59,6 @@ SRC :=  box.c \
         main.c \
         matrix.c \
         parse.c \
-        precalc_matrix.c \
         reshape.c \
         terminate.c \
         utils_calc.c \
@@ -120,7 +123,9 @@ $(NAME): $(LIBFT) $(MLX) $(OBJS)
 	printf "\033[2K\r$(GREEN)%-50s$(RESET)\n" "compilation done"
 	$(COMPILE) $(OBJS) $(LIBS) -o $(NAME)
 	echo "\n$(GREEN)$(NAME) created!$(RESET)"
+	echo $(MAKECMDGOALS)
 
+bonus: CFLAGS += -o3 -Wall -Werror -Wextra 
 bonus: $(LIBFT) $(MLX) $(OBJS_B)
 	printf "\033[2K\r$(GREEN)%-50s$(RESET)\n" "compilation done"
 	$(COMPILE) $(OBJS_B) $(LIBS) -o $(NAME_B)
@@ -132,10 +137,10 @@ debug: clean $(OBJS) $(LIBFT) $(MLX)
 	echo "$(NAME) created - DEBUG MODE!"
 
 profile: CFLAGS += -pg
-profile: clean $(OBJS) $(LIBFT) $(MLX) | $(LOG_DIR)
-	$(COMPILE) $(OBJS) $(LIBS) -o $(NAME)
-	./$(NAME) test_maps/julia.fdf
-	gprof fdf > $(LOG_FILE)
+profile: clean $(OBJS_B) $(LIBFT) $(MLX) | $(LOG_DIR)
+	$(COMPILE) $(OBJS_B) $(LIBS) -o $(NAME_B)
+	./$(NAME_B) test_maps/julia.fdf
+	gprof $(NAME_B) > $(LOG_FILE)
 	rm gmon.out
 	ls -dt1 $(LOG_DIR)/* | head -n 1 | xargs less
 
