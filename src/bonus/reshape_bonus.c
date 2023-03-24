@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 10:22:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/23 17:36:41 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/24 19:14:12 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,9 @@ void	ft_calc_morph(t_vec3f *morph, t_vec3f *points, t_mat4 mat, t_map *map)
 int	ft_render(t_data *data)
 {
 	t_map			*map;
-	static uint64_t	last_update;
 
-	data->fps = (ft_timestamp_ms(data->created_at) - last_update);
-	if (data->fps < (uint64_t)(1000 / FPS_TARGET))
+	if (ft_check_fps(data))
 		return (0);
-	last_update = ft_timestamp_ms(data->created_at);
 	map = &data->map;
 	fill_background(data->render[0], data->map.pattern[3],
 		data->map.props.canvas);
@@ -82,7 +79,9 @@ int	ft_render(t_data *data)
 		ft_draw_box(data->render[0], map->corner[1], data->map.props.canvas);
 	mlx_put_image_to_window(data->mlx, data->win,
 		data->render[0]->ptr, data->map.menu_width, 0);
-	if (data->map.menu == STATS)
+	if (map->menu == OFF)
+		mlx_string_put(data->mlx, data->win, 10, 20, WHITE, "Press 'I' for menu");
+	else if (map->menu == STATS)
 		ft_update_menu(data);
 	return (0);
 }

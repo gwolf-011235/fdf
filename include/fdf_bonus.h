@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/23 17:38:22 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/24 19:12:09 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -302,6 +302,7 @@ void		ft_calc_sphere_points(t_map *map, t_lonlat *ang_lonlat,
 //time.c
 uint64_t	ft_get_timeofday_ms(void);
 uint64_t	ft_timestamp_ms(uint64_t created_at);
+bool		ft_check_fps(t_data *data);
 
 //bresenham.c
 void		ft_prep_draw_line(t_img *img, t_vec3f start, t_vec3f end,
