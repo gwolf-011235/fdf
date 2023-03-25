@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 07:34:37 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/23 17:37:06 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/25 21:56:02 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	ft_set_lonlat(t_map *map, int sum)
 	float	step_lat;
 
 	i = 0;
-	step_lon = (2 * M_PI) / map->limits[XMAX];
-	step_lat = M_PI / map->limits[YMAX];
+	step_lon = 2 * M_PI / (map->width - 1);
+	step_lat = M_PI / (map->height - 1);
 	map->radius = map->width / (2 * M_PI);
 	while (i < sum)
 	{
@@ -57,12 +57,12 @@ void	ft_calc_sphere_points(t_map *map, t_lonlat *lonlat, t_vec3f *sphere)
 	while (i < map->sum_points)
 	{
 		z_offset = map->z_storage[i] * map->props.scale_z;
-		sphere[i].x = (map->radius + z_offset) * sin(lonlat[i].lat)
+		sphere[i].x = (map->radius + z_offset) * cos(lonlat[i].lat)
 			* cos(lonlat[i].lon);
-		sphere[i].y = (map->radius + z_offset) * sin(lonlat[i].lat)
+		sphere[i].y = (map->radius + z_offset) * cos(lonlat[i].lat)
 			* sin(lonlat[i].lon);
-		sphere[i].z = (map->radius + z_offset) * cos(lonlat[i].lat);
-		sphere[i].color = map->points[i].color;
+		sphere[i].z = (map->radius + z_offset) * sin(lonlat[i].lat);
+		//sphere[i].color = map->morph[i].color;
 		i++;
 	}
 	ft_find_limits_sphere(map, sphere);
