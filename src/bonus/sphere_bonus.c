@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 07:34:37 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/25 21:56:02 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/25 22:10:36 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void	ft_calc_sphere_points(t_map *map, t_lonlat *lonlat, t_vec3f *sphere)
 		sphere[i].y = (map->radius + z_offset) * cos(lonlat[i].lat)
 			* sin(lonlat[i].lon);
 		sphere[i].z = (map->radius + z_offset) * sin(lonlat[i].lat);
-		//sphere[i].color = map->morph[i].color;
 		i++;
 	}
 	ft_find_limits_sphere(map, sphere);
