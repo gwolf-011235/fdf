@@ -6,13 +6,13 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 07:58:40 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/23 17:36:20 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/27 23:33:19 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf_bonus.h"
 
-void	ft_precalc_rot_x(t_mat4 mat, int index)
+void	ft_precalc_rot_x(t_mat4 mat, uint8_t index)
 {
 	static const t_mat4	rot_x[6] = {
 	{{1, 0, 0, 0}, {0, COS_1, SIN_1, 0},
@@ -39,7 +39,7 @@ void	ft_precalc_rot_x(t_mat4 mat, int index)
 	ft_copy_mat4(temp, mat);
 }
 
-void	ft_precalc_rot_y(t_mat4 mat, int index)
+void	ft_precalc_rot_y(t_mat4 mat, uint8_t index)
 {
 	static const t_mat4	rot_y[6] = {
 	{{COS_1, 0, -SIN_1, 0}, {0, 1, 0, 0},
@@ -66,7 +66,7 @@ void	ft_precalc_rot_y(t_mat4 mat, int index)
 	ft_copy_mat4(temp, mat);
 }
 
-void	ft_precalc_rot_z(t_mat4 mat, int index)
+void	ft_precalc_rot_z(t_mat4 mat, uint8_t index)
 {
 	static const t_mat4	rot_z[6] = {
 	{{COS_1, SIN_1, 0, 0}, {-SIN_1, COS_1, 0, 0},

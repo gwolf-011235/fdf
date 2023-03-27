@@ -6,13 +6,13 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 18:35:32 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/23 17:36:26 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/27 23:35:07 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf_bonus.h"
 
-void	ft_precalc_zoom(t_mat4 mat, int index)
+void	ft_precalc_zoom(t_mat4 mat, uint8_t index)
 {
 	static const t_mat4	zoom[6] = {
 	{{1.1, 0, 0, 0}, {0, 1.1, 0, 0},
@@ -39,7 +39,7 @@ void	ft_precalc_zoom(t_mat4 mat, int index)
 	ft_copy_mat4(temp, mat);
 }
 
-void	ft_precalc_view(t_mat4 mat, int index)
+void	ft_precalc_view(t_mat4 mat, uint8_t index)
 {
 	static const t_mat4	view[5] = {
 	{0},

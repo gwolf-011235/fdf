@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:26:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/25 22:14:03 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/27 23:36:06 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -287,17 +287,17 @@ float		ft_fit_box(t_vec3f *corner, t_mat4 mat, t_props props);
 void		ft_draw_box(t_img *img, t_vec3f *corner, int size[2]);
 
 //precalc_matrix.c
-void		ft_precalc_rot_x(t_mat4 mat, int index);
-void		ft_precalc_rot_y(t_mat4 mat, int index);
-void		ft_precalc_rot_z(t_mat4 mat, int index);
+void		ft_precalc_rot_x(t_mat4 mat, uint8_t index);
+void		ft_precalc_rot_y(t_mat4 mat, uint8_t index);
+void		ft_precalc_rot_z(t_mat4 mat, uint8_t index);
 //precalc_matrix2.c
-void		ft_precalc_zoom(t_mat4 mat, int index);
-void		ft_precalc_view(t_mat4 mat, int index);
+void		ft_precalc_zoom(t_mat4 mat, uint8_t index);
+void		ft_precalc_view(t_mat4 mat, uint8_t index);
 
 //sphere.c
 void		ft_set_lonlat(t_map *map, int sum);
 void		ft_find_limits_sphere(t_map *map, t_vec3f *sphere);
-void		ft_calc_sphere_points(t_map *map, t_lonlat *ang_lonlat,
+void		ft_calc_sphere_points(t_map *map, t_lonlat *lonlat,
 				t_vec3f *sphere);
 
 //time.c
