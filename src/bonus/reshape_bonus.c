@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 10:22:06 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/25 22:20:20 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/29 11:27:25 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,8 @@ int	ft_render(t_data *data)
 	mlx_put_image_to_window(data->mlx, data->win,
 		data->render[0]->ptr, data->map.menu_width, 0);
 	if (map->menu == OFF)
-		mlx_string_put(data->mlx, data->win, 10, 20, WHITE, "Press 'I' for menu");
+		mlx_string_put(data->mlx, data->win, 10, 20, WHITE,
+			"Press 'I' for menu");
 	else if (map->menu == STATS)
 		ft_update_menu(data);
 	return (0);
