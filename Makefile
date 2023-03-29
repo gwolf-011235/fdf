@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/03/29 13:35:25 by gwolf             #+#    #+#              #
+#    Updated: 2023/03/29 13:43:36 by gwolf            ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 # text effects
 RESET := \033[0m
 BOLD := \033[1m
@@ -48,8 +60,10 @@ HIT_NB := 0
 HIT_COUNT_B = $(eval HIT_NB := $(shell expr ${HIT_NB} + 1))${HIT_NB}
 ECHO_B = printf "\033[2K\r[`expr ${HIT_COUNT_B} '*' 100 / ${HIT_TOTAL_B}`%%] %s"
 
-# source files
+# profile map
+PROFILE_MAP = maps/julia.fdf
 
+# source files
 SRC :=  box.c \
         bresenham.c \
         check.c \
@@ -112,34 +126,39 @@ OBJS_B := $(addprefix $(OBJ_DIR_B)/, $(OBJ_B))
 
 LOG_FILE = $(LOG_DIR)/$(shell date +"%H-%M-%S")
 
-.PHONY: all, clean, fclean, re, obj, debug, optimize, bonus, re_bonus
+.PHONY: all, clean, fclean, re, obj, debug, debug_bonus, profile, bonus, re_bonus
 
 .SILENT:
 
 all: $(NAME)
+	printf '$(GREEN)ALL DONE!$(RESET)\n'
 
 $(NAME): CFLAGS += -o3 -Wall -Werror -Wextra 
 $(NAME): $(LIBFT) $(MLX) $(OBJS)
 	printf "\033[2K\r$(GREEN)%-50s$(RESET)\n" "compilation done"
 	$(COMPILE) $(OBJS) $(LIBS) -o $(NAME)
-	echo "\n$(GREEN)$(NAME) created!$(RESET)"
-	echo $(MAKECMDGOALS)
+	echo "$(GREEN)$(NAME) created!$(RESET)"
 
 bonus: CFLAGS += -o3 -Wall -Werror -Wextra 
 bonus: $(LIBFT) $(MLX) $(OBJS_B)
 	printf "\033[2K\r$(GREEN)%-50s$(RESET)\n" "compilation done"
 	$(COMPILE) $(OBJS_B) $(LIBS) -o $(NAME_B)
-	echo "\n$(GREEN)$(NAME) created - BONUS!$(RESET)"
+	echo "$(GREEN)$(NAME) created - BONUS!$(RESET)"
 
 debug: CFLAGS += -g
 debug: clean $(OBJS) $(LIBFT) $(MLX)
 	$(COMPILE) $(OBJS) $(LIBS) -o $(NAME)
 	echo "$(NAME) created - DEBUG MODE!"
 
+debug_bonus: CFLAGS += -g
+debug_bonus: clean $(OBJS_B) $(LIBFT) $(MLX)
+	$(COMPILE) $(OBJS_B) $(LIBS) -o $(NAME)
+	echo "$(NAME) created - DEBUG MODE!"
+
 profile: CFLAGS += -pg
 profile: clean $(OBJS_B) $(LIBFT) $(MLX) | $(LOG_DIR)
 	$(COMPILE) $(OBJS_B) $(LIBS) -o $(NAME_B)
-	./$(NAME_B) test_maps/julia.fdf
+	./$(NAME_B) $(PROFILE_MAP)
 	gprof $(NAME_B) > $(LOG_FILE)
 	rm gmon.out
 	ls -dt1 $(LOG_DIR)/* | head -n 1 | xargs less
@@ -158,16 +177,16 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR) message
 	$(COMPILE) -c $< -o $@
 
 $(OBJ_DIR_B)/%.o: $(SRC_DIR_B)/%.c | $(OBJ_DIR_B) message
-	$(ECHO) "$(CC) $@"
+	$(ECHO_B) "$(CC) $@"
 	$(COMPILE) -c $< -o $@
 
 $(LIBFT):
 	printf "$(YELLOW)$(BOLD)compilation$(RESET) [$(BLUE)libft$(RESET)]\n"
-	$(MAKE) -C $(LIB_DIR)/libft
+	$(MAKE) -C $(LIB_DIR_FT)
 
 $(MLX):
 	printf "$(YELLOW)$(BOLD)compilation$(RESET) [$(BLUE)mlx$(RESET)]\n"
-	$(MAKE) -C $(LIB_DIR)/mlx_linux
+	$(MAKE) -C $(LIB_DIR_MLX)
 
 message:
 	printf "$(YELLOW)$(BOLD)compilation$(RESET) [$(BLUE)fdf$(RESET)]\n"
