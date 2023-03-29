@@ -6,7 +6,7 @@
 #    By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/29 13:35:25 by gwolf             #+#    #+#              #
-#    Updated: 2023/03/29 13:43:36 by gwolf            ###   ########.fr        #
+#    Updated: 2023/03/29 13:45:50 by gwolf            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -133,14 +133,17 @@ LOG_FILE = $(LOG_DIR)/$(shell date +"%H-%M-%S")
 all: $(NAME)
 	printf '$(GREEN)ALL DONE!$(RESET)\n'
 
+bonus: $(NAME_B)
+	printf '$(GREEN)ALL DONE!$(RESET)\n'
+
 $(NAME): CFLAGS += -o3 -Wall -Werror -Wextra 
 $(NAME): $(LIBFT) $(MLX) $(OBJS)
 	printf "\033[2K\r$(GREEN)%-50s$(RESET)\n" "compilation done"
 	$(COMPILE) $(OBJS) $(LIBS) -o $(NAME)
 	echo "$(GREEN)$(NAME) created!$(RESET)"
 
-bonus: CFLAGS += -o3 -Wall -Werror -Wextra 
-bonus: $(LIBFT) $(MLX) $(OBJS_B)
+$(NAME_B): CFLAGS += -o3 -Wall -Werror -Wextra 
+$(NAME_B): $(LIBFT) $(MLX) $(OBJS_B)
 	printf "\033[2K\r$(GREEN)%-50s$(RESET)\n" "compilation done"
 	$(COMPILE) $(OBJS_B) $(LIBS) -o $(NAME_B)
 	echo "$(GREEN)$(NAME) created - BONUS!$(RESET)"
