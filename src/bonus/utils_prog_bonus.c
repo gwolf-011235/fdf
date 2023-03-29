@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:20:50 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/23 17:38:56 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/29 12:03:19 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	ft_init_data(t_data *data)
 {
 	ft_set_pattern(data->map.pattern, 0);
+	data->map.props.view = ISO;
 	data->map.props.angle[X] = 35;
 	data->map.props.angle[Y] = 0;
 	data->map.props.angle[Z] = 45;
