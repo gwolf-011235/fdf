@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 21:36:25 by gwolf             #+#    #+#             */
-/*   Updated: 2023/04/05 14:58:16 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/04/05 16:16:17 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ void	ft_check_map(t_map *map, char *input)
 {
 	int	fd;
 
-	ft_check_filename(map->filename, input);
 	fd = open(input, O_RDONLY);
 	if (fd == -1)
 		ft_terminate(ERR_OPEN);
+	ft_check_filename(map->filename, input);
 	ft_extract_rows(map, fd);
 	if (close(fd) == -1)
 		ft_terminate(ERR_CLOSE);
