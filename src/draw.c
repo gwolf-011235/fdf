@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: gwolf < gwolf@student.42vienna.com >       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 09:58:18 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/23 15:45:21 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/03/31 13:30:34 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,12 @@ void	ft_connect_points(t_img *img, t_vec3f *morph_p, int line, t_map *map)
 		end[X] = i + map->sampling;
 		if (end[X] >= map->width)
 			end[X] = map->width - 1;
-		if (!morph_p[i].hidden || !morph_p[end[X]].hidden)
+		if (!morph_p[i].hidden && !morph_p[end[X]].hidden)
 			ft_prep_draw_line(img, morph_p[i], morph_p[end[X]]);
 		end[Y] = i + map->width * map->sampling;
 		if (line + map->sampling >= map->height)
 			end[Y] = i + (map->height - 1 - line) * map->width;
-		if (!morph_p[i].hidden || !morph_p[end[Y]].hidden)
+		if (!morph_p[i].hidden && !morph_p[end[Y]].hidden)
 			ft_prep_draw_line(img, morph_p[i], morph_p[end[Y]]);
 		i += map->sampling;
 	}
