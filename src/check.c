@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 21:36:25 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/23 13:12:44 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/04/05 14:57:54 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,11 @@ void	ft_check_filename(char filename[22], char *input)
 	int		len;
 	char	*start;
 
-	start = ft_strrchr(input, '/') + 1;
+	start = ft_strrchr(input, '/');
 	if (!start)
 		start = input;
+	else
+		start += 1;
 	len = ft_strlen(start);
 	if (!ft_strnstr(start, ".fdf", len))
 		ft_terminate(ERR_FILE);
