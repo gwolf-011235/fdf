@@ -6,7 +6,7 @@
 /*   By: gwolf <gwolf@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 20:28:13 by gwolf             #+#    #+#             */
-/*   Updated: 2023/03/23 15:45:19 by gwolf            ###   ########.fr       */
+/*   Updated: 2023/04/05 10:23:25 by gwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ float	ft_fit_box(t_vec3f *corner, t_mat4 mat, t_props props)
 		while (i < 8)
 		{
 			temp = ft_mult_vec3f_mat4(corner[i], mat);
-			if (ft_is_outside(temp, props.canvas, 0.1))
+			if (ft_is_outside(temp, props.canvas, 0.010))
 			{
 				ft_printf("🔍 Scale\n   |%d|\n\n", (int)props.scale);
 				return (props.scale);
