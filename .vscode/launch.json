@@ -1,0 +1,60 @@
+{
+	// Use IntelliSense to learn about possible attributes.
+	// Hover to view descriptions of existing attributes.
+	// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "Launch with 42 map",
+			"type": "cppdbg",
+			"request": "launch",
+			"program": "${workspaceFolder}/fdf",
+			"args": ["maps/42.fdf"],
+			"stopAtEntry": true,
+			"showDisplayString": true,
+			"cwd": "${workspaceFolder}",
+			"environment": [],
+			"externalConsole": false,
+			"MIMode": "gdb",
+			"setupCommands": [
+				{
+					"description": "Enable pretty-printing for gdb",
+					"text": "-enable-pretty-printing",
+					"ignoreFailures": true
+				},
+				{
+					"description": "Set Disassembly Flavor to Intel",
+					"text": "-gdb-set disassembly-flavor intel",
+					"ignoreFailures": true
+				}
+			],
+			"preLaunchTask": "make debug"
+		},
+		{
+			"name": "Launch with Julia map",
+			"type": "cppdbg",
+			"request": "launch",
+			"program": "${workspaceFolder}/fdf",
+			"args": ["maps/julia.fdf"],
+			"stopAtEntry": true,
+			"cwd": "${workspaceFolder}",
+			"environment": [],
+			"externalConsole": false,
+			"MIMode": "gdb",
+			"setupCommands": [
+				{
+					"description": "Enable pretty-printing for gdb",
+					"text": "-enable-pretty-printing",
+					"ignoreFailures": true
+				},
+				{
+					"description": "Set Disassembly Flavor to Intel",
+					"text": "-gdb-set disassembly-flavor intel",
+					"ignoreFailures": true
+				}
+			],
+			"preLaunchTask": "make debug"
+		}
+
+	]
+}
